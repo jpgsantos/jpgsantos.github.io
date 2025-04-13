@@ -7,7 +7,6 @@ title: Home
   <div class="hero-background"></div>
   <div class="hero-content">
     <div class="hero-text">
-      <h1 class="animated-text">João Pedro Gomes dos Santos</h1>
       <div class="typewriter">
         <h2 id="typewriter-text"></h2>
       </div>
