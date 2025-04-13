@@ -6,11 +6,6 @@ title: Home
 <div class="hero-section">
   <div class="hero-background"></div>
   <div class="hero-content">
-    <div class="hero-image-container">
-      <div class="hero-image-border">
-        <img src="{{ '/assets/images/Profile.jpg' | relative_url }}" alt="João Pedro Gomes dos Santos" class="hero-image">
-      </div>
-    </div>
     <div class="hero-text">
       <h1 class="animated-text">João Pedro Gomes dos Santos</h1>
       <div class="typewriter">
@@ -30,6 +25,11 @@ title: Home
         <a href="{{ '/contact' | relative_url }}" class="hero-button secondary-button">
           <i class="fas fa-envelope"></i> Contact
         </a>
+      </div>
+    </div>
+    <div class="hero-image-container">
+      <div class="hero-image-border">
+        <img src="{{ '/assets/images/Profile.jpg' | relative_url }}" alt="João Pedro Gomes dos Santos" class="hero-image">
       </div>
     </div>
   </div>
@@ -142,19 +142,6 @@ title: Home
     </div>
     <div class="project-showcase-visual">
       <div class="visual-container">
-        <div class="code-preview">
-          <pre><code>% Subcellular_Workflow example
-model = sbiomodel('pathway_model');
-addparameter(model, 'k1', 0.5);
-addparameter(model, 'k2', 0.2);
-addreaction(model, 'A -> B');
-addkineticlaw(model.Reactions(1), 'k1*A');
-% Configure simulation
-cs = getconfigset(model);
-cs.StopTime = 100;
-% Run simulation
-[t,x,names] = sbiosimulate(model);</code></pre>
-        </div>
         <div class="diagram">
           <img src="{{ '/assets/images/workflow_diagram.svg' | relative_url }}" alt="Workflow Diagram" class="diagram-image">
         </div>
@@ -246,67 +233,6 @@ cs.StopTime = 100;
   <div class="divider-icon"><i class="fas fa-comments"></i></div>
   <div class="divider-line"></div>
 </div>
-
-<section class="testimonials-section">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-quote-left"></i></span> Colleague Endorsements</h2>
-  
-  <div class="testimonials-carousel">
-    <div class="testimonial-item active">
-      <div class="testimonial-content">
-        <p>"João developed an impressive workflow that made complex ODE modeling accessible to researchers across disciplines. His ability to implement algorithms from literature and create user-friendly software demonstrates both technical excellence and a deep understanding of user needs."</p>
-      </div>
-      <div class="testimonial-author">
-        <div class="testimonial-author-image">
-          <i class="fas fa-user-circle"></i>
-        </div>
-        <div class="testimonial-author-info">
-          <h4>Prof. Jeanette Hellgren Kotaleski</h4>
-          <p>PhD Supervisor, Karolinska Institutet</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="testimonial-item">
-      <div class="testimonial-content">
-        <p>"João's systematic approach to problem-solving and his commitment to creating reusable, well-documented tools set him apart. His work on the Subcellular_Workflow significantly advanced our research capabilities and will benefit the scientific community for years to come."</p>
-      </div>
-      <div class="testimonial-author">
-        <div class="testimonial-author-image">
-          <i class="fas fa-user-circle"></i>
-        </div>
-        <div class="testimonial-author-info">
-          <h4>Dr. Teresa Summavielle</h4>
-          <p>Co-supervisor, i3S - Institute for Research and Innovation in Health</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="testimonial-item">
-      <div class="testimonial-content">
-        <p>"Working with João was a rewarding experience. His deep understanding of mathematical modeling and algorithm implementation, combined with his collaborative approach, elevated our entire team's work. Any organization would benefit from his analytical mindset and technical skills."</p>
-      </div>
-      <div class="testimonial-author">
-        <div class="testimonial-author-image">
-          <i class="fas fa-user-circle"></i>
-        </div>
-        <div class="testimonial-author-info">
-          <h4>Dr. Arvind Kumar</h4>
-          <p>Colleague, KTH Royal Institute of Technology</p>
-        </div>
-      </div>
-    </div>
-    
-    <div class="testimonial-controls">
-      <button class="testimonial-control prev"><i class="fas fa-chevron-left"></i></button>
-      <div class="testimonial-indicators">
-        <span class="testimonial-indicator active"></span>
-        <span class="testimonial-indicator"></span>
-        <span class="testimonial-indicator"></span>
-      </div>
-      <button class="testimonial-control next"><i class="fas fa-chevron-right"></i></button>
-    </div>
-  </div>
-</section>
 
 <div class="cta-section">
   <div class="cta-content">
