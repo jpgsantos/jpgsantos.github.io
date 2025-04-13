@@ -14,7 +14,7 @@ title: CV
       <p style="font-size: 1.2em; color: var(--text-light); margin-bottom: 0;">Computational Neuroscience PhD | Scientific Software Developer</p>
     </div>
     <div>
-      <a href="/assets/pdfs/Joao_Pedro_Santos_CV.pdf" class="button" style="margin-left: 1em;"><i class="fas fa-download"></i> Download PDF</a>
+      <a href="{{ '/assets/pdfs/Joao_Pedro_Santos_CV.pdf' | relative_url }}" class="button" style="margin-left: 1em;"><i class="fas fa-download"></i> Download PDF</a>
     </div>
   </div>
   

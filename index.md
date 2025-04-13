@@ -5,7 +5,7 @@ title: Home
 
 <div class="profile-section">
   <div class="profile-image-container">
-    <img src="/assets/images/Profile.jpg" alt="João Pedro Gomes dos Santos" class="profile-image">
+    <img src="{{ '/assets/images/Profile.jpg' | relative_url }}" alt="João Pedro Gomes dos Santos" class="profile-image">
   </div>
   <div class="profile-content">
     <h1>João Pedro Gomes dos Santos</h1>
@@ -13,9 +13,9 @@ title: Home
     <p>I'm a Computational Neuroscience PhD graduate with 8 years of experience in mathematical modeling (ODEs) and scientific software development. I specialize in implementing complex algorithms for biological systems and creating robust, reusable scientific tools.</p>
     <p><strong>Currently seeking opportunities in Copenhagen, Denmark or Remote positions</strong></p>
     <div class="action-buttons">
-      <a href="/cv" class="button">View My CV</a>
-      <a href="/projects" class="button button-secondary">View My Projects</a>
-      <a href="/contact" class="button button-secondary">Contact Me</a>
+      <a href="{{ '/cv' | relative_url }}" class="button">View My CV</a>
+      <a href="{{ '/projects' | relative_url }}" class="button button-secondary">View My Projects</a>
+      <a href="{{ '/contact' | relative_url }}" class="button button-secondary">Contact Me</a>
     </div>
   </div>
 </div>
@@ -57,5 +57,5 @@ I'm passionate about tackling complex analytical problems, developing new algori
 With my recent transition from academia to industry, I'm looking to apply my computational and problem-solving skills to innovative projects in neurotech, scientific computing, or AI/ML.
 
 <div class="action-buttons">
-  <a href="/about" class="button button-secondary">Learn More About Me</a>
+  <a href="{{ '/about' | relative_url }}" class="button button-secondary">Learn More About Me</a>
 </div>
