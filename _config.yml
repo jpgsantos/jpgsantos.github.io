@@ -8,4 +8,32 @@ theme: minima
 
 header_pages:
   - index.md
+  - about.mdtitle: João Pedro Gomes dos Santos
+description: Computational Neuroscience PhD | Scientific Software Developer
+author: João Pedro Gomes dos Santos
+email: jpgs.12390@gmail.com
+baseurl: ""
+url: "https://joaopedro.github.io" # Replace with your actual GitHub username
+
+# Social links
+github_username: jpgsantos
+linkedin_username: joaosantos1992
+
+# Build settings
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Navigation
+header_pages:
+  - index.md
   - about.md
+  - projects.md
+  - cv.md
+  - contact.md
+
+# Custom variables
+location: "Copenhagen, Denmark / Remote"
+position: "Computational Neuroscience PhD | Scientific Software Developer"
+available: true

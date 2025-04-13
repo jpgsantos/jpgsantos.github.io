@@ -6,19 +6,21 @@
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <meta name="description" content="{{ site.description }}">
     <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     {% seo %}
   </head>
   <body>
     <header>
       <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
       <nav>
-        {% for item in site.header_pages %}
-          {% assign my_page = site.pages | where: "path", item | first %}
-          {% if my_page.title %}
-            <a href="{{ my_page.url | relative_url }}">{{ my_page.title }}</a>
-          {% endif %}
-        {% endfor %}
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/projects">Projects</a>
+        <a href="/cv">CV</a>
+        <a href="/contact">Contact</a>
       </nav>
     </header>
     <main>
@@ -26,28 +28,20 @@
     </main>
     <footer>
       <div class="social-links">
-        {% if site.github_username %}
-          <a href="https://github.com/{{ site.github_username }}" target="_blank" title="GitHub">
-            <i class="fab fa-github"></i>
-          </a>
-        {% endif %}
-        {% if site.linkedin_username %}
-          <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" title="LinkedIn">
-            <i class="fab fa-linkedin"></i>
-          </a>
-        {% endif %}
-        {% if site.email %}
-          <a href="mailto:{{ site.email }}" title="Email">
-            <i class="fas fa-envelope"></i>
-          </a>
-        {% endif %}
+        <a href="https://github.com/jpgsantos" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/joaosantos1992" target="_blank" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="mailto:jpgs.12390@gmail.com" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
       </div>
-      <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}. All rights reserved.</p>
-      {% if site.available %}
-        <p class="availability">
-          <span class="available-indicator">●</span> Available for new opportunities
-        </p>
-      {% endif %}
+      <p>&copy; {{ site.time | date: '%Y' }} João Pedro Gomes dos Santos. All rights reserved.</p>
+      <p class="availability">
+        <span class="available-indicator">●</span> Available for new opportunities in Copenhagen or Remote
+      </p>
     </footer>
   </body>
 </html>

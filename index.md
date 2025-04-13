@@ -4,10 +4,12 @@ title: Home
 ---
 
 <div class="profile-section">
-  <img src="/assets/images/profile.jpg" alt="João Pedro Gomes dos Santos" class="profile-image">
+  <div class="profile-image-container">
+    <img src="/assets/images/profile.jpg" alt="João Pedro Gomes dos Santos" class="profile-image">
+  </div>
   <div class="profile-content">
     <h1>João Pedro Gomes dos Santos</h1>
-    <h2>PhD in Computational Neuroscience | Scientific Software Developer</h2>
+    <h2>Computational Neuroscience PhD | Scientific Software Developer</h2>
     <p>I'm a Computational Neuroscience PhD graduate with 8 years of experience in mathematical modeling (ODEs) and scientific software development. I specialize in implementing complex algorithms for biological systems and creating robust, reusable scientific tools.</p>
     <p><strong>Currently seeking opportunities in Copenhagen, Denmark or Remote positions</strong></p>
     <div class="action-buttons">
