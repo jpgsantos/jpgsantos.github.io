@@ -1,0 +1,11 @@
+title: João Pedro Gomes dos Santos
+description: Personal website of João Pedro Gomes dos Santos
+author: João Pedro Gomes dos Santos
+email: your@email.com
+baseurl: ""
+url: "https://joaopedro.github.io" # Replace with your actual GitHub username
+theme: minima
+
+header_pages:
+  - index.md
+  - about.md
