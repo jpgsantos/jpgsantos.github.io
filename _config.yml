@@ -1,14 +1,4 @@
 title: João Pedro Gomes dos Santos
-description: Personal website of João Pedro Gomes dos Santos
-author: João Pedro Gomes dos Santos
-email: your@email.com
-baseurl: ""
-url: "https://joaopedro.github.io" # Replace with your actual GitHub username
-theme: minima
-
-header_pages:
-  - index.md
-  - about.mdtitle: João Pedro Gomes dos Santos
 description: Computational Neuroscience PhD | Scientific Software Developer
 author: João Pedro Gomes dos Santos
 email: jpgs.12390@gmail.com

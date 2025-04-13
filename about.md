@@ -1,10 +1,10 @@
 ---
-layout default
-title Sobre
+layout: default
+title: About
 ---
 
-## Sobre mim
+## About Me
 
-Sou João Pedro Gomes dos Santos, com doutoramento em Neurociência Computacional. Os meus interesses incluem dinâmica cerebral, análise de dados e aplicações práticas de inteligência artificial.
+I'm João Pedro Gomes dos Santos, with a PhD in Computational Neuroscience. My interests include brain dynamics, data analysis, and practical applications of artificial intelligence.
 
-Este site é feito com [Jekyll](httpsjekyllrb.com) e está hospedado no [GitHub Pages](httpspages.github.com).
+This site is built with [Jekyll](https://jekyllrb.com) and is hosted on [GitHub Pages](https://pages.github.com).

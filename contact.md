@@ -48,7 +48,8 @@ title: Contact
 <div class="project-card">
   <h2 class="project-title">Send Me a Message</h2>
   
-  <form action="https://formspree.io/f/your-form-id" method="POST">
+  <!-- Replace the form action URL with your actual Formspree form ID when you set it up -->
+  <form action="https://formspree.io/f/xxxx" method="POST">
     <div class="form-group">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" required>
@@ -72,7 +73,7 @@ title: Contact
     <button type="submit">Send Message</button>
   </form>
   
-  <p class="note">Note: To activate the contact form, you'll need to create a Formspree account and replace "your-form-id" with your actual form ID.</p>
+  <p class="note">Note: To activate the contact form, you'll need to create a Formspree account and replace "xxxx" with your actual form ID.</p>
 </div>
 
 <div class="project-card">
