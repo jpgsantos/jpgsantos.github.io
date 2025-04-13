@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{ page.title }} | {{ site.title }}</title>
-    <link rel="stylesheet" href="{{ "/assets/style.css" | relative_url }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ site.description }}">
+    <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    {% seo %}
   </head>
   <body>
     <header>
-      <h1><a href="{{ "/" | relative_url }}">{{ site.title }}</a></h1>
+      <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
       <nav>
-        {% for page in site.pages %}
-          {% if page.title %}
-            <a href="{{ page.url | relative_url }}">{{ page.title }}</a>
+        {% for item in site.header_pages %}
+          {% assign my_page = site.pages | where: "path", item | first %}
+          {% if my_page.title %}
+            <a href="{{ my_page.url | relative_url }}">{{ my_page.title }}</a>
           {% endif %}
         {% endfor %}
       </nav>
@@ -20,7 +25,29 @@
       {{ content }}
     </main>
     <footer>
-      <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}</p>
+      <div class="social-links">
+        {% if site.github_username %}
+          <a href="https://github.com/{{ site.github_username }}" target="_blank" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+        {% endif %}
+        {% if site.linkedin_username %}
+          <a href="https://linkedin.com/in/{{ site.linkedin_username }}" target="_blank" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+        {% endif %}
+        {% if site.email %}
+          <a href="mailto:{{ site.email }}" title="Email">
+            <i class="fas fa-envelope"></i>
+          </a>
+        {% endif %}
+      </div>
+      <p>&copy; {{ site.time | date: '%Y' }} {{ site.author }}. All rights reserved.</p>
+      {% if site.available %}
+        <p class="availability">
+          <span class="available-indicator">●</span> Available for new opportunities
+        </p>
+      {% endif %}
     </footer>
   </body>
 </html>
