@@ -5,7 +5,7 @@ title: Home
 
 <div class="profile-section">
   <div class="profile-image-container">
-    <img src="/assets/images/profile.jpg" alt="João Pedro Gomes dos Santos" class="profile-image">
+    <img src="/assets/images/Profile.jpg" alt="João Pedro Gomes dos Santos" class="profile-image">
   </div>
   <div class="profile-content">
     <h1>João Pedro Gomes dos Santos</h1>
