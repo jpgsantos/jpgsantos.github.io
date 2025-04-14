@@ -232,8 +232,6 @@ title: Home
   </div>
 </section>
 
-{% include cta.html %}
-
 <style>
 /* Enhanced profile picture */
 .hero-image-border.enlarged {

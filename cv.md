@@ -295,8 +295,6 @@ title: CV
   </div>
 </section>
 
-{% include cta.html %}
-
 <style>
 /* CV page specific styles */
 .cv-hero {

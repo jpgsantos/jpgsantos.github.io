@@ -288,8 +288,6 @@ title: Projects
   </div>
 </section>
 
-{% include cta.html %}
-
 <style>
 /* Projects page specific styles */
 .projects-hero {

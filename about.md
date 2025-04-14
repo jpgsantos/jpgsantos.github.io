@@ -273,8 +273,6 @@ title: About
   </div>
 </section>
 
-{% include cta.html %}
-
 <style>
 /* About page specific styles */
 .about-hero {

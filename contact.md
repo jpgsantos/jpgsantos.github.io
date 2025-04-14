@@ -160,8 +160,6 @@ title: Contact
   </div>
 </section>
 
-{% include cta.html %}
-
 <style>
 /* Contact page specific styles */
 .contact-hero {
