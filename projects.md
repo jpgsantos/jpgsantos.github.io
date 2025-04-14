@@ -21,12 +21,6 @@ title: Projects
   </div>
 </div>
 
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-laptop-code"></i></div>
-  <div class="divider-line"></div>
-</div>
-
 <section class="featured-project">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-star"></i></span> Featured Project</h2>
   
@@ -95,12 +89,6 @@ title: Projects
     </div>
   </div>
 </section>
-
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-folder"></i></div>
-  <div class="divider-line"></div>
-</div>
 
 <section class="projects-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-code-branch"></i></span> All Projects</h2>
@@ -270,12 +258,6 @@ title: Projects
   </div>
 </section>
 
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-lightbulb"></i></div>
-  <div class="divider-line"></div>
-</div>
-
 <section class="future-projects">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-rocket"></i></span> Future Directions</h2>
   
@@ -306,16 +288,7 @@ title: Projects
   </div>
 </section>
 
-<div class="cta-section">
-  <div class="cta-content">
-    <h2>Interested in collaborating?</h2>
-    <p>I'm available for new opportunities in computational science and software development.</p>
-    <div class="cta-buttons">
-      <a href="{{ '/contact' | relative_url }}" class="cta-button">Contact Me</a>
-      <a href="{{ '/cv' | relative_url }}" class="cta-button-secondary">View My CV</a>
-    </div>
-  </div>
-</div>
+{% include cta.html %}
 
 <style>
 /* Projects page specific styles */
@@ -351,6 +324,21 @@ title: Projects
   0% { transform: scale(1); opacity: 0.5; }
   50% { transform: scale(1.2); opacity: 0.2; }
   100% { transform: scale(1); opacity: 0.5; }
+}
+
+/* Updated section spacing to replace dividers */
+.featured-project {
+  padding: 2em 4em 4em;
+  margin-top: 3em;
+}
+
+.projects-section {
+  margin-top: 4em;
+}
+
+.future-projects {
+  padding: 2em 4em 4em;
+  margin-top: 4em;
 }
 
 /* Project Cards */
@@ -719,10 +707,6 @@ title: Projects
 }
 
 /* Future Projects */
-.future-projects {
-  padding: 2em 4em;
-}
-
 .future-projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -763,6 +747,12 @@ title: Projects
   line-height: 1.6;
 }
 
+/* Add margin to CTA section for spacing */
+.cta-section {
+  margin-top: 4em;
+  margin-bottom: 2em;
+}
+
 /* Responsive styles */
 @media (max-width: 992px) {
   .projects-container {
@@ -783,6 +773,10 @@ title: Projects
   
   .project-content {
     padding: 1.5em;
+  }
+  
+  .featured-project {
+    padding: 2em;
   }
 }
 
