@@ -686,7 +686,7 @@ section:last-child {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 45px;
+  left: 60px;
   width: 4px;
   background-color: var(--timeline-color);
 }
@@ -713,7 +713,7 @@ section:last-child {
   justify-content: center;
   font-size: 1.2em;
   position: absolute;
-  left: 22px;
+  left: 20px;
   top: 20px;
   transform: translateX(-50%);
   z-index: 1;
@@ -738,7 +738,7 @@ section:last-child {
 .timeline-card::before {
   content: '';
   position: absolute;
-  top: 30px;
+  top: 20px;
   left: -15px;
   width: 0;
   height: 0;
