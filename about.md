@@ -71,12 +71,27 @@ title: About
           <i class="fas fa-star"></i>
         </div>
         <h3>Core Values</h3>
-        <ul>
-          <li><i class="fas fa-check-circle"></i> <strong>Technical Excellence:</strong> Clean, efficient, and well-structured code</li>
-          <li><i class="fas fa-check-circle"></i> <strong>Continuous Learning:</strong> Constantly expanding knowledge and skills</li>
-          <li><i class="fas fa-check-circle"></i> <strong>Interdisciplinary Approach:</strong> Combining insights from different fields</li>
-          <li><i class="fas fa-check-circle"></i> <strong>Open Collaboration:</strong> Sharing knowledge and working together</li>
-          <li><i class="fas fa-check-circle"></i> <strong>User-Centered Design:</strong> Creating accessible and usable tools</li>
+        <ul class="core-values-list">
+          <li class="core-value-item">
+            <div class="core-value-name">Technical Excellence</div>
+            <div class="core-value-desc">Clean, efficient, and well-structured code</div>
+          </li>
+          <li class="core-value-item">
+            <div class="core-value-name">Continuous Learning</div>
+            <div class="core-value-desc">Constantly expanding knowledge and skills</div>
+          </li>
+          <li class="core-value-item">
+            <div class="core-value-name">Interdisciplinary Approach</div>
+            <div class="core-value-desc">Combining insights from different fields</div>
+          </li>
+          <li class="core-value-item">
+            <div class="core-value-name">Open Collaboration</div>
+            <div class="core-value-desc">Sharing knowledge and working together</div>
+          </li>
+          <li class="core-value-item">
+            <div class="core-value-name">User-Centered Design</div>
+            <div class="core-value-desc">Creating accessible and usable tools</div>
+          </li>
         </ul>
       </div>
       
@@ -276,16 +291,7 @@ title: About
   </div>
 </section>
 
-<div class="cta-section">
-  <div class="cta-content">
-    <h2>Interested in working together?</h2>
-    <p>I'm currently available for new opportunities in Copenhagen or Remote positions.</p>
-    <div class="cta-buttons">
-      <a href="{{ '/contact' | relative_url }}" class="cta-button">Contact Me</a>
-      <a href="{{ '/cv' | relative_url }}" class="cta-button-secondary">View My CV</a>
-    </div>
-  </div>
-</div>
+{% include cta.html %}
 
 <style>
 /* About page specific styles */
@@ -295,8 +301,8 @@ title: About
 
 .profile-animation {
   position: relative;
-  width: 220px;
-  height: 220px;
+  width: 280px; /* Increased from 220px */
+  height: 280px; /* Increased from 220px */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -316,8 +322,8 @@ title: About
 
 .orbit {
   position: absolute;
-  width: 220px;
-  height: 220px;
+  width: 280px; /* Increased from 220px */
+  height: 280px; /* Increased from 220px */
   border-radius: 50%;
   border: 2px dashed var(--primary-light);
   animation: rotate 20s linear infinite;
@@ -339,21 +345,21 @@ title: About
 
 .code {
   top: 0;
-  left: 90px;
+  left: 120px; /* Adjusted to accommodate larger orbit */
 }
 
 .brain {
-  top: 90px;
+  top: 120px; /* Adjusted to accommodate larger orbit */
   right: 0;
 }
 
 .data {
   bottom: 0;
-  left: 90px;
+  left: 120px; /* Adjusted to accommodate larger orbit */
 }
 
 .lab {
-  top: 90px;
+  top: 120px; /* Adjusted to accommodate larger orbit */
   left: 0;
 }
 
@@ -491,18 +497,21 @@ title: About
 .highlight-card {
   padding: 2em;
   border-right: 1px solid var(--border-light);
-  transition: all var(--transition);
+  transition: background-color var(--transition), color var(--transition);
+  position: relative;
+  overflow: hidden;
 }
 
 .highlight-card:last-child {
   border-right: none;
 }
 
+/* Remove hover transform effects */
 .highlight-card:hover {
-  background-color: var(--white);
-  transform: translateY(-10px);
-  box-shadow: 0 10px 30px var(--shadow);
-  z-index: 1;
+  background-color: var(--primary-light);
+  transform: none;
+  box-shadow: none;
+  z-index: auto;
 }
 
 .highlight-icon {
@@ -540,6 +549,35 @@ title: About
   color: var(--primary-color);
   font-size: 1.1em;
   margin-top: 0.2em;
+}
+
+/* New Core Values styling */
+.core-values-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1em;
+}
+
+.core-value-item {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 1em;
+  box-shadow: 0 3px 8px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.core-value-name {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.core-value-desc {
+  font-size: 0.9em;
+  color: var(--text-light);
 }
 
 /* Career Goals Section */
@@ -780,6 +818,10 @@ title: About
   .highlight-card h3 {
     text-align: center;
   }
+  
+  .core-values-list {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
@@ -788,8 +830,8 @@ title: About
   }
   
   .profile-animation {
-    width: 180px;
-    height: 180px;
+    width: 220px;
+    height: 220px;
   }
   
   .profile-circle {
@@ -798,8 +840,8 @@ title: About
   }
   
   .orbit {
-    width: 180px;
-    height: 180px;
+    width: 220px;
+    height: 220px;
   }
   
   .satellite {
@@ -810,21 +852,21 @@ title: About
   
   .code {
     top: 0;
-    left: 75px;
+    left: 95px;
   }
   
   .brain {
-    top: 75px;
+    top: 95px;
     right: 0;
   }
   
   .data {
     bottom: 0;
-    left: 75px;
+    left: 95px;
   }
   
   .lab {
-    top: 75px;
+    top: 95px;
     left: 0;
   }
   
@@ -843,6 +885,10 @@ title: About
     margin-left: 60px;
     width: calc(100% - 60px);
     padding: 1.5em;
+  }
+  
+  .core-values-list {
+    grid-template-columns: 1fr;
   }
 }
 </style>
