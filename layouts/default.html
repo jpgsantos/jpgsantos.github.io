@@ -12,57 +12,40 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-      /* Header theme switcher styles */
-      .theme-switcher {
-        display: flex;
+      /* Simple theme switcher styles that match your minimal design */
+      .theme-icons {
+        display: inline-flex;
         align-items: center;
-        gap: 0.5em;
-        margin-left: 1.5em;
-        border-left: 1px solid var(--border-light);
-        padding-left: 1.5em;
+        margin-left: 15px;
+        gap: 8px;
       }
       
-      .theme-option {
+      .theme-icon {
         background: none;
         border: none;
         cursor: pointer;
-        font-size: 1.1em;
-        color: var(--text-light);
+        color: #666;
+        font-size: 1em;
         padding: 5px;
-        transition: all var(--transition);
-        position: relative;
+        transition: color 0.3s ease, transform 0.3s ease;
       }
       
-      .theme-option:hover {
-        color: var(--primary-color);
+      .theme-icon:hover {
+        color: #006400;
         transform: scale(1.1);
       }
       
-      .theme-option.active {
-        color: var(--primary-color);
-      }
-      
-      .theme-option.active::after {
-        content: '';
-        position: absolute;
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background-color: var(--primary-color);
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
+      .theme-icon.active {
+        color: #006400;
       }
       
       @media (max-width: 768px) {
-        .theme-switcher {
-          margin-top: 1em;
-          margin-left: 0;
-          border-left: none;
-          padding-left: 0;
-          border-top: 1px solid var(--border-light);
-          padding-top: 1em;
+        .theme-icons {
+          display: flex;
           justify-content: center;
+          width: 100%;
+          margin-top: 10px;
+          margin-left: 0;
         }
       }
     </style>
@@ -77,18 +60,14 @@
         <a href="/projects">Projects</a>
         <a href="/cv">CV</a>
         <a href="/contact">Contact</a>
-        
-        <div class="theme-switcher">
-          <button class="theme-option" data-theme="light" title="Light theme">
+        <span class="theme-icons">
+          <button class="theme-icon" id="light-theme" title="Light theme">
             <i class="fas fa-sun"></i>
           </button>
-          <button class="theme-option" data-theme="dark" title="Dark theme">
+          <button class="theme-icon" id="dark-theme" title="Dark theme">
             <i class="fas fa-moon"></i>
           </button>
-          <button class="theme-option" data-theme="system" title="System theme">
-            <i class="fas fa-desktop"></i>
-          </button>
-        </div>
+        </span>
       </nav>
     </header>
     <main>
@@ -113,90 +92,37 @@
     </footer>
     
     <script>
-      // Header Theme Switcher Functionality
+      // Simplified theme switcher script
       document.addEventListener('DOMContentLoaded', function() {
-        // Theme options
-        const themeOptions = {
-          LIGHT: 'light',
-          DARK: 'dark',
-          SYSTEM: 'system'
-        };
+        const lightButton = document.getElementById('light-theme');
+        const darkButton = document.getElementById('dark-theme');
         
-        // Get theme buttons
-        const themeButtons = document.querySelectorAll('.theme-option');
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme') || 'light';
         
-        // Check for saved theme preference or use default
-        const getTheme = () => {
-          const savedTheme = localStorage.getItem('theme');
-          if (savedTheme) {
-            return savedTheme;
-          }
-          return themeOptions.SYSTEM; // Default to system preference
-        };
+        // Apply the current theme
+        if (currentTheme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          darkButton.classList.add('active');
+        } else {
+          lightButton.classList.add('active');
+        }
         
-        // Function to detect system preference
-        const getSystemTheme = () => {
-          return window.matchMedia('(prefers-color-scheme: dark)').matches 
-            ? themeOptions.DARK 
-            : themeOptions.LIGHT;
-        };
-        
-        // Apply the selected theme
-        const applyTheme = (theme) => {
-          // If system preference, determine which theme to actually use
-          const themeToApply = theme === themeOptions.SYSTEM 
-            ? getSystemTheme() 
-            : theme;
-          
-          if (themeToApply === themeOptions.DARK) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-          } else {
-            document.documentElement.removeAttribute('data-theme');
-          }
-          
-          // Update active button styling
-          updateActiveButton(theme);
-        };
-        
-        // Save theme preference
-        const saveTheme = (theme) => {
-          localStorage.setItem('theme', theme);
-        };
-        
-        // Update active button styling
-        const updateActiveButton = (theme) => {
-          themeButtons.forEach(button => {
-            button.classList.remove('active');
-            if (button.getAttribute('data-theme') === theme) {
-              button.classList.add('active');
-            }
-          });
-        };
-        
-        // Initialize the theme
-        const initTheme = () => {
-          const currentTheme = getTheme();
-          applyTheme(currentTheme);
-        };
-        
-        // Add click handlers to theme buttons
-        themeButtons.forEach(button => {
-          button.addEventListener('click', () => {
-            const theme = button.getAttribute('data-theme');
-            saveTheme(theme);
-            applyTheme(theme);
-          });
+        // Light theme button
+        lightButton.addEventListener('click', function() {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'light');
+          lightButton.classList.add('active');
+          darkButton.classList.remove('active');
         });
         
-        // Listen for system preference changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-          if (getTheme() === themeOptions.SYSTEM) {
-            applyTheme(themeOptions.SYSTEM);
-          }
+        // Dark theme button
+        darkButton.addEventListener('click', function() {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+          darkButton.classList.add('active');
+          lightButton.classList.remove('active');
         });
-        
-        // Initialize theme
-        initTheme();
       });
     </script>
   </body>
