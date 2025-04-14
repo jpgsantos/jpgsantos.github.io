@@ -61,7 +61,7 @@
         </div>
       </div>
       
-      <!-- Branching arrows -->
+      <!-- Branching arrows with better alignment -->
       <div class="branching-arrows">
         <div class="branch-arrow left">
           <i class="fas fa-chevron-down"></i>
@@ -104,88 +104,50 @@
       </div>
     </div>
 
-    <!-- Mobile Diagram (Modified to show correct hierarchy) -->
+    <!-- Mobile Diagram (with parallel analysis methods) -->
     <div class="workflow-diagram clean mobile-diagram">
-      <!-- Start node -->
-      <div class="diagram-node start-node">
-        <i class="fas fa-play"></i>
-        <span>Start</span>
-      </div>
-      
-      <!-- Arrow -->
-      <div class="diagram-arrow">
-        <i class="fas fa-chevron-down"></i>
-      </div>
-      
-      <!-- Model Setup node -->
-      <div class="diagram-node regular-node">
-        <i class="fas fa-cogs"></i>
-        <span>Model Setup</span>
-      </div>
-      
-      <!-- Arrow -->
-      <div class="diagram-arrow">
-        <i class="fas fa-chevron-down"></i>
-      </div>
-      
       <!-- Simulation node -->
       <div class="diagram-node regular-node">
         <i class="fas fa-chart-line"></i>
         <span>Simulation</span>
       </div>
       
-      <!-- Arrow -->
-      <div class="diagram-arrow">
-        <i class="fas fa-chevron-down"></i>
+      <!-- Three arrows pointing to the analysis methods -->
+      <div class="mobile-branching-arrows">
+        <div class="mobile-branch-arrow">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="mobile-branch-arrow">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="mobile-branch-arrow">
+          <i class="fas fa-chevron-down"></i>
+        </div>
       </div>
       
-      <!-- Analysis Section with header to show they're at same level -->
-      <div class="analysis-section">
-        <!-- Parameter Estimation node -->
+      <!-- Three parallel analysis boxes without arrows between them -->
+      <div class="mobile-analysis-boxes">
         <div class="diagram-node regular-node">
           <i class="fas fa-sliders-h"></i>
           <span>Parameter Estimation</span>
         </div>
         
-        <!-- Arrow -->
-        <div class="diagram-arrow">
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        
-        <!-- Sensitivity Analysis node -->
         <div class="diagram-node regular-node">
           <i class="fas fa-search"></i>
           <span>Sensitivity Analysis</span>
         </div>
         
-        <!-- Arrow -->
-        <div class="diagram-arrow">
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        
-        <!-- Profile Likelihood Analysis node -->
         <div class="diagram-node regular-node">
           <i class="fas fa-chart-bar"></i>
           <span>Profile Likelihood Analysis</span>
         </div>
-      </div>
-      
-      <!-- Arrow -->
-      <div class="diagram-arrow">
-        <i class="fas fa-chevron-down"></i>
-      </div>
-      
-      <!-- Results node -->
-      <div class="diagram-node end-node">
-        <i class="fas fa-check-circle"></i>
-        <span>Results</span>
       </div>
     </div>
   </div>
 </div>
 
 <style>
-/* Clean Workflow Diagram - Based on the provided image */
+/* Clean Workflow Diagram - Based on the provided images */
 .workflow-diagram.clean {
   display: flex;
   flex-direction: column;
@@ -246,10 +208,12 @@
   justify-content: center;
 }
 
+/* Improved branching arrows for desktop */
 .branching-arrows {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  max-width: 580px; /* Control width to align with boxes below */
   padding: 0 20px;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -264,7 +228,7 @@
 
 .branch-arrow.left {
   margin-right: auto;
-  margin-left: 20%;
+  margin-left: 13%;
 }
 
 .branch-arrow.center {
@@ -273,7 +237,7 @@
 
 .branch-arrow.right {
   margin-left: auto;
-  margin-right: 20%;
+  margin-right: 13%;
 }
 
 .workflow-diagram.clean .diagram-branching {
@@ -283,20 +247,45 @@
   gap: 10px;
 }
 
-/* Mobile Diagram (Linear version) */
+/* Mobile Diagram (Parallel version) */
 .workflow-diagram.clean.mobile-diagram {
   display: none;
 }
 
-/* Analysis section for mobile to group related items */
-.analysis-section {
+/* Mobile branching arrows */
+.mobile-branching-arrows {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-around;
   width: 100%;
-  background-color: rgba(230, 240, 230, 0.5); /* Very light green background */
-  padding: 5px;
-  border-radius: 10px;
+  margin: 5px 0;
+}
+
+.mobile-branch-arrow {
+  color: #006400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile analysis boxes - positioned horizontally */
+.mobile-analysis-boxes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+
+.mobile-analysis-boxes .diagram-node {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+  font-size: 14px; /* Smaller font for mobile */
+  padding: 10px;
+}
+
+.mobile-analysis-boxes .diagram-node i {
+  font-size: 1.3em;
 }
 
 /* Responsive adjustments */
@@ -307,6 +296,32 @@
   
   .workflow-diagram.clean.mobile-diagram {
     display: flex;
+  }
+  
+  .mobile-analysis-boxes {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .mobile-analysis-boxes .diagram-node {
+    width: 100%;
+    font-size: 16px; /* Restore normal font size for vertical layout */
+    padding: 15px;
+  }
+  
+  .mobile-branching-arrows {
+    display: none; /* Hide the three arrows on very small screens */
+  }
+  
+  /* Show a single arrow for very small screens */
+  .workflow-diagram.clean.mobile-diagram::before {
+    content: '\f078'; /* fa-chevron-down */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #006400;
+    font-size: 16px;
+    margin: 5px 0;
+    display: block;
   }
 }
 </style>
