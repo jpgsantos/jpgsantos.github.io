@@ -78,20 +78,6 @@ title: Home
         <span>Parameter Optimization</span>
       </div>
     </div>
-    
-    <div class="expertise-card">
-      <div class="expertise-icon">
-        <i class="fas fa-lightbulb"></i>
-      </div>
-      <h3>Problem Solving</h3>
-      <p>Approaching complex technical challenges with systematic debugging and analytical rigor.</p>
-      <div class="expertise-skills">
-        <span>Analytical Thinking</span>
-        <span>AI/LLM Integration</span>
-        <span>Rapid Learning</span>
-        <span>Adaptability</span>
-      </div>
-    </div>
   </div>
 </section>
 
