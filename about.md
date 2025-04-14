@@ -221,25 +221,51 @@ title: About
 </section>
 
 <section class="education-timeline-section">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-university"></i></span> Education Journey</h2>
-  
-  <div class="education-timeline">
-    <div class="timeline-entry">
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-route"></i></span> My Journey</h2>
+
+  <div class="education-timeline"> <div class="timeline-entry">
       <div class="timeline-dot">
-        <i class="fas fa-graduation-cap"></i>
+        <i class="fas fa-briefcase"></i>
       </div>
-      <div class="timeline-card">
-        <div class="timeline-period">2016 - 2025</div>
-        <h3>PhD in Computational Neuroscience</h3>
-        <div class="timeline-institution">University of Porto / Karolinska Institutet</div>
+      <div class="timeline-card future-card">
+        <div class="timeline-period">2025 →</div>
+        <h3>Your Company?</h3>
+        <div class="timeline-location">Copenhagen, Denmark / Remote</div>
         <div class="timeline-details">
-          <p><strong>Thesis:</strong> A workflow for developing biochemical pathway models using ordinary differential equations</p>
-          <p><strong>Supervisors:</strong> Prof. Jeanette Hellgren Kotaleski, Dr. Teresa Summavielle</p>
-          <p>Developed the Subcellular_Workflow framework and published research in <em>Neuroinformatics</em>.</p>
+          <p>I'm seeking opportunities in algorithm development, scientific software creation, and computational problem-solving.</p>
+          <a href="{{ '/contact' | relative_url }}" class="timeline-cta">Let's Connect</a>
         </div>
       </div>
     </div>
-    
+
+    <div class="timeline-entry">
+      <div class="timeline-dot">
+        <i class="fas fa-graduation-cap"></i> </div>
+      <div class="timeline-card">
+        <div class="timeline-period">2016 - 2025</div>
+        <h3>PhD in Computational Neuroscience</h3>
+        <div class="timeline-institution">University of Porto / Karolinska Institutet / KTH / SciLifeLab</div>
+        <div class="timeline-details">
+          <p><strong>Thesis:</strong> A workflow for developing biochemical pathway models using ordinary differential equations.</p>
+          <p>Developed the <strong>Subcellular_Workflow</strong> framework: modular, FAIR-compliant MATLAB tool for ODE modeling (simulation, parameter estimation, sensitivity/likelihood analysis).</p>
+          <p>Published results in <em>Neuroinformatics</em>.</p>
+          </div>
+      </div>
+    </div>
+
+    <div class="timeline-entry">
+      <div class="timeline-dot">
+        <i class="fas fa-flask"></i>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-period">Apr 2015 - Dec 2015</div> <h3>Research Scholar</h3>
+        <div class="timeline-institution">UCIBIO @ REQUIMTE, University of Porto</div>
+        <div class="timeline-details">
+          <p>Conducted research on porphyrin nanomaterials via ionic self-assembly. Contributed to a publication in <em>Tetrahedron</em>.</p>
+        </div>
+      </div>
+    </div>
+
     <div class="timeline-entry">
       <div class="timeline-dot">
         <i class="fas fa-graduation-cap"></i>
@@ -250,12 +276,11 @@ title: About
         <div class="timeline-institution">University of Porto (FCUP, ICBAS)</div>
         <div class="timeline-details">
           <p><strong>Grade:</strong> 16/20</p>
-          <p><strong>Thesis:</strong> Exploring the Boundaries of Porphyrin Materials Synthesis by Ionic Self-Assembly</p>
-          <p>Conducted research on porphyrin nanomaterials that contributed to a publication in <em>Tetrahedron</em>.</p>
+          <p><strong>Thesis:</strong> Exploring the Boundaries of Porphyrin Materials Synthesis by Ionic Self-Assembly.</p>
         </div>
       </div>
     </div>
-    
+
     <div class="timeline-entry">
       <div class="timeline-dot">
         <i class="fas fa-graduation-cap"></i>
@@ -266,12 +291,12 @@ title: About
         <div class="timeline-institution">University of Porto (FCUP, ICBAS)</div>
         <div class="timeline-details">
           <p><strong>Grade:</strong> 16/20</p>
-          <p>Built a solid foundation in biological sciences with coursework in biochemistry, molecular biology, and cell biology.</p>
+          <p>Built a solid foundation in biological sciences.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+
+  </div> </section>
 
 <style>
 /* About page specific styles */
