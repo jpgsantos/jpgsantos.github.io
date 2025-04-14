@@ -48,59 +48,6 @@ body {
   background-color: var(--bg-body);
 }
 
-/* Theme switcher styles */
-.theme-switch-wrapper {
-  display: flex;
-  align-items: center;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: var(--white);
-  padding: 10px 15px;
-  border-radius: 50px;
-  box-shadow: 0 3px 10px var(--shadow-strong);
-  z-index: 1000;
-  transition: all var(--transition);
-}
-
-.theme-switch-container {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.theme-option {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2em;
-  color: var(--text-light);
-  transition: all var(--transition);
-  padding: 5px;
-  position: relative;
-}
-
-.theme-option:hover {
-  color: var(--primary-color);
-  transform: scale(1.1);
-}
-
-.theme-option.active {
-  color: var(--primary-color);
-}
-
-.theme-option.active::after {
-  content: '';
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--primary-color);
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 /* Transition for elements when theme changes */
 body, header, main, footer, .project-card, .expertise-card,
 .timeline-content, .cta-section, .hero-background, .testimonial-content,
