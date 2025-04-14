@@ -25,18 +25,168 @@
     </div>
   </div>
   <div class="project-showcase-visual">
-    {% if project.visual_type == "workflow-diagram" %}
-    <div class="workflow-diagram">
-      {% for node in project.diagram_nodes %}
-      {% if forloop.index > 1 %}
-      <div class="diagram-arrow"></div>
-      {% endif %}
-      <div class="diagram-node{% if node.type %} {{ node.type }}{% endif %}">
-        <i class="{{ node.icon }}"></i>
-        <span>{{ node.text }}</span>
+    {% if project.visual_type == "custom-workflow-diagram" %}
+    <div class="workflow-diagram branching">
+      <div class="diagram-row">
+        <div class="diagram-node start">
+          <i class="fas fa-play"></i>
+          <span>Start</span>
+        </div>
       </div>
-      {% endfor %}
+      <div class="diagram-arrow vertical"></div>
+      <div class="diagram-row">
+        <div class="diagram-node">
+          <i class="fas fa-cogs"></i>
+          <span>Model Setup</span>
+        </div>
+      </div>
+      <div class="diagram-arrow vertical"></div>
+      <div class="diagram-row">
+        <div class="diagram-node">
+          <i class="fas fa-chart-line"></i>
+          <span>Simulation</span>
+        </div>
+      </div>
+      <div class="diagram-branching">
+        <div class="diagram-branch">
+          <div class="diagram-arrow vertical"></div>
+          <div class="diagram-node">
+            <i class="fas fa-sliders-h"></i>
+            <span>Parameter Estimation</span>
+          </div>
+        </div>
+        <div class="diagram-branch">
+          <div class="diagram-arrow vertical"></div>
+          <div class="diagram-node">
+            <i class="fas fa-search"></i>
+            <span>Sensitivity Analysis</span>
+          </div>
+        </div>
+        <div class="diagram-branch">
+          <div class="diagram-arrow vertical"></div>
+          <div class="diagram-node">
+            <i class="fas fa-chart-bar"></i>
+            <span>Profile Likelihood Analysis</span>
+          </div>
+        </div>
+      </div>
+      <div class="diagram-arrow vertical"></div>
+      <div class="diagram-row">
+        <div class="diagram-node end">
+          <i class="fas fa-check-circle"></i>
+          <span>Results</span>
+        </div>
+      </div>
     </div>
     {% endif %}
   </div>
 </div>
+
+<style>
+/* Additional styles for the branching workflow diagram */
+.workflow-diagram.branching {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 2em;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 15px var(--shadow);
+  width: 100%;
+}
+
+.diagram-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.diagram-branching {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 500px;
+  padding: 0 10px;
+}
+
+.diagram-branch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  flex: 1;
+  margin: 0 5px;
+}
+
+.diagram-arrow.vertical {
+  width: 2px;
+  height: 30px;
+  background-color: var(--primary-color);
+  position: relative;
+}
+
+.diagram-arrow.vertical::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 10px solid var(--primary-color);
+}
+
+.workflow-diagram.branching .diagram-node {
+  width: 160px;
+  padding: 15px;
+  background-color: var(--primary-light);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  transition: all var(--transition);
+}
+
+.workflow-diagram.branching .diagram-node:hover {
+  transform: scale(1.05);
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.workflow-diagram.branching .diagram-node i {
+  font-size: 1.5em;
+  color: var(--primary-color);
+}
+
+.workflow-diagram.branching .diagram-node:hover i {
+  color: var(--white);
+}
+
+.workflow-diagram.branching .diagram-node.start, 
+.workflow-diagram.branching .diagram-node.end {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.workflow-diagram.branching .diagram-node.start i, 
+.workflow-diagram.branching .diagram-node.end i {
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .diagram-branching {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .diagram-branch {
+    width: 100%;
+  }
+}
+</style>
