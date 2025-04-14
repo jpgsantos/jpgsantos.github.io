@@ -1043,3 +1043,36 @@ section:last-child {
     width: 100%;
   }
 }
+
+/* Reduced header size for home page */
+.hero-section {
+  min-height: 400px; /* Reduced from 600px */
+}
+
+/* Remove headers completely from about, projects, cv, and contact pages */
+.about-hero,
+.projects-hero,
+.cv-hero,
+.contact-hero {
+  display: none;
+}
+
+/* Add some top margin to the first section after the removed hero */
+.bio-section,
+.projects-section,
+.featured-project,
+.cv-overview-section,
+.contact-options-section {
+  padding-top: 2em;
+}
+
+/* Adjust image size in home hero to match reduced height */
+.hero-image-border.enlarged {
+  width: 220px;
+  height: 220px;
+}
+
+/* Make sure the content flows nicely without the hero sections */
+.section-divider:first-of-type {
+  margin-top: 2em;
+}
