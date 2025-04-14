@@ -66,7 +66,7 @@ title: CV
           </div>
           <div class="cv-contact-item">
             <i class="fas fa-flag-checkered"></i>
-            <span>EU Citizen (Full EU rights)</span>
+            <span>EU Citizen</span>
           </div>
           <div class="cv-contact-item">
             <i class="fab fa-linkedin"></i>

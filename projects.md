@@ -24,101 +24,42 @@ title: Projects
 <section class="featured-project">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-star"></i></span> Featured Project</h2>
   
-  <div class="project-showcase">
-    <div class="project-showcase-content">
-      <h3>Subcellular_Workflow</h3>
-      <div class="project-showcase-badges">
-        <span class="project-badge"><i class="fas fa-calendar-alt"></i> 2016-2025</span>
-        <span class="project-badge"><i class="fab fa-github"></i> Open Source</span>
-        <span class="project-badge"><i class="fas fa-book"></i> Published</span>
-      </div>
-      <p class="project-showcase-description">
-        A modular, FAIR-compliant MATLAB framework for ODE biochemical pathway modeling, analysis, and parameterization. The workflow integrates tools for model initialization, simulation (MATLAB, COPASI via SimBiology), parameter estimation, and global sensitivity analysis and Profile Likelihood Analysis.
-      </p>
-      <ul class="project-showcase-features">
-        <li><i class="fas fa-check"></i> Architected and built a comprehensive scientific software framework following FAIR principles</li>
-        <li><i class="fas fa-check"></i> Implemented complex algorithms from scientific literature (parameter estimation, sensitivity analysis, PLA)</li>
-        <li><i class="fas fa-check"></i> Engineered interfaces between MATLAB solvers and COPASI</li>
-        <li><i class="fas fa-check"></i> Created comprehensive documentation and managed Git/GitHub collaboration</li>
-        <li><i class="fas fa-check"></i> Published results in a peer-reviewed article in <em>Neuroinformatics</em></li>
-      </ul>
-      <div class="project-showcase-links">
-        <a href="https://github.com/jpgsantos/Subcellular_Workflow" target="_blank" class="project-link">
-          <i class="fab fa-github"></i> GitHub Repository
-        </a>
-        <a href="https://subcellular-workflow.readthedocs.io/" target="_blank" class="project-link">
-          <i class="fas fa-book"></i> Documentation
-        </a>
-        <a href="https://doi.org/10.1007/s12021-021-09546-3" target="_blank" class="project-link">
-          <i class="fas fa-file-alt"></i> Publication
-        </a>
-      </div>
-    </div>
-    <div class="project-showcase-visual">
-      <div class="workflow-diagram">
-        <div class="diagram-node start">
-          <i class="fas fa-play"></i>
-          <span>Start</span>
-        </div>
-        <div class="diagram-arrow"></div>
-        <div class="diagram-node">
-          <i class="fas fa-cogs"></i>
-          <span>Model Setup</span>
-        </div>
-        <div class="diagram-arrow"></div>
-        <div class="diagram-node">
-          <i class="fas fa-chart-line"></i>
-          <span>Simulation</span>
-        </div>
-        <div class="diagram-arrow"></div>
-        <div class="diagram-node">
-          <i class="fas fa-sliders-h"></i>
-          <span>Parameter Estimation</span>
-        </div>
-        <div class="diagram-arrow"></div>
-        <div class="diagram-node">
-          <i class="fas fa-search"></i>
-          <span>Sensitivity Analysis</span>
-        </div>
-        <div class="diagram-arrow"></div>
-        <div class="diagram-node end">
-          <i class="fas fa-check-circle"></i>
-          <span>Results</span>
-        </div>
-      </div>
-    </div>
+  {% include featured-project.html %}
+  
+  <div class="view-more-projects">
+    <a href="#all-projects" class="view-more-link">
+      View All Projects <i class="fas fa-arrow-down"></i>
+    </a>
   </div>
 </section>
 
-<section class="projects-section">
+<section id="all-projects" class="projects-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-code-branch"></i></span> All Projects</h2>
   
   <div class="projects-container">
-    <!-- Project 1 -->
+    <!-- Project 1 - Subcellular_Workflow -->
     <div class="project-card">
       <div class="project-header">
         <div class="project-icon">
           <i class="fas fa-laptop-code"></i>
         </div>
         <div class="project-title-container">
-          <h2 class="project-title">Subcellular_Workflow</h2>
-          <p class="project-meta">PhD Project (2016-2025) • MATLAB, Python, Git</p>
+          <h2 class="project-title">{{ site.data.featured-project.title }}</h2>
+          <p class="project-meta">PhD Project ({{ site.data.featured-project.timeframe }}) • MATLAB, Python, Git</p>
         </div>
       </div>
       
       <div class="project-content">
-        <p>A modular, FAIR-compliant MATLAB framework for ODE biochemical pathway modeling, analysis, and parameterization. The workflow integrates tools for model initialization, simulation (MATLAB, COPASI via SimBiology), parameter estimation, and global sensitivity analysis and Profile Likelihood Analysis.</p>
+        <p>{{ site.data.featured-project.description }}</p>
         
         <div class="project-achievements">
           <h3><i class="fas fa-trophy"></i> Key Achievements</h3>
           <ul>
-            <li>Architected and built a comprehensive scientific software framework following FAIR principles</li>
-            <li>Implemented complex algorithms from scientific literature (parameter estimation, sensitivity analysis, PLA)</li>
-            <li>Engineered interfaces between MATLAB solvers and COPASI</li>
+            {% for feature in site.data.featured-project.features %}
+            <li>{{ feature }}</li>
+            {% endfor %}
             <li>Developed tools for converting between SBtab format and other standard formats (SBML)</li>
             <li>Applied the workflow to analyze benchmark models in systems biology and neuroscience</li>
-            <li>Created comprehensive documentation and managed Git/GitHub collaboration</li>
-            <li>Published results in a peer-reviewed article in <em>Neuroinformatics</em></li>
           </ul>
         </div>
         
@@ -138,20 +79,16 @@ title: Projects
         </div>
         
         <div class="project-links">
-          <a href="https://github.com/jpgsantos/Subcellular_Workflow" target="_blank" class="project-button">
-            <i class="fab fa-github"></i> GitHub Repository
+          {% for link in site.data.featured-project.links %}
+          <a href="{{ link.url }}" target="_blank" class="project-button">
+            <i class="{{ link.icon }}"></i> {{ link.text }}
           </a>
-          <a href="https://subcellular-workflow.readthedocs.io/" target="_blank" class="project-button">
-            <i class="fas fa-book"></i> Documentation
-          </a>
-          <a href="https://doi.org/10.1007/s12021-021-09546-3" target="_blank" class="project-button">
-            <i class="fas fa-file-alt"></i> Publication
-          </a>
+          {% endfor %}
         </div>
       </div>
     </div>
     
-    <!-- Project 2 -->
+    <!-- Project 2 - Chore Division Android App -->
     <div class="project-card">
       <div class="project-header">
         <div class="project-icon">
@@ -201,7 +138,7 @@ title: Projects
       </div>
     </div>
     
-    <!-- Project 3 -->
+    <!-- Project 3 - Porphyrin Materials Research -->
     <div class="project-card">
       <div class="project-header">
         <div class="project-icon">
@@ -611,97 +548,6 @@ title: Projects
   0% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0); }
-}
-
-/* Workflow Diagram */
-.workflow-diagram {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  padding: 2em;
-  background-color: var(--white);
-  border-radius: var(--border-radius);
-  box-shadow: 0 5px 15px var(--shadow);
-}
-
-.diagram-node {
-  width: 160px;
-  padding: 15px;
-  background-color: var(--primary-light);
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  text-align: center;
-  transition: all var(--transition);
-}
-
-.diagram-node:hover {
-  transform: scale(1.05);
-  background-color: var(--primary-color);
-  color: var(--white);
-}
-
-.diagram-node i {
-  font-size: 1.5em;
-  color: var(--primary-color);
-}
-
-.diagram-node:hover i {
-  color: var(--white);
-}
-
-.diagram-node span {
-  font-weight: 500;
-}
-
-.diagram-arrow {
-  width: 30px;
-  height: 30px;
-  position: relative;
-}
-
-.diagram-arrow::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  height: 100%;
-  width: 2px;
-  background-color: var(--primary-color);
-}
-
-.diagram-arrow::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 10px solid var(--primary-color);
-}
-
-.diagram-node.start {
-  background-color: var(--primary-color);
-  color: var(--white);
-}
-
-.diagram-node.start i {
-  color: var(--white);
-}
-
-.diagram-node.end {
-  background-color: var(--primary-dark);
-  color: var(--white);
-}
-
-.diagram-node.end i {
-  color: var(--white);
 }
 
 /* Future Projects */
