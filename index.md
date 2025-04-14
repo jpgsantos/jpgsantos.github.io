@@ -34,12 +34,6 @@ title: Home
   </div>
 </div>
 
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-code"></i></div>
-  <div class="divider-line"></div>
-</div>
-
 <section class="expertise-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-star"></i></span> Areas of Expertise</h2>
   
@@ -100,12 +94,6 @@ title: Home
     </div>
   </div>
 </section>
-
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-project-diagram"></i></div>
-  <div class="divider-line"></div>
-</div>
 
 <section class="featured-project">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-award"></i></span> Featured Project</h2>
@@ -180,12 +168,6 @@ title: Home
     </a>
   </div>
 </section>
-
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-user-graduate"></i></div>
-  <div class="divider-line"></div>
-</div>
 
 <section class="journey-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-road"></i></span> Professional Journey</h2>
@@ -264,28 +246,18 @@ title: Home
   </div>
 </section>
 
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-comments"></i></div>
-  <div class="divider-line"></div>
-</div>
-
-<div class="cta-section">
-  <div class="cta-content">
-    <h2>Ready to collaborate?</h2>
-    <p>I'm currently available for new opportunities in Copenhagen or Remote positions.</p>
-    <div class="cta-buttons">
-      <a href="{{ '/contact' | relative_url }}" class="cta-button">Contact Me</a>
-      <a href="{{ '/cv' | relative_url }}" class="cta-button-secondary">View My CV</a>
-    </div>
-  </div>
-</div>
+{% include cta.html %}
 
 <style>
 /* Enhanced profile picture */
 .hero-image-border.enlarged {
   width: 300px;
   height: 300px;
+}
+
+/* Additional spacing between sections when dividers are removed */
+section {
+  margin-top: 5em;
 }
 
 /* Workflow Diagram Styles */
