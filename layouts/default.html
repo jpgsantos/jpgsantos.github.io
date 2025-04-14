@@ -6,10 +6,66 @@
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <meta name="description" content="{{ site.description }}">
     <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/theme.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* Header theme switcher styles */
+      .theme-switcher {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        margin-left: 1.5em;
+        border-left: 1px solid var(--border-light);
+        padding-left: 1.5em;
+      }
+      
+      .theme-option {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 1.1em;
+        color: var(--text-light);
+        padding: 5px;
+        transition: all var(--transition);
+        position: relative;
+      }
+      
+      .theme-option:hover {
+        color: var(--primary-color);
+        transform: scale(1.1);
+      }
+      
+      .theme-option.active {
+        color: var(--primary-color);
+      }
+      
+      .theme-option.active::after {
+        content: '';
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      @media (max-width: 768px) {
+        .theme-switcher {
+          margin-top: 1em;
+          margin-left: 0;
+          border-left: none;
+          padding-left: 0;
+          border-top: 1px solid var(--border-light);
+          padding-top: 1em;
+          justify-content: center;
+        }
+      }
+    </style>
     {% seo %}
   </head>
   <body>
@@ -21,6 +77,18 @@
         <a href="/projects">Projects</a>
         <a href="/cv">CV</a>
         <a href="/contact">Contact</a>
+        
+        <div class="theme-switcher">
+          <button class="theme-option" data-theme="light" title="Light theme">
+            <i class="fas fa-sun"></i>
+          </button>
+          <button class="theme-option" data-theme="dark" title="Dark theme">
+            <i class="fas fa-moon"></i>
+          </button>
+          <button class="theme-option" data-theme="system" title="System theme">
+            <i class="fas fa-desktop"></i>
+          </button>
+        </div>
       </nav>
     </header>
     <main>
@@ -43,5 +111,93 @@
         <span class="available-indicator">●</span> Available for new opportunities in Copenhagen or Remote
       </p>
     </footer>
+    
+    <script>
+      // Header Theme Switcher Functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        // Theme options
+        const themeOptions = {
+          LIGHT: 'light',
+          DARK: 'dark',
+          SYSTEM: 'system'
+        };
+        
+        // Get theme buttons
+        const themeButtons = document.querySelectorAll('.theme-option');
+        
+        // Check for saved theme preference or use default
+        const getTheme = () => {
+          const savedTheme = localStorage.getItem('theme');
+          if (savedTheme) {
+            return savedTheme;
+          }
+          return themeOptions.SYSTEM; // Default to system preference
+        };
+        
+        // Function to detect system preference
+        const getSystemTheme = () => {
+          return window.matchMedia('(prefers-color-scheme: dark)').matches 
+            ? themeOptions.DARK 
+            : themeOptions.LIGHT;
+        };
+        
+        // Apply the selected theme
+        const applyTheme = (theme) => {
+          // If system preference, determine which theme to actually use
+          const themeToApply = theme === themeOptions.SYSTEM 
+            ? getSystemTheme() 
+            : theme;
+          
+          if (themeToApply === themeOptions.DARK) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          } else {
+            document.documentElement.removeAttribute('data-theme');
+          }
+          
+          // Update active button styling
+          updateActiveButton(theme);
+        };
+        
+        // Save theme preference
+        const saveTheme = (theme) => {
+          localStorage.setItem('theme', theme);
+        };
+        
+        // Update active button styling
+        const updateActiveButton = (theme) => {
+          themeButtons.forEach(button => {
+            button.classList.remove('active');
+            if (button.getAttribute('data-theme') === theme) {
+              button.classList.add('active');
+            }
+          });
+        };
+        
+        // Initialize the theme
+        const initTheme = () => {
+          const currentTheme = getTheme();
+          applyTheme(currentTheme);
+        };
+        
+        // Add click handlers to theme buttons
+        themeButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const theme = button.getAttribute('data-theme');
+            saveTheme(theme);
+            applyTheme(theme);
+          });
+        });
+        
+        // Listen for system preference changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+          if (getTheme() === themeOptions.SYSTEM) {
+            applyTheme(themeOptions.SYSTEM);
+          }
+        });
+        
+        // Initialize theme
+        initTheme();
+      });
+    </script>
   </body>
 </html>
