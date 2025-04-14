@@ -27,12 +27,6 @@ title: About
   </div>
 </div>
 
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-user-circle"></i></div>
-  <div class="divider-line"></div>
-</div>
-
 <section class="bio-section">
   <div class="bio-content">
     <div class="bio-main">
@@ -133,12 +127,6 @@ title: About
   </div>
 </section>
 
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-briefcase"></i></div>
-  <div class="divider-line"></div>
-</div>
-
 <section class="career-goals-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-bullseye"></i></span> What I'm Looking For</h2>
   
@@ -231,12 +219,6 @@ title: About
     </div>
   </div>
 </section>
-
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-graduation-cap"></i></div>
-  <div class="divider-line"></div>
-</div>
 
 <section class="education-timeline-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-university"></i></span> Education Journey</h2>
@@ -377,6 +359,7 @@ title: About
 /* Bio Section */
 .bio-section {
   padding: 0 4em 4em;
+  margin-top: 3em; /* Added spacing to compensate for removed divider */
 }
 
 .bio-content {
@@ -583,6 +566,7 @@ title: About
 /* Career Goals Section */
 .career-goals-section {
   padding: 0 4em 4em;
+  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .career-goals-grid {
@@ -671,6 +655,7 @@ title: About
 /* Education Timeline */
 .education-timeline-section {
   padding: 0 4em 4em;
+  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .education-timeline {
@@ -773,6 +758,12 @@ title: About
 
 .timeline-details p:last-child {
   margin-bottom: 0;
+}
+
+/* Add margin to the CTA section for spacing */
+.cta-section {
+  margin-top: 4em;
+  margin-bottom: 2em;
 }
 
 /* Responsive styles */
@@ -912,17 +903,4 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   // Set initial styles for animation
-  const elementsToAnimate = document.querySelectorAll('.bio-content, .career-goal-card, .timeline-entry');
-  elementsToAnimate.forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(20px)';
-    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  });
-  
-  // Listen for scroll events
-  window.addEventListener('scroll', animateOnScroll);
-  
-  // Trigger once on load
-  animateOnScroll();
-});
-</script>
+  const elementsToAnimate = document.querySelector
