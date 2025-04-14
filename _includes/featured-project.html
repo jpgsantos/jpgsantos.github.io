@@ -25,168 +25,200 @@
     </div>
   </div>
   <div class="project-showcase-visual">
-    {% if project.visual_type == "custom-workflow-diagram" %}
-    <div class="workflow-diagram branching">
+    <div class="workflow-diagram clean">
+      <!-- Start node -->
       <div class="diagram-row">
-        <div class="diagram-node start">
+        <div class="diagram-node start-node">
           <i class="fas fa-play"></i>
           <span>Start</span>
         </div>
       </div>
-      <div class="diagram-arrow vertical"></div>
+      
+      <!-- Arrow -->
+      <div class="diagram-arrow">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      
+      <!-- Model Setup node -->
       <div class="diagram-row">
-        <div class="diagram-node">
+        <div class="diagram-node regular-node">
           <i class="fas fa-cogs"></i>
           <span>Model Setup</span>
         </div>
       </div>
-      <div class="diagram-arrow vertical"></div>
+      
+      <!-- Arrow -->
+      <div class="diagram-arrow">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      
+      <!-- Simulation node -->
       <div class="diagram-row">
-        <div class="diagram-node">
+        <div class="diagram-node regular-node">
           <i class="fas fa-chart-line"></i>
           <span>Simulation</span>
         </div>
       </div>
-      <div class="diagram-branching">
-        <div class="diagram-branch">
-          <div class="diagram-arrow vertical"></div>
-          <div class="diagram-node">
-            <i class="fas fa-sliders-h"></i>
-            <span>Parameter Estimation</span>
-          </div>
+      
+      <!-- Branching arrows -->
+      <div class="branching-arrows">
+        <div class="branch-arrow left">
+          <i class="fas fa-chevron-down"></i>
         </div>
-        <div class="diagram-branch">
-          <div class="diagram-arrow vertical"></div>
-          <div class="diagram-node">
-            <i class="fas fa-search"></i>
-            <span>Sensitivity Analysis</span>
-          </div>
+        <div class="branch-arrow center">
+          <i class="fas fa-chevron-down"></i>
         </div>
-        <div class="diagram-branch">
-          <div class="diagram-arrow vertical"></div>
-          <div class="diagram-node">
-            <i class="fas fa-chart-bar"></i>
-            <span>Profile Likelihood Analysis</span>
-          </div>
+        <div class="branch-arrow right">
+          <i class="fas fa-chevron-down"></i>
         </div>
       </div>
-      <div class="diagram-arrow vertical"></div>
+      
+      <!-- Three parallel nodes -->
+      <div class="diagram-branching">
+        <div class="diagram-node regular-node">
+          <i class="fas fa-sliders-h"></i>
+          <span>Parameter Estimation</span>
+        </div>
+        <div class="diagram-node regular-node">
+          <i class="fas fa-search"></i>
+          <span>Sensitivity Analysis</span>
+        </div>
+        <div class="diagram-node regular-node">
+          <i class="fas fa-chart-bar"></i>
+          <span>Profile Likelihood Analysis</span>
+        </div>
+      </div>
+      
+      <!-- Arrow -->
+      <div class="diagram-arrow">
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      
+      <!-- Results node -->
       <div class="diagram-row">
-        <div class="diagram-node end">
+        <div class="diagram-node end-node">
           <i class="fas fa-check-circle"></i>
           <span>Results</span>
         </div>
       </div>
     </div>
-    {% endif %}
   </div>
 </div>
 
 <style>
-/* Additional styles for the branching workflow diagram */
-.workflow-diagram.branching {
+/* Clean Workflow Diagram - Based on the provided image */
+.workflow-diagram.clean {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 10px;
   padding: 2em;
-  background-color: var(--white);
-  border-radius: var(--border-radius);
-  box-shadow: 0 5px 15px var(--shadow);
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
-.diagram-row {
+.workflow-diagram.clean .diagram-row {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-.diagram-branching {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 500px;
-  padding: 0 10px;
-}
-
-.diagram-branch {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-  flex: 1;
-  margin: 0 5px;
-}
-
-.diagram-arrow.vertical {
-  width: 2px;
-  height: 30px;
-  background-color: var(--primary-color);
-  position: relative;
-}
-
-.diagram-arrow.vertical::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 10px solid var(--primary-color);
-}
-
-.workflow-diagram.branching .diagram-node {
-  width: 160px;
+.workflow-diagram.clean .diagram-node {
+  width: 180px;
   padding: 15px;
-  background-color: var(--primary-light);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   text-align: center;
-  transition: all var(--transition);
 }
 
-.workflow-diagram.branching .diagram-node:hover {
-  transform: scale(1.05);
-  background-color: var(--primary-color);
-  color: var(--white);
+.workflow-diagram.clean .start-node,
+.workflow-diagram.clean .end-node {
+  background-color: #006400; /* Dark green */
+  color: white;
 }
 
-.workflow-diagram.branching .diagram-node i {
+.workflow-diagram.clean .regular-node {
+  background-color: #e6f0e6; /* Light green */
+  color: #006400;
+}
+
+.workflow-diagram.clean .diagram-node i {
   font-size: 1.5em;
-  color: var(--primary-color);
+  color: inherit;
 }
 
-.workflow-diagram.branching .diagram-node:hover i {
-  color: var(--white);
+.workflow-diagram.clean .diagram-arrow {
+  color: #006400;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.workflow-diagram.branching .diagram-node.start, 
-.workflow-diagram.branching .diagram-node.end {
-  background-color: var(--primary-color);
-  color: var(--white);
+.branching-arrows {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-.workflow-diagram.branching .diagram-node.start i, 
-.workflow-diagram.branching .diagram-node.end i {
-  color: var(--white);
+.branch-arrow {
+  color: #006400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.branch-arrow.left {
+  margin-right: auto;
+  margin-left: 20%;
+}
+
+.branch-arrow.center {
+  margin: 0 auto;
+}
+
+.branch-arrow.right {
+  margin-left: auto;
+  margin-right: 20%;
+}
+
+.workflow-diagram.clean .diagram-branching {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .diagram-branching {
+  .workflow-diagram.clean .diagram-branching {
     flex-direction: column;
     align-items: center;
     gap: 15px;
   }
   
-  .diagram-branch {
-    width: 100%;
+  .branching-arrows {
+    display: none; /* Hide the branching arrows on mobile */
+  }
+  
+  /* Add single arrow between each node on mobile */
+  .workflow-diagram.clean .diagram-branching .diagram-node:not(:last-child)::after {
+    content: '\f078'; /* fa-chevron-down */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: #006400;
+    margin-top: 10px;
+    display: block;
   }
 }
 </style>
