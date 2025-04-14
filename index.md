@@ -27,7 +27,7 @@ title: Home
       </div>
     </div>
     <div class="hero-image-container">
-      <div class="hero-image-border">
+      <div class="hero-image-border enlarged">
         <img src="{{ '/assets/images/Profile.jpg' | relative_url }}" alt="João Pedro Gomes dos Santos" class="hero-image">
       </div>
     </div>
@@ -140,9 +140,35 @@ title: Home
       </div>
     </div>
     <div class="project-showcase-visual">
-      <div class="visual-container">
-        <div class="diagram">
-          <img src="{{ '/assets/images/workflow_diagram.svg' | relative_url }}" alt="Workflow Diagram" class="diagram-image">
+      <div class="workflow-diagram">
+        <div class="diagram-node start">
+          <i class="fas fa-play"></i>
+          <span>Start</span>
+        </div>
+        <div class="diagram-arrow"></div>
+        <div class="diagram-node">
+          <i class="fas fa-cogs"></i>
+          <span>Model Setup</span>
+        </div>
+        <div class="diagram-arrow"></div>
+        <div class="diagram-node">
+          <i class="fas fa-chart-line"></i>
+          <span>Simulation</span>
+        </div>
+        <div class="diagram-arrow"></div>
+        <div class="diagram-node">
+          <i class="fas fa-sliders-h"></i>
+          <span>Parameter Estimation</span>
+        </div>
+        <div class="diagram-arrow"></div>
+        <div class="diagram-node">
+          <i class="fas fa-search"></i>
+          <span>Sensitivity Analysis</span>
+        </div>
+        <div class="diagram-arrow"></div>
+        <div class="diagram-node end">
+          <i class="fas fa-check-circle"></i>
+          <span>Results</span>
         </div>
       </div>
     </div>
@@ -243,5 +269,118 @@ title: Home
     </div>
   </div>
 </div>
+
+<style>
+/* Enhanced profile picture */
+.hero-image-border.enlarged {
+  width: 300px;
+  height: 300px;
+}
+
+/* Workflow Diagram Styles */
+.workflow-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 2em;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 5px 15px var(--shadow);
+}
+
+.diagram-node {
+  width: 160px;
+  padding: 15px;
+  background-color: var(--primary-light);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  transition: all var(--transition);
+}
+
+.diagram-node:hover {
+  transform: scale(1.05);
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.diagram-node i {
+  font-size: 1.5em;
+  color: var(--primary-color);
+}
+
+.diagram-node:hover i {
+  color: var(--white);
+}
+
+.diagram-node span {
+  font-weight: 500;
+}
+
+.diagram-arrow {
+  width: 30px;
+  height: 30px;
+  position: relative;
+}
+
+.diagram-arrow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 2px;
+  background-color: var(--primary-color);
+}
+
+.diagram-arrow::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 10px solid var(--primary-color);
+}
+
+.diagram-node.start {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.diagram-node.start i {
+  color: var(--white);
+}
+
+.diagram-node.end {
+  background-color: var(--primary-dark);
+  color: var(--white);
+}
+
+.diagram-node.end i {
+  color: var(--white);
+}
+
+@media (max-width: 992px) {
+  .hero-image-border.enlarged {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-image-border.enlarged {
+    width: 220px;
+    height: 220px;
+  }
+}
+</style>
 
 <script src="{{ '/assets/js/home.js' | relative_url }}"></script>
