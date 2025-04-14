@@ -1,0 +1,112 @@
+/* Theme variables */
+:root {
+  /* Light theme (default) */
+  --primary-color: #006400;     /* Main green color */
+  --primary-light: #e6f0e6;     /* Light green for backgrounds */
+  --primary-dark: #004d00;      /* Darker green for hover states */
+  --text-dark: #333;            /* Main text color */
+  --text-light: #666;           /* Secondary text color */
+  --bg-light: #f9f9f9;          /* Light background */
+  --bg-body: #f9f9f9;           /* Body background */
+  --white: #ffffff;             /* White background */
+  --accent: #ffa500;            /* Accent color (orange) for contrast */
+  --accent-light: #fff3e0;      /* Light accent background */
+  --border-light: #ddd;         /* Light border color */
+  --shadow: rgba(0,0,0,0.1);    /* Shadow color */
+  --shadow-strong: rgba(0,0,0,0.15); /* Stronger shadow */
+  --code-bg: #f5f5f5;           /* Code background */
+  --code-text: #333;            /* Code text color */
+  --timeline-color: #e0e0e0;    /* Timeline color */
+  
+  /* Other variables remain unchanged */
+  --transition: 0.3s ease;      /* Standard transition */
+  --border-radius: 8px;         /* Standard border radius */
+  --border-radius-lg: 12px;     /* Larger border radius */
+}
+
+[data-theme="dark"] {
+  --primary-color: #4caf50;     /* Brighter green for dark mode */
+  --primary-light: #1e3320;     /* Darker green for backgrounds */
+  --primary-dark: #81c784;      /* Lighter green for hover states (inverted) */
+  --text-dark: #e0e0e0;         /* Light text for dark mode */
+  --text-light: #b0b0b0;        /* Secondary light text */
+  --bg-light: #222;             /* Dark background */
+  --bg-body: #121212;           /* Dark body background */
+  --white: #1e1e1e;             /* Dark card background */
+  --accent: #ff9800;            /* Slightly adjusted accent */
+  --accent-light: #332500;      /* Dark accent background */
+  --border-light: #444;         /* Dark border color */
+  --shadow: rgba(0,0,0,0.3);    /* Stronger shadow for dark mode */
+  --shadow-strong: rgba(0,0,0,0.5); /* Even stronger shadow */
+  --code-bg: #2d2d2d;           /* Darker code background */
+  --code-text: #e0e0e0;         /* Lighter code text */
+  --timeline-color: #444;       /* Darker timeline color */
+}
+
+/* Update body background */
+body {
+  background-color: var(--bg-body);
+}
+
+/* Theme switcher styles */
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--white);
+  padding: 10px 15px;
+  border-radius: 50px;
+  box-shadow: 0 3px 10px var(--shadow-strong);
+  z-index: 1000;
+  transition: all var(--transition);
+}
+
+.theme-switch-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.theme-option {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: var(--text-light);
+  transition: all var(--transition);
+  padding: 5px;
+  position: relative;
+}
+
+.theme-option:hover {
+  color: var(--primary-color);
+  transform: scale(1.1);
+}
+
+.theme-option.active {
+  color: var(--primary-color);
+}
+
+.theme-option.active::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Transition for elements when theme changes */
+body, header, main, footer, .project-card, .expertise-card,
+.timeline-content, .cta-section, .hero-background, .testimonial-content,
+.hero-buttons a, .cta-buttons a {
+  transition: background-color var(--transition), 
+              color var(--transition), 
+              border-color var(--transition), 
+              box-shadow var(--transition);
+}
