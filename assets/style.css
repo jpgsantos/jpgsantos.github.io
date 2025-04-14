@@ -258,14 +258,8 @@ footer .available-indicator {
 }
 
 .hero-text {
-  flex: 1;
+  flex: 3;  /* Increased from 1 to 3 to give more space to text */
   max-width: 600px;
-}
-
-.hero-text h1 {
-  font-size: 3.5em;
-  margin-bottom: 0.2em;
-  color: var(--primary-dark);
 }
 
 .hero-description {
@@ -276,17 +270,18 @@ footer .available-indicator {
 }
 
 .hero-image-container {
+  flex: 1;  /* Decreased from default to take less space */
   display: flex;
   justify-content: center;
   align-items: center;
   padding-left: 2em;
-  /* Remove the padding-right: 3em; */
+  /* Removed padding-right */
 }
 
 .hero-image-border {
   position: relative;
-  width: 280px;  /* Reduced from 320px */
-  height: 280px; /* Reduced from 320px */
+  width: 220px;  /* Reduced from 280px */
+  height: 220px; /* Reduced from 280px */
   border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
   overflow: hidden;
   box-shadow: 0 15px 30px var(--shadow-strong);
@@ -304,7 +299,7 @@ footer .available-indicator {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top; /* Add this line to center the face */
+  object-position: center top; /* Center the face */
 }
 
 .hero-buttons {
@@ -405,7 +400,7 @@ footer .available-indicator {
 
 @media (max-width: 992px) {
   .hero-content {
-    flex-direction: column;
+    flex-direction: column-reverse;
     text-align: center;
     padding: 3em 2em;
   }
@@ -425,9 +420,13 @@ footer .available-indicator {
 }
 
 @media (max-width: 768px) {
+  .hero-text h1 {
+    font-size: 2.5em;
+  }
+  
   .hero-image-border {
-    width: 220px;
-    height: 220px;
+    width: 200px;
+    height: 200px;
   }
 }
 
