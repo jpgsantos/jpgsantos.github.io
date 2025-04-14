@@ -24,6 +24,10 @@
   --timeline-color: #e0e0e0;    /* Timeline color */
   --code-bg: #f5f5f5;           /* Code background */
   --code-text: #333;            /* Code text color */
+  
+  /* Standardized spacing variables */
+  --section-spacing: 2.5rem;    /* Consistent spacing between sections */
+  --content-padding: 2rem;      /* Standard padding inside content areas */
 }
 
 body {
@@ -216,11 +220,12 @@ footer .available-indicator {
 /* ==================== HERO SECTION ==================== */
 .hero-section {
   position: relative;
-  min-height: 600px;
+  min-height: 500px; /* Reduced from 600px for more compact design */
   overflow: hidden;
   display: flex;
   align-items: center;
   padding: 0;
+  margin-bottom: var(--section-spacing);
 }
 
 .hero-background {
@@ -275,13 +280,12 @@ footer .available-indicator {
   justify-content: center;
   align-items: center;
   padding-left: 2em;
-  /* Removed padding-right */
 }
 
 .hero-image-border {
   position: relative;
-  width: 220px;  /* Reduced from 280px */
-  height: 220px; /* Reduced from 280px */
+  width: 220px;
+  height: 220px;
   border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
   overflow: hidden;
   box-shadow: 0 15px 30px var(--shadow-strong);
@@ -398,66 +402,17 @@ footer .available-indicator {
   100% { background-position: 0% 50%; }
 }
 
-@media (max-width: 992px) {
-  .hero-content {
-    flex-direction: column-reverse;
-    text-align: center;
-    padding: 3em 2em;
-  }
-  
-  .hero-text {
-    max-width: 100%;
-    margin-bottom: 2em;
-  }
-  
-  .hero-image-container {
-    padding-left: 0;
-  }
-  
-  .hero-buttons {
-    justify-content: center;
-  }
+/* ==================== STANDARDIZED SECTION SPACING ==================== */
+/* This is the key change for consistent spacing */
+section {
+  padding: var(--content-padding);
+  margin-bottom: var(--section-spacing);
 }
 
-@media (max-width: 768px) {
-  .hero-text h1 {
-    font-size: 2.5em;
-  }
-  
-  .hero-image-border {
-    width: 200px;
-    height: 200px;
-  }
+section:last-child {
+  margin-bottom: 0;
 }
 
-/* ==================== SECTION DIVIDERS ==================== */
-.section-divider {
-  display: flex;
-  align-items: center;
-  margin: 4em 0;
-  padding: 0 2em;
-}
-
-.divider-line {
-  flex: 1;
-  height: 1px;
-  background-color: var(--border-light);
-}
-
-.divider-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: var(--primary-light);
-  color: var(--primary-color);
-  margin: 0 1em;
-  box-shadow: 0 2px 5px var(--shadow);
-}
-
-/* ==================== SECTION HEADINGS ==================== */
 .section-heading {
   text-align: center;
   margin-bottom: 2em;
@@ -484,7 +439,7 @@ footer .available-indicator {
 
 /* ==================== EXPERTISE SECTION ==================== */
 .expertise-section {
-  padding: 2em 4em 4em;
+  padding: var(--content-padding);
 }
 
 .expertise-grid {
@@ -544,7 +499,7 @@ footer .available-indicator {
 
 /* ==================== FEATURED PROJECT SECTION ==================== */
 .featured-project {
-  padding: 2em 4em 4em;
+  padding: var(--content-padding);
 }
 
 .project-showcase {
@@ -715,79 +670,75 @@ footer .available-indicator {
 
 /* ==================== JOURNEY/TIMELINE SECTION ==================== */
 .journey-section {
-  padding: 2em 4em 4em;
+  padding: var(--content-padding);
 }
 
-.timeline {
-  position: relative;
+/* Vertical Timeline - Standardized */
+.vertical-timeline {
   max-width: 800px;
   margin: 3em auto 0;
+  position: relative;
   padding: 0 2em;
 }
 
-.timeline::before {
+.vertical-timeline::before {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 50%;
+  left: 45px;
   width: 4px;
   background-color: var(--timeline-color);
-  transform: translateX(-50%);
 }
 
-.timeline-item {
-  position: relative;
+.timeline-entry {
   margin-bottom: 3em;
-  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
 }
 
-.timeline-icon {
-  position: absolute;
-  left: 50%;
+.timeline-entry:last-child {
+  margin-bottom: 0;
+}
+
+.timeline-dot {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
   background-color: var(--primary-color);
   color: var(--white);
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2em;
-  box-shadow: 0 0 0 4px var(--white), 0 2px 10px var(--shadow);
+  position: absolute;
+  left: 22px;
+  top: 20px;
   transform: translateX(-50%);
   z-index: 1;
+  box-shadow: 0 0 0 5px var(--white), 0 5px 15px var(--shadow);
 }
 
-.timeline-content {
-  position: relative;
-  width: calc(50% - 50px);
-  padding: 1.5em;
+.timeline-card {
   background-color: var(--white);
   border-radius: var(--border-radius);
-  box-shadow: 0 5px 15px var(--shadow);
+  padding: 1.5em;
+  margin-left: 70px;
+  width: calc(100% - 70px);
+  box-shadow: 0 10px 30px var(--shadow);
+  position: relative;
 }
 
-.timeline-item:nth-child(odd) .timeline-content {
-  margin-left: auto;
+.timeline-card.future-card {
+  background-color: var(--accent-light);
+  border: 2px dashed var(--primary-color);
 }
 
-.timeline-item:nth-child(even) .timeline-content::before {
+.timeline-card::before {
   content: '';
   position: absolute;
-  top: 20px;
-  right: -15px;
-  width: 0;
-  height: 0;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-left: 15px solid var(--white);
-}
-
-.timeline-item:nth-child(odd) .timeline-content::before {
-  content: '';
-  position: absolute;
-  top: 20px;
+  top: 30px;
   left: -15px;
   width: 0;
   height: 0;
@@ -796,34 +747,36 @@ footer .available-indicator {
   border-right: 15px solid var(--white);
 }
 
-.timeline-content h3 {
-  font-size: 1.3em;
-  margin-bottom: 0.3em;
-  color: var(--primary-color);
+.timeline-card.future-card::before {
+  border-right-color: var(--accent-light);
 }
 
-.timeline-date {
+.timeline-period {
   display: inline-block;
   background-color: var(--primary-light);
   color: var(--primary-dark);
-  padding: 0.3em 0.8em;
+  padding: 0.4em 1em;
   border-radius: 20px;
-  font-size: 0.85em;
+  font-size: 0.9em;
   font-weight: 500;
   margin-bottom: 0.8em;
 }
 
+.timeline-card h3 {
+  font-size: 1.3em;
+  margin-bottom: 0.5em;
+  color: var(--primary-color);
+}
+
 .timeline-location {
-  display: block;
   font-style: italic;
   color: var(--text-light);
-  margin-top: 0.5em;
+  margin-bottom: 0.8em;
   font-size: 0.9em;
 }
 
-.timeline-future {
-  background-color: var(--accent-light);
-  border: 2px dashed var(--primary-color);
+.timeline-details {
+  line-height: 1.6;
 }
 
 .timeline-cta {
@@ -844,152 +797,14 @@ footer .available-indicator {
   transform: translateY(-2px);
 }
 
-/* ==================== TESTIMONIALS SECTION ==================== */
-.testimonials-section {
-  padding: 2em 4em 4em;
-}
-
-.testimonials-carousel {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.testimonial-item {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.testimonial-item.active {
-  display: block;
-  opacity: 1;
-}
-
-.testimonial-content {
-  background-color: var(--white);
-  border-radius: var(--border-radius-lg);
-  padding: 2em;
-  box-shadow: 0 10px 20px var(--shadow);
-  position: relative;
-  margin-bottom: 2em;
-}
-
-.testimonial-content::after {
-  content: '';
-  position: absolute;
-  bottom: -15px;
-  left: 50px;
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-top: 15px solid var(--white);
-}
-
-.testimonial-content p {
-  font-style: italic;
-  color: var(--text-dark);
-  line-height: 1.8;
-  margin: 0;
-  position: relative;
-  z-index: 1;
-}
-
-.testimonial-content::before {
-  content: '\f10d';
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 2em;
-  color: var(--primary-light);
-  opacity: 0.3;
-  z-index: 0;
-}
-
-.testimonial-author {
-  display: flex;
-  align-items: center;
-  gap: 1em;
-  margin-left: 3em;
-}
-
-.testimonial-author-image {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: var(--primary-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2em;
-  color: var(--primary-color);
-}
-
-.testimonial-author-info h4 {
-  margin: 0 0 0.2em;
-  font-size: 1em;
-  color: var(--text-dark);
-}
-
-.testimonial-author-info p {
-  margin: 0;
-  font-size: 0.85em;
-  color: var(--text-light);
-}
-
-.testimonial-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 2em;
-  gap: 1em;
-}
-
-.testimonial-control {
-  background: none;
-  border: none;
-  color: var(--primary-color);
-  font-size: 1.5em;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.testimonial-control:hover {
-  color: var(--primary-dark);
-  transform: scale(1.1);
-}
-
-.testimonial-indicators {
-  display: flex;
-  gap: 0.5em;
-}
-
-.testimonial-indicator {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: var(--border-light);
-  cursor: pointer;
-  transition: all var(--transition);
-}
-
-.testimonial-indicator.active {
-  background-color: var(--primary-color);
-  transform: scale(1.2);
-}
-
 /* ==================== CTA SECTION ==================== */
 .cta-section {
   background-color: var(--primary-color);
   padding: 3em;
-  margin-top: 4em;
+  margin: var(--section-spacing) var(--content-padding);
   text-align: center;
   border-radius: var(--border-radius-lg);
   box-shadow: 0 10px 30px var(--shadow);
-  margin: 4em;
 }
 
 .cta-content h2 {
@@ -1042,8 +857,69 @@ footer .available-indicator {
   transform: translateY(-3px);
 }
 
+/* ==================== PROJECT CARDS ==================== */
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2em; /* Reduced from 3em */
+  padding: var(--content-padding);
+}
+
+.project-card {
+  background-color: var(--white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 10px 30px var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px var(--shadow-strong);
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+  padding: 2em;
+  background-color: var(--primary-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.project-icon {
+  width: 60px;
+  height: 60px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8em;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px var(--shadow);
+}
+
+/* ==================== CONTACT AND CV SECTIONS ==================== */
+.contact-options-section,
+.cv-overview-section,
+.bio-section,
+.projects-section,
+.education-timeline-section,
+.professional-info-section,
+.cv-download-section,
+.career-goals-section {
+  padding: var(--content-padding);
+  margin-bottom: var(--section-spacing);
+}
+
 /* ==================== RESPONSIVE STYLES ==================== */
 @media (max-width: 1200px) {
+  :root {
+    --content-padding: 1.5rem;
+    --section-spacing: 2rem;
+  }
+  
   .hero-content {
     padding: 3em;
   }
@@ -1052,19 +928,17 @@ footer .available-indicator {
     font-size: 3em;
   }
   
-  .expertise-section,
-  .featured-project,
-  .journey-section,
-  .testimonials-section {
-    padding: 2em 3em 3em;
-  }
-  
   .cta-section {
-    margin: 3em;
+    margin: var(--section-spacing) var(--content-padding);
   }
 }
 
 @media (max-width: 992px) {
+  :root {
+    --content-padding: 1.25rem;
+    --section-spacing: 1.75rem;
+  }
+  
   .hero-content {
     flex-direction: column-reverse;
     text-align: center;
@@ -1080,15 +954,8 @@ footer .available-indicator {
     justify-content: center;
   }
   
-  .expertise-section,
-  .featured-project,
-  .journey-section,
-  .testimonials-section {
-    padding: 2em;
-  }
-  
   .cta-section {
-    margin: 2em;
+    margin: var(--section-spacing) var(--content-padding);
   }
   
   .timeline::before {
@@ -1114,6 +981,11 @@ footer .available-indicator {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --content-padding: 1rem;
+    --section-spacing: 1.5rem;
+  }
+  
   header {
     flex-direction: column;
     align-items: center;
@@ -1170,61 +1042,4 @@ footer .available-indicator {
   .cta-button, .cta-button-secondary {
     width: 100%;
   }
-}
-
-@media (max-width: 576px) {
-  .hero-text h1 {
-    font-size: 2em;
-  }
-  
-  .hero-image-border {
-    width: 200px;
-    height: 200px;
-  }
-  
-  .expertise-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .timeline-content {
-    padding: 1em;
-  }
-  
-  .cta-section {
-    margin: 1em;
-    padding: 2em 1em;
-  }
-}
-
-/* Reduced header size for home page */
-.hero-section {
-  min-height: 400px; /* Reduced from 600px */
-}
-
-/* Remove headers completely from about, projects, cv, and contact pages */
-.about-hero,
-.projects-hero,
-.cv-hero,
-.contact-hero {
-  display: none;
-}
-
-/* Add some top margin to the first section after the removed hero */
-.bio-section,
-.projects-section,
-.featured-project,
-.cv-overview-section,
-.contact-options-section {
-  padding-top: 2em;
-}
-
-/* Adjust image size in home hero to match reduced height */
-.hero-image-border.enlarged {
-  width: 220px;
-  height: 220px;
-}
-
-/* Make sure the content flows nicely without the hero sections */
-.section-divider:first-of-type {
-  margin-top: 2em;
 }
