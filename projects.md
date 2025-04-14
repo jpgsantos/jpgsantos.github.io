@@ -21,18 +21,6 @@ title: Projects
   </div>
 </div>
 
-<section class="featured-project">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-star"></i></span> Featured Project</h2>
-  
-  {% include featured-project.html %}
-  
-  <div class="view-more-projects">
-    <a href="#all-projects" class="view-more-link">
-      View All Projects <i class="fas fa-arrow-down"></i>
-    </a>
-  </div>
-</section>
-
 <section id="all-projects" class="projects-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-code-branch"></i></span> All Projects</h2>
   
