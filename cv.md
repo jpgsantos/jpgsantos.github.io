@@ -41,12 +41,6 @@ title: CV
   </div>
 </div>
 
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-user"></i></div>
-  <div class="divider-line"></div>
-</div>
-
 <section class="cv-overview-section">
   <div class="cv-header-card">
     <div class="cv-header-content">
@@ -95,12 +89,6 @@ title: CV
     </div>
   </div>
 </section>
-
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-briefcase"></i></div>
-  <div class="divider-line"></div>
-</div>
 
 <section class="cv-main-section">
   <div class="cv-grid">
@@ -190,12 +178,6 @@ title: CV
   </div>
 </section>
 
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-tools"></i></div>
-  <div class="divider-line"></div>
-</div>
-
 <section class="cv-skills-section">
   <div class="cv-section-header centered">
     <i class="fas fa-cogs"></i>
@@ -244,12 +226,6 @@ title: CV
   </div>
 </section>
 
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-file-alt"></i></div>
-  <div class="divider-line"></div>
-</div>
-
 <section class="cv-publications-section">
   <div class="cv-section-header centered">
     <i class="fas fa-file-alt"></i>
@@ -278,12 +254,6 @@ title: CV
     </div>
   </div>
 </section>
-
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-rocket"></i></div>
-  <div class="divider-line"></div>
-</div>
 
 <section class="cv-projects-section">
   <div class="cv-section-header centered">
@@ -325,16 +295,7 @@ title: CV
   </div>
 </section>
 
-<div class="cta-section">
-  <div class="cta-content">
-    <h2>Ready to collaborate?</h2>
-    <p>I'm currently available for new opportunities in Copenhagen or Remote positions.</p>
-    <div class="cta-buttons">
-      <a href="{{ '/contact' | relative_url }}" class="cta-button">Contact Me</a>
-      <a href="{{ '/assets/PDFs/Joao_Pedro_Santos_CV.pdf' | relative_url }}" class="cta-button-secondary" target="_blank">Download CV</a>
-    </div>
-  </div>
-</div>
+{% include cta.html %}
 
 <style>
 /* CV page specific styles */
@@ -450,6 +411,7 @@ title: CV
 /* CV Overview Section */
 .cv-overview-section {
   padding: 0 4em 4em;
+  margin-top: 3em; /* Added spacing to compensate for removed divider */
 }
 
 .cv-header-card {
@@ -517,6 +479,7 @@ title: CV
 /* CV Main Section */
 .cv-main-section {
   padding: 0 4em 4em;
+  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .cv-grid {
@@ -624,6 +587,7 @@ title: CV
 /* CV Skills Section */
 .cv-skills-section {
   padding: 0 4em 4em;
+  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .skills-grid {
@@ -675,6 +639,7 @@ title: CV
 /* CV Publications Section */
 .cv-publications-section {
   padding: 0 4em 4em;
+  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .publications-grid {
@@ -749,6 +714,7 @@ title: CV
 /* CV Projects Section */
 .cv-projects-section {
   padding: 0 4em 4em;
+  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .projects-mini-grid {
@@ -833,4 +799,62 @@ title: CV
   color: var(--primary-color);
   font-size: 1.1em;
   font-weight: 600;
-  transition
+  transition: all var(--transition);
+}
+
+.view-more-link:hover {
+  color: var(--primary-dark);
+  gap: 1.2em;
+}
+
+/* Add margin to CTA section for spacing */
+.cta-section {
+  margin-top: 4em;
+  margin-bottom: 2em;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .cv-overview-section,
+  .cv-main-section,
+  .cv-skills-section,
+  .cv-publications-section,
+  .cv-projects-section {
+    padding: 0 2em 2em;
+  }
+  
+  .cv-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cv-header-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .cv-header-info {
+    text-align: center;
+  }
+  
+  .cv-header-info h2 {
+    margin-top: 0.5em;
+  }
+  
+  .projects-mini-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cv-header-content {
+    padding: 1.5em;
+  }
+  
+  .cv-contact-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cv-entry-header {
+    flex-direction: column;
+    align-items: flex-start;

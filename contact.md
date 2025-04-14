@@ -21,12 +21,6 @@ title: Contact
   </div>
 </div>
 
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-address-card"></i></div>
-  <div class="divider-line"></div>
-</div>
-
 <section class="contact-options-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-paper-plane"></i></span> Connect With Me</h2>
   
@@ -76,12 +70,6 @@ title: Contact
     </div>
   </div>
 </section>
-
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-briefcase"></i></div>
-  <div class="divider-line"></div>
-</div>
 
 <section class="professional-info-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-info-circle"></i></span> Professional Information</h2>
@@ -146,12 +134,6 @@ title: Contact
   </div>
 </section>
 
-<div class="section-divider">
-  <div class="divider-line"></div>
-  <div class="divider-icon"><i class="fas fa-file-alt"></i></div>
-  <div class="divider-line"></div>
-</div>
-
 <section class="cv-download-section">
   <div class="cv-showcase">
     <div class="cv-content">
@@ -178,16 +160,7 @@ title: Contact
   </div>
 </section>
 
-<div class="cta-section">
-  <div class="cta-content">
-    <h2>Let's collaborate on innovative projects</h2>
-    <p>I'm passionate about developing scientific software solutions and implementing complex algorithms that make a difference.</p>
-    <div class="cta-buttons">
-      <a href="mailto:jpgs.12390@gmail.com" class="cta-button">Email Me Now</a>
-      <a href="{{ '/projects' | relative_url }}" class="cta-button-secondary">View My Projects</a>
-    </div>
-  </div>
-</div>
+{% include cta.html %}
 
 <style>
 /* Contact page specific styles */
@@ -213,6 +186,22 @@ title: Contact
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
+}
+
+/* Added spacing to replace dividers */
+.contact-options-section {
+  padding: 2em 0;
+  margin-top: 3em;
+}
+
+.professional-info-section {
+  padding: 2em 0;
+  margin-top: 4em;
+}
+
+.cv-download-section {
+  padding: 2em 4em;
+  margin-top: 4em;
 }
 
 .contact-grid {
@@ -333,15 +322,6 @@ title: Contact
   gap: 0.5em;
 }
 
-.contact-options-section,
-.professional-info-section {
-  padding: 2em 0;
-}
-
-.cv-download-section {
-  padding: 2em 4em;
-}
-
 .cv-showcase {
   background-color: var(--white);
   border-radius: var(--border-radius-lg);
@@ -452,6 +432,12 @@ title: Contact
   background-color: var(--border-light);
   border-radius: 3px;
   width: 90%;
+}
+
+/* Add spacing to CTA section */
+.cta-section {
+  margin-top: 4em;
+  margin-bottom: 2em;
 }
 
 /* Responsive styles */
