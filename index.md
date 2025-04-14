@@ -241,11 +241,6 @@ title: Home
   height: 300px;
 }
 
-/* Additional spacing between sections when dividers are removed */
-section {
-  margin-top: 5em;
-}
-
 /* Workflow Diagram Styles */
 .workflow-diagram {
   display: flex;
