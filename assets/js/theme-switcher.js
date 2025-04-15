@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
   const darkButton = document.getElementById('dark-theme');
   const autoButton = document.getElementById('auto-theme');
   
+  // Make sure all buttons exist
+  if (!lightButton || !darkButton || !autoButton) {
+    return;
+  }
+  
   // Function to set theme based on selection
   function setTheme(theme) {
     if (theme === 'dark') {
@@ -49,21 +54,33 @@ document.addEventListener('DOMContentLoaded', function() {
   // Apply the saved theme
   setTheme(savedTheme);
   
-  // Light theme button
+  // Direct click handler function
+  function handleThemeClick(themeName) {
+    setTheme(themeName);
+    localStorage.setItem('theme', themeName);
+  }
+  
+  // Light theme button - Add explicit onclick as backup
   lightButton.addEventListener('click', function() {
-    setTheme('light');
-    localStorage.setItem('theme', 'light');
+    handleThemeClick('light');
   });
+  lightButton.onclick = function() {
+    handleThemeClick('light');
+  };
   
-  // Dark theme button
+  // Dark theme button - Add explicit onclick as backup
   darkButton.addEventListener('click', function() {
-    setTheme('dark');
-    localStorage.setItem('theme', 'dark');
+    handleThemeClick('dark');
   });
+  darkButton.onclick = function() {
+    handleThemeClick('dark');
+  };
   
-  // Auto theme button
+  // Auto theme button - Add explicit onclick as backup
   autoButton.addEventListener('click', function() {
-    setTheme('auto');
-    localStorage.setItem('theme', 'auto');
+    handleThemeClick('auto');
   });
+  autoButton.onclick = function() {
+    handleThemeClick('auto');
+  };
 });

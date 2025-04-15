@@ -22,6 +22,10 @@
   --transition: 0.3s ease;      /* Standard transition */
   --border-radius: 8px;         /* Standard border radius */
   --border-radius-lg: 12px;     /* Larger border radius */
+  
+  /* Uniform theme transition timing */
+  --theme-transition-duration: 0.5s;
+  --theme-transition-timing: ease;
 }
 
 [data-theme="dark"] {
@@ -48,14 +52,23 @@ body {
   background-color: var(--bg-body);
 }
 
-/* Transition for elements when theme changes */
-body, header, main, footer, .project-card, .expertise-card,
-.timeline-content, .cta-section, .hero-background, .testimonial-content,
-.hero-buttons a, .cta-buttons a {
-  transition: background-color var(--transition), 
-              color var(--transition), 
-              border-color var(--transition), 
-              box-shadow var(--transition);
+/* Universal transition for theme switching */
+* {
+  transition: color var(--theme-transition-duration) var(--theme-transition-timing),
+              background-color var(--theme-transition-duration) var(--theme-transition-timing),
+              border-color var(--theme-transition-duration) var(--theme-transition-timing),
+              box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+}
+
+/* Elements that should NOT transition (prevents flash or weird animations) */
+.hero-image, 
+img, 
+video, 
+canvas, 
+iframe, 
+.fa-*, 
+i[class*="fa-"] {
+  transition: transform var(--transition), opacity var(--transition);
 }
 
 /* Enhanced theme switcher styles */
@@ -67,6 +80,8 @@ body, header, main, footer, .project-card, .expertise-card,
   border-radius: 30px;
   padding: 5px;
   box-shadow: 0 2px 8px var(--shadow);
+  position: relative;
+  z-index: 10;
 }
 
 .theme-icon {
@@ -84,6 +99,7 @@ body, header, main, footer, .project-card, .expertise-card,
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  z-index: 11;
 }
 
 .theme-icon:hover {
