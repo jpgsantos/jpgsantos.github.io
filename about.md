@@ -272,7 +272,8 @@ title: About
       </div>
     </div>
 
-  </div> </section>
+  </div>
+</section>
 
 <style>
 
@@ -803,35 +804,3 @@ title: About
   }
 }
 </style>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Animation for cards on scroll
-  const animateOnScroll = function() {
-    const elements = document.querySelectorAll('.bio-content, .career-goal-card, .timeline-entry');
-    
-    elements.forEach(element => {
-      const elementPosition = element.getBoundingClientRect().top;
-      const windowHeight = window.innerHeight;
-      
-      // If element is in viewport
-      if (elementPosition < windowHeight * 0.85) {
-        element.style.opacity = '1';
-        element.style.transform = 'translateY(0)';
-      }
-    });
-  };
-  
-  // Set initial styles for animation
-  const elementsToAnimate = document.querySelectorAll('.bio-content, .career-goal-card, .timeline-entry');
-  elementsToAnimate.forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(20px)';
-    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  });
-
-// Listen for scroll events
-window.addEventListener('scroll', animateOnScroll);
-
-// Trigger once on load
-animateOnScroll();

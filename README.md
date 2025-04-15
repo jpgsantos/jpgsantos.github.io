@@ -17,9 +17,13 @@ This is the repository for my personal website showcasing my professional backgr
 ├── assets                    # Folder for static assets
 │   ├── images                # Folder for images
 │   │   └── Profile.jpg       # Your profile photo
+│   ├── js                    # JavaScript files
+│   │   ├── animations.js     # Centralized animation scripts
+│   │   └── theme-switcher.js # Theme switching functionality
 │   ├── pdfs                  # Folder for PDF files
 │   │   └── Joao_Pedro_Santos_CV.pdf  # Your CV in PDF format
 │   └── style.css             # Main stylesheet
+│   └── theme.css             # Theme styling and variables
 ```
 
 ## Setup Instructions
@@ -76,18 +80,7 @@ This is the repository for my personal website showcasing my professional backgr
 
 - Edit `_config.yml` to update site-wide settings
 - Modify content in Markdown files to update page content
-- Change styles in `assets/style.css` to customize appearance
-
-## Contact Form Setup
-
-The contact form uses Formspree. To set it up:
-
-1. Create an account at [Formspree](https://formspree.io/)
-2. Create a new form and get your form ID
-3. Replace the placeholder in the contact.md file with your actual form ID:
-   ```
-   <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-   ```
+- Change styles in `assets/style.css` and `assets/theme.css` to customize appearance
 
 ## License
 

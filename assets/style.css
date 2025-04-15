@@ -658,26 +658,27 @@ section:last-child {
   gap: 0.8em;
 }
 
-/* ==================== EDUCATION TIMELINE SECTION ==================== */
-.education-timeline-section {
+/* ==================== JOURNEY/TIMELINE SECTION ==================== */
+.journey-section {
   padding: var(--content-padding);
 }
 
-/* Vertical Timeline */
-.education-timeline {
+/* Vertical Timeline - Standardized */
+.vertical-timeline {
   max-width: 800px;
   margin: 3em auto 0;
   position: relative;
+  padding: 0 2em;
 }
 
-.education-timeline::before {
+.vertical-timeline::before {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
   left: 45px;
   width: 4px;
-  background-color: var(--primary-light);
+  background-color: var(--timeline-color);
 }
 
 .timeline-entry {
@@ -712,7 +713,7 @@ section:last-child {
 .timeline-card {
   background-color: var(--white);
   border-radius: var(--border-radius);
-  padding: 2em;
+  padding: 1.5em;
   margin-left: 70px;
   width: calc(100% - 70px);
   box-shadow: 0 10px 30px var(--shadow);
@@ -752,27 +753,20 @@ section:last-child {
 }
 
 .timeline-card h3 {
-  font-size: 1.5em;
+  font-size: 1.3em;
   margin-bottom: 0.5em;
   color: var(--primary-color);
 }
 
-.timeline-institution {
+.timeline-location {
   font-style: italic;
   color: var(--text-light);
-  margin-bottom: 1.2em;
+  margin-bottom: 0.8em;
+  font-size: 0.9em;
 }
 
 .timeline-details {
   line-height: 1.6;
-}
-
-.timeline-details p {
-  margin-bottom: 0.8em;
-}
-
-.timeline-details p:last-child {
-  margin-bottom: 0;
 }
 
 .timeline-cta {
@@ -791,6 +785,25 @@ section:last-child {
   background-color: var(--primary-dark);
   color: var(--white);
   transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .timeline-dot {
+    width: 40px;
+    height: 40px;
+    font-size: 1em;
+    left: 20px;
+  }
+  
+  .timeline-card {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+    padding: 1em;
+  }
+  
+  .timeline-card h3 {
+    font-size: 1.2em;
+  }
 }
 
 /* ==================== CTA SECTION ==================== */

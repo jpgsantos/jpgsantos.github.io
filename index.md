@@ -132,5 +132,3 @@ title: Home
   }
 }
 </style>
-
-<script src="{{ '/assets/js/home.js' | relative_url }}"></script>

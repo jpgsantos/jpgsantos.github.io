@@ -57,3 +57,40 @@ body, header, main, footer, .project-card, .expertise-card,
               border-color var(--transition), 
               box-shadow var(--transition);
 }
+
+/* Theme switcher styles moved from default.html */
+.theme-icons {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 15px;
+  gap: 8px;
+}
+
+.theme-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  font-size: 1em;
+  padding: 5px;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.theme-icon:hover {
+  color: #006400;
+  transform: scale(1.1);
+}
+
+.theme-icon.active {
+  color: #006400;
+}
+
+@media (max-width: 768px) {
+  .theme-icons {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 0;
+  }
+}
