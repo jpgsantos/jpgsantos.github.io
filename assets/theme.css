@@ -141,18 +141,6 @@ button:hover,
   background-color: var(--primary-color);
 }
 
-.theme-icon.active::after {
-  content: '';
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--white);
-  bottom: 3px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 /* Add tooltip for theme buttons */
 .theme-icon::before {
   content: attr(title);
