@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(typeEffect, 1000);
   }
    
-  // Scroll Animations
+  // Animation for expertise cards and project showcase
   const animateOnScroll = function() {
-    const elements = document.querySelectorAll('.expertise-card, .project-showcase, .timeline-item, .testimonial-content');
+    const elements = document.querySelectorAll('.expertise-card, .project-showcase');
     
     elements.forEach(element => {
       const elementPosition = element.getBoundingClientRect().top;
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   // Set initial styles for animation
-  const elementsToAnimate = document.querySelectorAll('.expertise-card, .project-showcase, .timeline-item, .testimonial-content');
+  const elementsToAnimate = document.querySelectorAll('.expertise-card, .project-showcase');
   elementsToAnimate.forEach(element => {
     element.style.opacity = '0';
     element.style.transform = 'translateY(20px)';

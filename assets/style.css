@@ -658,27 +658,26 @@ section:last-child {
   gap: 0.8em;
 }
 
-/* ==================== JOURNEY/TIMELINE SECTION ==================== */
-.journey-section {
+/* ==================== EDUCATION TIMELINE SECTION ==================== */
+.education-timeline-section {
   padding: var(--content-padding);
 }
 
-/* Vertical Timeline - Standardized */
-.vertical-timeline {
+/* Vertical Timeline */
+.education-timeline {
   max-width: 800px;
   margin: 3em auto 0;
   position: relative;
-  padding: 0 2em;
 }
 
-.vertical-timeline::before {
+.education-timeline::before {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 100px;
+  left: 45px;
   width: 4px;
-  background-color: var(--timeline-color);
+  background-color: var(--primary-light);
 }
 
 .timeline-entry {
@@ -703,7 +702,7 @@ section:last-child {
   justify-content: center;
   font-size: 1.2em;
   position: absolute;
-  left: 20px;
+  left: 22px;
   top: 20px;
   transform: translateX(-50%);
   z-index: 1;
@@ -713,7 +712,7 @@ section:last-child {
 .timeline-card {
   background-color: var(--white);
   border-radius: var(--border-radius);
-  padding: 1.5em;
+  padding: 2em;
   margin-left: 70px;
   width: calc(100% - 70px);
   box-shadow: 0 10px 30px var(--shadow);
@@ -728,7 +727,7 @@ section:last-child {
 .timeline-card::before {
   content: '';
   position: absolute;
-  top: 20px;
+  top: 30px;
   left: -15px;
   width: 0;
   height: 0;
@@ -753,20 +752,27 @@ section:last-child {
 }
 
 .timeline-card h3 {
-  font-size: 1.3em;
+  font-size: 1.5em;
   margin-bottom: 0.5em;
   color: var(--primary-color);
 }
 
-.timeline-location {
+.timeline-institution {
   font-style: italic;
   color: var(--text-light);
-  margin-bottom: 0.8em;
-  font-size: 0.9em;
+  margin-bottom: 1.2em;
 }
 
 .timeline-details {
   line-height: 1.6;
+}
+
+.timeline-details p {
+  margin-bottom: 0.8em;
+}
+
+.timeline-details p:last-child {
+  margin-bottom: 0;
 }
 
 .timeline-cta {
@@ -947,27 +953,6 @@ section:last-child {
   .cta-section {
     margin: var(--section-spacing) var(--content-padding);
   }
-  
-  .timeline::before {
-    left: 20px;
-  }
-  
-  .timeline-icon {
-    left: 20px;
-    transform: none;
-  }
-  
-  .timeline-content {
-    width: calc(100% - 70px);
-    margin-left: 70px !important;
-  }
-  
-  .timeline-item:nth-child(odd) .timeline-content::before,
-  .timeline-item:nth-child(even) .timeline-content::before {
-    left: -15px;
-    border-right: 15px solid var(--white);
-    border-left: none;
-  }
 }
 
 @media (max-width: 768px) {
@@ -1032,6 +1017,19 @@ section:last-child {
   .cta-button, .cta-button-secondary {
     width: 100%;
   }
+  
+  .timeline-dot {
+    width: 40px;
+    height: 40px;
+    font-size: 1em;
+    left: 20px;
+  }
+  
+  .timeline-card {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+    padding: 1.5em;
+  }
 }
 
 /* Reduced header size for home page */
@@ -1052,9 +1050,4 @@ section:last-child {
 .hero-image-border.enlarged {
   width: 220px;
   height: 220px;
-}
-
-/* Make sure the content flows nicely without the hero sections */
-.section-divider:first-of-type {
-  margin-top: 2em;
 }
