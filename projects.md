@@ -194,40 +194,6 @@ title: Projects
 </section>
 
 <style>
-/* Projects page specific styles */
-.projects-hero {
-  min-height: 400px;
-}
-
-.projects-illustration {
-  width: 180px;
-  height: 180px;
-  background-color: var(--primary-light);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 5em;
-  color: var(--primary-color);
-  box-shadow: 0 10px 20px var(--shadow);
-  position: relative;
-  overflow: hidden;
-}
-
-.projects-illustration::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(var(--primary-light) 30%, transparent 70%);
-  animation: pulse 3s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 0.5; }
-  50% { transform: scale(1.2); opacity: 0.2; }
-  100% { transform: scale(1); opacity: 0.5; }
-}
 
 /* Updated section spacing to replace dividers */
 

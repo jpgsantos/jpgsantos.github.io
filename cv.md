@@ -259,9 +259,6 @@ title: CV
 
 <style>
 /* CV page specific styles */
-.cv-hero {
-  min-height: 400px;
-}
 
 .cv-actions {
   display: flex;
@@ -305,36 +302,6 @@ title: CV
   background-color: var(--primary-light);
   transform: translateY(-3px);
   box-shadow: 0 5px 15px var(--shadow);
-}
-
-.cv-illustration {
-  position: relative;
-  width: 200px;
-  height: 250px;
-  margin-top: 20px;
-}
-
-.cv-page {
-  position: absolute;
-  width: 180px;
-  height: 230px;
-  background-color: var(--white);
-  border-radius: 5px;
-  box-shadow: 0 10px 30px var(--shadow);
-  padding: 20px;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  transform: rotate(-5deg);
-  transition: all var(--transition);
-}
-
-.cv-page.back {
-  background-color: var(--bg-light);
-  top: 20px;
-  left: 20px;
-  z-index: 1;
-  transform: rotate(5deg);
 }
 
 .cv-illustration:hover .cv-page {

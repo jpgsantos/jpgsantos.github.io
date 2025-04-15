@@ -386,16 +386,6 @@ footer .available-indicator {
   letter-spacing: 0.5px;
 }
 
-/* Animated text */
-.animated-text {
-  background: linear-gradient(90deg, var(--primary-dark), var(--primary-color), var(--primary-light));
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradient 6s linear infinite;
-}
-
 @keyframes gradient {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }

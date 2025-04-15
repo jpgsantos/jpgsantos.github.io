@@ -143,31 +143,6 @@ title: Contact
 </section>
 
 <style>
-/* Contact page specific styles */
-.contact-hero {
-  min-height: 400px;
-}
-
-.contact-illustration {
-  width: 180px;
-  height: 180px;
-  background-color: var(--primary-light);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 5em;
-  color: var(--primary-color);
-  box-shadow: 0 10px 20px var(--shadow);
-  animation: pulse 3s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
 /* Added spacing to replace dividers */
 .contact-options-section {
   padding: 2em 0;
