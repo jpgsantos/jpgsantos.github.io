@@ -1064,3 +1064,41 @@ section:last-child {
   width: 220px;
   height: 220px;
 }
+
+/* Header styles for scroll behavior */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  background-color: var(--white);
+  max-width: none; /* Override max-width to make it full width */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.header-visible {
+  transform: translateY(0);
+}
+
+.header-hidden {
+  transform: translateY(-100%);
+}
+
+.header-scrolled {
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+/* Adjust main content to account for fixed header */
+main {
+  margin-top: 80px; /* Adjust this value based on your header height */
+}
+
+/* For mobile - adjust as needed */
+@media (max-width: 768px) {
+  main {
+    margin-top: 120px; /* Adjust for taller mobile header */
+  }
+}
