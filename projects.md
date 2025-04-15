@@ -4,8 +4,6 @@ title: Projects
 ---
 
 <section id="all-projects" class="projects-section">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-code-branch"></i></span> All Projects</h2>
-  
   <div class="projects-container">
     <!-- Project 1 - Subcellular_Workflow -->
     <div class="project-card">
@@ -232,18 +230,14 @@ title: Projects
 }
 
 /* Updated section spacing to replace dividers */
-.featured-project {
-  padding: 2em 4em 4em;
-  margin-top: 3em;
-}
+
 
 .projects-section {
-  margin-top: 4em;
+
 }
 
 .future-projects {
   padding: 2em 4em 4em;
-  margin-top: 4em;
 }
 
 /* Project Cards */
@@ -359,12 +353,6 @@ title: Projects
   display: inline-flex;
   align-items: center;
   transition: all var(--transition);
-}
-
-.skill-tag:hover {
-  background-color: var(--primary-color);
-  color: var(--white);
-  transform: translateY(-3px);
 }
 
 .project-links {

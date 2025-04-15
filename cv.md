@@ -589,13 +589,6 @@ title: CV
   transition: all var(--transition);
 }
 
-.skill-tag:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 10px var(--shadow);
-  background-color: var(--primary-color);
-  color: var(--white);
-}
-
 /* CV Publications Section */
 .cv-publications-section {
   padding: 0 4em 4em;
