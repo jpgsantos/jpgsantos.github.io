@@ -146,17 +146,14 @@ title: Contact
 /* Added spacing to replace dividers */
 .contact-options-section {
   padding: 2em 0;
-  margin-top: 3em;
 }
 
 .professional-info-section {
   padding: 2em 0;
-  margin-top: 4em;
 }
 
 .cv-download-section {
   padding: 2em 4em;
-  margin-top: 4em;
 }
 
 .contact-grid {
@@ -389,11 +386,6 @@ title: Contact
   width: 90%;
 }
 
-/* Add spacing to CTA section */
-.cta-section {
-  margin-top: 4em;
-  margin-bottom: 2em;
-}
 
 /* Responsive styles */
 @media (max-width: 992px) {

@@ -338,7 +338,6 @@ title: CV
 /* CV Overview Section */
 .cv-overview-section {
   padding: 0 4em 4em;
-  margin-top: 3em; /* Added spacing to compensate for removed divider */
 }
 
 .cv-header-card {
@@ -406,7 +405,6 @@ title: CV
 /* CV Main Section */
 .cv-main-section {
   padding: 0 4em 4em;
-  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .cv-grid {
@@ -514,7 +512,6 @@ title: CV
 /* CV Skills Section */
 .cv-skills-section {
   padding: 0 4em 4em;
-  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .skills-grid {
@@ -559,7 +556,6 @@ title: CV
 /* CV Publications Section */
 .cv-publications-section {
   padding: 0 4em 4em;
-  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .publications-grid {
@@ -634,7 +630,6 @@ title: CV
 /* CV Projects Section */
 .cv-projects-section {
   padding: 0 4em 4em;
-  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .projects-mini-grid {

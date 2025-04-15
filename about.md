@@ -280,7 +280,6 @@ title: About
 /* Bio Section */
 .bio-section {
   padding: 0 4em 4em;
-  margin-top: 3em; /* Added spacing to compensate for removed divider */
 }
 
 .bio-content {
@@ -487,7 +486,6 @@ title: About
 /* Career Goals Section */
 .career-goals-section {
   padding: 0 4em 4em;
-  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .career-goals-grid {
@@ -576,7 +574,6 @@ title: About
 /* Education Timeline */
 .education-timeline-section {
   padding: 0 4em 4em;
-  margin-top: 4em; /* Added spacing to compensate for removed divider */
 }
 
 .education-timeline {
@@ -679,12 +676,6 @@ title: About
 
 .timeline-details p:last-child {
   margin-bottom: 0;
-}
-
-/* Add margin to the CTA section for spacing */
-.cta-section {
-  margin-top: 4em;
-  margin-bottom: 2em;
 }
 
 /* Responsive styles */

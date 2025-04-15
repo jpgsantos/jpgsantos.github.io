@@ -23,8 +23,8 @@
   --border-radius: 8px;         /* Standard border radius */
   --border-radius-lg: 12px;     /* Larger border radius */
   
-  /* Uniform theme transition timing */
-  --theme-transition-duration: 0.5s;
+  /* Removing transition duration for instant theme changes */
+  --theme-transition-duration: 0s;
   --theme-transition-timing: ease;
 }
 
@@ -52,23 +52,53 @@ body {
   background-color: var(--bg-body);
 }
 
-/* Universal transition for theme switching */
+/* Instantaneous transition for ALL elements - no fading */
 * {
-  transition: color var(--theme-transition-duration) var(--theme-transition-timing),
-              background-color var(--theme-transition-duration) var(--theme-transition-timing),
-              border-color var(--theme-transition-duration) var(--theme-transition-timing),
-              box-shadow var(--theme-transition-duration) var(--theme-transition-timing);
+  transition: none !important;
 }
 
-/* Elements that should NOT transition (prevents flash or weird animations) */
+/* Make sure no elements have transitions for theme-related properties */
+*,
 .hero-image, 
 img, 
 video, 
 canvas, 
 iframe, 
 .fa-*, 
-i[class*="fa-"] {
-  transition: transform var(--transition), opacity var(--transition);
+i[class*="fa-"],
+.expertise-card,
+.project-card,
+.timeline-card,
+.contact-card,
+.info-card,
+.hero-button,
+.skill-tag,
+.project-link,
+.project-button,
+.view-more-link,
+.contact-button,
+.timeline-cta,
+.cta-button,
+.core-value-item,
+.avatar-quote,
+.highlight-card {
+  transition: none !important;
+}
+
+/* Keep non-theme transitions for interactive elements */
+a:hover,
+button:hover,
+.theme-icon:hover,
+.theme-icon::before,
+.hero-button:hover,
+.project-card:hover,
+.contact-card:hover,
+.view-more-link:hover,
+.project-button:hover,
+.contact-button:hover,
+.timeline-cta:hover,
+.cta-button:hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
 }
 
 /* Enhanced theme switcher styles */
@@ -96,7 +126,6 @@ i[class*="fa-"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
   z-index: 11;
@@ -139,7 +168,6 @@ i[class*="fa-"] {
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
-  transition: all 0.2s ease;
 }
 
 .theme-icon:hover::before {

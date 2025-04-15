@@ -199,7 +199,6 @@ title: Projects
 
 
 .projects-section {
-
 }
 
 .future-projects {
