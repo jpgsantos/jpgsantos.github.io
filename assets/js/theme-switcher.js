@@ -10,8 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
   if (currentTheme === 'dark') {
     document.documentElement.setAttribute('data-theme', 'dark');
     darkButton.classList.add('active');
+    lightButton.classList.remove('active');
   } else {
+    document.documentElement.removeAttribute('data-theme');
     lightButton.classList.add('active');
+    darkButton.classList.remove('active');
   }
   
   // Light theme button
@@ -20,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('theme', 'light');
     lightButton.classList.add('active');
     darkButton.classList.remove('active');
+    console.log('Light theme activated');
   });
   
   // Dark theme button
@@ -28,5 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('theme', 'dark');
     darkButton.classList.add('active');
     lightButton.classList.remove('active');
+    console.log('Dark theme activated');
   });
 });
