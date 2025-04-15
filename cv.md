@@ -6,8 +6,13 @@ title: CV
 <section class="cv-overview-section">
   <div class="cv-header-card">
     <div class="cv-header-content">
-      <div class="cv-header-photo">
-        <img src="{{ '/assets/images/Profile.jpg' | relative_url }}" alt="João Pedro Gomes dos Santos">
+      <div class="cv-header-photo-container">
+        <div class="cv-header-photo">
+          <img src="{{ '/assets/images/Profile.jpg' | relative_url }}" alt="João Pedro Gomes dos Santos">
+        </div>
+        <a href="{{ '/assets/PDFs/Joao_Pedro_Santos_CV.pdf' | relative_url }}" class="cv-quick-download" target="_blank">
+          <i class="fas fa-download"></i> Download CV
+        </a>
       </div>
       <div class="cv-header-info">
         <h2>João Pedro Gomes dos Santos</h2>
@@ -32,11 +37,11 @@ title: CV
           </div>
           <div class="cv-contact-item">
             <i class="fab fa-linkedin"></i>
-            <span><a href="https://linkedin.com/in/joaosantos1992" target="_blank">linkedin.com/in/joaosantos1992</a></span>
+            <span><a href="https://linkedin.com/in/joaosantos1992" target="_blank">joaosantos1992</a></span>
           </div>
           <div class="cv-contact-item">
             <i class="fab fa-github"></i>
-            <span><a href="https://github.com/jpgsantos" target="_blank">github.com/jpgsantos</a></span>
+            <span><a href="https://github.com/jpgsantos" target="_blank">jpgsantos</a></span>
           </div>
           <div class="cv-contact-item">
             <i class="fas fa-language"></i>
@@ -353,8 +358,17 @@ title: CV
   gap: 2em;
 }
 
-.cv-header-photo {
+/* New container for photo and download button */
+.cv-header-photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   flex: 0 0 180px;
+}
+
+.cv-header-photo {
+  width: 180px;
 }
 
 .cv-header-photo img {
@@ -364,6 +378,31 @@ title: CV
   object-position: center top;
   border-radius: 10px;
   box-shadow: 0 5px 15px var(--shadow);
+}
+
+/* New Download Button Style */
+.cv-quick-download {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.9em;
+  font-weight: 600;
+  box-shadow: 0 4px 8px var(--shadow);
+  transition: all var(--transition);
+  width: 180px;
+  text-align: center;
+}
+
+.cv-quick-download:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px var(--shadow-strong);
+  color: var(--white);
 }
 
 .cv-header-info {
@@ -775,3 +814,4 @@ title: CV
     align-items: flex-start;
   }
 }
+</style>
