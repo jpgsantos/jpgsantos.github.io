@@ -3,24 +3,6 @@ layout: default
 title: Projects
 ---
 
-<div class="hero-section projects-hero">
-  <div class="hero-background"></div>
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1>Projects</h1>
-      <p class="hero-description">Explore my work in computational modeling, scientific software development, and algorithm implementation.</p>
-      <div class="location-badge">
-        <i class="fas fa-code"></i> Examples of my technical capabilities
-      </div>
-    </div>
-    <div class="hero-image-container">
-      <div class="projects-illustration">
-        <i class="fas fa-project-diagram"></i>
-      </div>
-    </div>
-  </div>
-</div>
-
 <section id="all-projects" class="projects-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-code-branch"></i></span> All Projects</h2>
   

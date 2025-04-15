@@ -3,44 +3,6 @@ layout: default
 title: CV
 ---
 
-<div class="hero-section cv-hero">
-  <div class="hero-background"></div>
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1>Curriculum Vitae</h1>
-      <p class="hero-description">Computational Neuroscience PhD with expertise in scientific software development, mathematical modeling, and algorithm implementation.</p>
-      <div class="cv-actions">
-        <a href="{{ '/assets/PDFs/Joao_Pedro_Santos_CV.pdf' | relative_url }}" class="cv-download-button" target="_blank">
-          <i class="fas fa-download"></i> Download PDF
-        </a>
-        <a href="{{ '/contact' | relative_url }}" class="cv-contact-button">
-          <i class="fas fa-envelope"></i> Contact Me
-        </a>
-      </div>
-    </div>
-    <div class="hero-image-container">
-      <div class="cv-illustration">
-        <div class="cv-page">
-          <div class="cv-header"></div>
-          <div class="cv-lines">
-            <div class="cv-line"></div>
-            <div class="cv-line"></div>
-            <div class="cv-line short"></div>
-          </div>
-        </div>
-        <div class="cv-page back">
-          <div class="cv-header"></div>
-          <div class="cv-lines">
-            <div class="cv-line"></div>
-            <div class="cv-line"></div>
-            <div class="cv-line short"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <section class="cv-overview-section">
   <div class="cv-header-card">
     <div class="cv-header-content">
@@ -856,3 +818,5 @@ title: CV
   .cv-entry-header {
     flex-direction: column;
     align-items: flex-start;
+  }
+}

@@ -3,24 +3,6 @@ layout: default
 title: Contact
 ---
 
-<div class="hero-section contact-hero">
-  <div class="hero-background"></div>
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1>Get In Touch</h1>
-      <p class="hero-description">I'm currently seeking opportunities in Copenhagen, Denmark or Remote positions. Let's connect and discuss how my skills in computational modeling and scientific software development can benefit your team.</p>
-      <div class="location-badge">
-        <i class="fas fa-map-marker-alt"></i> Available for immediate start
-      </div>
-    </div>
-    <div class="hero-image-container">
-      <div class="contact-illustration">
-        <i class="fas fa-comments"></i>
-      </div>
-    </div>
-  </div>
-</div>
-
 <section class="contact-options-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-paper-plane"></i></span> Connect With Me</h2>
   

@@ -1049,14 +1049,6 @@ section:last-child {
   min-height: 400px; /* Reduced from 600px */
 }
 
-/* Remove headers completely from about, projects, cv, and contact pages */
-.about-hero,
-.projects-hero,
-.cv-hero,
-.contact-hero {
-  display: none;
-}
-
 /* Add some top margin to the first section after the removed hero */
 .bio-section,
 .projects-section,

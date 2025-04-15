@@ -3,30 +3,6 @@ layout: default
 title: About
 ---
 
-<div class="hero-section about-hero">
-  <div class="hero-background"></div>
-  <div class="hero-content">
-    <div class="hero-text">
-      <h1>About Me</h1>
-      <p class="hero-description">Computational Neuroscience PhD with a passion for developing mathematical models and scientific software to understand complex biological systems.</p>
-      <div class="location-badge">
-        <i class="fas fa-map-marker-alt"></i> Seeking opportunities in Copenhagen or Remote
-      </div>
-    </div>
-    <div class="hero-image-container">
-      <div class="profile-animation">
-        <img src="{{ '/assets/images/Profile.jpg' | relative_url }}" alt="João Pedro Gomes dos Santos" class="profile-circle">
-        <div class="orbit">
-          <div class="satellite code"><i class="fas fa-code"></i></div>
-          <div class="satellite brain"><i class="fas fa-brain"></i></div>
-          <div class="satellite data"><i class="fas fa-chart-line"></i></div>
-          <div class="satellite lab"><i class="fas fa-flask"></i></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <section class="bio-section">
   <div class="bio-content">
     <div class="bio-main">
@@ -926,4 +902,15 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   // Set initial styles for animation
-  const elementsToAnimate = document.querySelector
+  const elementsToAnimate = document.querySelectorAll('.bio-content, .career-goal-card, .timeline-entry');
+  elementsToAnimate.forEach(element => {
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(20px)';
+    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  });
+
+// Listen for scroll events
+window.addEventListener('scroll', animateOnScroll);
+
+// Trigger once on load
+animateOnScroll();

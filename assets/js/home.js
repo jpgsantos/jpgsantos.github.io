@@ -46,62 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
   if (typewriterElement) {
     setTimeout(typeEffect, 1000);
   }
-  
-  // Testimonial Carousel
-  const testimonials = document.querySelectorAll('.testimonial-item');
-  const indicators = document.querySelectorAll('.testimonial-indicator');
-  const prevButton = document.querySelector('.testimonial-control.prev');
-  const nextButton = document.querySelector('.testimonial-control.next');
-  let currentTestimonial = 0;
-  
-  function showTestimonial(index) {
-    // Hide all testimonials
-    testimonials.forEach(item => {
-      item.classList.remove('active');
-    });
-    
-    // Remove active class from all indicators
-    indicators.forEach(indicator => {
-      indicator.classList.remove('active');
-    });
-    
-    // Show active testimonial and indicator
-    testimonials[index].classList.add('active');
-    indicators[index].classList.add('active');
-    
-    currentTestimonial = index;
-  }
-  
-  // Event listeners for controls
-  if (prevButton) {
-    prevButton.addEventListener('click', () => {
-      let index = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
-      showTestimonial(index);
-    });
-  }
-  
-  if (nextButton) {
-    nextButton.addEventListener('click', () => {
-      let index = (currentTestimonial + 1) % testimonials.length;
-      showTestimonial(index);
-    });
-  }
-  
-  // Event listeners for indicators
-  indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
-      showTestimonial(index);
-    });
-  });
-  
-  // Auto slide testimonials every 8 seconds
-  setInterval(() => {
-    if (nextButton) {
-      let index = (currentTestimonial + 1) % testimonials.length;
-      showTestimonial(index);
-    }
-  }, 8000);
-  
+   
   // Scroll Animations
   const animateOnScroll = function() {
     const elements = document.querySelectorAll('.expertise-card, .project-showcase, .timeline-item, .testimonial-content');
