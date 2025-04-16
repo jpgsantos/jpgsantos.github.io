@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
       "PhD in Computational Neuroscience",
       "Scientific Software Developer",
       "Algorithm Implementation Specialist",
-      "Mathematical Modeling Expert"
+      "Biological Modeling Expert"
     ];
     
     let phraseIndex = 0;
