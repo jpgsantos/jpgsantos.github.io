@@ -209,6 +209,7 @@ title: Projects
 .projects-container {
   display: flex;
   flex-direction: column;
+  padding: 0em;
 }
 
 .project-card {
