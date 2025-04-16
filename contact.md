@@ -144,23 +144,11 @@ title: Contact
 
 <style>
 /* Added spacing to replace dividers */
-.contact-options-section {
-  padding: 2em 0;
-}
-
-.professional-info-section {
-  padding: 2em 0;
-}
-
-.cv-download-section {
-  padding: 2em 4em;
-}
 
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2em;
-  padding: 2em 4em;
 }
 
 .contact-card {
@@ -219,7 +207,6 @@ title: Contact
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2em;
-  padding: 2em 4em;
 }
 
 .info-card {
@@ -407,7 +394,6 @@ title: Contact
   }
   
   .cv-download-section {
-    padding: 2em;
   }
 }
 
