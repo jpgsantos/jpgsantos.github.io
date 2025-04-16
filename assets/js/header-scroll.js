@@ -1,76 +1,79 @@
 document.addEventListener('DOMContentLoaded', function() {
   const header = document.querySelector('header');
   const headerHeight = header.offsetHeight;
-  let prevScrollY = window.scrollY;
+  let lastScrollY = 0;
   let ticking = false;
+  
+  // Set initial position - always show header at top of page
+  header.style.transform = 'translateY(0)';
 
-  // Function to update header position
+  // Function to update header position based on scroll
   function updateHeaderPosition() {
     const currentScrollY = window.scrollY;
     
-    // For shadow effect when scrolled
+    // Shadow effect when scrolled
     if (currentScrollY > 10) {
       header.classList.add('header-scrolled');
     } else {
       header.classList.remove('header-scrolled');
     }
     
-    // Direction of scroll determines our action
-    const scrollingDown = currentScrollY > prevScrollY;
+    // Determine scroll direction
+    const scrollingDown = currentScrollY > lastScrollY;
     
-    // When near top of page, always show header
-    if (currentScrollY < headerHeight) {
-      header.style.transform = 'translateY(0)';
-    } 
-    // When scrolling down, gradually hide header
-    else if (scrollingDown) {
-      // Calculate how much to hide, capped at 100% of header height
-      const translateY = Math.min(headerHeight, currentScrollY - prevScrollY);
-      const currentTransform = getComputedStyle(header).transform;
+    // The key difference - start hiding immediately with any scroll
+    if (scrollingDown) {
+      // Calculate how much to hide based on scroll distance
+      // Make the header move proportionally to scroll distance
+      const scrollAmount = currentScrollY - lastScrollY;
       
-      // If already has a transform, extract the Y value
+      // Get current transform position
       let currentY = 0;
-      if (currentTransform !== 'none') {
-        const matrix = new DOMMatrix(currentTransform);
-        currentY = matrix.m42; // m42 is the Y translation
+      const transform = getComputedStyle(header).transform;
+      if (transform !== 'none') {
+        const matrix = new DOMMatrix(transform);
+        currentY = matrix.m42;
       }
       
-      // Calculate new position (don't go beyond fully hidden)
-      const newY = Math.max(-headerHeight, currentY - translateY);
+      // Calculate new position (don't hide more than header height)
+      const newY = Math.max(-headerHeight, currentY - scrollAmount);
       header.style.transform = `translateY(${newY}px)`;
     } 
-    // When scrolling up, gradually show header
-    else {
-      // Calculate how much to show, proportional to scroll amount
-      const translateY = Math.min(headerHeight, prevScrollY - currentScrollY);
-      const currentTransform = getComputedStyle(header).transform;
-      
-      // If already has a transform, extract the Y value
+    // When scrolling up or at top, show the header
+    else if (!scrollingDown || currentScrollY === 0) {
+      // Get current transform position
       let currentY = 0;
-      if (currentTransform !== 'none') {
-        const matrix = new DOMMatrix(currentTransform);
-        currentY = matrix.m42; // m42 is the Y translation
+      const transform = getComputedStyle(header).transform;
+      if (transform !== 'none') {
+        const matrix = new DOMMatrix(transform);
+        currentY = matrix.m42;
       }
       
-      // Calculate new position (don't go beyond fully visible)
-      const newY = Math.min(0, currentY + translateY);
+      // Calculate amount to show based on scroll
+      const scrollAmount = lastScrollY - currentScrollY;
+      
+      // Calculate new position (don't show more than fully visible)
+      const newY = Math.min(0, currentY + scrollAmount);
       header.style.transform = `translateY(${newY}px)`;
     }
     
-    prevScrollY = currentScrollY;
+    // At the very top, always fully show header
+    if (currentScrollY === 0) {
+      header.style.transform = 'translateY(0)';
+    }
+    
+    // Update last scroll position
+    lastScrollY = currentScrollY;
     ticking = false;
   }
   
-  // Throttle scroll events with requestAnimationFrame for performance
+  // Add scroll event listener with requestAnimationFrame for performance
   window.addEventListener('scroll', function() {
     if (!ticking) {
-      window.requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
         updateHeaderPosition();
       });
       ticking = true;
     }
   }, { passive: true });
-  
-  // Initialize header state
-  header.style.transform = 'translateY(0)';
 });

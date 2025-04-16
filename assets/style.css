@@ -1091,18 +1091,9 @@ header {
   margin: 0 auto;
 }
 
-/* Adjust main content to account for fixed header */
+/* Adjust main content spacing without affecting design */
 main {
-  margin-top: 80px; /* Adjust this value based on your header height */
-  background-color: var(--white);
+  background-color: var(--bg-body); /* Match body background */
   max-width: none; /* Allow main to be full width */
   width: 100%;
-  padding: 0; /* Remove default padding */
-}
-
-/* For mobile - adjust as needed */
-@media (max-width: 768px) {
-  main {
-    margin-top: 120px; /* Adjust for taller mobile header */
-  }
 }
