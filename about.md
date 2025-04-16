@@ -215,6 +215,69 @@ title: About
   </div>
 </section>
 
+<section class="professional-info-section">
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-info-circle"></i></span> Professional Information</h2>
+  
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="info-icon">
+        <i class="fas fa-bullseye"></i>
+      </div>
+      <h3>Target Roles</h3>
+      <ul class="info-list">
+        <li><i class="fas fa-check"></i> Research Engineer</li>
+        <li><i class="fas fa-check"></i> Scientific Software Developer</li>
+        <li><i class="fas fa-check"></i> ML Engineer (Algorithm Focus)</li>
+        <li><i class="fas fa-check"></i> Computational Scientist</li>
+        <li><i class="fas fa-check"></i> Modeling Scientist (Tooling/Algorithm Focus)</li>
+      </ul>
+    </div>
+    
+    <div class="info-card">
+      <div class="info-icon">
+        <i class="fas fa-industry"></i>
+      </div>
+      <h3>Target Industries</h3>
+      <ul class="info-list">
+        <li><i class="fas fa-check"></i> Neurotechnology startups</li>
+        <li><i class="fas fa-check"></i> Scientific Computing Services</li>
+        <li><i class="fas fa-check"></i> AI/ML research-focused companies</li>
+        <li><i class="fas fa-check"></i> Innovative computational sectors</li>
+      </ul>
+    </div>
+    
+    <div class="info-card">
+      <div class="info-icon">
+        <i class="fas fa-clipboard-list"></i>
+      </div>
+      <h3>Key Information</h3>
+      <ul class="info-list">
+        <li><i class="fas fa-check"></i> <strong>Availability:</strong> Immediate start</li>
+        <li><i class="fas fa-check"></i> <strong>Work Authorization:</strong> EU Citizen (Full EU rights)</li>
+        <li><i class="fas fa-check"></i> <strong>Target Location:</strong> Copenhagen / Remote</li>
+        <li><i class="fas fa-check"></i> <strong>Languages:</strong> Portuguese (Native), English (C2)</li>
+      </ul>
+    </div>
+    
+    <div class="info-card">
+      <div class="info-icon">
+        <i class="fas fa-code"></i>
+      </div>
+      <h3>Technical Skills</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">MATLAB</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Kotlin</span>
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">ODE Modeling</span>
+        <span class="skill-tag">Parameter Estimation</span>
+        <span class="skill-tag">Sensitivity Analysis</span>
+        <span class="skill-tag">FAIR Principles</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="education-timeline-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-route"></i></span> My Journey</h2>
 
@@ -729,6 +792,72 @@ title: About
     margin-left: 60px;
     width: calc(100% - 60px);
     padding: 1.5em;
+  }
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2em;
+}
+
+.info-card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 2em;
+  box-shadow: 0 5px 15px var(--shadow);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-icon {
+  font-size: 2em;
+  color: var(--primary-color);
+  margin-bottom: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  background-color: var(--primary-light);
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-card h3 {
+  margin-bottom: 1em;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-list li {
+  margin-bottom: 0.8em;
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+
+.info-list li i {
+  color: var(--primary-color);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+@media (max-width: 768px) {
+  .info-grid{
+    grid-template-columns: 1fr;
   }
 }
 </style>

@@ -177,102 +177,17 @@ title: Contact
   gap: 0.8em;
 }
 
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2em;
-}
 
-.info-card {
-  background-color: var(--white);
-  border-radius: var(--border-radius);
-  padding: 2em;
-  box-shadow: 0 5px 15px var(--shadow);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.info-icon {
-  font-size: 2em;
-  color: var(--primary-color);
-  margin-bottom: 0.8em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 70px;
-  height: 70px;
-  background-color: var(--primary-light);
-  border-radius: 50%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.info-card h3 {
-  margin-bottom: 1em;
-  color: var(--primary-color);
-  text-align: center;
-}
-
-.info-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.info-list li {
-  margin-bottom: 0.8em;
-  display: flex;
-  align-items: center;
-  gap: 0.8em;
-}
-
-.info-list li i {
-  color: var(--primary-color);
-}
-
-.skill-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
-}
 
 /* Responsive styles */
 @media (max-width: 992px) {
   .contact-grid,
-  .info-grid {
-  }
-  
-  .cv-showcase {
-    flex-direction: column;
-  }
-  
-  .cv-image {
-    padding: 2em;
-  }
-  
-  .cv-document {
-    transform: rotate(0);
-  }
-  
-  .cv-download-section {
-  }
 }
 
 @media (max-width: 768px) {
-  .contact-hero {
-    min-height: 300px;
-  }
   
-  .contact-grid,
-  .info-grid {
+  .contact-grid{
     grid-template-columns: 1fr;
-  }
-  
-  .contact-illustration {
-    width: 150px;
-    height: 150px;
-    font-size: 4em;
   }
 }
 </style>
