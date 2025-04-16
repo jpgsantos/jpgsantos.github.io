@@ -40,7 +40,7 @@ title: About
 <section class="career-goals-section">
   <div class="career-goals-grid">
     <div class="highlight-card">
-      <div class="highlight-icon">
+      <div class="expertise-icon">
         <i class="fas fa-star"></i>
       </div>
       <h3>Core Values</h3>
