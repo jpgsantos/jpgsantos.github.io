@@ -35,6 +35,12 @@ title: About
       </div>
     </div>
     
+    
+  </div>
+</section>
+
+<section class="career-goals-section">
+  <div class="career-goals-grid">
     <div class="highlight-card">
       <div class="highlight-icon">
         <i class="fas fa-star"></i>
