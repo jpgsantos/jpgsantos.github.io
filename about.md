@@ -279,7 +279,6 @@ title: About
 
 /* Bio Section */
 .bio-section {
-  padding: 0 4em 4em;
 }
 
 .bio-content {
@@ -485,7 +484,6 @@ title: About
 
 /* Career Goals Section */
 .career-goals-section {
-  padding: 0 4em 4em;
 }
 
 .career-goals-grid {
@@ -573,7 +571,6 @@ title: About
 
 /* Education Timeline */
 .education-timeline-section {
-  padding: 0 4em 4em;
 }
 
 .education-timeline {
