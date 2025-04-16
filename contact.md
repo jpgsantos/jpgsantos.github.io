@@ -230,6 +230,8 @@ title: Contact
   height: 70px;
   background-color: var(--primary-light);
   border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .info-card h3 {

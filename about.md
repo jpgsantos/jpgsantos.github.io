@@ -427,6 +427,8 @@ title: About
   justify-content: center;
   font-size: 1.8em;
   margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .highlight-card h3 {
@@ -521,8 +523,9 @@ title: About
   justify-content: center;
   font-size: 2em;
   margin-bottom: 1.5em;
+  margin-left: auto;
+  margin-right: auto;
 }
-
 .career-goal-card h3 {
   font-size: 1.4em;
   margin-bottom: 1.5em;
