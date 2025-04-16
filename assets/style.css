@@ -1055,7 +1055,6 @@ section:last-child {
 .featured-project,
 .cv-overview-section,
 .contact-options-section {
-  padding-top: 2em;
 }
 
 /* Adjust image size in home hero to match reduced height */
