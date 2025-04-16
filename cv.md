@@ -770,7 +770,6 @@ title: CV
   .cv-skills-section,
   .cv-publications-section,
   .cv-projects-section {
-    padding: 0 2em 2em;
   }
   
   .cv-grid {
@@ -798,7 +797,6 @@ title: CV
 
 @media (max-width: 768px) {
   .cv-header-content {
-    padding: 1.5em;
   }
   
   .cv-contact-grid {

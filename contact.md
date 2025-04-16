@@ -378,7 +378,6 @@ title: Contact
 @media (max-width: 992px) {
   .contact-grid,
   .info-grid {
-    padding: 2em;
   }
   
   .cv-showcase {

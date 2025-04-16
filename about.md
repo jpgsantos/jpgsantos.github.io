@@ -680,14 +680,12 @@ title: About
   .bio-section,
   .career-goals-section,
   .education-timeline-section {
-    padding: 0 2em 2em;
   }
   
   .bio-main {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 2em;
   }
   
   .bio-avatar {

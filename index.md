@@ -104,7 +104,7 @@ title: Home
   .hero-content {
     flex-direction: column-reverse;
     text-align: center;
-    padding: 3em 2em;
+    padding: 2em 1em;
   }
   
   .hero-text {
