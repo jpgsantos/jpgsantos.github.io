@@ -39,7 +39,7 @@ title: Home
   
   <div class="expertise-grid">
     <div class="expertise-card">
-      <div class="expertise-icon">
+      <div class="card-icon">
         <i class="fas fa-laptop-code"></i>
       </div>
       <h3>Scientific Software Development</h3>
@@ -53,7 +53,7 @@ title: Home
     </div>
     
     <div class="expertise-card">
-      <div class="expertise-icon">
+      <div class="card-icon">
         <i class="fas fa-brain"></i>
       </div>
       <h3>Computational Modeling</h3>
@@ -67,7 +67,7 @@ title: Home
     </div>
     
     <div class="expertise-card">
-      <div class="expertise-icon">
+      <div class="card-icon">
         <i class="fas fa-chart-line"></i>
       </div>
       <h3>Algorithm Implementation</h3>

@@ -40,7 +40,7 @@ title: About
 <section class="career-goals-section">
   <div class="career-goals-grid">
     <div class="highlight-card">
-      <div class="expertise-icon">
+      <div class="card-icon">
         <i class="fas fa-star"></i>
       </div>
       <h3>Core Values</h3>
@@ -88,7 +88,7 @@ title: About
 <section class="career-goals-section">
   <div class="career-goals-grid">
     <div class="highlight-card">
-      <div class="highlight-icon">
+      <div class="card-icon">
         <i class="fas fa-compass"></i>
       </div>
       <h3>Professional Interests</h3>
@@ -106,7 +106,7 @@ title: About
     </div>
     
     <div class="highlight-card">
-      <div class="highlight-icon">
+      <div class="card-icon">
         <i class="fas fa-laptop-code"></i>
       </div>
       <h3>Technical Skills</h3>
@@ -131,7 +131,7 @@ title: About
   
   <div class="career-goals-grid">
     <div class="career-goal-card">
-      <div class="career-goal-icon">
+      <div class="card-icon">
         <i class="fas fa-briefcase"></i>
       </div>
       <h3>Target Roles</h3>
@@ -160,7 +160,7 @@ title: About
     </div>
     
     <div class="career-goal-card">
-      <div class="career-goal-icon">
+      <div class="card-icon">
         <i class="fas fa-tasks"></i>
       </div>
       <h3>Preferred Tasks</h3>
@@ -189,7 +189,7 @@ title: About
     </div>
     
     <div class="career-goal-card">
-      <div class="career-goal-icon">
+      <div class="card-icon">
         <i class="fas fa-building"></i>
       </div>
       <h3>Ideal Environment</h3>
@@ -218,7 +218,7 @@ title: About
     </div>
 	
 	<div class="career-goal-card">
-      <div class="career-goal-icon">
+      <div class="card-icon">
         <i class="fas fa-industry"></i>
       </div>
       <h3>Target Industries</h3>
