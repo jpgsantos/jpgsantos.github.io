@@ -34,8 +34,6 @@ title: About
         <p>I'm now seeking to transition from academia to industry, looking for roles that allow me to apply my computational skills, problem-solving abilities, and software development experience to innovative projects, preferably in Copenhagen or remotely.</p>
       </div>
     </div>
-    
-    
   </div>
 </section>
 
@@ -84,7 +82,11 @@ title: About
         </li>
       </ul>
     </div>
-    
+  </div>
+</section>	
+	
+<section class="career-goals-section">
+  <div class="career-goals-grid">
     <div class="highlight-card">
       <div class="highlight-icon">
         <i class="fas fa-compass"></i>
@@ -537,7 +539,6 @@ title: About
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   gap: 2em;
-  margin-top: 2em;
 }
 
 .career-goal-card {
