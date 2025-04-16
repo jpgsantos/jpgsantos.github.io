@@ -411,6 +411,7 @@ title: CV
 .cv-header-info h2 {
   font-size: 2.2em;
   margin-bottom: 0.1em;
+  margin-top: 1em;
   color: var(--primary-color);
 }
 

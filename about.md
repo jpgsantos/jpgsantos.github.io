@@ -4,113 +4,103 @@ title: About
 ---
 
 <section class="bio-section">
-  <div class="bio-content">
-    <div class="bio-main">
-      <div class="bio-avatar">
-        <div class="bio-avatar-image"></div>
-        <div class="avatar-quotes">
-          <div class="avatar-quote">
-            <i class="fas fa-quote-left"></i>
-            <span>Passionate about translating complex biological systems into computational models</span>
-          </div>
-          <div class="avatar-quote">
-            <i class="fas fa-quote-left"></i>
-            <span>Dedicated to developing scientific software that makes a difference</span>
-          </div>
+  <h2 class="section-heading">
+    <span class="heading-icon"><i class="fas fa-user"></i></span>
+    About Me
+  </h2>
+  <div class="bio-content-grid">
+    <div class="bio-avatar">
+      <div class="bio-avatar-image" style="background-image: url('{{ "/assets/images/Profile.jpg" | relative_url }}');"></div>
+      <div class="avatar-quotes">
+        <div class="avatar-quote">
+          <i class="fas fa-quote-left"></i>
+          <span>Passionate about translating complex biological systems into computational models</span>
         </div>
-      </div>
-      
-      <div class="bio-text">
-        <h2><i class="fas fa-book-open"></i> My Story</h2>
-        
-        <p>I'm João Pedro Gomes dos Santos, a Computational Neuroscience PhD graduate with a passion for developing mathematical models and scientific software that help understand complex biological systems.</p>
-        
-        <p>My academic journey began with a BSc and MSc in Biochemistry at the University of Porto, where I gained a solid foundation in biological sciences. Pursuing my interest in computational approaches, I embarked on a PhD focused on computational neuroscience, collaborating between the University of Porto and Karolinska Institutet in Stockholm.</p>
-        
-        <p>During my PhD research, I developed the <strong>Subcellular_Workflow</strong>, a comprehensive MATLAB framework for biochemical pathway modeling. This project combined my interests in software development, algorithm implementation, and biological modeling, resulting in a publicly available tool and a peer-reviewed publication.</p>
-        
-        <p>Beyond my academic work, I enjoy learning new technologies, as demonstrated by my recent self-taught Kotlin/Android project. I'm a strong believer in leveraging modern tools, including AI/LLMs, to enhance productivity and accelerate development.</p>
-        
-        <p>I'm now seeking to transition from academia to industry, looking for roles that allow me to apply my computational skills, problem-solving abilities, and software development experience to innovative projects, preferably in Copenhagen or remotely.</p>
+        <div class="avatar-quote">
+          <i class="fas fa-quote-left"></i>
+          <span>Dedicated to developing scientific software that makes a difference</span>
+        </div>
       </div>
     </div>
-    
-    <div class="bio-highlights">
-      <div class="highlight-card">
-        <div class="highlight-icon">
-          <i class="fas fa-star"></i>
-        </div>
-        <h3>Core Values</h3>
-        <ul class="core-values-list">
-          <li class="core-value-item">
-            <div class="core-value-name">Technical Excellence</div>
-            <div class="core-value-desc">Clean, efficient, and well-structured code</div>
-          </li>
-          <li class="core-value-item">
-            <div class="core-value-name">Continuous Learning</div>
-            <div class="core-value-desc">Constantly expanding knowledge and skills</div>
-          </li>
-          <li class="core-value-item">
-            <div class="core-value-name">Interdisciplinary Approach</div>
-            <div class="core-value-desc">Combining insights from different fields</div>
-          </li>
-          <li class="core-value-item">
-            <div class="core-value-name">Open Collaboration</div>
-            <div class="core-value-desc">Sharing knowledge and working together</div>
-          </li>
-          <li class="core-value-item">
-            <div class="core-value-name">User-Centered Design</div>
-            <div class="core-value-desc">Creating accessible and usable tools</div>
-          </li>
-        </ul>
+    <div class="bio-text">
+      <h3><i class="fas fa-book-open"></i> My Story</h3>
+      <p>I'm João Pedro Gomes dos Santos, a Computational Neuroscience PhD graduate with a passion for developing mathematical models and scientific software that help understand complex biological systems.</p>
+      <p>My academic journey began with a BSc and MSc in Biochemistry at the University of Porto, where I gained a solid foundation in biological sciences. Pursuing my interest in computational approaches, I embarked on a PhD focused on computational neuroscience, collaborating between the University of Porto and Karolinska Institutet in Stockholm.</p>
+      <p>During my PhD research, I developed the <strong>Subcellular_Workflow</strong>, a comprehensive MATLAB framework for biochemical pathway modeling. This project combined my interests in software development, algorithm implementation, and biological modeling, resulting in a publicly available tool and a peer-reviewed publication.</p>
+      <p>Beyond my academic work, I enjoy learning new technologies, as demonstrated by my recent self-taught Kotlin/Android project. I'm a strong believer in leveraging modern tools, including AI/LLMs, to enhance productivity and accelerate development.</p>
+      <p>I'm now seeking to transition from academia to industry, looking for roles that allow me to apply my computational skills, problem-solving abilities, and software development experience to innovative projects, preferably in Copenhagen or remotely.</p>
+    </div>
+  </div>
+
+  <div class="bio-highlights-grid">
+    <div class="highlight-card">
+      <div class="highlight-icon"><i class="fas fa-star"></i></div>
+      <h3>Core Values</h3>
+      <ul class="core-values-list">
+        <li class="core-value-item">
+          <div class="core-value-name">Technical Excellence</div>
+          <div class="core-value-desc">Clean, efficient, well‑structured code</div>
+        </li>
+        <li class="core-value-item">
+          <div class="core-value-name">Continuous Learning</div>
+          <div class="core-value-desc">Constantly expanding knowledge and skills</div>
+        </li>
+        <li class="core-value-item">
+          <div class="core-value-name">Interdisciplinary Approach</div>
+          <div class="core-value-desc">Combining insights from different fields</div>
+        </li>
+        <li class="core-value-item">
+          <div class="core-value-name">Open Collaboration</div>
+          <div class="core-value-desc">Sharing knowledge and working together</div>
+        </li>
+        <li class="core-value-item">
+          <div class="core-value-name">User-Centered Design</div>
+          <div class="core-value-desc">Creating accessible and usable tools</div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="highlight-card">
+      <div class="highlight-icon"><i class="fas fa-compass"></i></div>
+      <h3>Professional Interests</h3>
+      <div class="skills-container">
+        <span class="skill-tag">Computational Neuroscience</span>
+        <span class="skill-tag">Scientific Software Development</span>
+        <span class="skill-tag">Algorithm Implementation</span>
+        <span class="skill-tag">Machine Learning</span>
+        <span class="skill-tag">Data Analysis</span>
+        <span class="skill-tag">Systems Biology</span>
+        <span class="skill-tag">Information Theory</span>
+        <span class="skill-tag">Artificial Intelligence</span>
+        <span class="skill-tag">Complex Systems</span>
       </div>
-      
-      <div class="highlight-card">
-        <div class="highlight-icon">
-          <i class="fas fa-compass"></i>
-        </div>
-        <h3>Professional Interests</h3>
-        <div class="skills-container">
-          <span class="skill-tag">Computational Neuroscience</span>
-          <span class="skill-tag">Scientific Software Development</span>
-          <span class="skill-tag">Algorithm Implementation</span>
-          <span class="skill-tag">Machine Learning</span>
-          <span class="skill-tag">Data Analysis</span>
-          <span class="skill-tag">Systems Biology</span>
-          <span class="skill-tag">Information Theory</span>
-          <span class="skill-tag">Artificial Intelligence</span>
-          <span class="skill-tag">Complex Systems</span>
-        </div>
-      </div>
-      
-      <div class="highlight-card">
-        <div class="highlight-icon">
-          <i class="fas fa-laptop-code"></i>
-        </div>
-        <h3>Technical Skills</h3>
-        <div class="skills-container">
-          <span class="skill-tag">MATLAB</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">Kotlin</span>
-          <span class="skill-tag">Git/GitHub</span>
-          <span class="skill-tag">ODE Modeling</span>
-          <span class="skill-tag">Sensitivity Analysis</span>
-          <span class="skill-tag">Parameter Estimation</span>
-          <span class="skill-tag">FAIR Principles</span>
-        </div>
+    </div>
+
+    <div class="highlight-card">
+      <div class="highlight-icon"><i class="fas fa-laptop-code"></i></div>
+      <h3>Technical Skills</h3>
+      <div class="skills-container">
+        <span class="skill-tag">MATLAB</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Kotlin</span>
+        <span class="skill-tag">Git/GitHub</span>
+        <span class="skill-tag">ODE Modeling</span>
+        <span class="skill-tag">Sensitivity Analysis</span>
+        <span class="skill-tag">Parameter Estimation</span>
+        <span class="skill-tag">FAIR Principles</span>
       </div>
     </div>
   </div>
 </section>
 
 <section class="career-goals-section">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-bullseye"></i></span> What I'm Looking For</h2>
-  
+  <h2 class="section-heading">
+    <span class="heading-icon"><i class="fas fa-bullseye"></i></span>
+    What I’m Looking For
+  </h2>
   <div class="career-goals-grid">
     <div class="career-goal-card">
-      <div class="career-goal-icon">
-        <i class="fas fa-briefcase"></i>
-      </div>
+      <div class="career-goal-icon"><i class="fas fa-briefcase"></i></div>
       <h3>Target Roles</h3>
       <ul class="career-goal-list">
         <li>
@@ -135,11 +125,9 @@ title: About
         </li>
       </ul>
     </div>
-    
+
     <div class="career-goal-card">
-      <div class="career-goal-icon">
-        <i class="fas fa-tasks"></i>
-      </div>
+      <div class="career-goal-icon"><i class="fas fa-tasks"></i></div>
       <h3>Preferred Tasks</h3>
       <ul class="career-goal-list">
         <li>
@@ -164,11 +152,9 @@ title: About
         </li>
       </ul>
     </div>
-    
+
     <div class="career-goal-card">
-      <div class="career-goal-icon">
-        <i class="fas fa-building"></i>
-      </div>
+      <div class="career-goal-icon"><i class="fas fa-building"></i></div>
       <h3>Ideal Environment</h3>
       <ul class="career-goal-list">
         <li>
@@ -195,6 +181,80 @@ title: About
     </div>
   </div>
 </section>
+
+<style>
+/* ———————————————————————————————— */
+/* About & Bio */
+.bio-section {
+  padding: var(--content-padding) 0;
+}
+.bio-content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+.bio-avatar-image {
+  width: 100%;
+  aspect-ratio: 1;
+  background-size: cover;
+  background-position: center top;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px var(--shadow);
+}
+.avatar-quotes {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+.bio-text h3 {
+  font-size: 1.6em;
+  margin-bottom: 1rem;
+}
+.bio-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+/* Core‑value cards */
+.core-values-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.core-value-item {
+  padding: 1rem;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 3px 8px var(--shadow);
+}
+
+/* ———————————————————————————————— */
+/* Career Goals */
+.career-goals-section {
+  padding: var(--content-padding) 0;
+}
+.career-goals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+.career-goal-card {
+  border-top: 4px solid var(--accent);
+  padding: 1.5rem;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.career-goal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px var(--shadow-strong);
+}
+</style>
+
 
 <section class="education-timeline-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-route"></i></span> My Journey</h2>
