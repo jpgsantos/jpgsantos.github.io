@@ -1072,28 +1072,32 @@ header {
   left: 0;
   right: 0;
   z-index: 1000;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
   background-color: var(--white);
   max-width: none; /* Override max-width to make it full width */
   width: 100%;
   box-sizing: border-box;
-}
-
-.header-visible {
-  transform: translateY(0);
-}
-
-.header-hidden {
-  transform: translateY(-100%);
+  /* No transition here - the transform will be handled directly in JS */
+  box-shadow: 0 0px 0px var(--shadow);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .header-scrolled {
   box-shadow: 0 4px 15px var(--shadow);
 }
 
+/* Create a container inside of main to provide spacing */
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 /* Adjust main content to account for fixed header */
 main {
   margin-top: 80px; /* Adjust this value based on your header height */
+  background-color: var(--white);
+  max-width: none; /* Allow main to be full width */
+  width: 100%;
+  padding: 0; /* Remove default padding */
 }
 
 /* For mobile - adjust as needed */
