@@ -26,7 +26,7 @@
   --code-text: #333;            /* Code text color */
   
   /* Standardized spacing variables */
-  --section-spacing: 2.5rem;    /* Consistent spacing between sections */
+  --section-spacing: 0rem;    /* Consistent spacing between sections */
   --content-padding: 2rem;      /* Standard padding inside content areas */
 }
 
@@ -925,7 +925,7 @@ section:last-child {
 @media (max-width: 1200px) {
   :root {
     --content-padding: 1.5rem;
-    --section-spacing: 2rem;
+    --section-spacing: 0rem;
   }
   
   .hero-content {
@@ -944,7 +944,7 @@ section:last-child {
 @media (max-width: 992px) {
   :root {
     --content-padding: 1.25rem;
-    --section-spacing: 1.75rem;
+    --section-spacing: 0rem;
   }
   
   .hero-content {
@@ -970,7 +970,7 @@ section:last-child {
 @media (max-width: 768px) {
   :root {
     --content-padding: 1rem;
-    --section-spacing: 1.5rem;
+    --section-spacing: 0rem;
   }
   
   header {
