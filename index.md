@@ -12,7 +12,7 @@ title: Home
       </div>
       <p class="hero-description">I transform complex biological systems into computational models and develop scientific software that makes a difference.</p>
       <div class="location-badge">
-        <i class="fas fa-map-marker-alt"></i> Seeking opportunities in Copenhagen or Remote
+        <i class="fas fa-map-marker-alt"></i> Seeking opportunities in Copenhagen/Remote
       </div>
       <div class="hero-buttons">
         <a href="{{ '/cv' | relative_url }}" class="hero-button primary-button">
