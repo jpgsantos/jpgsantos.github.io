@@ -35,84 +35,82 @@ title: About
       </div>
     </div>
     
-    <div class="bio-highlights">
-      <div class="highlight-card">
-        <div class="highlight-icon">
-          <i class="fas fa-star"></i>
-        </div>
-        <h3>Core Values</h3>
-        <ul class="core-values-list">
-          <li class="core-value-item">
-            <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-            <div class="goal-text">
-              <div class="core-value-name">Technical Excellence</div>
-              <div class="core-value-desc">Clean, efficient, and well-structured code</div>
-            </div>
-          </li>
-          <li class="core-value-item">
-            <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-            <div class="goal-text">
-              <div class="core-value-name">Continuous Learning</div>
-              <div class="core-value-desc">Constantly expanding knowledge and skills</div>
-            </div>
-          </li>
-          <li class="core-value-item">
-            <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-            <div class="goal-text">
-              <div class="core-value-name">Interdisciplinary Approach</div>
-              <div class="core-value-desc">Combining insights from different fields</div>
-            </div>
-          </li>
-          <li class="core-value-item">
-            <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-            <div class="goal-text">
-              <div class="core-value-name">Open Collaboration</div>
-              <div class="core-value-desc">Sharing knowledge and working together</div>
-            </div>
-          </li>
-          <li class="core-value-item">
-            <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-            <div class="goal-text">
-              <div class="core-value-name">User-Centered Design</div>
-              <div class="core-value-desc">Creating accessible and usable tools</div>
-            </div>
-          </li>
-        </ul>
+    <div class="highlight-card">
+      <div class="highlight-icon">
+        <i class="fas fa-star"></i>
       </div>
-      
-      <div class="highlight-card">
-        <div class="highlight-icon">
-          <i class="fas fa-compass"></i>
-        </div>
-        <h3>Professional Interests</h3>
-        <div class="skills-container">
-          <span class="skill-tag">Computational Neuroscience</span>
-          <span class="skill-tag">Scientific Software Development</span>
-          <span class="skill-tag">Algorithm Implementation</span>
-          <span class="skill-tag">Machine Learning</span>
-          <span class="skill-tag">Data Analysis</span>
-          <span class="skill-tag">Systems Biology</span>
-          <span class="skill-tag">Information Theory</span>
-          <span class="skill-tag">Artificial Intelligence</span>
-          <span class="skill-tag">Complex Systems</span>
-        </div>
+      <h3>Core Values</h3>
+      <ul class="core-values-list">
+        <li class="core-value-item">
+          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+          <div class="goal-text">
+            <div class="core-value-name">Technical Excellence</div>
+            <div class="core-value-desc">Clean, efficient, and well-structured code</div>
+          </div>
+        </li>
+        <li class="core-value-item">
+          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+          <div class="goal-text">
+            <div class="core-value-name">Continuous Learning</div>
+            <div class="core-value-desc">Constantly expanding knowledge and skills</div>
+          </div>
+        </li>
+        <li class="core-value-item">
+          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+          <div class="goal-text">
+            <div class="core-value-name">Interdisciplinary Approach</div>
+            <div class="core-value-desc">Combining insights from different fields</div>
+          </div>
+        </li>
+        <li class="core-value-item">
+          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+          <div class="goal-text">
+            <div class="core-value-name">Open Collaboration</div>
+            <div class="core-value-desc">Sharing knowledge and working together</div>
+          </div>
+        </li>
+        <li class="core-value-item">
+          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+          <div class="goal-text">
+            <div class="core-value-name">User-Centered Design</div>
+            <div class="core-value-desc">Creating accessible and usable tools</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="highlight-card">
+      <div class="highlight-icon">
+        <i class="fas fa-compass"></i>
       </div>
-      
-      <div class="highlight-card">
-        <div class="highlight-icon">
-          <i class="fas fa-laptop-code"></i>
-        </div>
-        <h3>Technical Skills</h3>
-        <div class="skills-container">
-          <span class="skill-tag">MATLAB</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">Kotlin</span>
-          <span class="skill-tag">Git/GitHub</span>
-          <span class="skill-tag">ODE Modeling</span>
-          <span class="skill-tag">Sensitivity Analysis</span>
-          <span class="skill-tag">Parameter Estimation</span>
-          <span class="skill-tag">FAIR Principles</span>
-        </div>
+      <h3>Professional Interests</h3>
+      <div class="skills-container">
+        <span class="skill-tag">Computational Neuroscience</span>
+        <span class="skill-tag">Scientific Software Development</span>
+        <span class="skill-tag">Algorithm Implementation</span>
+        <span class="skill-tag">Machine Learning</span>
+        <span class="skill-tag">Data Analysis</span>
+        <span class="skill-tag">Systems Biology</span>
+        <span class="skill-tag">Information Theory</span>
+        <span class="skill-tag">Artificial Intelligence</span>
+        <span class="skill-tag">Complex Systems</span>
+      </div>
+    </div>
+    
+    <div class="highlight-card">
+      <div class="highlight-icon">
+        <i class="fas fa-laptop-code"></i>
+      </div>
+      <h3>Technical Skills</h3>
+      <div class="skills-container">
+        <span class="skill-tag">MATLAB</span>
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Kotlin</span>
+        <span class="skill-tag">Git/GitHub</span>
+        <span class="skill-tag">ODE Modeling</span>
+        <span class="skill-tag">Sensitivity Analysis</span>
+        <span class="skill-tag">Parameter Estimation</span>
+        <span class="skill-tag">FAIR Principles</span>
       </div>
     </div>
   </div>
@@ -405,13 +403,6 @@ title: About
 }
 
 /* Updated Bio Highlights - Now using grid like career goals section */
-.bio-highlights {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2em;
-  padding: 2em;
-  background-color: var(--bg-light);
-}
 
 .highlight-card {
   background-color: var(--white);
