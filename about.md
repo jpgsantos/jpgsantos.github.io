@@ -112,10 +112,12 @@ title: About
         <span class="skill-tag">MATLAB</span>
         <span class="skill-tag">Python</span>
         <span class="skill-tag">Kotlin</span>
-        <span class="skill-tag">Git/GitHub</span>
+		<span class="skill-tag">Android</span>
+        <span class="skill-tag">Git</span>
         <span class="skill-tag">ODE Modeling</span>
+		<span class="skill-tag">Parameter Estimation</span>
         <span class="skill-tag">Sensitivity Analysis</span>
-        <span class="skill-tag">Parameter Estimation</span>
+        <span class="skill-tag">Profile likelihood Analysis</span>
         <span class="skill-tag">FAIR Principles</span>
       </div>
     </div>
@@ -146,7 +148,7 @@ title: About
         </li>
         <li>
           <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Computational Scientist</div>
+          <div class="goal-text">Data Scientist</div>
         </li>
         <li>
           <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
@@ -212,69 +214,33 @@ title: About
         </li>
       </ul>
     </div>
-  </div>
-</section>
-
-<section class="professional-info-section">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-info-circle"></i></span> Professional Information</h2>
-  
-  <div class="info-grid">
-    <div class="info-card">
-      <div class="info-icon">
-        <i class="fas fa-bullseye"></i>
-      </div>
-      <h3>Target Roles</h3>
-      <ul class="info-list">
-        <li><i class="fas fa-check"></i> Research Engineer</li>
-        <li><i class="fas fa-check"></i> Scientific Software Developer</li>
-        <li><i class="fas fa-check"></i> ML Engineer (Algorithm Focus)</li>
-        <li><i class="fas fa-check"></i> Computational Scientist</li>
-        <li><i class="fas fa-check"></i> Modeling Scientist (Tooling/Algorithm Focus)</li>
-      </ul>
-    </div>
-    
-    <div class="info-card">
-      <div class="info-icon">
+	
+	<div class="career-goal-card">
+      <div class="career-goal-icon">
         <i class="fas fa-industry"></i>
       </div>
       <h3>Target Industries</h3>
-      <ul class="info-list">
-        <li><i class="fas fa-check"></i> Neurotechnology startups</li>
-        <li><i class="fas fa-check"></i> Scientific Computing Services</li>
-        <li><i class="fas fa-check"></i> AI/ML research-focused companies</li>
-        <li><i class="fas fa-check"></i> Innovative computational sectors</li>
+      <ul class="career-goal-list">
+        <li>
+          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+          <div class="goal-text">Neurotechnology startups</div>
+        </li>
+        <li>
+          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+          <div class="goal-text">Scientific Computing Services</div>
+        </li>
+        <li>
+          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+          <div class="goal-text">AI/ML research-focused companies</div>
+        </li>
+        <li>
+          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+          <div class="goal-text">Innovative computational sectors</div>
+        </li>
       </ul>
     </div>
-    
-    <div class="info-card">
-      <div class="info-icon">
-        <i class="fas fa-clipboard-list"></i>
-      </div>
-      <h3>Key Information</h3>
-      <ul class="info-list">
-        <li><i class="fas fa-check"></i> <strong>Availability:</strong> Immediate start</li>
-        <li><i class="fas fa-check"></i> <strong>Work Authorization:</strong> EU Citizen (Full EU rights)</li>
-        <li><i class="fas fa-check"></i> <strong>Target Location:</strong> Copenhagen / Remote</li>
-        <li><i class="fas fa-check"></i> <strong>Languages:</strong> Portuguese (Native), English (C2)</li>
-      </ul>
-    </div>
-    
-    <div class="info-card">
-      <div class="info-icon">
-        <i class="fas fa-code"></i>
-      </div>
-      <h3>Technical Skills</h3>
-      <div class="skill-tags">
-        <span class="skill-tag">MATLAB</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">Kotlin</span>
-        <span class="skill-tag">Git</span>
-        <span class="skill-tag">ODE Modeling</span>
-        <span class="skill-tag">Parameter Estimation</span>
-        <span class="skill-tag">Sensitivity Analysis</span>
-        <span class="skill-tag">FAIR Principles</span>
-      </div>
-    </div>
+	
+	
   </div>
 </section>
 
@@ -569,7 +535,7 @@ title: About
 
 .career-goals-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
   gap: 2em;
   margin-top: 2em;
 }
