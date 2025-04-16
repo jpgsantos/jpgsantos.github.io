@@ -870,7 +870,7 @@ section:last-child {
   display: flex;
   flex-direction: column;
   gap: 2em; /* Reduced from 3em */
-  padding: var(--content-padding);
+  padding: 0em;
 }
 
 .project-card {
