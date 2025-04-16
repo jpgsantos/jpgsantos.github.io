@@ -43,24 +43,39 @@ title: About
         <h3>Core Values</h3>
         <ul class="core-values-list">
           <li class="core-value-item">
-            <div class="core-value-name">Technical Excellence</div>
-            <div class="core-value-desc">Clean, efficient, and well-structured code</div>
+            <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+            <div class="goal-text">
+              <div class="core-value-name">Technical Excellence</div>
+              <div class="core-value-desc">Clean, efficient, and well-structured code</div>
+            </div>
           </li>
           <li class="core-value-item">
-            <div class="core-value-name">Continuous Learning</div>
-            <div class="core-value-desc">Constantly expanding knowledge and skills</div>
+            <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+            <div class="goal-text">
+              <div class="core-value-name">Continuous Learning</div>
+              <div class="core-value-desc">Constantly expanding knowledge and skills</div>
+            </div>
           </li>
           <li class="core-value-item">
-            <div class="core-value-name">Interdisciplinary Approach</div>
-            <div class="core-value-desc">Combining insights from different fields</div>
+            <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+            <div class="goal-text">
+              <div class="core-value-name">Interdisciplinary Approach</div>
+              <div class="core-value-desc">Combining insights from different fields</div>
+            </div>
           </li>
           <li class="core-value-item">
-            <div class="core-value-name">Open Collaboration</div>
-            <div class="core-value-desc">Sharing knowledge and working together</div>
+            <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+            <div class="goal-text">
+              <div class="core-value-name">Open Collaboration</div>
+              <div class="core-value-desc">Sharing knowledge and working together</div>
+            </div>
           </li>
           <li class="core-value-item">
-            <div class="core-value-name">User-Centered Design</div>
-            <div class="core-value-desc">Creating accessible and usable tools</div>
+            <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+            <div class="goal-text">
+              <div class="core-value-name">User-Centered Design</div>
+              <div class="core-value-desc">Creating accessible and usable tools</div>
+            </div>
           </li>
         </ul>
       </div>
@@ -276,9 +291,9 @@ title: About
 </section>
 
 <style>
-
 /* Bio Section */
 .bio-section {
+  padding: var(--content-padding);
 }
 
 .bio-content {
@@ -389,36 +404,35 @@ title: About
   margin-bottom: 0;
 }
 
+/* Updated Bio Highlights - Now using grid like career goals section */
 .bio-highlights {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 0;
+  gap: 2em;
+  padding: 2em;
   background-color: var(--bg-light);
 }
 
 .highlight-card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
   padding: 2em;
-  border-right: 1px solid var(--border-light);
-  transition: background-color var(--transition), color var(--transition);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 10px 30px var(--shadow);
+  transition: all var(--transition);
+  border-top: 5px solid var(--primary-color);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.highlight-card:last-child {
-  border-right: none;
-}
-
-/* Remove hover transform effects */
 .highlight-card:hover {
-  background-color: var(--primary-light);
-  transform: none;
-  box-shadow: none;
-  z-index: auto;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px var(--shadow-strong);
 }
 
 .highlight-icon {
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   background-color: var(--primary-light);
   color: var(--primary-color);
   border-radius: 50%;
@@ -426,52 +440,38 @@ title: About
   align-items: center;
   justify-content: center;
   font-size: 1.8em;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
   margin-left: auto;
   margin-right: auto;
 }
 
 .highlight-card h3 {
   font-size: 1.4em;
-  margin-bottom: 1em;
+  margin-bottom: 1.5em;
   color: var(--primary-dark);
+  text-align: center;
 }
 
-.highlight-card ul {
-  list-style: none;
-  padding: 0;
-}
-
-.highlight-card li {
-  margin-bottom: 0.8em;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.8em;
-}
-
-.highlight-card li i {
-  color: var(--primary-color);
-  font-size: 1.1em;
-  margin-top: 0.2em;
-}
-
-/* New Core Values styling */
+/* Core values styling - now matching the career goal items */
 .core-values-list {
   list-style: none;
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1em;
+  margin: 0;
 }
 
 .core-value-item {
-  background-color: var(--white);
-  border-radius: var(--border-radius);
-  padding: 1em;
-  box-shadow: 0 3px 8px var(--shadow);
   display: flex;
-  flex-direction: column;
-  gap: 0.5em;
+  align-items: flex-start;
+  gap: 0.8em;
+  margin-bottom: 1.2em;
+  padding-bottom: 1.2em;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.core-value-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .core-value-name {
@@ -482,10 +482,29 @@ title: About
 .core-value-desc {
   font-size: 0.9em;
   color: var(--text-light);
+  margin-top: 0.3em;
+}
+
+/* Skills container - now matching the projects page */
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8em;
+}
+
+.skill-tag {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.5em 1em;
+  border-radius: 50px;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: all var(--transition);
 }
 
 /* Career Goals Section */
 .career-goals-section {
+  padding: var(--content-padding);
 }
 
 .career-goals-grid {
@@ -574,6 +593,7 @@ title: About
 
 /* Education Timeline */
 .education-timeline-section {
+  padding: var(--content-padding);
 }
 
 .education-timeline {
@@ -680,11 +700,6 @@ title: About
 
 /* Responsive styles */
 @media (max-width: 992px) {
-  .bio-section,
-  .career-goals-section,
-  .education-timeline-section {
-  }
-  
   .bio-main {
     flex-direction: column;
     align-items: center;
@@ -698,80 +713,11 @@ title: About
   .bio-text h2 {
     justify-content: center;
   }
-  
-  .bio-highlights {
-    grid-template-columns: 1fr;
-  }
-  
-  .highlight-card {
-    border-right: none;
-    border-bottom: 1px solid var(--border-light);
-  }
-  
-  .highlight-card:last-child {
-    border-bottom: none;
-  }
-  
-  .highlight-icon {
-    margin: 0 auto 1em;
-  }
-  
-  .highlight-card h3 {
-    text-align: center;
-  }
-  
-  .core-values-list {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
 }
 
 @media (max-width: 768px) {
-  .about-hero {
-    min-height: 300px;
-  }
-  
-  .profile-animation {
-    width: 220px;
-    height: 220px;
-  }
-  
-  .profile-circle {
-    width: 150px;
-    height: 150px;
-  }
-  
-  .orbit {
-    width: 220px;
-    height: 220px;
-  }
-  
-  .satellite {
-    width: 30px;
-    height: 30px;
-    font-size: 1em;
-  }
-  
-  .code {
-    top: 0;
-    left: 95px;
-  }
-  
-  .brain {
-    top: 95px;
-    right: 0;
-  }
-  
-  .data {
-    bottom: 0;
-    left: 95px;
-  }
-  
-  .lab {
-    top: 95px;
-    left: 0;
-  }
-  
-  .career-goals-grid {
+  .career-goals-grid,
+  .bio-highlights {
     grid-template-columns: 1fr;
   }
   
@@ -786,10 +732,6 @@ title: About
     margin-left: 60px;
     width: calc(100% - 60px);
     padding: 1.5em;
-  }
-  
-  .core-values-list {
-    grid-template-columns: 1fr;
   }
 }
 </style>
