@@ -209,7 +209,6 @@ title: Projects
 .projects-container {
   display: flex;
   flex-direction: column;
-  gap: 3em;
 }
 
 .project-card {
@@ -477,7 +476,6 @@ title: Projects
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2em;
-  margin-top: 2em;
 }
 
 .future-project-card {
