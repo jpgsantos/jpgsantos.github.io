@@ -473,7 +473,7 @@ section:last-child {
   gap: 0.5em;
 }
 
-.expertise-skills span {
+.pills span {
   background-color: var(--primary-light);
   color: var(--primary-dark);
   padding: 0.3em 0.8em;
