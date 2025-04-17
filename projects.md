@@ -168,7 +168,7 @@ title: Projects
   
   <div class="future-projects-grid">
     <div class="future-project-card">
-      <div class="future-project-icon">
+      <div class="card-icon">
         <i class="fas fa-brain"></i>
       </div>
       <h3>Computational Neuroscience Models</h3>
@@ -176,7 +176,7 @@ title: Projects
     </div>
     
     <div class="future-project-card">
-      <div class="future-project-icon">
+      <div class="card-icon">
         <i class="fas fa-robot"></i>
       </div>
       <h3>ML Algorithm Implementation</h3>
@@ -184,7 +184,7 @@ title: Projects
     </div>
     
     <div class="future-project-card">
-      <div class="future-project-icon">
+      <div class="card-icon">
         <i class="fas fa-plug"></i>
       </div>
       <h3>API Development</h3>

@@ -8,7 +8,7 @@ title: Contact
   
   <div class="contact-grid">
     <div class="contact-card">
-      <div class="contact-icon">
+      <div class="card-icon">
         <i class="fas fa-envelope"></i>
       </div>
       <h3>Email</h3>
@@ -19,7 +19,7 @@ title: Contact
     </div>
     
     <div class="contact-card">
-      <div class="contact-icon">
+      <div class="card-icon">
         <i class="fas fa-phone"></i>
       </div>
       <h3>Phone</h3>
@@ -30,7 +30,7 @@ title: Contact
     </div>
     
     <div class="contact-card">
-      <div class="contact-icon">
+      <div class="card-icon">
         <i class="fab fa-linkedin"></i>
       </div>
       <h3>LinkedIn</h3>
@@ -41,7 +41,7 @@ title: Contact
     </div>
     
     <div class="contact-card">
-      <div class="contact-icon">
+      <div class="card-icon">
         <i class="fab fa-github"></i>
       </div>
       <h3>GitHub</h3>
