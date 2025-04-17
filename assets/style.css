@@ -460,6 +460,7 @@ section:last-child {
   font-size: 1.4em;
   margin-bottom: 0.7em;
   color: var(--primary-dark);
+  text-align: center;
 }
 
 .card p {
