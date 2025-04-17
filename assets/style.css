@@ -438,7 +438,7 @@ section:last-child {
   margin-top: 2em;
 }
 
-.expertise-card {
+.card {
   background-color: var(--white);
   border-radius: var(--border-radius-lg);
   padding: 2em;
@@ -446,12 +446,6 @@ section:last-child {
   transition: transform var(--transition), box-shadow var(--transition);
   position: relative;
   overflow: hidden;
-  border-top: 5px solid var(--primary-color);
-}
-
-.expertise-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px var(--shadow-strong);
 }
 
 .card-icon {
@@ -463,18 +457,18 @@ section:last-child {
   width: 100%;
 }
 
-.expertise-card h3 {
+.card h3 {
   font-size: 1.4em;
   margin-bottom: 0.7em;
   color: var(--primary-dark);
 }
 
-.expertise-card p {
+.card p {
   margin-bottom: 1.5em;
   color: var(--text-light);
 }
 
-.expertise-skills {
+.pills {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5em;

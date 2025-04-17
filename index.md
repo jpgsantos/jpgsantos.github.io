@@ -38,13 +38,13 @@ title: Home
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-star"></i></span> Areas of Expertise</h2>
   
   <div class="expertise-grid">
-    <div class="expertise-card">
+    <div class="card">
       <div class="card-icon">
         <i class="fas fa-laptop-code"></i>
       </div>
       <h3>Scientific Software Development</h3>
       <p>Building robust, modular, and FAIR-compliant scientific tools with 8+ years of experience in MATLAB.</p>
-      <div class="expertise-skills">
+      <div class="pills">
         <span>MATLAB</span>
         <span>Python</span>
         <span>Git</span>
@@ -52,13 +52,13 @@ title: Home
       </div>
     </div>
     
-    <div class="expertise-card">
+    <div class="card">
       <div class="card-icon">
         <i class="fas fa-brain"></i>
       </div>
       <h3>Computational Modeling</h3>
       <p>Designing and implementing mathematical models of biological systems using ordinary differential equations.</p>
-      <div class="expertise-skills">
+      <div class="pills">
         <span>ODE Modeling</span>
         <span>Parameter Estimation</span>
         <span>SimBiology</span>
@@ -66,13 +66,13 @@ title: Home
       </div>
     </div>
     
-    <div class="expertise-card">
+    <div class="card">
       <div class="card-icon">
         <i class="fas fa-chart-line"></i>
       </div>
       <h3>Algorithm Implementation</h3>
       <p>Translating complex scientific algorithms from literature into functional, efficient code for analysis.</p>
-      <div class="expertise-skills">
+      <div class="pills">
         <span>Sensitivity Analysis</span>
         <span>Profile Likelihood Analysis</span>
         <span>Parameter Optimization</span>
