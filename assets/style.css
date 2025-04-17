@@ -431,11 +431,10 @@ section:last-child {
   padding: var(--content-padding);
 }
 
-.expertise-grid {
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2em;
-  margin-top: 2em;
 }
 
 .card {

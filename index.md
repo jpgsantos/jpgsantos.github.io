@@ -37,7 +37,7 @@ title: Home
 <section class="expertise-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-star"></i></span> Areas of Expertise</h2>
   
-  <div class="expertise-grid">
+  <div class="grid">
     <div class="card">
       <div class="card-icon">
         <i class="fas fa-laptop-code"></i>
@@ -131,4 +131,11 @@ title: Home
     height: 200px;
   }
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 2em;
+}
+
 </style>
