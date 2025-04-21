@@ -43,16 +43,6 @@ title: Projects
 		    <span>SBML</span>
 		    <span>SBtab</span>
           </div>
-          <div class="skills-container">
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">SimBiology</span>
-            <span class="skill-tag">Optimization Toolbox</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">COPASI</span>
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">SBML</span>
-            <span class="skill-tag">SBtab</span>
-          </div>
         </div>
         
         <div class="project-links">
@@ -92,10 +82,10 @@ title: Projects
         
         <div class="project-skills">
           <h3><i class="fas fa-tools"></i> Technologies</h3>
-          <div class="skills-container">
-            <span class="skill-tag">Kotlin</span>
-            <span class="skill-tag">Android Studio</span>
-            <span class="skill-tag">AI/LLM Tools</span>
+		  <div class="pills">
+            <span>Kotlin</span>
+            <span>Android Studio</span>
+            <span>AI/LLM Tools</span>
           </div>
         </div>
         
@@ -142,11 +132,11 @@ title: Projects
         
         <div class="project-skills">
           <h3><i class="fas fa-tools"></i> Technologies/Skills</h3>
-          <div class="skills-container">
-            <span class="skill-tag">Organic Synthesis</span>
-            <span class="skill-tag">Spectroscopy</span>
-            <span class="skill-tag">Data Analysis</span>
-            <span class="skill-tag">Chromatography</span>
+		  <div class="pills">
+            <span>Organic Synthesis</span>
+            <span>Spectroscopy</span>
+            <span>Data Analysis</span>
+		    <span>Chromatography</span>
           </div>
         </div>
         
@@ -227,11 +217,6 @@ title: Projects
   transition: transform var(--transition), box-shadow var(--transition);
 }
 
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px var(--shadow-strong);
-}
-
 .project-header {
   display: flex;
   align-items: center;
@@ -306,24 +291,6 @@ title: Projects
 
 .project-skills {
   margin-bottom: 1.5em;
-}
-
-.skills-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8em;
-}
-
-.skill-tag {
-  background-color: var(--primary-light);
-  color: var(--primary-dark);
-  padding: 0.5em 1em;
-  border-radius: 50px;
-  font-size: 0.9em;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  transition: all var(--transition);
 }
 
 .project-links {

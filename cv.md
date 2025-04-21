@@ -151,20 +151,22 @@ title: CV
     <h2>Technical Skills</h2>
   </div>
   
-  <div class="skills-grid">
-    <div class="skills-category">
-      <h3><i class="fas fa-code"></i> Programming & Software</h3>
-      <div class="skills-container">
-        <span class="skill-tag">MATLAB (8+ years)</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">Kotlin (Basic)</span>
-        <span class="skill-tag">Git/GitHub</span>
-        <span class="skill-tag">SimBiology</span>
-        <span class="skill-tag">COPASI</span>
-        <span class="skill-tag">LaTeX</span>
-        <span class="skill-tag">AI/LLM Tools</span>
+  <div class="grid">
+    <div class="card">
+      <div class="card-icon">
+		<i class="fas fa-code"></i>
       </div>
-    </div>
+      <h3>Programming & Software</h3>
+	  <div class="pills">
+        <span>MATLAB (8+ years)</span>
+        <span>Python</span>
+        <span>Kotlin (Basic)</span>
+		<span>Git</span>
+		<span>SimBiology</span>
+		<span>COPASI</span>
+		<span>LaTeX</span>
+		<span>AI/LLM Tools</span>
+      </div>
     
     <div class="skills-category">
       <h3><i class="fas fa-chart-line"></i> Modeling & Analysis</h3>
