@@ -85,48 +85,45 @@ title: About
   </div>
 </section>	
 	
-<section class="career-goals-section">
+<section class="section">
   <div class="career-goals-grid">
-    <div class="highlight-card">
+    <div class="card">
       <div class="card-icon">
         <i class="fas fa-compass"></i>
       </div>
       <h3>Professional Interests</h3>
 	  <div class="pills">
-        <span>Sensitivity Analysis</span>
-        <span>Profile Likelihood Analysis</span>
-        <span>Parameter Optimization</span>
-      </div>
-	  <div class="skills-container">
-        <span class="skill-tag">Computational Neuroscience</span>
-        <span class="skill-tag">Scientific Software Development</span>
-        <span class="skill-tag">Algorithm Implementation</span>
-        <span class="skill-tag">Machine Learning</span>
-        <span class="skill-tag">Data Analysis</span>
-        <span class="skill-tag">Systems Biology</span>
-        <span class="skill-tag">Information Theory</span>
-        <span class="skill-tag">Artificial Intelligence</span>
-        <span class="skill-tag">Complex Systems</span>
+        <span>Computational Neuroscience</span>
+        <span>Scientific Software Development</span>
+        <span>Algorithm Implementation</span>
+		<span>Machine Learning</span>
+		<span>Data Analysis</span>
+		<span>Systems Biology</span>
+		<span>Information Theory</span>
+		<span>Artificial Intelligence</span>
+		<span>Complex Systems</span>
+		<span>Algorithm Implementation</span>
+		<span>Algorithm Implementation</span>
       </div>
     </div>
     
-    <div class="highlight-card">
+    <div class="card">
       <div class="card-icon">
         <i class="fas fa-laptop-code"></i>
       </div>
       <h3>Technical Skills</h3>
-      <div class="skills-container">
-        <span class="skill-tag">MATLAB</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">Kotlin</span>
-		<span class="skill-tag">Android</span>
-        <span class="skill-tag">Git</span>
-        <span class="skill-tag">ODE Modeling</span>
-		<span class="skill-tag">Parameter Estimation</span>
-        <span class="skill-tag">Sensitivity Analysis</span>
-        <span class="skill-tag">Profile likelihood Analysis</span>
-        <span class="skill-tag">FAIR Principles</span>
-      </div>
+	  <div class="pills">
+	    <span>MATLAB</span>
+		<span>Python</span>
+		<span>Kotlin</span>
+		<span>Android</span>
+		<span>Git</span>
+		<span>ODE Modeling</span>
+		<span>Parameter Estimation</span>
+		<span>Sensitivity Analysis</span>
+		<span>Profile likelihood Analysis</span>
+		<span>FAIR Principles</span>
+	  </div>
     </div>
   </div>
 </section>
@@ -444,47 +441,6 @@ title: About
   margin-bottom: 0;
 }
 
-/* Updated Bio Highlights - Now using grid like career goals section */
-
-.highlight-card {
-  background-color: var(--white);
-  border-radius: var(--border-radius);
-  padding: 2em;
-  box-shadow: 0 10px 30px var(--shadow);
-  transition: all var(--transition);
-  border-top: 5px solid var(--primary-color);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.highlight-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 40px var(--shadow-strong);
-}
-
-.highlight-icon {
-  width: 70px;
-  height: 70px;
-  background-color: var(--primary-light);
-  color: var(--primary-color);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8em;
-  margin-bottom: 1.5em;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.highlight-card h3 {
-  font-size: 1.4em;
-  margin-bottom: 1.5em;
-  color: var(--primary-dark);
-  text-align: center;
-}
-
 /* Core values styling - now matching the career goal items */
 .core-values-list {
   list-style: none;
@@ -516,23 +472,6 @@ title: About
   font-size: 0.9em;
   color: var(--text-light);
   margin-top: 0.3em;
-}
-
-/* Skills container - now matching the projects page */
-.skills-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8em;
-}
-
-.skill-tag {
-  background-color: var(--primary-light);
-  color: var(--primary-dark);
-  padding: 0.5em 1em;
-  border-radius: 50px;
-  font-size: 0.9em;
-  font-weight: 500;
-  transition: all var(--transition);
 }
 
 /* Career Goals Section */

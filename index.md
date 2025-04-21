@@ -34,9 +34,8 @@ title: Home
   </div>
 </div>
 
-<section class="expertise-section">
+<section class="section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-star"></i></span> Areas of Expertise</h2>
-  
   <div class="grid">
     <div class="card">
       <div class="card-icon">
@@ -51,7 +50,7 @@ title: Home
         <span>FAIR Principles</span>
       </div>
     </div>
-    
+	
     <div class="card">
       <div class="card-icon">
         <i class="fas fa-brain"></i>
@@ -65,7 +64,7 @@ title: Home
         <span>COPASI</span>
       </div>
     </div>
-    
+	
     <div class="card">
       <div class="card-icon">
         <i class="fas fa-chart-line"></i>
