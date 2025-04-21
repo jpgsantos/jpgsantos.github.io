@@ -37,56 +37,53 @@ title: About
   </div>
 </section>
 
-<section class="career-goals-section">
-  <div class="career-goals-grid">
-    <div class="highlight-card">
-      <div class="card-icon">
-        <i class="fas fa-star"></i>
-      </div>
-      <h3>Core Values</h3>
-      <ul class="core-values-list">
-        <li class="core-value-item">
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">
-            <div class="core-value-name">Technical Excellence</div>
-            <div class="core-value-desc">Clean, efficient, and well-structured code</div>
-          </div>
-        </li>
-        <li class="core-value-item">
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">
-            <div class="core-value-name">Continuous Learning</div>
-            <div class="core-value-desc">Constantly expanding knowledge and skills</div>
-          </div>
-        </li>
-        <li class="core-value-item">
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">
-            <div class="core-value-name">Interdisciplinary Approach</div>
-            <div class="core-value-desc">Combining insights from different fields</div>
-          </div>
-        </li>
-        <li class="core-value-item">
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">
-            <div class="core-value-name">Open Collaboration</div>
-            <div class="core-value-desc">Sharing knowledge and working together</div>
-          </div>
-        </li>
-        <li class="core-value-item">
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">
-            <div class="core-value-name">User-Centered Design</div>
-            <div class="core-value-desc">Creating accessible and usable tools</div>
-          </div>
-        </li>
-      </ul>
+<section class="section">
+  <div class="card">
+    <div class="card-icon">
+      <i class="fas fa-star"></i>
     </div>
+    <h3>Core Values</h3>
+    <ul class="core-values-list">
+      <li class="core-value-item">
+        <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+        <div class="goal-text">
+          <div class="core-value-name">Technical Excellence</div>
+          <div class="core-value-desc">Clean, efficient, and well-structured code</div>
+        </div>
+      </li>
+      <li class="core-value-item">
+        <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+        <div class="goal-text">
+          <div class="core-value-name">Continuous Learning</div>
+          <div class="core-value-desc">Constantly expanding knowledge and skills</div>
+        </div>
+      </li>
+      <li class="core-value-item">
+        <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+        <div class="goal-text">
+          <div class="core-value-name">Interdisciplinary Approach</div>
+          <div class="core-value-desc">Combining insights from different fields</div>
+        </div>
+      </li>
+      <li class="core-value-item">
+        <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+        <div class="goal-text">
+          <div class="core-value-name">Open Collaboration</div>
+          <div class="core-value-desc">Sharing knowledge and working together</div>
+        </div>
+      </li>
+      <li class="core-value-item">
+        <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
+        <div class="goal-text">
+          <div class="core-value-name">User-Centered Design</div>
+          <div class="core-value-desc">Creating accessible and usable tools</div>
+        </div>
+      </li>
+    </ul>
   </div>
 </section>	
 	
 <section class="section">
-  <div class="career-goals-grid">
     <div class="card">
       <div class="card-icon">
         <i class="fas fa-compass"></i>
@@ -106,7 +103,6 @@ title: About
 		<span>Algorithm Implementation</span>
       </div>
     </div>
-    
     <div class="card">
       <div class="card-icon">
         <i class="fas fa-laptop-code"></i>
@@ -125,14 +121,12 @@ title: About
 		<span>FAIR Principles</span>
 	  </div>
     </div>
-  </div>
 </section>
 
 <section class="career-goals-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-bullseye"></i></span> What I'm Looking For</h2>
-  
   <div class="career-goals-grid">
-    <div class="career-goal-card">
+    <div class="card">
       <div class="card-icon">
         <i class="fas fa-briefcase"></i>
       </div>
@@ -161,7 +155,7 @@ title: About
       </ul>
     </div>
     
-    <div class="career-goal-card">
+    <div class="card">
       <div class="card-icon">
         <i class="fas fa-tasks"></i>
       </div>
@@ -190,7 +184,7 @@ title: About
       </ul>
     </div>
     
-    <div class="career-goal-card">
+    <div class="card">
       <div class="card-icon">
         <i class="fas fa-building"></i>
       </div>
@@ -219,7 +213,7 @@ title: About
       </ul>
     </div>
 	
-	<div class="career-goal-card">
+	<div class="card">
       <div class="card-icon">
         <i class="fas fa-industry"></i>
       </div>

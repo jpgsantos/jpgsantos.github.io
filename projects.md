@@ -163,33 +163,30 @@ title: Projects
   </div>
 </section>
 
-<section class="future-projects">
+<section class="section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-rocket"></i></span> Future Directions</h2>
+  <div class="card">
+    <div class="card-icon">
+      <i class="fas fa-brain"></i>
+    </div>
+    <h3>Computational Neuroscience Models</h3>
+    <p>Expanding the Subcellular_Workflow to support multi-scale neural modeling, from molecular interactions to network activity.</p>
+  </div>
   
-  <div class="future-projects-grid">
-    <div class="future-project-card">
-      <div class="card-icon">
-        <i class="fas fa-brain"></i>
-      </div>
-      <h3>Computational Neuroscience Models</h3>
-      <p>Expanding the Subcellular_Workflow to support multi-scale neural modeling, from molecular interactions to network activity.</p>
+  <div class="card">
+    <div class="card-icon">
+      <i class="fas fa-robot"></i>
     </div>
-    
-    <div class="future-project-card">
-      <div class="card-icon">
-        <i class="fas fa-robot"></i>
-      </div>
-      <h3>ML Algorithm Implementation</h3>
-      <p>Implementing specialized machine learning algorithms for analyzing complex biological datasets and time series.</p>
+    <h3>ML Algorithm Implementation</h3>
+    <p>Implementing specialized machine learning algorithms for analyzing complex biological datasets and time series.</p>
+  </div>
+  
+  <div class="card">
+    <div class="card-icon">
+      <i class="fas fa-plug"></i>
     </div>
-    
-    <div class="future-project-card">
-      <div class="card-icon">
-        <i class="fas fa-plug"></i>
-      </div>
-      <h3>API Development</h3>
-      <p>Creating APIs and interfaces to connect various computational tools and facilitate data exchange between platforms.</p>
-    </div>
+    <h3>API Development</h3>
+    <p>Creating APIs and interfaces to connect various computational tools and facilitate data exchange between platforms.</p>
   </div>
 </section>
 
