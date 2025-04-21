@@ -477,9 +477,9 @@ section:last-child {
 .pills span {
   background-color: var(--primary-light);
   color: var(--primary-dark);
-  padding: 0.3em 0.8em;
-  border-radius: 20px;
-  font-size: 0.8em;
+  padding: 0.5em 1em;
+  border-radius: 50px;
+  font-size: 0.9em;
   font-weight: 500;
 }
 

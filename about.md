@@ -92,7 +92,12 @@ title: About
         <i class="fas fa-compass"></i>
       </div>
       <h3>Professional Interests</h3>
-      <div class="skills-container">
+	  <div class="pills">
+        <span>Sensitivity Analysis</span>
+        <span>Profile Likelihood Analysis</span>
+        <span>Parameter Optimization</span>
+      </div>
+	  <div class="skills-container">
         <span class="skill-tag">Computational Neuroscience</span>
         <span class="skill-tag">Scientific Software Development</span>
         <span class="skill-tag">Algorithm Implementation</span>
