@@ -1,0 +1,101 @@
+/* Clean Workflow Diagram - With Dark Mode Support */
+.workflow-diagram.clean {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 2em;
+  background-color: var(--white); /* Use theme variable */
+  border-radius: 10px;
+  box-shadow: 0 2px 10px var(--shadow); /* Use theme variable */
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Desktop Diagram (Branching version) */
+.workflow-diagram.clean.desktop-diagram {
+  display: flex;
+}
+
+.workflow-diagram.clean .diagram-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.workflow-diagram.clean .diagram-node {
+  width: 180px;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+}
+
+.workflow-diagram.clean .start-node,
+.workflow-diagram.clean .end-node {
+  background-color: var(--primary-light); /* Use theme variable */
+  color: var(--primary-color); /* Use theme variable */
+}
+
+.workflow-diagram.clean .regular-node {
+  background-color: var(--primary-light); /* Use theme variable */
+  color: var(--primary-color); /* Use theme variable */
+}
+
+.workflow-diagram.clean .diagram-node i {
+  font-size: 1.5em;
+  color: inherit;
+}
+
+.workflow-diagram.clean .diagram-arrow {
+  color: var(--primary-color); /* Use theme variable */
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Improved branching arrows for desktop - more space between */
+.branching-arrows {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  gap: 20px;
+}
+
+.branch-arrow {
+  color: var(--primary-color); /* Use theme variable */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.workflow-diagram.clean .diagram-branching {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px; /* More space between boxes */
+}
+
+/* Mobile Diagram (Simple linear version) */
+.workflow-diagram.clean.mobile-diagram {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .workflow-diagram.clean.desktop-diagram {
+    display: none;
+  }
+  
+  .workflow-diagram.clean.mobile-diagram {
+    display: flex;
+  }
+}
