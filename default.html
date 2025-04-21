@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2G376VMXHB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-2G376VMXHB');
+  </script>
+  
+  
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{{ site.description }}">
+    <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/theme.css' | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      /* Simple theme switcher styles that match your minimal design */
+      .theme-icons {
+        display: inline-flex;
+        align-items: center;
+        margin-left: 15px;
+        gap: 8px;
+      }
+      
+      .theme-icon {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #666;
+        font-size: 1em;
+        padding: 5px;
+        transition: color 0.3s ease, transform 0.3s ease;
+      }
+      
+      .theme-icon:hover {
+        color: #006400;
+        transform: scale(1.1);
+      }
+      
+      .theme-icon.active {
+        color: #006400;
+      }
+      
+      @media (max-width: 768px) {
+        .theme-icons {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          margin-top: 10px;
+          margin-left: 0;
+        }
+      }
+    </style>
+    {% seo %}
+  </head>
+  <body>
+    <header>
+      <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/projects">Projects</a>
+        <a href="/cv">CV</a>
+        <a href="/contact">Contact</a>
+        <span class="theme-icons">
+          <button class="theme-icon" id="light-theme" title="Light theme">
+            <i class="fas fa-sun"></i>
+          </button>
+          <button class="theme-icon" id="dark-theme" title="Dark theme">
+            <i class="fas fa-moon"></i>
+          </button>
+        </span>
+      </nav>
+    </header>
+    <main>
+      {{ content }}
+    </main>
+    <footer>
+      <div class="social-links">
+        <a href="https://github.com/jpgsantos" target="_blank" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://linkedin.com/in/joaosantos1992" target="_blank" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="mailto:jpgs.12390@gmail.com" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+      <p>&copy; {{ site.time | date: '%Y' }} João Pedro Gomes dos Santos. All rights reserved.</p>
+      <p class="availability">
+        <span class="available-indicator">●</span> Available for new opportunities in Copenhagen or Remote
+      </p>
+    </footer>
+    
+    <script>
+      // Simplified theme switcher script
+      document.addEventListener('DOMContentLoaded', function() {
+        const lightButton = document.getElementById('light-theme');
+        const darkButton = document.getElementById('dark-theme');
+        
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        // Apply the current theme
+        if (currentTheme === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          darkButton.classList.add('active');
+        } else {
+          lightButton.classList.add('active');
+        }
+        
+        // Light theme button
+        lightButton.addEventListener('click', function() {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'light');
+          lightButton.classList.add('active');
+          darkButton.classList.remove('active');
+        });
+        
+        // Dark theme button
+        darkButton.addEventListener('click', function() {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+          darkButton.classList.add('active');
+          lightButton.classList.remove('active');
+        });
+      });
+    </script>
+  </body>
+</html>
