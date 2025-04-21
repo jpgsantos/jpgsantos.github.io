@@ -84,6 +84,7 @@ title: About
 </section>	
 	
 <section class="section">
+  <div class="grid">
     <div class="card">
       <div class="card-icon">
         <i class="fas fa-compass"></i>
@@ -121,6 +122,7 @@ title: About
 		<span>FAIR Principles</span>
 	  </div>
     </div>
+  </div>
 </section>
 
 <section class="career-goals-section">

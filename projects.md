@@ -33,6 +33,16 @@ title: Projects
         
         <div class="project-skills">
           <h3><i class="fas fa-tools"></i> Technologies</h3>
+		  <div class="pills">
+            <span>MATLAB</span>
+            <span>SimBiology</span>
+            <span>Optimization Toolbox</span>
+		    <span>Python</span>
+		    <span>COPASI</span>
+		    <span>Git</span>
+		    <span>SBML</span>
+		    <span>SBtab</span>
+          </div>
           <div class="skills-container">
             <span class="skill-tag">MATLAB</span>
             <span class="skill-tag">SimBiology</span>
@@ -40,7 +50,6 @@ title: Projects
             <span class="skill-tag">Python</span>
             <span class="skill-tag">COPASI</span>
             <span class="skill-tag">Git</span>
-            <span class="skill-tag">GitHub</span>
             <span class="skill-tag">SBML</span>
             <span class="skill-tag">SBtab</span>
           </div>
@@ -165,28 +174,30 @@ title: Projects
 
 <section class="section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-rocket"></i></span> Future Directions</h2>
-  <div class="card">
-    <div class="card-icon">
-      <i class="fas fa-brain"></i>
+  <div class="grid">
+    <div class="card">
+      <div class="card-icon">
+        <i class="fas fa-brain"></i>
+      </div>
+      <h3>Computational Neuroscience Models</h3>
+      <p>Expanding the Subcellular_Workflow to support multi-scale neural modeling, from molecular interactions to network activity.</p>
     </div>
-    <h3>Computational Neuroscience Models</h3>
-    <p>Expanding the Subcellular_Workflow to support multi-scale neural modeling, from molecular interactions to network activity.</p>
-  </div>
-  
-  <div class="card">
-    <div class="card-icon">
-      <i class="fas fa-robot"></i>
+    
+    <div class="card">
+      <div class="card-icon">
+        <i class="fas fa-robot"></i>
+      </div>
+      <h3>ML Algorithm Implementation</h3>
+      <p>Implementing specialized machine learning algorithms for analyzing complex biological datasets and time series.</p>
     </div>
-    <h3>ML Algorithm Implementation</h3>
-    <p>Implementing specialized machine learning algorithms for analyzing complex biological datasets and time series.</p>
-  </div>
-  
-  <div class="card">
-    <div class="card-icon">
-      <i class="fas fa-plug"></i>
+    
+    <div class="card">
+      <div class="card-icon">
+        <i class="fas fa-plug"></i>
+      </div>
+      <h3>API Development</h3>
+      <p>Creating APIs and interfaces to connect various computational tools and facilitate data exchange between platforms.</p>
     </div>
-    <h3>API Development</h3>
-    <p>Creating APIs and interfaces to connect various computational tools and facilitate data exchange between platforms.</p>
   </div>
 </section>
 
@@ -466,46 +477,6 @@ title: Projects
   0% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0); }
-}
-
-/* Future Projects */
-.future-projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2em;
-}
-
-.future-project-card {
-  background-color: var(--white);
-  border-radius: var(--border-radius);
-  padding: 2em;
-  text-align: center;
-  box-shadow: 0 10px 20px var(--shadow);
-  transition: all var(--transition);
-  border-top: 5px solid transparent;
-}
-
-.future-project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px var(--shadow-strong);
-  border-top: 5px solid var(--primary-color);
-}
-
-.future-project-icon {
-  font-size: 2.5em;
-  color: var(--primary-color);
-  margin-bottom: 0.8em;
-}
-
-.future-project-card h3 {
-  margin-bottom: 0.8em;
-  color: var(--primary-dark);
-}
-
-.future-project-card p {
-  color: var(--text-light);
-  font-size: 0.95em;
-  line-height: 1.6;
 }
 
 /* Responsive styles */
