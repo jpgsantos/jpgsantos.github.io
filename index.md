@@ -170,11 +170,18 @@ title: Home
   position: relative;
   display: inline;
   opacity: 0.9;
+  padding-right: 0.9em;
 }
 
 .attribute-item:not(:last-child)::after {
-  content: " • ";
-  opacity: 0.7;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 15%;
+  height: 70%;
+  width: 1px;
+  background-color: var(--primary-color);
+  opacity: 0.3;
 }
 
 /* Main content area - now a flex container */
