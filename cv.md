@@ -208,7 +208,7 @@ title: CV
         <h3>A modular workflow for model building, analysis, and parameter estimation in systems biology and neuroscience</h3>
         <div class="publication-authors"><strong>Santos, JPG</strong>, Pajo, K., Trpevski, D., Stepaniuk, A., Eriksson, O., Nair, AG., Keller, D., Hellgren Kotaleski, J., & Kramer, A.</div>
         <div class="publication-journal"><em>Neuroinformatics</em>, 20(1), 241–259.</div>
-        <a href="https://doi.org/10.1007/s12021-021-09546-3" target="_blank" class="publication-link"><i class="fas fa-external-link-alt"></i> DOI: 10.1007/s12021-021-09546-3</a>
+        <a href="https://doi.org/10.1007/s12021-021-09546-3" target="_blank" class="button"><i class="fas fa-external-link-alt"></i> DOI: 10.1007/s12021-021-09546-3</a>
       </div>
     </div>
     
@@ -218,7 +218,7 @@ title: CV
         <h3>Ionic self-assembly reactions of a porphyrin octacation</h3>
         <div class="publication-authors">Frigerio, C., <strong>Santos, JPG</strong>, Quaresma, P., Rebelo, SLH., Gomes, A., Eaton, P., Pereira, E., Carvalho, PA., Shelnutt, JA., Jiang, L., Medforth, CJ.</div>
         <div class="publication-journal"><em>Tetrahedron</em>, 72(44), 6988–6995.</div>
-        <a href="https://doi.org/10.1016/j.tet.2016.09.030" target="_blank" class="publication-link"><i class="fas fa-external-link-alt"></i> DOI: 10.1016/j.tet.2016.09.030</a>
+        <a href="https://doi.org/10.1016/j.tet.2016.09.030" target="_blank" class="button"><i class="fas fa-external-link-alt"></i> DOI: 10.1016/j.tet.2016.09.030</a>
       </div>
     </div>
   </div>

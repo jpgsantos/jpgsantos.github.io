@@ -52,7 +52,7 @@ title: Projects
           </a>
           {% endfor %}
 		  
-		  <a href="{{ '/assets/PDFs/Joao_Pedro_Santos_CV.pdf' | relative_url }}" class="cv-quick-download" target="_blank">
+		  <a href="{{ '/assets/PDFs/Joao_Pedro_Santos_CV.pdf' | relative_url }}" class="button" target="_blank">
           <i class="fas fa-download"></i> Download CV
         </a>
         </div>
