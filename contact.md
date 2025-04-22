@@ -8,7 +8,7 @@ title: Contact
   
   <div class="grid">
     <div class="card">
-      <div class="icon">
+      <div class="card-icon">
         <i class="fas fa-envelope"></i>
       </div>
       <h3>Email</h3>
@@ -19,7 +19,7 @@ title: Contact
     </div>
     
     <div class="card">
-      <div class="icon">
+      <div class="card-icon">
         <i class="fas fa-phone"></i>
       </div>
       <h3>Phone</h3>
@@ -30,7 +30,7 @@ title: Contact
     </div>
     
     <div class="card">
-      <div class="icon">
+      <div class="card-icon">
         <i class="fab fa-linkedin"></i>
       </div>
       <h3>LinkedIn</h3>
@@ -41,7 +41,7 @@ title: Contact
     </div>
     
     <div class="card">
-      <div class="icon">
+      <div class="card-icon">
         <i class="fab fa-github"></i>
       </div>
       <h3>GitHub</h3>
@@ -55,45 +55,6 @@ title: Contact
 
 <style>
 /* Added spacing to replace dividers */
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2em;
-}
-
-.contact-card {
-  background-color: var(--white);
-  border-radius: var(--border-radius);
-  padding: 2em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  box-shadow: 0 5px 15px var(--shadow);
-  transition: transform var(--transition), box-shadow var(--transition);
-}
-
-.contact-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px var(--shadow-strong);
-}
-
-.contact-icon {
-  font-size: 2.5em;
-  color: var(--primary-color);
-  margin-bottom: 0.8em;
-}
-
-.contact-card h3 {
-  margin-bottom: 0.5em;
-  color: var(--primary-color);
-}
-
-.contact-card p {
-  margin-bottom: 1.5em;
-  color: var(--text-light);
-}
 
 .contact-button {
   display: inline-flex;
