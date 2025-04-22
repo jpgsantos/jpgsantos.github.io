@@ -9,8 +9,8 @@ title: Home
     <div class="attributes-list">
       <h2>
         <span class="attribute-item">PhD in Computational Neuroscience</span>
+        <span class="attribute-item">DAta scientist</span>
         <span class="attribute-item">Scientific Software Developer</span>
-        <span class="attribute-item">Algorithm Implementation Specialist</span>
         <span class="attribute-item">Biological Modeling Expert</span>
       </h2>
     </div>
@@ -157,12 +157,10 @@ title: Home
 .attributes-list h2 {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5em;
   font-size: 1.4em;
   color: var(--primary-color);
   font-weight: 600;
   letter-spacing: 0.5px;
-  margin: 0 0 0.5em 0;
   line-height: 1.3;
 }
 
@@ -170,7 +168,6 @@ title: Home
   position: relative;
   display: inline;
   opacity: 0.9;
-  margin-right: 1em;
 }
 
 .attribute-item:not(:last-child)::after {
