@@ -6,29 +6,32 @@ title: Home
 <div class="hero-section">
   <div class="hero-background"></div>
   <div class="hero-content">
-    <div class="attributes-list">
-      <h2>
-        <span class="attribute-item">PhD in Computational Neuroscience</span>
-        <span class="attribute-item">Scientific Software Developer</span>
-        <span class="attribute-item">Algorithm Implementation Specialist</span>
-        <span class="attribute-item">Biological Modeling Expert</span>
-      </h2>
-    </div>
-    <p class="hero-description">I transform complex biological systems into computational models and develop scientific software that makes a difference.</p>
-    <div class="location-badge">
-      <i class="fas fa-map-marker-alt"></i> Seeking opportunities in Copenhagen/Remote
-    </div>
-    <div class="hero-buttons">
-      <a href="{{ '/cv' | relative_url }}" class="hero-button primary-button">
-        <i class="fas fa-file-alt"></i> View CV
-      </a>
-      <a href="{{ '/projects' | relative_url }}" class="hero-button secondary-button">
-        <i class="fas fa-laptop-code"></i> Projects
-      </a>
-      <a href="{{ '/contact' | relative_url }}" class="hero-button secondary-button">
-        <i class="fas fa-envelope"></i> Contact
-      </a>
-    </div>
+  <div class="attributes-list">
+    <h2>
+      <span class="attribute-item">PhD in Computational Neuroscience</span>
+      <span class="attribute-item">Scientific Software Developer</span>
+      <span class="attribute-item">Algorithm Implementation Specialist</span>
+      <span class="attribute-item">Biological Modeling Expert</span>
+    </h2>
+  </div>
+    <div class="hero-text">
+      
+      <p class="hero-description">I transform complex biological systems into computational models and develop scientific software that makes a difference.</p>
+      <div class="location-badge">
+        <i class="fas fa-map-marker-alt"></i> Seeking opportunities in Copenhagen/Remote
+      </div>
+      <div class="hero-buttons">
+        <a href="{{ '/cv' | relative_url }}" class="hero-button primary-button">
+          <i class="fas fa-file-alt"></i> View CV
+        </a>
+        <a href="{{ '/projects' | relative_url }}" class="hero-button secondary-button">
+          <i class="fas fa-laptop-code"></i> Projects
+        </a>
+        <a href="{{ '/contact' | relative_url }}" class="hero-button secondary-button">
+          <i class="fas fa-envelope"></i> Contact
+        </a>
+      </div>
+	</div>
     <div class="hero-image-container">
       <div class="hero-image-border">
         <img src="{{ '/assets/images/Profile.jpg' | relative_url }}" alt="João Pedro Gomes dos Santos" class="hero-image">
