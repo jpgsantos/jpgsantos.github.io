@@ -10,7 +10,7 @@ title: CV
         <div class="cv-header-photo">
           <img src="{{ '/assets/images/Profile.jpg' | relative_url }}" alt="João Pedro Gomes dos Santos">
         </div>
-        <a href="{{ '/assets/PDFs/Joao_Pedro_Santos_CV.pdf' | relative_url }}" class="cv-quick-download" target="_blank">
+        <a href="{{ '/assets/PDFs/Joao_Pedro_Santos_CV.pdf' | relative_url }}" class="button" target="_blank">
           <i class="fas fa-download"></i> Download CV
         </a>
       </div>
@@ -229,12 +229,24 @@ title: CV
   
   <div class="grid">
     <div class="card">
-      <div class="icon">
+      <div class="card-icon">
         <i class="fas fa-laptop-code"></i>
       </div>
         <h3>Subcellular_Workflow</h3>
         <p>A modular, FAIR-compliant MATLAB framework for ODE biochemical pathway modeling, analysis, and parameterization.</p>
-        <div class="project-mini-links">
+		<a href="https://github.com/jpgsantos/Subcellular_Workflow" target="_blank" class="button">
+        GitHub <i class="fab fa-github"></i>
+        </a>
+		<a href="https://subcellular-workflow.readthedocs.io/" target="_blank" class="button">
+        Docs <i class="fas fa-book"></i>
+        </a>
+		<a href="https://github.com/jpgsantos/Subcellular_Workflow" target="_blank" class="button">
+        Paper <i class="fas fa-file-alt"></i>
+        </a>
+		<div class="project-mini-links">
+		
+		
+		
           <a href="https://github.com/jpgsantos/Subcellular_Workflow" target="_blank"><i class="fab fa-github"></i> GitHub</a>
           <a href="https://subcellular-workflow.readthedocs.io/" target="_blank"><i class="fas fa-book"></i> Docs</a>
           <a href="https://doi.org/10.1007/s12021-021-09546-3" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
@@ -242,7 +254,7 @@ title: CV
     </div>
     
     <div class="card">
-      <div class="icon">
+      <div class="card-icon">
         <i class="fas fa-mobile-alt"></i>
       </div>
         <h3>Chore Division Android App</h3>
@@ -264,25 +276,6 @@ title: CV
   display: flex;
   gap: 1em;
   margin-top: 1.5em;
-}
-
-.cv-download-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.8em 1.8em;
-  background-color: var(--primary-color);
-  color: var(--white);
-  border-radius: 50px;
-  font-weight: 600;
-  transition: all var(--transition);
-  box-shadow: 0 4px 8px var(--shadow);
-}
-
-.cv-download-button:hover {
-  background-color: var(--primary-dark);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 16px var(--shadow-strong);
 }
 
 .cv-contact-button {
@@ -372,31 +365,6 @@ title: CV
   object-position: center top;
   border-radius: 10px;
   box-shadow: 0 5px 15px var(--shadow);
-}
-
-/* New Download Button Style */
-.cv-quick-download {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background-color: var(--primary-color);
-  color: var(--white);
-  padding: 8px 16px;
-  border-radius: 50px;
-  font-size: 0.9em;
-  font-weight: 600;
-  box-shadow: 0 4px 8px var(--shadow);
-  transition: all var(--transition);
-  width: 180px;
-  text-align: center;
-}
-
-.cv-quick-download:hover {
-  background-color: var(--primary-dark);
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px var(--shadow-strong);
-  color: var(--white);
 }
 
 .cv-header-info {
