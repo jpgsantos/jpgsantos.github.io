@@ -145,12 +145,8 @@ title: CV
   </div>
 </section>
 
-<section class="cv-skills-section">
-  <div class="cv-section-header centered">
-    <i class="fas fa-cogs"></i>
-    <h2>Technical Skills</h2>
-  </div>
-  
+<section class="section">
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-cogs"></i></span>Technical Skills</h2>
   <div class="grid">
     <div class="card">
       <div class="card-icon">
@@ -167,29 +163,35 @@ title: CV
 		<span>LaTeX</span>
 		<span>AI/LLM Tools</span>
       </div>
-    
-    <div class="skills-category">
-      <h3><i class="fas fa-chart-line"></i> Modeling & Analysis</h3>
-      <div class="skills-container">
-        <span class="skill-tag">ODE Modeling</span>
-        <span class="skill-tag">Parameter Estimation</span>
-        <span class="skill-tag">Sensitivity Analysis</span>
-        <span class="skill-tag">Profile Likelihood Analysis</span>
-        <span class="skill-tag">SBML</span>
-        <span class="skill-tag">SBtab</span>
-        <span class="skill-tag">FAIR Principles</span>
+    </div>
+	
+	<div class="card">
+      <div class="card-icon">
+		<i class="fas fa-chart-line"></i>
+      </div>
+      <h3>Modeling & Analysis</h3>
+	  <div class="pills">
+        <span>ODE Modeling</span>
+        <span>Parameter Estimation</span>
+        <span>Sensitivity Analysis</span>
+		<span>Profile Likelihood Analysis</span>
+		<span>SBML</span>
+		<span>SBtab</span>
+		<span>FAIR Principles</span>
       </div>
     </div>
-    
-    <div class="skills-category">
-      <h3><i class="fas fa-comment"></i> Soft Skills</h3>
-      <div class="skills-container">
-        <span class="skill-tag">Problem Solving</span>
-        <span class="skill-tag">Algorithm Implementation</span>
-        <span class="skill-tag">Scientific Writing</span>
-        <span class="skill-tag">Collaboration</span>
-        <span class="skill-tag">Documentation</span>
-        <span class="skill-tag">Rapid Learning</span>
+    <div class="card">
+      <div class="card-icon">
+		<i class="fas fa-comment"></i>
+      </div>
+      <h3>Soft Skills</h3>
+	  <div class="pills">
+        <span>Problem Solving</span>
+        <span>Algorithm Implementation</span>
+        <span>Scientific Writing</span>
+		<span>Collaboration</span>
+		<span>Documentation</span>
+		<span>Rapid Learning</span>
       </div>
     </div>
   </div>
