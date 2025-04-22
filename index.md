@@ -7,8 +7,13 @@ title: Home
   <div class="hero-background"></div>
   <div class="hero-content">
     <div class="hero-text">
-      <div class="typewriter">
-        <h2 id="typewriter-text"></h2>
+      <div class="attributes-list">
+        <h2>
+          <span class="attribute-item">PhD in Computational Neuroscience</span>
+          <span class="attribute-item">Scientific Software Developer</span>
+          <span class="attribute-item">Algorithm Implementation Specialist</span>
+          <span class="attribute-item">Biological Modeling Expert</span>
+        </h2>
       </div>
       <p class="hero-description">I transform complex biological systems into computational models and develop scientific software that makes a difference.</p>
       <div class="location-badge">
@@ -99,6 +104,36 @@ title: Home
   height: 300px;
 }
 
+/* Attributes list styling */
+.attributes-list h2 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2em;
+  font-size: 1.8em;
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  height: 50px;
+  margin: 0 0 1em 0;
+}
+
+.attribute-item {
+  position: relative;
+  display: block;
+}
+
+.attribute-item:not(:first-child) {
+  position: relative;
+  margin-top: 0.3em;
+}
+
+.attribute-item:not(:first-child)::before {
+  content: '•';
+  position: absolute;
+  left: -1em;
+  color: var(--primary-color);
+}
+
 @media (max-width: 992px) {
   .hero-content {
     flex-direction: column-reverse;
@@ -109,6 +144,12 @@ title: Home
   .hero-text {
     max-width: 100%;
     margin-bottom: 2em;
+  }
+  
+  .attributes-list h2 {
+    margin: 0 auto 1em auto;
+    text-align: left;
+    display: inline-block;
   }
   
   .hero-image-container {

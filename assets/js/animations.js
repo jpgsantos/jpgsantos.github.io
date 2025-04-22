@@ -1,52 +1,6 @@
 // Consolidated animations for all pages
 document.addEventListener('DOMContentLoaded', function() {
-  // Typewriter Effect - only for home page
-  const typewriterElement = document.getElementById('typewriter-text');
-  if (typewriterElement) {
-    const phrases = [
-      "PhD in Computational Neuroscience",
-      "Scientific Software Developer",
-      "Algorithm Implementation Specialist",
-      "Biological Modeling Expert"
-    ];
-    
-    let phraseIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-    
-    function typeEffect() {
-      const currentPhrase = phrases[phraseIndex];
-      
-      if (isDeleting) {
-        // Removing characters
-        typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        // Adding characters
-        typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
-        charIndex++;
-      }
-      
-      // Speed controls
-      let typeSpeed = isDeleting ? 50 : 100;
-      
-      // If complete, start deleting after pause
-      if (!isDeleting && charIndex === currentPhrase.length) {
-        isDeleting = true;
-        typeSpeed = 1500; // Pause at end of phrase
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        // Move to next phrase
-        phraseIndex = (phraseIndex + 1) % phrases.length;
-        typeSpeed = 500; // Pause before starting new phrase
-      }
-      
-      setTimeout(typeEffect, typeSpeed);
-    }
-    
-    // Start typing effect
-    setTimeout(typeEffect, 1000);
-  }
+  // Note: Typewriter effect has been removed
    
   // Scroll Animations - for all pages
   // Map of page-specific selectors to animate on scroll
