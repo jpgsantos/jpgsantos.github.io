@@ -170,7 +170,8 @@ title: Home
   position: relative;
   display: inline;
   opacity: 0.9;
-  padding-right: 0.9em;
+  padding-right: 0.5em;
+  padding-left: 0.5em;
 }
 
 .attribute-item:not(:last-child)::after {
