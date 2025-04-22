@@ -180,6 +180,7 @@ title: CV
 		<span>FAIR Principles</span>
       </div>
     </div>
+	
     <div class="card">
       <div class="card-icon">
 		<i class="fas fa-comment"></i>
@@ -197,11 +198,8 @@ title: CV
   </div>
 </section>
 
-<section class="cv-publications-section">
-  <div class="cv-section-header centered">
-    <i class="fas fa-file-alt"></i>
-    <h2>Publications</h2>
-  </div>
+<section class="section">
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-file-alt"></i></span>Publications</h2>
   
   <div class="publications-grid">
     <div class="publication-card">
@@ -226,18 +224,14 @@ title: CV
   </div>
 </section>
 
-<section class="cv-projects-section">
-  <div class="cv-section-header centered">
-    <i class="fas fa-project-diagram"></i>
-    <h2>Key Projects</h2>
-  </div>
+<section class="section">
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-project-diagram"></i></span>Key Projects</h2>
   
-  <div class="projects-mini-grid">
-    <div class="project-mini-card">
-      <div class="project-mini-icon">
+  <div class="grid">
+    <div class="card">
+      <div class="icon">
         <i class="fas fa-laptop-code"></i>
       </div>
-      <div class="project-mini-content">
         <h3>Subcellular_Workflow</h3>
         <p>A modular, FAIR-compliant MATLAB framework for ODE biochemical pathway modeling, analysis, and parameterization.</p>
         <div class="project-mini-links">
@@ -245,17 +239,14 @@ title: CV
           <a href="https://subcellular-workflow.readthedocs.io/" target="_blank"><i class="fas fa-book"></i> Docs</a>
           <a href="https://doi.org/10.1007/s12021-021-09546-3" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
         </div>
-      </div>
     </div>
     
-    <div class="project-mini-card">
-      <div class="project-mini-icon">
+    <div class="card">
+      <div class="icon">
         <i class="fas fa-mobile-alt"></i>
       </div>
-      <div class="project-mini-content">
         <h3>Chore Division Android App</h3>
         <p>Self-taught Kotlin project demonstrating rapid learning ability and adaptability to new technologies.</p>
-      </div>
     </div>
   </div>
   
