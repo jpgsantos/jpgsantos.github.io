@@ -140,7 +140,7 @@ title: Home
   flex-direction: column;
   max-width: 1200px;
   width: 100%;
-  padding: 1px 2em 2em 2em;
+  padding: 1px 4em 2em 4em;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -172,7 +172,7 @@ title: Home
   padding-left: 0.5em;
 }
 
-.attribute-item:not(:last-child)::after {
+.attribute-item:after {
   content: "";
   position: absolute;
   right: 0;
