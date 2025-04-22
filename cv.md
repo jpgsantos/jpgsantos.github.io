@@ -683,20 +683,6 @@ title: CV
   gap: 1em;
 }
 
-.project-mini-links a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  color: var(--primary-color);
-  font-size: 0.9em;
-  font-weight: 500;
-  transition: all var(--transition);
-}
-
-.project-mini-links a:hover {
-  color: var(--primary-dark);
-}
-
 .view-more-projects {
   margin-top: 2em;
   text-align: center;
