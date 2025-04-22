@@ -6,31 +6,28 @@ title: Home
 <div class="hero-section">
   <div class="hero-background"></div>
   <div class="hero-content">
-    <div class="hero-text">
-      <h1>João Pedro Gomes dos Santos</h1>
-      <div class="attributes-list">
-        <h2>
-          <span class="attribute-item">PhD in Computational Neuroscience</span>
-          <span class="attribute-item">Scientific Software Developer</span>
-          <span class="attribute-item">Algorithm Implementation Specialist</span>
-          <span class="attribute-item">Biological Modeling Expert</span>
-        </h2>
-      </div>
-      <p class="hero-description">I transform complex biological systems into computational models and develop scientific software that makes a difference.</p>
-      <div class="location-badge">
-        <i class="fas fa-map-marker-alt"></i> Seeking opportunities in Copenhagen/Remote
-      </div>
-      <div class="hero-buttons">
-        <a href="{{ '/cv' | relative_url }}" class="hero-button primary-button">
-          <i class="fas fa-file-alt"></i> View CV
-        </a>
-        <a href="{{ '/projects' | relative_url }}" class="hero-button secondary-button">
-          <i class="fas fa-laptop-code"></i> Projects
-        </a>
-        <a href="{{ '/contact' | relative_url }}" class="hero-button secondary-button">
-          <i class="fas fa-envelope"></i> Contact
-        </a>
-      </div>
+    <div class="attributes-list">
+      <h2>
+        <span class="attribute-item">PhD in Computational Neuroscience</span>
+        <span class="attribute-item">Scientific Software Developer</span>
+        <span class="attribute-item">Algorithm Implementation Specialist</span>
+        <span class="attribute-item">Biological Modeling Expert</span>
+      </h2>
+    </div>
+    <p class="hero-description">I transform complex biological systems into computational models and develop scientific software that makes a difference.</p>
+    <div class="location-badge">
+      <i class="fas fa-map-marker-alt"></i> Seeking opportunities in Copenhagen/Remote
+    </div>
+    <div class="hero-buttons">
+      <a href="{{ '/cv' | relative_url }}" class="hero-button primary-button">
+        <i class="fas fa-file-alt"></i> View CV
+      </a>
+      <a href="{{ '/projects' | relative_url }}" class="hero-button secondary-button">
+        <i class="fas fa-laptop-code"></i> Projects
+      </a>
+      <a href="{{ '/contact' | relative_url }}" class="hero-button secondary-button">
+        <i class="fas fa-envelope"></i> Contact
+      </a>
     </div>
     <div class="hero-image-container">
       <div class="hero-image-border">
@@ -222,21 +219,30 @@ title: Home
 /* Attributes list styling */
 .attributes-list h2 {
   display: flex;
-  flex-direction: column;
-  gap: 0.2em;
+  flex-wrap: wrap;
+  gap: 0.5em;
   font-size: 1.4em;
   color: var(--primary-color);
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.5px;
   margin: 0 0 1em 0;
   line-height: 1.3;
+  height: auto;
 }
 
 .attribute-item {
   position: relative;
-  display: block;
+  display: inline;
   opacity: 0.9;
+  margin-right: 1em;
 }
+
+.attribute-item:not(:last-child)::after {
+  content: "•";
+  margin-left: 1em;
+  opacity: 0.7;
+}
+
 
 .location-badge {
   display: inline-flex;
@@ -412,6 +418,12 @@ title: Home
   
   .attributes-list h2 {
     font-size: 1.2em;
+	justify-content: center;
   }
+  
+  .attribute-item {
+    margin-bottom: 0.5em;
+  }
+}
 }
 </style>
