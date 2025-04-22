@@ -9,7 +9,7 @@ title: Home
     <div class="attributes-list">
       <h2>
         <span class="attribute-item">PhD in Computational Neuroscience</span>
-        <span class="attribute-item">DAta scientist</span>
+        <span class="attribute-item">Data scientist</span>
         <span class="attribute-item">Scientific Software Developer</span>
         <span class="attribute-item">Biological Modeling Expert</span>
       </h2>
@@ -140,6 +140,8 @@ title: Home
   flex-direction: column;
   max-width: 1200px;
   width: 100%;
+  padding: 1px 2em 2em 2em;
+  
   padding: 4em;
   margin: 0 auto;
   position: relative;
@@ -171,8 +173,7 @@ title: Home
 }
 
 .attribute-item:not(:last-child)::after {
-  content: "•";
-  margin-left: 1em;
+  content: " • ";
   opacity: 0.7;
 }
 
