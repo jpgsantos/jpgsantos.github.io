@@ -15,7 +15,7 @@ features:
   - "Created comprehensive documentation and managed Git/GitHub collaboration"
   - "Published results in a peer-reviewed article in Neuroinformatics"
 links:
-  - text: "GitHub Repository"
+  - text: "GitHub"
     url: "https://github.com/jpgsantos/Subcellular_Workflow"
     icon: "fab fa-github"
   - text: "Documentation"
