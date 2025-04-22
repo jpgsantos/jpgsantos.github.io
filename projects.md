@@ -51,7 +51,6 @@ title: Projects
             <i class="{{ link.icon }}"></i> {{ link.text }}
           </a>
           {% endfor %}
-        </a>
         </div>
       </div>
     </div>
