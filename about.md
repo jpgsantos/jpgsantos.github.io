@@ -257,7 +257,7 @@ title: About
         <div class="timeline-location">Copenhagen, Denmark / Remote</div>
         <div class="timeline-details">
           <p>I'm seeking opportunities in algorithm development, scientific software creation, and computational problem-solving.</p>
-          <a href="{{ '/contact' | relative_url }}" class="timeline-cta">Let's Connect</a>
+          <a href="{{ '/contact' | relative_url }}" class="button">Let's Connect</a>
         </div>
       </div>
     </div>

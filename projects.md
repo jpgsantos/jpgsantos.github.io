@@ -47,10 +47,14 @@ title: Projects
         
         <div class="project-links">
           {% for link in site.data.featured-project.links %}
-          <a href="{{ link.url }}" target="_blank" class="project-button">
+          <a href="{{ link.url }}" target="_blank" class="button">
             <i class="{{ link.icon }}"></i> {{ link.text }}
           </a>
           {% endfor %}
+		  
+		  <a href="{{ '/assets/PDFs/Joao_Pedro_Santos_CV.pdf' | relative_url }}" class="cv-quick-download" target="_blank">
+          <i class="fas fa-download"></i> Download CV
+        </a>
         </div>
       </div>
     </div>
@@ -141,7 +145,7 @@ title: Projects
         </div>
         
         <div class="project-links">
-          <a href="https://doi.org/10.1016/j.tet.2016.09.030" target="_blank" class="project-button">
+          <a href="https://doi.org/10.1016/j.tet.2016.09.030" target="_blank" class="button">
             <i class="fas fa-file-alt"></i> Publication
           </a>
         </div>
@@ -300,28 +304,6 @@ title: Projects
   margin-top: 1.5em;
 }
 
-.project-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.7em 1.4em;
-  background-color: var(--primary-color);
-  color: var(--white);
-  border-radius: 50px;
-  font-size: 0.9em;
-  font-weight: 500;
-  transition: all var(--transition);
-  box-shadow: 0 4px 8px var(--shadow);
-}
-
-.project-button:hover {
-  background-color: var(--primary-dark);
-  color: var(--white);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 16px var(--shadow-strong);
-  gap: 0.8em;
-}
-
 /* Project Images */
 .project-image-container {
   margin-top: 2em;
@@ -466,9 +448,5 @@ title: Projects
     flex-direction: column;
   }
   
-  .project-button {
-    width: 100%;
-    justify-content: center;
-  }
 }
 </style>

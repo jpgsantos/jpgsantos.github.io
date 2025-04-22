@@ -466,6 +466,8 @@ section:last-child {
 .card p {
   margin-bottom: 1.5em;
   color: var(--text-light);
+  align-items: center;
+  text-align: center;
 }
 
 .pills {
@@ -482,6 +484,32 @@ section:last-child {
   font-size: 0.9em;
   font-weight: 500;
 }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0.7em 1.4em;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-radius: 50px;
+  font-size: 0.9em;
+  font-weight: 600;
+  box-shadow: 0 4px 8px var(--shadow);
+  transition: all var(--transition);
+  width: 180px;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px var(--shadow-strong);
+  color: var(--white);
+}
+
+
 
 /* ==================== FEATURED PROJECT SECTION ==================== */
 .featured-project {
@@ -763,24 +791,6 @@ section:last-child {
 
 .timeline-details {
   line-height: 1.6;
-}
-
-.timeline-cta {
-  display: inline-block;
-  background-color: var(--primary-color);
-  color: var(--white);
-  padding: 0.5em 1.2em;
-  border-radius: 50px;
-  font-size: 0.9em;
-  font-weight: 500;
-  margin-top: 1em;
-  transition: all var(--transition);
-}
-
-.timeline-cta:hover {
-  background-color: var(--primary-dark);
-  color: var(--white);
-  transform: translateY(-2px);
 }
 
 @media (max-width: 768px) {
