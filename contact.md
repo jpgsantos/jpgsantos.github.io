@@ -3,12 +3,12 @@ layout: default
 title: Contact
 ---
 
-<section class="contact-options-section">
+<section class="section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-paper-plane"></i></span> Connect With Me</h2>
   
-  <div class="contact-grid">
-    <div class="contact-card">
-      <div class="card-icon">
+  <div class="grid">
+    <div class="card">
+      <div class="icon">
         <i class="fas fa-envelope"></i>
       </div>
       <h3>Email</h3>
@@ -18,8 +18,8 @@ title: Contact
       </a>
     </div>
     
-    <div class="contact-card">
-      <div class="card-icon">
+    <div class="card">
+      <div class="icon">
         <i class="fas fa-phone"></i>
       </div>
       <h3>Phone</h3>
@@ -29,8 +29,8 @@ title: Contact
       </a>
     </div>
     
-    <div class="contact-card">
-      <div class="card-icon">
+    <div class="card">
+      <div class="icon">
         <i class="fab fa-linkedin"></i>
       </div>
       <h3>LinkedIn</h3>
@@ -40,8 +40,8 @@ title: Contact
       </a>
     </div>
     
-    <div class="contact-card">
-      <div class="card-icon">
+    <div class="card">
+      <div class="icon">
         <i class="fab fa-github"></i>
       </div>
       <h3>GitHub</h3>
