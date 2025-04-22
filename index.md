@@ -141,8 +141,6 @@ title: Home
   max-width: 1200px;
   width: 100%;
   padding: 1px 2em 2em 2em;
-  
-  padding: 4em;
   margin: 0 auto;
   position: relative;
   z-index: 1;
