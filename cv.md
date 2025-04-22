@@ -234,6 +234,7 @@ title: CV
       </div>
         <h3>Subcellular_Workflow</h3>
         <p>A modular, FAIR-compliant MATLAB framework for ODE biochemical pathway modeling, analysis, and parameterization.</p>
+		<div class="project-mini-links">
 		<a href="https://github.com/jpgsantos/Subcellular_Workflow" target="_blank" class="button">
         GitHub <i class="fab fa-github"></i>
         </a>
@@ -243,10 +244,6 @@ title: CV
 		<a href="https://github.com/jpgsantos/Subcellular_Workflow" target="_blank" class="button">
         Paper <i class="fas fa-file-alt"></i>
         </a>
-		<div class="project-mini-links">
-		
-		
-		
           <a href="https://github.com/jpgsantos/Subcellular_Workflow" target="_blank"><i class="fab fa-github"></i> GitHub</a>
           <a href="https://subcellular-workflow.readthedocs.io/" target="_blank"><i class="fas fa-book"></i> Docs</a>
           <a href="https://doi.org/10.1007/s12021-021-09546-3" target="_blank"><i class="fas fa-file-alt"></i> Paper</a>
