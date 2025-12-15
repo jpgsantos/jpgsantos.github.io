@@ -5,7 +5,6 @@ description: "João Pedro Gomes dos Santos - Computational Neuroscience PhD and 
 ---
 
 <div class="hero-section">
-  <div class="hero-background"></div>
   <div class="hero-content">
     <div class="attributes-list">
       <h2>
@@ -24,9 +23,10 @@ description: "João Pedro Gomes dos Santos - Computational Neuroscience PhD and 
       </div>
       
       <div class="hero-text">
-        <p class="hero-description">I transform complex biological systems into computational models and develop scientific software that makes a difference.</p>
+        <h1 class="hero-title">Algorithms & Scientific Software</h1>
+        <p class="hero-description">I solve complex problems with algorithms and scientific software. With 8+ years in computational neuroscience and a recently shipped Android app, I combine mathematical rigor with practical engineering to build solutions that work.</p>
         <div class="location-badge">
-          <i class="fas fa-map-marker-alt"></i> Seeking opportunities in Copenhagen/Remote
+          <i class="fas fa-map-marker-alt"></i> Seeking opportunities in Copenhagen, Amsterdam or Remote
         </div>
         <div class="hero-buttons">
           <a href="{{ '/cv' | relative_url }}" class="hero-button primary-button">
@@ -37,6 +37,9 @@ description: "João Pedro Gomes dos Santos - Computational Neuroscience PhD and 
           </a>
           <a href="{{ '/contact' | relative_url }}" class="hero-button secondary-button">
             <i class="fas fa-envelope"></i> Contact
+          </a>
+          <a href="{{ '/about' | relative_url }}" class="hero-button secondary-button">
+            <i class="fas fa-user"></i> About Me
           </a>
         </div>
       </div>

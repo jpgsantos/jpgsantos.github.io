@@ -1,7 +1,7 @@
-<div class="grid">
+<div class="expertise-grid">
   {% for item in site.data.expertise %}
-  <div class="card">
-    <div class="card-icon">
+  <div class="expertise-card" data-reveal>
+    <div class="expertise-card-icon">
       <i class="{{ item.icon }}"></i>
     </div>
     <h3>{{ item.title }}</h3>
@@ -14,5 +14,3 @@
   </div>
   {% endfor %}
 </div>
-
-

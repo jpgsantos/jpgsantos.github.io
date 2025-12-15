@@ -30,7 +30,7 @@ description: "Curriculum Vitae of João Pedro Santos - education, experience, sk
           </div>
           <div class="cv-contact-item">
             <i class="fas fa-map-marker-alt"></i>
-            <span>Copenhagen, Denmark (Target) / Remote</span>
+            <span>Copenhagen, Amsterdam or Remote</span>
           </div>
           <div class="cv-contact-item">
             <i class="fas fa-flag-checkered"></i>
@@ -58,50 +58,24 @@ description: "Curriculum Vitae of João Pedro Santos - education, experience, sk
   </div>
 </section>
 
-<section class="cv-main-section">
-  <div class="cv-grid">
-    <div class="cv-section">
-      <div class="cv-section-header">
-        <i class="fas fa-graduation-cap"></i>
-        <h2>Education</h2>
-      </div>
-      
-      <div class="cv-entry">
-        <div class="cv-entry-header">
-          <h3>PhD in Computational Neuroscience (GABBA Program)</h3>
-          <div class="cv-date">Jan 2016 - Mar 2025</div>
-        </div>
-        <div class="cv-entry-subtitle">University of Porto / Karolinska Institutet</div>
-        <div class="cv-entry-content">
-          <p><strong>Thesis:</strong> A workflow for developing biochemical pathway models using ordinary differential equations</p>
-          <p><strong>Supervisors:</strong> Prof. Jeanette Hellgren Kotaleski, Dr. Teresa Summavielle</p>
-        </div>
-      </div>
-      
-      <div class="cv-entry">
-        <div class="cv-entry-header">
-          <h3>MSc in Biochemistry</h3>
-          <div class="cv-date">Sep 2013 - Sep 2015</div>
-        </div>
-        <div class="cv-entry-subtitle">University of Porto (FCUP, ICBAS)</div>
-        <div class="cv-entry-content">
-          <p><strong>Final Grade:</strong> 16/20</p>
-          <p><strong>Thesis:</strong> Exploring the Boundaries of Porphyrin Materials Synthesis by Ionic Self-Assembly</p>
-        </div>
-      </div>
-      
-      <div class="cv-entry">
-        <div class="cv-entry-header">
-          <h3>BSc in Biochemistry</h3>
-          <div class="cv-date">Sep 2010 - Jul 2013</div>
-        </div>
-        <div class="cv-entry-subtitle">University of Porto (FCUP, ICBAS)</div>
-        <div class="cv-entry-content">
-          <p><strong>Final Grade:</strong> 16/20</p>
-        </div>
+<section class="cv-summary-section">
+  <div class="cv-section">
+    <div class="cv-section-header">
+      <i class="fas fa-user-tie"></i>
+      <h2>Professional Summary</h2>
+    </div>
+    <div class="cv-entry">
+      <div class="cv-entry-content">
+        <p>I solve complex problems with algorithms and scientific software. Combining mathematical rigor with practical engineering, I'm particularly good at turning technical complexity into clear insights that help teams make decisions.</p>
+        <p>Recently, I built and shipped a Kotlin Android application that is now in Play Store testing. This meant owning everything: defining requirements, designing the architecture and data layer, building the UI, and managing releases. I set up solid Git workflows and documentation that can be used by future collaborators. Where it made sense, I used LLM-assisted programming to work faster without sacrificing code quality.</p>
+        <p>I hold a PhD in Computational Neuroscience that gave me 8+ years of experience working with ODE-based models, parameter estimation, and sensitivity analysis in MATLAB and Python. I built reproducible frameworks and FAIR-compliant tools that can be easily adopted by the broader scientific community.</p>
       </div>
     </div>
-    
+  </div>
+</section>
+
+<section class="cv-main-section">
+  <div class="cv-grid">
     <div class="cv-section">
       <div class="cv-section-header">
         <i class="fas fa-briefcase"></i>
@@ -110,18 +84,17 @@ description: "Curriculum Vitae of João Pedro Santos - education, experience, sk
       
       <div class="cv-entry">
         <div class="cv-entry-header">
-          <h3>PhD Researcher (Computational Neuroscience)</h3>
+          <h3>PhD Researcher</h3>
           <div class="cv-date">Jan 2016 - Mar 2025</div>
         </div>
-        <div class="cv-entry-subtitle">University of Porto / Karolinska Institutet / KTH Royal Institute of Technology / SciLifeLab</div>
+        <div class="cv-entry-subtitle">University of Porto / Karolinska Institutet / KTH / SciLifeLab</div>
         <div class="cv-entry-content">
-          <p>Developed <strong>Subcellular_Workflow</strong>: a modular, FAIR-compliant MATLAB framework for ODE-based biochemical pathway modeling.</p>
+          <p><strong>Thesis:</strong> A workflow for developing biochemical pathway models using ordinary differential equations</p>
           <ul>
-            <li>Implemented algorithms from literature: parameter estimation, sensitivity analysis, profile likelihood analysis</li>
-            <li>Engineered interfaces between MATLAB solvers and COPASI</li>
-            <li>Applied the workflow to analyze benchmark models in neuroscience and systems biology</li>
-            <li>Created comprehensive documentation and managed Git/GitHub collaboration</li>
-            <li>Published results in a peer-reviewed article in <em>Neuroinformatics</em></li>
+            <li>Built <strong>Subcellular Workflow</strong>: a modular, FAIR-compliant MATLAB framework for ODE-based pathway modeling with simulation, analysis and parameterization capabilities</li>
+            <li>Implemented methods: parameter estimation, local/global sensitivity, and profile likelihood analysis</li>
+            <li>Validated on complex benchmark models in neuroscience/systems biology</li>
+            <li>Published in <em>Neuroinformatics</em></li>
           </ul>
         </div>
       </div>
@@ -143,6 +116,67 @@ description: "Curriculum Vitae of João Pedro Santos - education, experience, sk
         </div>
       </div>
     </div>
+    
+    <div class="cv-section">
+      <div class="cv-section-header">
+        <i class="fas fa-graduation-cap"></i>
+        <h2>Education</h2>
+      </div>
+      
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <h3>PhD, Computational Neuroscience</h3>
+          <div class="cv-date">2016 - 2025</div>
+        </div>
+        <div class="cv-entry-subtitle">University of Porto (FCUP/ICBAS/FMUP/GABBA)</div>
+      </div>
+      
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <h3>MSc, Biochemistry</h3>
+          <div class="cv-date">2013 - 2015</div>
+        </div>
+        <div class="cv-entry-subtitle">University of Porto (FCUP, ICBAS)</div>
+        <div class="cv-entry-content">
+          <p><strong>Grade:</strong> 16/20</p>
+        </div>
+      </div>
+      
+      <div class="cv-entry">
+        <div class="cv-entry-header">
+          <h3>BSc, Biochemistry</h3>
+          <div class="cv-date">2010 - 2013</div>
+        </div>
+        <div class="cv-entry-subtitle">University of Porto (FCUP, ICBAS)</div>
+        <div class="cv-entry-content">
+          <p><strong>Grade:</strong> 16/20</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cv-projects-section">
+  <div class="cv-section">
+    <div class="cv-section-header">
+      <i class="fas fa-laptop-code"></i>
+      <h2>Projects</h2>
+    </div>
+    
+    <div class="cv-entry">
+      <div class="cv-entry-header">
+        <h3>Chore Division Android App</h3>
+        <div class="cv-date">2025</div>
+      </div>
+      <div class="cv-entry-subtitle">Kotlin, Android Studio</div>
+      <div class="cv-entry-content">
+        <ul>
+          <li>Independently developed full-stack Android application from concept to Google Play deployment</li>
+          <li>Kotlin and Android SDK to implement modern app architecture, local data persistence, and responsive UI/UX</li>
+          <li>Delivered end-to-end solution including version control (Git), unit testing, debugging, and production APK packaging</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -154,43 +188,4 @@ description: "Curriculum Vitae of João Pedro Santos - education, experience, sk
 <section class="section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-file-alt"></i></span>Publications</h2>
   {% include publications.html %}
-</section>
-
-<section class="section">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-project-diagram"></i></span>Key Projects</h2>
-  
-  <div class="grid">
-    <div class="card">
-      <div class="card-icon">
-        <i class="fas fa-laptop-code"></i>
-      </div>
-      <h3>Subcellular_Workflow</h3>
-      <p>A modular, FAIR-compliant MATLAB framework for ODE biochemical pathway modeling, analysis, and parameterization.</p>
-      <div class="project-mini-links">
-        <a href="https://github.com/jpgsantos/Subcellular_Workflow" target="_blank" rel="noopener noreferrer" class="button">
-        GitHub <i class="fab fa-github"></i>
-        </a>
-        <a href="https://subcellular-workflow.readthedocs.io/" target="_blank" rel="noopener noreferrer" class="button">
-        Docs <i class="fas fa-book"></i>
-        </a>
-        <a href="https://github.com/jpgsantos/Subcellular_Workflow" target="_blank" rel="noopener noreferrer" class="button">
-        Paper <i class="fas fa-file-alt"></i>
-        </a>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-icon">
-        <i class="fas fa-mobile-alt"></i>
-      </div>
-        <h3>Chore Division Android App</h3>
-        <p>Self-taught Kotlin project demonstrating rapid learning ability and adaptability to new technologies.</p>
-    </div>
-  </div>
-  
-  <div class="view-more-projects">
-    <a href="{{ '/projects' | relative_url }}" class="view-more-link">
-      View Detailed Projects <i class="fas fa-arrow-right"></i>
-    </a>
-  </div>
 </section>

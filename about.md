@@ -24,15 +24,15 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
       <div class="bio-text">
         <h2><i class="fas fa-book-open"></i> My Story</h2>
         
-        <p>I'm João Pedro Gomes dos Santos, a Computational Neuroscience PhD graduate with a passion for developing mathematical models and scientific software that help understand complex biological systems.</p>
+        <p>I solve complex problems with algorithms and scientific software. Combining mathematical rigor with practical engineering, I'm particularly good at turning technical complexity into clear insights that help teams make decisions.</p>
         
-        <p>My academic journey began with a BSc and MSc in Biochemistry at the University of Porto, where I gained a solid foundation in biological sciences. Pursuing my interest in computational approaches, I embarked on a PhD focused on computational neuroscience, collaborating between the University of Porto and Karolinska Institutet in Stockholm.</p>
+        <p>Recently, I built and shipped a <strong>Kotlin Android application</strong> that is now in Play Store testing. This meant owning everything: defining requirements, designing the architecture and data layer, building the UI, and managing releases. I set up solid Git workflows and documentation that can be used by future collaborators. Where it made sense, I used LLM-assisted programming to work faster without sacrificing code quality.</p>
         
-        <p>During my PhD research, I developed the <strong>Subcellular_Workflow</strong>, a comprehensive MATLAB framework for biochemical pathway modeling. This project combined my interests in software development, algorithm implementation, and biological modeling, resulting in a publicly available tool and a peer-reviewed publication.</p>
+        <p>I hold a PhD in Computational Neuroscience that gave me <strong>8+ years of experience</strong> working with ODE-based models, parameter estimation, and sensitivity analysis in MATLAB and Python. I built reproducible frameworks and FAIR-compliant tools that can be easily adopted by the broader scientific community. During my PhD, I developed the <strong>Subcellular_Workflow</strong>, a comprehensive MATLAB framework for biochemical pathway modeling, resulting in a peer-reviewed publication in <em>Neuroinformatics</em>.</p>
         
-        <p>Beyond my academic work, I enjoy learning new technologies, as demonstrated by my recent self-taught Kotlin/Android project. I'm a strong believer in leveraging modern tools, including AI/LLMs, to enhance productivity and accelerate development.</p>
+        <p>This background means I can switch between research, data analysis, and software engineering as needed, always focused on building solutions that work well today and won't break tomorrow.</p>
         
-        <p>I'm now seeking to transition from academia to industry, looking for roles that allow me to apply my computational skills, problem-solving abilities, and software development experience to innovative projects, preferably in Copenhagen or remotely.</p>
+        <p>I'm now seeking to transition from academia to industry, looking for roles in Copenhagen, Amsterdam or remotely where I can apply my computational skills, problem-solving abilities, and software development experience to innovative projects.</p>
         
         <div class="bio-cta">
           <a href="/contact" class="button">
@@ -91,7 +91,7 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
 <section class="stats-section">
   <div class="stats-grid">
     <div class="stat-card">
-      <div class="stat-number">5+</div>
+      <div class="stat-number">8+</div>
       <div class="stat-label">Years in Research</div>
     </div>
     <div class="stat-card">
@@ -99,7 +99,7 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
       <div class="stat-label">Publications</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number">2</div>
+      <div class="stat-number">3</div>
       <div class="stat-label">Major Projects</div>
     </div>
     <div class="stat-card">
@@ -109,82 +109,22 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
   </div>
 </section>
 
-<section class="skills-section">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-code"></i></span> Skills & Expertise</h2>
-  <div class="skills-container">
-    <div class="skill-category">
-      <div class="skill-category-header">
-        <i class="fas fa-terminal"></i>
-        <h3>Programming</h3>
-      </div>
-      <div class="skill-items">
-        <div class="skill-item">
-          <span class="skill-name">MATLAB</span>
-          <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
-        </div>
-        <div class="skill-item">
-          <span class="skill-name">Python</span>
-          <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
-        </div>
-        <div class="skill-item">
-          <span class="skill-name">Kotlin</span>
-          <div class="skill-bar"><div class="skill-fill" style="width: 60%"></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="skill-category">
-      <div class="skill-category-header">
-        <i class="fas fa-flask"></i>
-        <h3>Scientific Methods</h3>
-      </div>
-      <div class="skill-items">
-        <div class="skill-item">
-          <span class="skill-name">ODE Modeling</span>
-          <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
-        </div>
-        <div class="skill-item">
-          <span class="skill-name">Parameter Estimation</span>
-          <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
-        </div>
-        <div class="skill-item">
-          <span class="skill-name">Sensitivity Analysis</span>
-          <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="skill-category">
-      <div class="skill-category-header">
-        <i class="fas fa-tools"></i>
-        <h3>Tools & Platforms</h3>
-      </div>
-      <div class="skill-items">
-        <div class="skill-item">
-          <span class="skill-name">Git/GitHub</span>
-          <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
-        </div>
-        <div class="skill-item">
-          <span class="skill-name">Android Development</span>
-          <div class="skill-bar"><div class="skill-fill" style="width: 60%"></div></div>
-        </div>
-        <div class="skill-item">
-          <span class="skill-name">FAIR Principles</span>
-          <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="skill-category">
-      <div class="skill-category-header">
-        <i class="fas fa-brain"></i>
-        <h3>Domains</h3>
-      </div>
-      <div class="skill-tags-list">
-        <span class="skill-tag">Computational Neuroscience</span>
-        <span class="skill-tag">Systems Biology</span>
-        <span class="skill-tag">Machine Learning</span>
-        <span class="skill-tag">Data Analysis</span>
-        <span class="skill-tag">Algorithm Design</span>
-        <span class="skill-tag">Complex Systems</span>
-      </div>
+<section class="section">
+  <div class="main-container" style="text-align: center; margin-bottom: 2rem;">
+    <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-code"></i></span> Technical Expertise</h2>
+    <p style="max-width: 700px; margin: 0 auto 2rem; color: var(--text-light);">
+      My technical toolkit spans scientific modeling, software development, and data analysis.
+      For a detailed breakdown of my proficiency levels, please view my <a href="{{ '/cv' | relative_url }}">CV</a>.
+    </p>
+    
+    <div class="pills" style="gap: 1em;">
+      <span class="badge"><i class="fas fa-terminal"></i> MATLAB</span>
+      <span class="badge"><i class="fab fa-python"></i> Python</span>
+      <span class="badge"><i class="fab fa-android"></i> Kotlin</span>
+      <span class="badge"><i class="fab fa-git-alt"></i> Git/GitHub</span>
+      <span class="badge"><i class="fas fa-chart-line"></i> ODE Modeling</span>
+      <span class="badge"><i class="fas fa-search"></i> Sensitivity Analysis</span>
+      <span class="badge"><i class="fas fa-brain"></i> Comp. Neuroscience</span>
     </div>
   </div>
 </section>
@@ -192,7 +132,7 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
 <section class="career-goals-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-bullseye"></i></span> What I'm Looking For</h2>
   <div class="career-goals-grid">
-    <div class="goal-card goal-card--teal">
+    <div class="goal-card">
       <div class="goal-card-icon">
         <i class="fas fa-briefcase"></i>
       </div>
@@ -206,7 +146,7 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
       </ul>
     </div>
     
-    <div class="goal-card goal-card--coral">
+    <div class="goal-card">
       <div class="goal-card-icon">
         <i class="fas fa-tasks"></i>
       </div>
@@ -220,7 +160,7 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
       </ul>
     </div>
     
-    <div class="goal-card goal-card--purple">
+    <div class="goal-card">
       <div class="goal-card-icon">
         <i class="fas fa-building"></i>
       </div>
@@ -234,7 +174,7 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
       </ul>
     </div>
     
-    <div class="goal-card goal-card--blue">
+    <div class="goal-card">
       <div class="goal-card-icon">
         <i class="fas fa-industry"></i>
       </div>

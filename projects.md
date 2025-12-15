@@ -64,20 +64,22 @@ description: "Explore João Pedro Santos's projects including the Subcellular_Wo
         </div>
         <div class="project-title-container">
           <h2 class="project-title">Chore Division Android App</h2>
-          <p class="project-meta">Personal Project (Oct 2024 - Mar 2025) • Kotlin, Android Studio</p>
+          <p class="project-meta">Personal Project (2025) • Kotlin, Android Studio</p>
         </div>
       </div>
       
       <div class="project-content">
-        <p>A functional Android app for household chore division, built to demonstrate rapid learning ability and adaptability to new technologies.</p>
+        <p>Independently developed full-stack Android application from concept to Google Play deployment, managing the entire development lifecycle.</p>
         
         <div class="project-achievements">
           <h3><i class="fas fa-trophy"></i> Key Achievements</h3>
           <ul>
-            <li>Self-taught Kotlin basics and Android fundamentals from scratch</li>
-            <li>Leveraged AI/LLM tools to accelerate learning and development</li>
-            <li>Implemented core application logic and UI</li>
-            <li>Demonstrated ability to quickly adapt to new programming languages and frameworks</li>
+            <li>Built and shipped a complete Android app now in Play Store testing</li>
+            <li>Implemented modern app architecture with Jetpack Compose and ViewModel-based architecture using Hilt</li>
+            <li>Designed local data persistence with Room and background task management with WorkManager</li>
+            <li>Integrated Firebase for analytics and notifications</li>
+            <li>Set up solid Git workflows and documentation for future collaborators</li>
+            <li>Used LLM-assisted programming to accelerate development without sacrificing code quality</li>
           </ul>
         </div>
         
@@ -85,8 +87,12 @@ description: "Explore João Pedro Santos's projects including the Subcellular_Wo
           <h3><i class="fas fa-tools"></i> Technologies</h3>
 		  <div class="pills">
             <span>Kotlin</span>
-            <span>Android Studio</span>
-            <span>AI/LLM Tools</span>
+            <span>Jetpack Compose</span>
+            <span>Hilt</span>
+            <span>Room</span>
+            <span>WorkManager</span>
+            <span>Firebase</span>
+            <span>Play Console</span>
           </div>
         </div>
         
@@ -163,7 +169,7 @@ description: "Explore João Pedro Santos's projects including the Subcellular_Wo
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="margin-bottom: 0;">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-rocket"></i></span> Future Directions</h2>
   <div class="grid">
     <div class="card">

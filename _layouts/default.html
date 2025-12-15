@@ -37,8 +37,6 @@
     {% seo %}
   </head>
   <body data-page="{{ page.title | downcase | default: 'home' }}">
-    <a href="#main-content" class="skip-link">Skip to main content</a>
-    
     <header role="banner">
       <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
       <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation">
@@ -64,11 +62,17 @@
       </nav>
     </header>
     
+    <canvas id="neural-canvas" class="neural-canvas"></canvas>
+    
     <main id="main-content">
       <div class="main-container">
         {{ content }}
       </div>
     </main>
+    
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+      <i class="fas fa-chevron-up"></i>
+    </button>
     
     <footer role="contentinfo">
       <div class="social-links">
@@ -81,11 +85,14 @@
         <a href="mailto:jpgs.12390@gmail.com" aria-label="Send email">
           <i class="fas fa-envelope" aria-hidden="true"></i>
         </a>
+        <a href="tel:+351963264450" aria-label="Call phone">
+          <i class="fas fa-phone" aria-hidden="true"></i>
+        </a>
       </div>
       <p>&copy; {{ site.time | date: '%Y' }} João Pedro Gomes dos Santos. All rights reserved.</p>
       <p class="availability">
         <span class="available-indicator" aria-hidden="true">●</span>
-        <span class="visually-hidden">Status:</span> Available for new opportunities in Copenhagen or Remote
+        <span class="visually-hidden">Status:</span> Available for new opportunities in Copenhagen, Amsterdam or Remote
       </p>
     </footer>
     
@@ -93,5 +100,8 @@
     <script src="{{ '/assets/js/animations.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/header-scroll.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/nav-toggle.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/scroll-reveal.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/scroll-to-top.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/neural-network.js' | relative_url }}"></script>
   </body>
 </html>

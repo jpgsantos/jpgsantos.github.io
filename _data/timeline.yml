@@ -3,9 +3,20 @@
   icon: "fas fa-briefcase"
   period: "2025 →"
   title: "Your Company?"
-  institution: "Copenhagen, Denmark / Remote"
+  institution: "Copenhagen, Amsterdam or Remote"
   description: "I'm seeking opportunities in algorithm development, scientific software creation, and computational problem-solving."
   show_contact_button: true
+
+- id: "android-app"
+  type: "project"
+  icon: "fab fa-android"
+  period: "2025"
+  title: "Chore Division Android App"
+  institution: "Personal Project • Now in Play Store Testing"
+  description: |
+    Full-stack Android application from concept to Google Play deployment.
+    
+    Built with Kotlin, Jetpack Compose, Room, WorkManager, and Firebase. Used LLM-assisted programming to accelerate development.
 
 - id: "phd"
   type: "education"
@@ -16,9 +27,9 @@
   description: |
     **Thesis:** A workflow for developing biochemical pathway models using ordinary differential equations.
     
-    Developed the **Subcellular_Workflow** framework: modular, FAIR-compliant MATLAB tool for ODE modeling (simulation, parameter estimation, sensitivity/likelihood analysis).
+    Built **Subcellular Workflow**: modular, FAIR-compliant MATLAB framework for ODE modeling with simulation, parameter estimation, and sensitivity/likelihood analysis.
     
-    Published results in *Neuroinformatics*.
+    Published in *Neuroinformatics*.
 
 - id: "research-scholar"
   type: "work"
