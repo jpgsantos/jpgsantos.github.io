@@ -1,0 +1,359 @@
+/* CV page specific styles (migrated from inline <style> in cv.md) */
+
+.cv-actions {
+  display: flex;
+  gap: 1em;
+  margin-top: 1.5em;
+}
+
+.cv-contact-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.8em 1.8em;
+  background-color: var(--white);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all var(--transition);
+}
+
+.cv-contact-button:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px var(--shadow);
+}
+
+.cv-illustration:hover .cv-page {
+  transform: rotate(-10deg) translateX(-10px);
+}
+
+.cv-illustration:hover .cv-page.back {
+  transform: rotate(10deg) translateX(10px);
+}
+
+.cv-header {
+  height: 30px;
+  background-color: var(--primary-color);
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.cv-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cv-line {
+  height: 10px;
+  background-color: var(--primary-light);
+  border-radius: 3px;
+}
+
+.cv-line.short {
+  width: 60%;
+}
+
+/* CV Header / Overview */
+.cv-header-card {
+  background-color: var(--white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.cv-header-content {
+  display: flex;
+  padding: 2em;
+  gap: 2em;
+}
+
+/* New container for photo and download button */
+.cv-header-photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  flex: 0 0 180px;
+}
+
+.cv-header-photo {
+  width: 180px;
+}
+
+.cv-header-photo img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px var(--shadow);
+}
+
+.cv-header-info {
+  flex: 1;
+}
+
+.cv-header-info h2 {
+  font-size: 2.2em;
+  margin-bottom: 0.1em;
+  margin-top: 1em;
+  color: var(--primary-color);
+}
+
+.cv-header-info h3 {
+  font-size: 1.3em;
+  margin-bottom: 1.2em;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.cv-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1em;
+}
+
+.cv-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+
+.cv-contact-item i {
+  color: var(--primary-color);
+  font-size: 1.1em;
+  width: 20px;
+  text-align: center;
+}
+
+/* CV Main Section */
+.cv-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 2em;
+}
+
+.cv-section {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 2em;
+  box-shadow: 0 10px 30px var(--shadow);
+}
+
+.cv-section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  margin-bottom: 1.5em;
+  padding-bottom: 0.8em;
+  border-bottom: 2px solid var(--primary-light);
+}
+
+.cv-section-header.centered {
+  justify-content: center;
+}
+
+.cv-section-header i {
+  color: var(--primary-color);
+  font-size: 1.5em;
+  width: 30px;
+  text-align: center;
+}
+
+.cv-section-header h2 {
+  font-size: 1.5em;
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.cv-entry {
+  margin-bottom: 2em;
+  padding-bottom: 2em;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.cv-entry:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.cv-entry-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin-bottom: 0.5em;
+}
+
+.cv-entry-header h3 {
+  margin: 0;
+  font-size: 1.3em;
+  color: var(--primary-dark);
+}
+
+.cv-date {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.3em 0.8em;
+  border-radius: 50px;
+  font-size: 0.9em;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.cv-entry-subtitle {
+  font-style: italic;
+  color: var(--text-light);
+  margin-bottom: 1em;
+}
+
+.cv-entry-content {
+  line-height: 1.6;
+}
+
+.cv-entry-content p {
+  margin-bottom: 0.8em;
+}
+
+.cv-entry-content ul {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+}
+
+.cv-entry-content li {
+  margin-bottom: 0.5em;
+}
+
+.cv-entry-content li:last-child {
+  margin-bottom: 0;
+}
+
+/* Publications (used by publications include) */
+.publications-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.publication-card {
+  display: flex;
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: 0 10px 30px var(--shadow);
+  transition: all var(--transition);
+}
+
+.publication-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px var(--shadow-strong);
+}
+
+.publication-year {
+  flex: 0 0 80px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.publication-content {
+  flex: 1;
+  padding: 1.5em;
+}
+
+.publication-content h3 {
+  margin: 0 0 0.5em;
+  font-size: 1.2em;
+  color: var(--primary-dark);
+}
+
+.publication-authors {
+  font-size: 0.95em;
+  margin-bottom: 0.5em;
+  line-height: 1.5;
+}
+
+.publication-journal {
+  font-size: 0.95em;
+  color: var(--text-light);
+  margin-bottom: 0.8em;
+}
+
+/* Mini projects */
+.project-mini-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.view-more-projects {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.view-more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8em;
+  color: var(--primary-color);
+  font-size: 1.1em;
+  font-weight: 600;
+  transition: all var(--transition);
+}
+
+.view-more-link:hover {
+  color: var(--primary-dark);
+  gap: 1.2em;
+}
+
+/* Add margin to CTA section for spacing */
+.cta-section {
+  margin-top: 4em;
+  margin-bottom: 2em;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .cv-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cv-header-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .cv-header-info {
+    text-align: center;
+  }
+  
+  .cv-header-info h2 {
+    margin-top: 0.5em;
+  }
+  
+  .projects-mini-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .cv-contact-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .cv-entry-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+

@@ -11,64 +11,87 @@
     </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
-    <meta name="description" content="{{ site.description }}">
-    <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/theme.css' | relative_url }}">
-    <link rel="stylesheet" href="{{ '/assets/workflow-diagram.css' | relative_url }}">
+    <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <script>
+      // Prevent theme "flash" by applying the saved/system theme before first paint.
+      (function() {
+        try {
+          var theme = localStorage.getItem('theme') || 'auto';
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (theme === 'dark' || (theme === 'auto' && prefersDark)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          } else {
+            document.documentElement.removeAttribute('data-theme');
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
     {% seo %}
   </head>
-  <body>
-    <header>
+  <body data-page="{{ page.title | downcase | default: 'home' }}">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header role="banner">
       <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
-      <nav>
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/projects">Projects</a>
-        <a href="/cv">CV</a>
-        <a href="/contact">Contact</a>
-        <span class="theme-icons">
-          <button class="theme-icon" id="light-theme" title="Light theme">
-            <i class="fas fa-sun"></i>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+      <nav id="main-nav" role="navigation" aria-label="Main navigation">
+        <a href="{{ '/' | relative_url }}" {% if page.url == "/" %}aria-current="page"{% endif %}>Home</a>
+        <a href="{{ '/about' | relative_url }}" {% if page.url == "/about/" %}aria-current="page"{% endif %}>About</a>
+        <a href="{{ '/projects' | relative_url }}" {% if page.url == "/projects/" %}aria-current="page"{% endif %}>Projects</a>
+        <a href="{{ '/cv' | relative_url }}" {% if page.url == "/cv/" %}aria-current="page"{% endif %}>CV</a>
+        <a href="{{ '/contact' | relative_url }}" {% if page.url == "/contact/" %}aria-current="page"{% endif %}>Contact</a>
+        <span class="theme-icons" role="group" aria-label="Theme selection">
+          <button class="theme-icon" id="light-theme" aria-label="Switch to light theme" title="Light theme">
+            <i class="fas fa-sun" aria-hidden="true"></i>
           </button>
-          <button class="theme-icon" id="dark-theme" title="Dark theme">
-            <i class="fas fa-moon"></i>
+          <button class="theme-icon" id="dark-theme" aria-label="Switch to dark theme" title="Dark theme">
+            <i class="fas fa-moon" aria-hidden="true"></i>
           </button>
-          <button class="theme-icon" id="auto-theme" title="System theme">
-            <i class="fas fa-desktop"></i>
+          <button class="theme-icon" id="auto-theme" aria-label="Use system theme" title="System theme">
+            <i class="fas fa-desktop" aria-hidden="true"></i>
           </button>
         </span>
       </nav>
     </header>
-    <main>
+    
+    <main id="main-content">
       <div class="main-container">
         {{ content }}
       </div>
     </main>
-    <footer>
+    
+    <footer role="contentinfo">
       <div class="social-links">
-        <a href="https://github.com/jpgsantos" target="_blank" title="GitHub">
-          <i class="fab fa-github"></i>
+        <a href="https://github.com/jpgsantos" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
+          <i class="fab fa-github" aria-hidden="true"></i>
         </a>
-        <a href="https://linkedin.com/in/joaosantos1992" target="_blank" title="LinkedIn">
-          <i class="fab fa-linkedin"></i>
+        <a href="https://linkedin.com/in/joaosantos1992" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
         </a>
-        <a href="mailto:jpgs.12390@gmail.com" title="Email">
-          <i class="fas fa-envelope"></i>
+        <a href="mailto:jpgs.12390@gmail.com" aria-label="Send email">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
         </a>
       </div>
       <p>&copy; {{ site.time | date: '%Y' }} João Pedro Gomes dos Santos. All rights reserved.</p>
       <p class="availability">
-        <span class="available-indicator">●</span> Available for new opportunities in Copenhagen or Remote
+        <span class="available-indicator" aria-hidden="true">●</span>
+        <span class="visually-hidden">Status:</span> Available for new opportunities in Copenhagen or Remote
       </p>
     </footer>
     
     <script src="{{ '/assets/js/theme-switcher.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/animations.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/header-scroll.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/nav-toggle.js' | relative_url }}"></script>
   </body>
 </html>

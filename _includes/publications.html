@@ -1,0 +1,17 @@
+<div class="publications-grid">
+  {% for pub in site.data.publications %}
+  <div class="publication-card">
+    <div class="publication-year">{{ pub.year }}</div>
+    <div class="publication-content">
+      <h3>{{ pub.title }}</h3>
+      <div class="publication-authors">{{ pub.authors | replace: "Santos, JPG", "<strong>Santos, JPG</strong>" }}</div>
+      <div class="publication-journal"><em>{{ pub.journal }}</em>, {{ pub.volume }}.</div>
+      <a href="https://doi.org/{{ pub.doi }}" target="_blank" rel="noopener noreferrer" class="button">
+        <i class="fas fa-external-link-alt"></i> DOI: {{ pub.doi }}
+      </a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+

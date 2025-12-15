@@ -1,0 +1,11 @@
+/* Main CSS - imports all partials */
+@import '_variables.css';
+@import '_base.css';
+@import '_layout.css';
+@import '_components.css';
+@import '_hero.css';
+@import '_pages/_about.css';
+@import '_pages/_projects.css';
+@import '_pages/_cv.css';
+
+

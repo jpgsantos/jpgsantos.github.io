@@ -1,0 +1,25 @@
+# Jekyll build output
+_site/
+
+# Jekyll cache
+.jekyll-cache/
+.sass-cache/
+.jekyll-metadata
+
+# Bundler
+.bundle/
+vendor/bundle/
+
+# Logs
+*.log
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+
+

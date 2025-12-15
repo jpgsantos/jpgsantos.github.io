@@ -1,0 +1,22 @@
+<div class="timeline">
+  {% for entry in site.data.timeline %}
+  <div class="timeline__entry">
+    <div class="timeline__dot">
+      <i class="{{ entry.icon }}"></i>
+    </div>
+    <div class="timeline__card {% if entry.type == 'future' %}timeline__card--future{% endif %}">
+      <div class="timeline__period">{{ entry.period }}</div>
+      <h3>{{ entry.title }}</h3>
+      <div class="timeline__subtitle">{{ entry.institution }}</div>
+      <div class="timeline__details">
+        {{ entry.description | markdownify }}
+        {% if entry.show_contact_button %}
+        <a href="{{ '/contact' | relative_url }}" class="button">Let's Connect</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+

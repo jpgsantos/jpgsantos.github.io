@@ -1,0 +1,487 @@
+/* Cards */
+.card {
+  background-color: var(--white);
+  border-radius: var(--border-radius-lg);
+  padding: 2em;
+  box-shadow: 0 10px 20px var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.card-icon {
+  font-size: 2.5em;
+  color: var(--primary-color);
+  width: 100%;
+}
+
+.card h3 {
+  font-size: 1.4em;
+  margin-bottom: 0.7em;
+  color: var(--primary-dark);
+}
+
+.card p {
+  margin-bottom: 1.5em;
+  color: var(--text-light);
+}
+
+/* Buttons */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0.7em 1.4em;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-radius: 50px;
+  font-size: 0.9em;
+  font-weight: 600;
+  box-shadow: 0 4px 8px var(--shadow);
+  transition: all var(--transition);
+  min-width: max-content;
+  text-align: center;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px var(--shadow-strong);
+  color: var(--white);
+}
+
+.button--secondary {
+  background-color: var(--white);
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+}
+
+.button--secondary:hover {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+/* Pills/Tags */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.pills span {
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.5em 1em;
+  border-radius: 50px;
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.4em 1em;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+/* Timeline */
+.timeline {
+  max-width: 800px;
+  margin: 3em auto 0;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 45px;
+  width: 4px;
+  background-color: var(--timeline-color);
+}
+
+.timeline__entry {
+  margin-bottom: 3em;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.timeline__entry:last-child {
+  margin-bottom: 0;
+}
+
+.timeline__dot {
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  position: absolute;
+  left: 22px;
+  top: 20px;
+  transform: translateX(-50%);
+  z-index: 1;
+  box-shadow: 0 0 0 5px var(--white), 0 5px 15px var(--shadow);
+}
+
+.timeline__card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 2em;
+  margin-left: 70px;
+  width: calc(100% - 70px);
+  box-shadow: 0 10px 30px var(--shadow);
+  position: relative;
+}
+
+.timeline__card::before {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: -15px;
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-right: 15px solid var(--white);
+}
+
+.timeline__card--future {
+  background-color: var(--accent-light);
+  border: 2px dashed var(--primary-color);
+}
+
+.timeline__card--future::before {
+  border-right-color: var(--accent-light);
+}
+
+.timeline__period {
+  display: inline-block;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.4em 1em;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 0.8em;
+}
+
+.timeline__card h3 {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+  color: var(--primary-color);
+}
+
+.timeline__subtitle {
+  font-style: italic;
+  color: var(--text-light);
+  margin-bottom: 1.2em;
+}
+
+.timeline__details {
+  line-height: 1.6;
+}
+
+.timeline__details p {
+  margin-bottom: 0.8em;
+}
+
+.timeline__details p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  .timeline__dot {
+    width: 40px;
+    height: 40px;
+    font-size: 1em;
+    left: 20px;
+  }
+  
+  .timeline__card {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+    padding: 1.5em;
+  }
+}
+
+/* Theme switcher */
+.theme-icons {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 15px;
+  background-color: var(--primary-light);
+  border-radius: 30px;
+  padding: 5px;
+  box-shadow: 0 2px 8px var(--shadow);
+  position: relative;
+  z-index: 10;
+}
+
+.theme-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-light);
+  font-size: 1em;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 11;
+}
+
+.theme-icon:hover {
+  color: var(--primary-color);
+  background-color: rgba(0, 100, 0, 0.1);
+}
+
+.theme-icon.active {
+  color: var(--white);
+  background-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  .theme-icons {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    margin: 10px auto 0;
+  }
+}
+
+/* Featured project showcase */
+.featured-project {
+  padding: var(--content-padding);
+}
+
+.project-showcase {
+  background-color: var(--white);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  box-shadow: 0 10px 30px var(--shadow);
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.project-showcase-content {
+  flex: 1;
+  min-width: 300px;
+  padding: 3em;
+}
+
+.project-showcase-content h3 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+  color: var(--primary-color);
+}
+
+.project-showcase-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8em;
+  margin-bottom: 1.5em;
+}
+
+.project-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: 0.4em 1em;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 500;
+}
+
+.project-showcase-description {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 1.5em;
+  color: var(--text-dark);
+}
+
+.project-showcase-features {
+  margin-bottom: 2em;
+  list-style: none;
+  padding: 0;
+}
+
+.project-showcase-features li {
+  margin-bottom: 0.7em;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7em;
+}
+
+.project-showcase-features li i {
+  color: var(--primary-color);
+  font-size: 1.1em;
+  margin-top: 0.2em;
+}
+
+.project-showcase-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin-top: 2em;
+}
+
+.project-showcase-visual {
+  flex: 1;
+  min-width: 300px;
+  background-color: var(--primary-light);
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.view-more-projects {
+  text-align: center;
+  margin-top: 2em;
+}
+
+.view-more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-weight: 600;
+  color: var(--primary-color);
+  transition: all var(--transition);
+  font-size: 1.1em;
+}
+
+.view-more-link:hover {
+  color: var(--primary-dark);
+  gap: 0.8em;
+}
+
+/* Clean Workflow Diagram - With Dark Mode Support */
+.workflow-diagram.clean {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 2em;
+  background-color: var(--white);
+  border-radius: 10px;
+  box-shadow: 0 2px 10px var(--shadow);
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Desktop Diagram (Branching version) */
+.workflow-diagram.clean.desktop-diagram {
+  display: flex;
+}
+
+.workflow-diagram.clean .diagram-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.workflow-diagram.clean .diagram-node {
+  width: 180px;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+}
+
+.workflow-diagram.clean .start-node,
+.workflow-diagram.clean .end-node {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.workflow-diagram.clean .regular-node {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
+.workflow-diagram.clean .diagram-node i {
+  font-size: 1.5em;
+  color: inherit;
+}
+
+.workflow-diagram.clean .diagram-arrow {
+  color: var(--primary-color);
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Improved branching arrows for desktop - more space between */
+.branching-arrows {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  gap: 20px;
+}
+
+.branch-arrow {
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.workflow-diagram.clean .diagram-branching {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+/* Mobile Diagram (Simple linear version) */
+.workflow-diagram.clean.mobile-diagram {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .workflow-diagram.clean.desktop-diagram {
+    display: none;
+  }
+
+  .workflow-diagram.clean.mobile-diagram {
+    display: flex;
+  }
+}
+
+

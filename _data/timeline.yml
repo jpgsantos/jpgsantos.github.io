@@ -1,0 +1,53 @@
+- id: "future"
+  type: "future"
+  icon: "fas fa-briefcase"
+  period: "2025 →"
+  title: "Your Company?"
+  institution: "Copenhagen, Denmark / Remote"
+  description: "I'm seeking opportunities in algorithm development, scientific software creation, and computational problem-solving."
+  show_contact_button: true
+
+- id: "phd"
+  type: "education"
+  icon: "fas fa-graduation-cap"
+  period: "2016 - 2025"
+  title: "PhD in Computational Neuroscience"
+  institution: "University of Porto / Karolinska Institutet / KTH / SciLifeLab"
+  description: |
+    **Thesis:** A workflow for developing biochemical pathway models using ordinary differential equations.
+    
+    Developed the **Subcellular_Workflow** framework: modular, FAIR-compliant MATLAB tool for ODE modeling (simulation, parameter estimation, sensitivity/likelihood analysis).
+    
+    Published results in *Neuroinformatics*.
+
+- id: "research-scholar"
+  type: "work"
+  icon: "fas fa-flask"
+  period: "Apr 2015 - Dec 2015"
+  title: "Research Scholar"
+  institution: "UCIBIO @ REQUIMTE, University of Porto"
+  description: "Conducted research on porphyrin nanomaterials via ionic self-assembly. Contributed to a publication in *Tetrahedron*."
+
+- id: "msc"
+  type: "education"
+  icon: "fas fa-graduation-cap"
+  period: "2013 - 2015"
+  title: "MSc in Biochemistry"
+  institution: "University of Porto (FCUP, ICBAS)"
+  description: |
+    **Grade:** 16/20
+    
+    **Thesis:** Exploring the Boundaries of Porphyrin Materials Synthesis by Ionic Self-Assembly.
+
+- id: "bsc"
+  type: "education"
+  icon: "fas fa-graduation-cap"
+  period: "2010 - 2013"
+  title: "BSc in Biochemistry"
+  institution: "University of Porto (FCUP, ICBAS)"
+  description: |
+    **Grade:** 16/20
+    
+    Built a solid foundation in biological sciences.
+
+

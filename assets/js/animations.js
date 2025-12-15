@@ -5,28 +5,15 @@ document.addEventListener('DOMContentLoaded', function() {
   // Scroll Animations - for all pages
   // Map of page-specific selectors to animate on scroll
   const pageSelectors = {
-    'home': '.expertise-card, .project-showcase',
-    'about': '.bio-content, .career-goal-card, .timeline-entry',
-    'projects': '.project-card, .future-project-card, .project-showcase',
-    'cv': '.cv-header-card, .cv-section, .publication-card, .project-mini-card',
-    'contact': '.contact-card, .info-card, .cv-showcase'
+    'home': '.expertise-card, .project-showcase, .card',
+    'about': '.bio-content, .career-goal-card, .timeline__entry, .card',
+    'projects': '.project-card, .future-project-card, .project-showcase, .card',
+    'cv': '.cv-header-card, .cv-section, .publication-card, .project-mini-card, .card',
+    'contact': '.contact-card, .info-card, .cv-showcase, .card'
   };
   
-  // Determine current page based on body class or URL
-  let currentPage = 'home'; // Default
-  const pathname = window.location.pathname;
-  
-  if (pathname.includes('/about')) {
-    currentPage = 'about';
-  } else if (pathname.includes('/projects')) {
-    currentPage = 'projects';
-  } else if (pathname.includes('/cv')) {
-    currentPage = 'cv';
-  } else if (pathname.includes('/contact')) {
-    currentPage = 'contact';
-  }
-  
-  // Get selector for current page, or use a default selector
+  // Use data attribute instead of URL parsing
+  const currentPage = document.body.dataset.page || 'home';
   const selector = pageSelectors[currentPage] || '.card, .section';
   
   const animateOnScroll = function() {
@@ -44,17 +31,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   };
   
-  // Set initial styles for animation
-  const elementsToAnimate = document.querySelectorAll(selector);
-  elementsToAnimate.forEach(element => {
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(20px)';
-    element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-  });
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   
-  // Listen for scroll events
-  window.addEventListener('scroll', animateOnScroll);
-  
-  // Trigger once on load
-  animateOnScroll();
+  if (!prefersReducedMotion) {
+    const elementsToAnimate = document.querySelectorAll(selector);
+    elementsToAnimate.forEach(element => {
+      element.style.opacity = '0';
+      element.style.transform = 'translateY(20px)';
+      element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    });
+    
+    window.addEventListener('scroll', animateOnScroll);
+    animateOnScroll();
+  }
 });

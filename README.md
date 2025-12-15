@@ -80,7 +80,7 @@ This is the repository for my personal website showcasing my professional backgr
 
 - Edit `_config.yml` to update site-wide settings
 - Modify content in Markdown files to update page content
-- Change styles in `assets/style.css` and `assets/theme.css` to customize appearance
+- Change styles in `assets/css/main.css` and the partials in `assets/css/` to customize appearance
 
 ## License
 

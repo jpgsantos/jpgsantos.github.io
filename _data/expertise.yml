@@ -1,0 +1,27 @@
+- title: "Scientific Software Development"
+  icon: "fas fa-laptop-code"
+  description: "Building robust, modular, and FAIR-compliant scientific tools with 8+ years of experience in MATLAB."
+  skills:
+    - "MATLAB"
+    - "Python"
+    - "Git"
+    - "FAIR Principles"
+
+- title: "Computational Modeling"
+  icon: "fas fa-brain"
+  description: "Designing and implementing mathematical models of biological systems using ordinary differential equations."
+  skills:
+    - "ODE Modeling"
+    - "Parameter Estimation"
+    - "SimBiology"
+    - "COPASI"
+
+- title: "Algorithm Implementation"
+  icon: "fas fa-chart-line"
+  description: "Translating complex scientific algorithms from literature into functional, efficient code for analysis."
+  skills:
+    - "Sensitivity Analysis"
+    - "Profile Likelihood Analysis"
+    - "Parameter Optimization"
+
+

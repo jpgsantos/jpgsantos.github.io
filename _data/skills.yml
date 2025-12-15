@@ -1,0 +1,34 @@
+- category: "Programming & Software"
+  icon: "fas fa-code"
+  items:
+    - "MATLAB (8+ years)"
+    - "Python"
+    - "Kotlin (Basic)"
+    - "Git"
+    - "SimBiology"
+    - "COPASI"
+    - "LaTeX"
+    - "AI/LLM Tools"
+
+- category: "Modeling & Analysis"
+  icon: "fas fa-chart-line"
+  items:
+    - "ODE Modeling"
+    - "Parameter Estimation"
+    - "Sensitivity Analysis"
+    - "Profile Likelihood Analysis"
+    - "SBML"
+    - "SBtab"
+    - "FAIR Principles"
+
+- category: "Soft Skills"
+  icon: "fas fa-comment"
+  items:
+    - "Problem Solving"
+    - "Algorithm Implementation"
+    - "Scientific Writing"
+    - "Collaboration"
+    - "Documentation"
+    - "Rapid Learning"
+
+

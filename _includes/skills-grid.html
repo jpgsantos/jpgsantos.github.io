@@ -1,0 +1,17 @@
+<div class="grid">
+  {% for skill_group in site.data.skills %}
+  <div class="card">
+    <div class="card-icon">
+      <i class="{{ skill_group.icon }}"></i>
+    </div>
+    <h3>{{ skill_group.category }}</h3>
+    <div class="pills">
+      {% for item in skill_group.items %}
+      <span>{{ item }}</span>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+

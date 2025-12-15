@@ -1,0 +1,332 @@
+/* About page styles (migrated from inline <style> in about.md) */
+
+/* Bio Section */
+.bio-section {
+  padding: var(--content-padding);
+}
+
+.bio-content {
+  background-color: var(--white);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 10px 30px var(--shadow);
+  overflow: hidden;
+}
+
+.bio-main {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3em;
+  gap: 3em;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.bio-avatar {
+  flex: 0 0 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+
+.bio-avatar-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 10px;
+  background-image: url('../../images/Profile.jpg');
+  background-size: cover;
+  background-position: center top;
+  box-shadow: 0 10px 30px var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.bio-avatar-image::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, var(--primary-light) 0%, transparent 100%);
+  opacity: 0.3;
+}
+
+.avatar-quotes {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.avatar-quote {
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius);
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  box-shadow: 0 5px 15px var(--shadow);
+  animation: float 4s infinite ease-in-out;
+}
+
+.avatar-quote:nth-child(2) {
+  animation-delay: 2s;
+}
+
+.avatar-quote i {
+  color: var(--primary-color);
+  font-size: 1.2em;
+}
+
+.avatar-quote span {
+  font-style: italic;
+  color: var(--primary-dark);
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+.bio-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.bio-text h2 {
+  font-size: 1.8em;
+  margin-bottom: 1em;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.bio-text p {
+  margin-bottom: 1em;
+  line-height: 1.7;
+  color: var(--text-dark);
+}
+
+.bio-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Core values styling - now matching the career goal items */
+.core-values-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.core-value-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8em;
+  margin-bottom: 1.2em;
+  padding-bottom: 1.2em;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.core-value-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.core-value-name {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.core-value-desc {
+  font-size: 0.9em;
+  color: var(--text-light);
+  margin-top: 0.3em;
+}
+
+/* Career Goals Section */
+.career-goals-section {
+  padding: var(--content-padding);
+}
+
+.career-goals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2em;
+}
+
+.career-goal-card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 2em;
+  box-shadow: 0 10px 30px var(--shadow);
+  transition: all var(--transition);
+  border-top: 5px solid var(--primary-color);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.career-goal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px var(--shadow-strong);
+}
+
+.career-goal-icon {
+  width: 70px;
+  height: 70px;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  margin-bottom: 1.5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+.career-goal-card h3 {
+  font-size: 1.4em;
+  margin-bottom: 1.5em;
+  color: var(--primary-dark);
+  text-align: center;
+}
+
+.career-goal-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.career-goal-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8em;
+  margin-bottom: 1.2em;
+  padding-bottom: 1.2em;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.career-goal-list li:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.goal-icon {
+  width: 24px;
+  height: 24px;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+  flex-shrink: 0;
+}
+
+.goal-text {
+  flex: 1;
+  line-height: 1.5;
+}
+
+/* Education Timeline */
+.education-timeline-section {
+  padding: var(--content-padding);
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .bio-main {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .bio-avatar {
+    align-items: center;
+  }
+  
+  .bio-text h2 {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .career-goals-grid,
+  .bio-highlights {
+    grid-template-columns: 1fr;
+  }
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2em;
+}
+
+.info-card {
+  background-color: var(--white);
+  border-radius: var(--border-radius);
+  padding: 2em;
+  box-shadow: 0 5px 15px var(--shadow);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.info-icon {
+  font-size: 2em;
+  color: var(--primary-color);
+  margin-bottom: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+  height: 70px;
+  background-color: var(--primary-light);
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-card h3 {
+  margin-bottom: 1em;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-list li {
+  margin-bottom: 0.8em;
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+
+.info-list li i {
+  color: var(--primary-color);
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+@media (max-width: 768px) {
+  .info-grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+

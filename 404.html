@@ -1,0 +1,72 @@
+---
+layout: default
+title: Page Not Found
+permalink: /404.html
+---
+
+<section class="error-page">
+  <div class="error-content">
+    <div class="error-icon">
+      <i class="fas fa-exclamation-triangle"></i>
+    </div>
+    <h1>404</h1>
+    <h2>Page Not Found</h2>
+    <p>Sorry, the page you're looking for doesn't exist or has been moved.</p>
+    <div class="error-actions">
+      <a href="{{ '/' | relative_url }}" class="button">
+        <i class="fas fa-home"></i> Go Home
+      </a>
+      <a href="{{ '/contact' | relative_url }}" class="button button--secondary">
+        <i class="fas fa-envelope"></i> Contact Me
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+.error-page {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2em;
+}
+
+.error-content {
+  max-width: 500px;
+}
+
+.error-icon {
+  font-size: 4em;
+  color: var(--accent);
+  margin-bottom: 0.5em;
+}
+
+.error-page h1 {
+  font-size: 6em;
+  margin: 0;
+  line-height: 1;
+  color: var(--primary-color);
+}
+
+.error-page h2 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  color: var(--text-dark);
+}
+
+.error-page p {
+  color: var(--text-light);
+  margin-bottom: 2em;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+</style>
+
+

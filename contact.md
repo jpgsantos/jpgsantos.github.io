@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Contact
+description: "Get in touch with João Pedro Santos - email, phone, LinkedIn, and GitHub contact information."
 ---
 
 <section class="section">
@@ -35,7 +36,7 @@ title: Contact
       </div>
       <h3>LinkedIn</h3>
       <p>Connect professionally</p>
-      <a href="https://linkedin.com/in/joaosantos1992" target="_blank" class="button">
+      <a href="https://linkedin.com/in/joaosantos1992" target="_blank" rel="noopener noreferrer" class="button">
         Visit Profile <i class="fas fa-arrow-right"></i>
       </a>
     </div>
@@ -46,7 +47,7 @@ title: Contact
       </div>
       <h3>GitHub</h3>
       <p>Check out my code</p>
-      <a href="https://github.com/jpgsantos" target="_blank" class="button">
+      <a href="https://github.com/jpgsantos" target="_blank" rel="noopener noreferrer" class="button">
         View Projects <i class="fas fa-arrow-right"></i>
       </a>
     </div>

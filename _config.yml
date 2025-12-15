@@ -15,6 +15,18 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
+# Ensure Jekyll publishes CSS partials that start with "_"
+# Note: Jekyll ignores files starting with "_" unless explicitly included.
+include:
+  - assets/css/_variables.css
+  - assets/css/_base.css
+  - assets/css/_layout.css
+  - assets/css/_components.css
+  - assets/css/_hero.css
+  - assets/css/_pages/_about.css
+  - assets/css/_pages/_projects.css
+  - assets/css/_pages/_cv.css
+
 # Navigation
 header_pages:
   - index.md
