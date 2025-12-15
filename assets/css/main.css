@@ -90,7 +90,6 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0;
-  position: relative;
   overflow-x: hidden;
   font-size: 17px;
   -webkit-font-smoothing: antialiased;
@@ -335,15 +334,11 @@ main {
   max-width: none;
   width: 100%;
   min-height: 100vh;
-  position: relative;
-  z-index: 1;
 }
 
 .main-container {
   max-width: 1200px;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
 }
 
 footer {
@@ -353,9 +348,7 @@ footer {
   color: var(--text-light);
   font-size: 0.9em;
   background: transparent;
-  position: relative;
   overflow: hidden;
-  z-index: 1;
 }
 
 
@@ -1294,21 +1287,21 @@ section:last-child {
   display: none;
 }
 
-/* Neural Network Canvas */
+/* Ensure html has the background color */
+html {
+  background-color: var(--bg-body);
+}
+
+/* Neural Network Canvas - must be behind all content */
 .neural-canvas {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
   opacity: 0.7;
-}
-
-/* Ensure html has the background color */
-html {
-  background-color: var(--bg-body);
 }
 
 .hero-content {
@@ -1318,8 +1311,6 @@ html {
   width: 100%;
   padding: 2em 4em 3em 4em;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
 }
 
 .hero-content > * {
