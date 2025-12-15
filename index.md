@@ -23,7 +23,6 @@ description: "João Pedro Gomes dos Santos - Computational Neuroscience PhD and 
       </div>
       
       <div class="hero-text">
-        <h1 class="hero-title">Algorithms & Scientific Software</h1>
         <p class="hero-description">I solve complex problems with algorithms and scientific software. With 8+ years in computational neuroscience and a recently shipped Android app, I combine mathematical rigor with practical engineering to build solutions that work.</p>
         <div class="location-badge">
           <i class="fas fa-map-marker-alt"></i> Seeking opportunities in Copenhagen, Amsterdam or Remote

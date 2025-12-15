@@ -36,7 +36,7 @@
     <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
     {% seo %}
   </head>
-  <body data-page="{{ page.title | downcase | default: 'home' }}">
+  <body data-page="{{ page.title | downcase | default: 'home' }}" class="preload">
     <header role="banner">
       <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
       <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation">
@@ -96,6 +96,16 @@
       </p>
     </footer>
     
+    <script>
+      // Remove preload class to enable transitions after page load
+      window.addEventListener('load', function() {
+        document.body.classList.remove('preload');
+      });
+      // Fallback: remove after short delay if load event doesn't fire
+      setTimeout(function() {
+        document.body.classList.remove('preload');
+      }, 100);
+    </script>
     <script src="{{ '/assets/js/theme-switcher.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/animations.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/header-scroll.js' | relative_url }}"></script>

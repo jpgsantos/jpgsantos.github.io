@@ -12,11 +12,16 @@
   const ctx = canvas.getContext('2d');
   let animationId;
   let particles = [];
-  let mouse = { x: null, y: null, radius: 180 };
+  let mouse = { x: null, y: null, radius: 150 };
+  let lastWidth = 0;
+  let lastHeight = 0;
 
-  // Configuration
+  // Configuration - base values for desktop
   const config = {
-    particleCount: 80,
+    // Particles per 100,000 square pixels (adjust density here)
+    particleDensity: 0.00004,
+    minParticles: 20,
+    maxParticles: 100,
     particleSize: { min: 2, max: 4 },
     connectionDistance: 180,
     speed: 0.25,
@@ -45,9 +50,64 @@
     return isDark ? config.colors.dark : config.colors.light;
   }
 
+  // Calculate particle count based on screen area
+  function getParticleCount() {
+    const area = window.innerWidth * window.innerHeight;
+    let count = Math.floor(area * config.particleDensity);
+    
+    // Clamp between min and max
+    count = Math.max(config.minParticles, Math.min(config.maxParticles, count));
+    
+    // Further reduce for very small screens (phones)
+    if (window.innerWidth < 480) {
+      count = Math.floor(count * 0.6);
+    } else if (window.innerWidth < 768) {
+      count = Math.floor(count * 0.75);
+    }
+    
+    return Math.max(config.minParticles, count);
+  }
+
+  // Get connection distance based on screen size
+  function getConnectionDistance() {
+    if (window.innerWidth < 480) {
+      return 120;
+    } else if (window.innerWidth < 768) {
+      return 150;
+    }
+    return config.connectionDistance;
+  }
+
   function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const newWidth = window.innerWidth;
+    const newHeight = window.innerHeight;
+    
+    // Only do a full resize if dimensions changed significantly
+    // This prevents jumps from mobile address bar show/hide
+    const widthChange = Math.abs(newWidth - lastWidth);
+    const heightChange = Math.abs(newHeight - lastHeight);
+    
+    // Update canvas dimensions
+    canvas.width = newWidth;
+    canvas.height = newHeight;
+    
+    // If it's just a small height change (likely address bar), 
+    // just adjust particle positions proportionally
+    if (lastWidth > 0 && widthChange < 50 && heightChange < 150 && heightChange > 0) {
+      const heightRatio = newHeight / lastHeight;
+      particles.forEach(particle => {
+        particle.y *= heightRatio;
+        // Make sure particle stays in bounds
+        if (particle.y > newHeight) particle.y = newHeight - 10;
+        if (particle.y < 0) particle.y = 10;
+      });
+    } else if (lastWidth > 0 && (widthChange > 100 || heightChange > 200)) {
+      // Significant resize (rotation, window resize) - reinitialize
+      init();
+    }
+    
+    lastWidth = newWidth;
+    lastHeight = newHeight;
   }
 
   class Particle {
@@ -69,6 +129,10 @@
       // Bounce off edges
       if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
       if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+      
+      // Keep particles in bounds
+      this.x = Math.max(0, Math.min(canvas.width, this.x));
+      this.y = Math.max(0, Math.min(canvas.height, this.y));
 
       // Mouse interaction - calculate highlight factor
       this.highlightFactor = 0;
@@ -92,9 +156,6 @@
     draw() {
       const colors = getColors();
       
-      // Interpolate color based on highlight
-      const alpha = 0.55 + this.highlightFactor * 0.4;
-      
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       
@@ -102,7 +163,7 @@
       if (this.highlightFactor > 0.1) {
         ctx.fillStyle = colors.particleHighlight;
         ctx.shadowColor = colors.glow;
-        ctx.shadowBlur = 10  + this.highlightFactor * 6;
+        ctx.shadowBlur = 10 + this.highlightFactor * 6;
       } else {
         ctx.fillStyle = colors.particle;
         ctx.shadowColor = colors.glow;
@@ -116,13 +177,15 @@
 
   function init() {
     particles = [];
-    for (let i = 0; i < config.particleCount; i++) {
+    const count = getParticleCount();
+    for (let i = 0; i < count; i++) {
       particles.push(new Particle());
     }
   }
 
   function drawConnections() {
     const colors = getColors();
+    const connectionDist = getConnectionDistance();
     
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
@@ -133,9 +196,9 @@
         const dy = p1.y - p2.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance < config.connectionDistance) {
+        if (distance < connectionDist) {
           // Base opacity from distance (fade with distance)
-          const distanceOpacity = 1 - (distance / config.connectionDistance);
+          const distanceOpacity = 1 - (distance / connectionDist);
           
           // Combined highlight factor from both connected nodes
           const combinedHighlight = Math.max(p1.highlightFactor, p2.highlightFactor);
@@ -189,10 +252,18 @@
     animationId = requestAnimationFrame(animate);
   }
 
-  // Event listeners
+  // Debounced resize handler
+  let resizeTimeout;
   window.addEventListener('resize', () => {
-    resize();
-    init();
+    // Immediate canvas resize for smooth experience
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    // Debounce the particle adjustment
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      resize();
+    }, 100);
   });
 
   // Track mouse position globally since canvas has pointer-events: none
@@ -206,6 +277,22 @@
     mouse.y = null;
   });
 
+  // Touch support for mobile
+  document.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 0) {
+      mouse.x = e.touches[0].clientX;
+      mouse.y = e.touches[0].clientY;
+    }
+  }, { passive: true });
+
+  document.addEventListener('touchend', () => {
+    // Delay clearing to allow for smooth fadeout
+    setTimeout(() => {
+      mouse.x = null;
+      mouse.y = null;
+    }, 100);
+  });
+
   // Watch for theme changes
   const observer = new MutationObserver(() => {
     // Colors will update automatically on next frame
@@ -217,7 +304,10 @@
   });
 
   // Initialize
-  resize();
+  lastWidth = window.innerWidth;
+  lastHeight = window.innerHeight;
+  canvas.width = lastWidth;
+  canvas.height = lastHeight;
   init();
   animate();
 

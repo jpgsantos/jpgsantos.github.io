@@ -17,16 +17,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Create observer
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         // Add staggered delay based on element position
         const siblings = Array.from(entry.target.parentElement?.children || []);
         const elementIndex = siblings.indexOf(entry.target);
-        const delay = elementIndex * 0.1;
+        const delay = Math.min(elementIndex * 0.08, 0.4); // Cap delay at 0.4s
         
-        entry.target.style.transitionDelay = `${delay}s`;
+        // Use CSS custom property for reveal delay (doesn't affect theme transitions)
+        entry.target.style.setProperty('--reveal-delay', `${delay}s`);
         entry.target.classList.add('reveal-visible');
         entry.target.classList.remove('reveal-hidden');
+        
+        // Clear the reveal delay after animation completes
+        setTimeout(() => {
+          entry.target.style.removeProperty('--reveal-delay');
+        }, (delay + 0.6) * 1000); // delay + animation duration
         
         // Unobserve after revealing
         observer.unobserve(entry.target);
@@ -39,4 +45,3 @@ document.addEventListener('DOMContentLoaded', function() {
     observer.observe(el);
   });
 });
-
