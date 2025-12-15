@@ -33,95 +33,158 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
         <p>Beyond my academic work, I enjoy learning new technologies, as demonstrated by my recent self-taught Kotlin/Android project. I'm a strong believer in leveraging modern tools, including AI/LLMs, to enhance productivity and accelerate development.</p>
         
         <p>I'm now seeking to transition from academia to industry, looking for roles that allow me to apply my computational skills, problem-solving abilities, and software development experience to innovative projects, preferably in Copenhagen or remotely.</p>
+        
+        <div class="bio-cta">
+          <a href="/contact" class="button">
+            <i class="fas fa-envelope"></i> Get in Touch
+          </a>
+          <a href="/cv" class="button button--secondary">
+            <i class="fas fa-file-alt"></i> View CV
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="card">
-    <div class="card-icon">
-      <i class="fas fa-star"></i>
+<section class="core-values-section">
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-star"></i></span> Core Values</h2>
+  <div class="core-values-grid">
+    <div class="core-value-card">
+      <div class="core-value-icon">
+        <i class="fas fa-gem"></i>
+      </div>
+      <h3>Technical Excellence</h3>
+      <p>Clean, efficient, and well-structured code that stands the test of time</p>
     </div>
-    <h3>Core Values</h3>
-    <ul class="core-values-list">
-      <li class="core-value-item">
-        <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-        <div class="goal-text">
-          <div class="core-value-name">Technical Excellence</div>
-          <div class="core-value-desc">Clean, efficient, and well-structured code</div>
-        </div>
-      </li>
-      <li class="core-value-item">
-        <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-        <div class="goal-text">
-          <div class="core-value-name">Continuous Learning</div>
-          <div class="core-value-desc">Constantly expanding knowledge and skills</div>
-        </div>
-      </li>
-      <li class="core-value-item">
-        <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-        <div class="goal-text">
-          <div class="core-value-name">Interdisciplinary Approach</div>
-          <div class="core-value-desc">Combining insights from different fields</div>
-        </div>
-      </li>
-      <li class="core-value-item">
-        <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-        <div class="goal-text">
-          <div class="core-value-name">Open Collaboration</div>
-          <div class="core-value-desc">Sharing knowledge and working together</div>
-        </div>
-      </li>
-      <li class="core-value-item">
-        <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-        <div class="goal-text">
-          <div class="core-value-name">User-Centered Design</div>
-          <div class="core-value-desc">Creating accessible and usable tools</div>
-        </div>
-      </li>
-    </ul>
+    <div class="core-value-card">
+      <div class="core-value-icon">
+        <i class="fas fa-seedling"></i>
+      </div>
+      <h3>Continuous Learning</h3>
+      <p>Constantly expanding knowledge and embracing new technologies</p>
+    </div>
+    <div class="core-value-card">
+      <div class="core-value-icon">
+        <i class="fas fa-puzzle-piece"></i>
+      </div>
+      <h3>Interdisciplinary Approach</h3>
+      <p>Combining insights from biology, mathematics, and computer science</p>
+    </div>
+    <div class="core-value-card">
+      <div class="core-value-icon">
+        <i class="fas fa-hands-helping"></i>
+      </div>
+      <h3>Open Collaboration</h3>
+      <p>Sharing knowledge and building together with the community</p>
+    </div>
+    <div class="core-value-card">
+      <div class="core-value-icon">
+        <i class="fas fa-user-check"></i>
+      </div>
+      <h3>User-Centered Design</h3>
+      <p>Creating accessible, intuitive tools that solve real problems</p>
+    </div>
   </div>
 </section>	
 	
-<section class="section">
-  <div class="grid">
-    <div class="card">
-      <div class="card-icon">
-        <i class="fas fa-compass"></i>
+<section class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">5+</div>
+      <div class="stat-label">Years in Research</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Publications</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">2</div>
+      <div class="stat-label">Major Projects</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">3</div>
+      <div class="stat-label">Countries Worked In</div>
+    </div>
+  </div>
+</section>
+
+<section class="skills-section">
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-code"></i></span> Skills & Expertise</h2>
+  <div class="skills-container">
+    <div class="skill-category">
+      <div class="skill-category-header">
+        <i class="fas fa-terminal"></i>
+        <h3>Programming</h3>
       </div>
-      <h3>Professional Interests</h3>
-	  <div class="pills">
-        <span>Computational Neuroscience</span>
-        <span>Scientific Software Development</span>
-        <span>Algorithm Implementation</span>
-		<span>Machine Learning</span>
-		<span>Data Analysis</span>
-		<span>Systems Biology</span>
-		<span>Information Theory</span>
-		<span>Artificial Intelligence</span>
-		<span>Complex Systems</span>
-		<span>Algorithm Implementation</span>
-		<span>Algorithm Implementation</span>
+      <div class="skill-items">
+        <div class="skill-item">
+          <span class="skill-name">MATLAB</span>
+          <div class="skill-bar"><div class="skill-fill" style="width: 95%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Python</span>
+          <div class="skill-bar"><div class="skill-fill" style="width: 75%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Kotlin</span>
+          <div class="skill-bar"><div class="skill-fill" style="width: 60%"></div></div>
+        </div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-icon">
-        <i class="fas fa-laptop-code"></i>
+    <div class="skill-category">
+      <div class="skill-category-header">
+        <i class="fas fa-flask"></i>
+        <h3>Scientific Methods</h3>
       </div>
-      <h3>Technical Skills</h3>
-	  <div class="pills">
-	    <span>MATLAB</span>
-		<span>Python</span>
-		<span>Kotlin</span>
-		<span>Android</span>
-		<span>Git</span>
-		<span>ODE Modeling</span>
-		<span>Parameter Estimation</span>
-		<span>Sensitivity Analysis</span>
-		<span>Profile likelihood Analysis</span>
-		<span>FAIR Principles</span>
-	  </div>
+      <div class="skill-items">
+        <div class="skill-item">
+          <span class="skill-name">ODE Modeling</span>
+          <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Parameter Estimation</span>
+          <div class="skill-bar"><div class="skill-fill" style="width: 90%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Sensitivity Analysis</span>
+          <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-category-header">
+        <i class="fas fa-tools"></i>
+        <h3>Tools & Platforms</h3>
+      </div>
+      <div class="skill-items">
+        <div class="skill-item">
+          <span class="skill-name">Git/GitHub</span>
+          <div class="skill-bar"><div class="skill-fill" style="width: 85%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">Android Development</span>
+          <div class="skill-bar"><div class="skill-fill" style="width: 60%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-name">FAIR Principles</span>
+          <div class="skill-bar"><div class="skill-fill" style="width: 80%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="skill-category">
+      <div class="skill-category-header">
+        <i class="fas fa-brain"></i>
+        <h3>Domains</h3>
+      </div>
+      <div class="skill-tags-list">
+        <span class="skill-tag">Computational Neuroscience</span>
+        <span class="skill-tag">Systems Biology</span>
+        <span class="skill-tag">Machine Learning</span>
+        <span class="skill-tag">Data Analysis</span>
+        <span class="skill-tag">Algorithm Design</span>
+        <span class="skill-tag">Complex Systems</span>
+      </div>
     </div>
   </div>
 </section>
@@ -129,119 +192,60 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
 <section class="career-goals-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-bullseye"></i></span> What I'm Looking For</h2>
   <div class="career-goals-grid">
-    <div class="card">
-      <div class="card-icon">
+    <div class="goal-card goal-card--teal">
+      <div class="goal-card-icon">
         <i class="fas fa-briefcase"></i>
       </div>
       <h3>Target Roles</h3>
-      <ul class="career-goal-list">
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Research Engineer</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Scientific Software Developer</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">ML Engineer (Algorithm/Methodology Focus)</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Data Scientist</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Modeling Scientist (Tooling/Algorithm Focus)</div>
-        </li>
+      <ul class="goal-list">
+        <li>Research Engineer</li>
+        <li>Scientific Software Developer</li>
+        <li>ML Engineer (Algorithm Focus)</li>
+        <li>Data Scientist</li>
+        <li>Modeling Scientist</li>
       </ul>
     </div>
     
-    <div class="card">
-      <div class="card-icon">
+    <div class="goal-card goal-card--coral">
+      <div class="goal-card-icon">
         <i class="fas fa-tasks"></i>
       </div>
       <h3>Preferred Tasks</h3>
-      <ul class="career-goal-list">
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Developing new algorithms and methods</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Writing clean, efficient, reusable scientific code</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Integrating software tools and data sources</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Implementing methods from scientific literature</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Tackling novel technical challenges</div>
-        </li>
+      <ul class="goal-list">
+        <li>Developing new algorithms</li>
+        <li>Writing clean scientific code</li>
+        <li>Integrating tools & data sources</li>
+        <li>Implementing literature methods</li>
+        <li>Tackling novel challenges</li>
       </ul>
     </div>
     
-    <div class="card">
-      <div class="card-icon">
+    <div class="goal-card goal-card--purple">
+      <div class="goal-card-icon">
         <i class="fas fa-building"></i>
       </div>
       <h3>Ideal Environment</h3>
-      <ul class="career-goal-list">
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Collaborative and innovative culture</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Focus on solving complex problems</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Embraces modern tools and technologies</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Values technical excellence and continuous learning</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Dynamic with minimal bureaucracy</div>
-        </li>
+      <ul class="goal-list">
+        <li>Collaborative & innovative</li>
+        <li>Complex problem solving</li>
+        <li>Modern tools & technologies</li>
+        <li>Values technical excellence</li>
+        <li>Dynamic, minimal bureaucracy</li>
       </ul>
     </div>
-	
-	<div class="card">
-      <div class="card-icon">
+    
+    <div class="goal-card goal-card--blue">
+      <div class="goal-card-icon">
         <i class="fas fa-industry"></i>
       </div>
       <h3>Target Industries</h3>
-      <ul class="career-goal-list">
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Neurotechnology startups</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Scientific Computing Services</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">AI/ML research-focused companies</div>
-        </li>
-        <li>
-          <div class="goal-icon"><i class="fas fa-angle-right"></i></div>
-          <div class="goal-text">Innovative computational sectors</div>
-        </li>
+      <ul class="goal-list">
+        <li>Neurotechnology startups</li>
+        <li>Scientific Computing</li>
+        <li>AI/ML research companies</li>
+        <li>Biotech & Pharma</li>
       </ul>
     </div>
-	
-	
   </div>
 </section>
 
