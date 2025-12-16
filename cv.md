@@ -91,10 +91,10 @@ description: "Curriculum Vitae of João Pedro Santos - education, experience, sk
         <div class="cv-entry-content">
           <p><strong>Thesis:</strong> A workflow for developing biochemical pathway models using ordinary differential equations</p>
           <ul>
-            <li>Built <strong>Subcellular Workflow</strong>: a modular, FAIR-compliant MATLAB framework for ODE-based pathway modeling with simulation, analysis and parameterization capabilities</li>
+            <li><span>Built: <strong>Subcellular&nbsp;Workflow</strong> a modular, FAIR-compliant MATLAB framework for ODE-based pathway modeling with simulation, analysis and parameterization capabilities</span></li>
             <li>Implemented methods: parameter estimation, local/global sensitivity, and profile likelihood analysis</li>
             <li>Validated on complex benchmark models in neuroscience/systems biology</li>
-            <li>Published in <em>Neuroinformatics</em></li>
+            <li>Published in <a href="https://doi.org/10.1007/s12021-021-09546-3" target="_blank" rel="noopener noreferrer"><em>Neuroinformatics</em></a></li>
           </ul>
         </div>
       </div>
@@ -111,7 +111,7 @@ description: "Curriculum Vitae of João Pedro Santos - education, experience, sk
             <li>Performed synthesis, purification, and characterization of materials</li>
             <li>Analyzed IR spectrograms for species concentrations</li>
             <li>Supervised two undergraduate students</li>
-            <li>Contributed to a publication in <em>Tetrahedron</em></li>
+            <li>Published in <a href="https://doi.org/10.1016/j.tet.2016.09.030" target="_blank" rel="noopener noreferrer"><em>Tetrahedron</em></a></li>
           </ul>
         </div>
       </div>

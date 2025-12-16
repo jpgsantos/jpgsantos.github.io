@@ -133,7 +133,7 @@ description: "Explore João Pedro Santos's projects including the Subcellular_Wo
             <li>Performed synthesis, purification, and characterization of porphyrin nanomaterials</li>
             <li>Analyzed IR spectrograms for species concentrations</li>
             <li>Supervised two undergraduate students during their extracurricular internships</li>
-            <li>Contributed to a publication in <em>Tetrahedron</em></li>
+            <li>Published in <a href="https://doi.org/10.1016/j.tet.2016.09.030" target="_blank" rel="noopener noreferrer"><em>Tetrahedron</em></a></li>
           </ul>
         </div>
         

@@ -5,8 +5,12 @@
       <i class="{{ entry.icon }}"></i>
     </div>
     <div class="timeline__card {% if entry.type == 'future' %}timeline__card--future{% endif %}">
-      <div class="timeline__period">{{ entry.period }}</div>
-      <h3>{{ entry.title }}</h3>
+      <div class="timeline__header">
+        <h3>{{ entry.title }}</h3>
+        {% unless entry.type == 'future' %}
+        <div class="timeline__period">{{ entry.period }}</div>
+        {% endunless %}
+      </div>
       <div class="timeline__subtitle">{{ entry.institution }}</div>
       <div class="timeline__details">
         {{ entry.description | markdownify }}

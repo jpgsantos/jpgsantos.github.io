@@ -130,60 +130,71 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
 </section>
 
 <section class="career-goals-section">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-bullseye"></i></span> What I'm Looking For</h2>
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-bullseye"></i></span> How I Add Value</h2>
+  <p style="max-width: 760px; margin: 0 auto 2rem; color: var(--text-light); text-align: center;">
+    I help teams ship reliable scientific software and models by combining research rigor with practical engineering.
+  </p>
   <div class="career-goals-grid">
     <div class="goal-card">
-      <div class="goal-card-icon">
-        <i class="fas fa-briefcase"></i>
+      <div class="goal-card-header">
+        <div class="goal-card-icon">
+          <i class="fas fa-briefcase"></i>
+        </div>
+        <h3>Roles I Can Own</h3>
       </div>
-      <h3>Target Roles</h3>
       <ul class="goal-list">
         <li>Research Engineer</li>
-        <li>Scientific Software Developer</li>
-        <li>ML Engineer (Algorithm Focus)</li>
-        <li>Data Scientist</li>
+        <li>Scientific Software Engineer</li>
+        <li>ML Engineer (Algorithms)</li>
+        <li>Data Scientist (Modeling & analysis)</li>
         <li>Modeling Scientist</li>
       </ul>
     </div>
     
     <div class="goal-card">
-      <div class="goal-card-icon">
-        <i class="fas fa-tasks"></i>
+      <div class="goal-card-header">
+        <div class="goal-card-icon">
+          <i class="fas fa-tasks"></i>
+        </div>
+        <h3>How I Can Contribute</h3>
       </div>
-      <h3>Preferred Tasks</h3>
       <ul class="goal-list">
-        <li>Developing new algorithms</li>
-        <li>Writing clean scientific code</li>
-        <li>Integrating tools & data sources</li>
-        <li>Implementing literature methods</li>
-        <li>Tackling novel challenges</li>
+        <li>Design and validate new algorithms</li>
+        <li>Write clean, testable scientific code</li>
+        <li>Integrate tools & data sources end-to-end</li>
+        <li>Implement and benchmark methods from the literature</li>
+        <li>Tackle novel challenges and de-risk early exploration</li>
       </ul>
     </div>
     
     <div class="goal-card">
-      <div class="goal-card-icon">
-        <i class="fas fa-building"></i>
+      <div class="goal-card-header">
+        <div class="goal-card-icon">
+          <i class="fas fa-building"></i>
+        </div>
+        <h3>How I Work Best</h3>
       </div>
-      <h3>Ideal Environment</h3>
       <ul class="goal-list">
-        <li>Collaborative & innovative</li>
-        <li>Complex problem solving</li>
-        <li>Modern tools & technologies</li>
-        <li>Values technical excellence</li>
-        <li>Dynamic, minimal bureaucracy</li>
+        <li>Collaborative teams with clear goals and feedback loops</li>
+        <li>Ambiguous problems where rigorous thinking matters</li>
+        <li>Modern tooling, reproducible workflows, and good documentation</li>
+        <li>High standards for code quality, testing, and maintainability</li>
+        <li>Fast iteration and ownership (low bureaucracy)</li>
       </ul>
     </div>
     
     <div class="goal-card">
-      <div class="goal-card-icon">
-        <i class="fas fa-industry"></i>
+      <div class="goal-card-header">
+        <div class="goal-card-icon">
+          <i class="fas fa-industry"></i>
+        </div>
+        <h3>Focus Areas</h3>
       </div>
-      <h3>Target Industries</h3>
       <ul class="goal-list">
-        <li>Neurotechnology startups</li>
-        <li>Scientific Computing</li>
-        <li>AI/ML research companies</li>
-        <li>Biotech & Pharma</li>
+        <li>Neurotechnology</li>
+        <li>Scientific computing & research tooling</li>
+        <li>Applied ML/AI research</li>
+        <li>Biotech & pharma (modeling, analytics, automation)</li>
       </ul>
     </div>
   </div>

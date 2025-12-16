@@ -28,8 +28,36 @@
     **Thesis:** A workflow for developing biochemical pathway models using ordinary differential equations.
     
     Built **Subcellular Workflow**: modular, FAIR-compliant MATLAB framework for ODE modeling with simulation, parameter estimation, and sensitivity/likelihood analysis.
+
+    The PhD started with the **GABBA doctoral programme (Basic and Applied Biology)**, which provided structured training in statistics, molecular/cellular biology, genetics, and systems bioinformatics during the first semester.
+
+    <details class="coursework-details">
+    <summary>Doctoral programme coursework & grades (1st semester)</summary>
+
+    <div class="coursework-terms">
+      <div class="coursework-term">
+        <h4>Doctoral Programme in Basic and Applied Biology (GABBA)</h4>
+        <ul class="course-list">
+          <li><span class="course-name">Biostatistics (STAT)</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Cellular and Developmental Biology (CDB)</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Structural Biology (Struct)</span><span class="course-grade">14/20</span></li>
+          <li><span class="course-name">Biology of Iron (IRON)</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Cell Division and Differentiation (CDD)</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Molecular and Population Genetics (MPG)</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Immunology (IMMU)</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Molecular Microbiology and Parasitology (MMP)</span><span class="course-grade">18/20</span></li>
+          <li><span class="course-name">Neurosciences (NSCI)</span><span class="course-grade">18/20</span></li>
+          <li><span class="course-name">New Therapies and Technologies (NTT)</span><span class="course-grade">18/20</span></li>
+          <li><span class="course-name">Oncobiology (ONCO)</span><span class="course-grade">18/20</span></li>
+          <li><span class="course-name">Other Competences (OC)</span><span class="course-grade">18/20</span></li>
+          <li><span class="course-name">Systems, Synthetic and Bioinformatics (SSI)</span><span class="course-grade">17/20</span></li>
+        </ul>
+      </div>
+    </div>
+
+    </details>
     
-    Published in *Neuroinformatics*.
+    Published in *[Neuroinformatics](https://doi.org/10.1007/s12021-021-09546-3)*.
 
 - id: "research-scholar"
   type: "work"
@@ -37,7 +65,7 @@
   period: "Apr 2015 - Dec 2015"
   title: "Research Scholar"
   institution: "UCIBIO @ REQUIMTE, University of Porto"
-  description: "Conducted research on porphyrin nanomaterials via ionic self-assembly. Contributed to a publication in *Tetrahedron*."
+  description: "Conducted research on porphyrin nanomaterials via ionic self-assembly. Published in *[Tetrahedron](https://doi.org/10.1016/j.tet.2016.09.030)*."
 
 - id: "msc"
   type: "education"
@@ -50,6 +78,51 @@
     
     **Thesis:** Exploring the Boundaries of Porphyrin Materials Synthesis by Ionic Self-Assembly.
 
+    Focused on bridging wet-lab biochemistry with computation and quantitative thinking. Highlights include **Computational Biochemistry**, **Bioinformatics**, and **Protein Structure & Function**, complemented by strong analytical training.
+
+    <details class="coursework-details">
+    <summary>Full coursework & grades</summary>
+
+    <details class="coursework-year">
+    <summary>Year 1</summary>
+    <div class="coursework-terms">
+      <div class="coursework-term">
+        <h4>1st Semester</h4>
+        <ul class="course-list">
+          <li><span class="course-name">Instrumental Analysis</span><span class="course-grade">15/20</span></li>
+          <li><span class="course-name">Computational Biochemistry</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Industrial Biochemistry</span><span class="course-grade">14/20</span></li>
+          <li><span class="course-name">Complements of Molecular Biology</span><span class="course-grade">15/20</span></li>
+          <li><span class="course-name">Oncobiology</span><span class="course-grade">13/20</span></li>
+        </ul>
+      </div>
+      <div class="coursework-term">
+        <h4>2nd Semester</h4>
+        <ul class="course-list">
+          <li><span class="course-name">Bioinformatics</span><span class="course-grade">16/20</span></li>
+          <li><span class="course-name">Structure and Function of Proteins</span><span class="course-grade">18/20</span></li>
+          <li><span class="course-name">Molecular and Cellular Pharmacology</span><span class="course-grade">11/20</span></li>
+          <li><span class="course-name">Bioanalytical Chemistry</span><span class="course-grade">15/20</span></li>
+          <li><span class="course-name">Molecular Signalling</span><span class="course-grade">14/20</span></li>
+        </ul>
+      </div>
+    </div>
+    </details>
+
+    <details class="coursework-year">
+    <summary>Year 2</summary>
+    <div class="coursework-terms">
+      <div class="coursework-term">
+        <h4>Internship</h4>
+        <ul class="course-list">
+          <li><span class="course-name">Internship</span><span class="course-grade">17/20</span></li>
+        </ul>
+      </div>
+    </div>
+    </details>
+
+    </details>
+
 - id: "bsc"
   type: "education"
   icon: "fas fa-graduation-cap"
@@ -59,6 +132,88 @@
   description: |
     **Grade:** 16/20
     
-    Built a solid foundation in biological sciences.
+    Broad training across chemistry → molecular biology → physiology, with a strong quantitative and lab backbone that later enabled my transition into computational work. Standouts include **Genetics**, **Biochemistry I**, **Lab courses**, plus **Mathematics** and **Statistics**.
+
+    <details class="coursework-details">
+    <summary>Full coursework & grades</summary>
+
+    <details class="coursework-year">
+    <summary>Year 1</summary>
+    <div class="coursework-terms">
+      <div class="coursework-term">
+        <h4>1st Semester</h4>
+        <ul class="course-list">
+          <li><span class="course-name">Biophysics I</span><span class="course-grade">14/20</span></li>
+          <li><span class="course-name">Fundamentals of Chemistry</span><span class="course-grade">15/20</span></li>
+          <li><span class="course-name">Chemistry Laboratory</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Mathematics I</span><span class="course-grade">17/20</span></li>
+        </ul>
+      </div>
+      <div class="coursework-term">
+        <h4>2nd Semester</h4>
+        <ul class="course-list">
+          <li><span class="course-name">Cell Biology</span><span class="course-grade">14/20</span></li>
+          <li><span class="course-name">Structure and Reactivity in Inorganic Chemistry</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Plant Physiology</span><span class="course-grade">16/20</span></li>
+          <li><span class="course-name">Functional Histology</span><span class="course-grade">16/20</span></li>
+          <li><span class="course-name">Organic Chemistry I</span><span class="course-grade">12/20</span></li>
+        </ul>
+      </div>
+    </div>
+    </details>
+
+    <details class="coursework-year">
+    <summary>Year 2</summary>
+    <div class="coursework-terms">
+      <div class="coursework-term">
+        <h4>1st Semester</h4>
+        <ul class="course-list">
+          <li><span class="course-name">Biophysics II</span><span class="course-grade">14/20</span></li>
+          <li><span class="course-name">Biochemistry I</span><span class="course-grade">18/20</span></li>
+          <li><span class="course-name">Statistical Methods</span><span class="course-grade">16/20</span></li>
+          <li><span class="course-name">Analytical Chemistry</span><span class="course-grade">16/20</span></li>
+          <li><span class="course-name">Biological Physical Chemistry</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Organic Chemistry II</span><span class="course-grade">17/20</span></li>
+        </ul>
+      </div>
+      <div class="coursework-term">
+        <h4>2nd Semester</h4>
+        <ul class="course-list">
+          <li><span class="course-name">Molecular Biology</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Biological Physical Chemistry Laboratory</span><span class="course-grade">17/20</span></li>
+          <li><span class="course-name">Biochemistry and Biophysics Laboratory</span><span class="course-grade">16/20</span></li>
+          <li><span class="course-name">Bioinorganic Chemistry</span><span class="course-grade">16/20</span></li>
+          <li><span class="course-name">Food Chemistry and Nutrition</span><span class="course-grade">15/20</span></li>
+        </ul>
+      </div>
+    </div>
+    </details>
+
+    <details class="coursework-year">
+    <summary>Year 3</summary>
+    <div class="coursework-terms">
+      <div class="coursework-term">
+        <h4>1st Semester</h4>
+        <ul class="course-list">
+          <li><span class="course-name">Structural Organic Analysis</span><span class="course-grade">15/20</span></li>
+          <li><span class="course-name">Biochemistry II</span><span class="course-grade">14/20</span></li>
+          <li><span class="course-name">Animal Physiology</span><span class="course-grade">16/20</span></li>
+          <li><span class="course-name">Biochemistry and Physiology Laboratory</span><span class="course-grade">18/20</span></li>
+          <li><span class="course-name">General Microbiology</span><span class="course-grade">16/20</span></li>
+        </ul>
+      </div>
+      <div class="coursework-term">
+        <h4>2nd Semester</h4>
+        <ul class="course-list">
+          <li><span class="course-name">General Genetics</span><span class="course-grade">19/20</span></li>
+          <li><span class="course-name">Immunology</span><span class="course-grade">13/20</span></li>
+          <li><span class="course-name">Mathematical Models</span><span class="course-grade">14/20</span></li>
+          <li><span class="course-name">Project / Internship</span><span class="course-grade">18/20</span></li>
+        </ul>
+      </div>
+    </div>
+    </details>
+
+    </details>
 
 
