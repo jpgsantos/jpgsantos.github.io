@@ -9,6 +9,11 @@ url: "https://jpgsantos.github.io"
 github_username: jpgsantos
 linkedin_username: joaosantos1992
 
+# Open Graph / Social Sharing
+og_image: /assets/images/og-share.png
+twitter:
+  card: summary_large_image
+
 # Build settings
 plugins:
   - jekyll-feed

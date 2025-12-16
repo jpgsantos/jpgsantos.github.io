@@ -5306,3 +5306,102 @@ html {
     border-radius: 12px;
   }
 }
+
+/* ==========================================================================
+   404 ERROR PAGE
+   ========================================================================== */
+
+.error-page {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2em;
+}
+
+.error-content {
+  max-width: 500px;
+}
+
+.error-icon {
+  font-size: 4em;
+  color: var(--accent);
+  margin-bottom: 0.5em;
+}
+
+.error-page h1 {
+  font-size: 6em;
+  margin: 0;
+  line-height: 1;
+  color: var(--primary-color);
+}
+
+.error-page h2 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  color: var(--text-dark);
+}
+
+.error-page p {
+  color: var(--text-light);
+  margin-bottom: 2em;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .error-page {
+    min-height: 50vh;
+    padding: 1.5em;
+  }
+
+  .error-icon {
+    font-size: 3em;
+  }
+
+  .error-page h1 {
+    font-size: 4em;
+  }
+
+  .error-page h2 {
+    font-size: 1.25em;
+  }
+
+  .error-actions {
+    flex-direction: column;
+  }
+
+  .error-actions .button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .error-page {
+    min-height: 45vh;
+    padding: 1em;
+  }
+
+  .error-icon {
+    font-size: 2.5em;
+  }
+
+  .error-page h1 {
+    font-size: 3em;
+  }
+
+  .error-page h2 {
+    font-size: 1.1em;
+  }
+
+  .error-page p {
+    font-size: 0.9em;
+  }
+}

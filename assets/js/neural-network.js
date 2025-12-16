@@ -234,6 +234,9 @@
   }
 
   function animate() {
+    // Don't continue if animation should be stopped
+    if (!isAnimating) return;
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     // Update all particles first
@@ -303,17 +306,49 @@
     attributeFilter: ['data-theme']
   });
 
+  // Track animation state
+  let isAnimating = false;
+
+  // Start animation function
+  function startAnimation() {
+    if (!isAnimating) {
+      isAnimating = true;
+      animate();
+    }
+  }
+
+  // Stop animation function
+  function stopAnimation() {
+    if (isAnimating) {
+      isAnimating = false;
+      cancelAnimationFrame(animationId);
+    }
+  }
+
+  // Pause animation when tab is not visible, resume when visible
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stopAnimation();
+    } else {
+      startAnimation();
+    }
+  });
+
   // Initialize
   lastWidth = window.innerWidth;
   lastHeight = window.innerHeight;
   canvas.width = lastWidth;
   canvas.height = lastHeight;
   init();
-  animate();
+  
+  // Only start animation if tab is visible
+  if (!document.hidden) {
+    startAnimation();
+  }
 
   // Cleanup on page unload
   window.addEventListener('beforeunload', () => {
-    cancelAnimationFrame(animationId);
+    stopAnimation();
     observer.disconnect();
   });
 })();

@@ -32,9 +32,92 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
     {% seo %}
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "João Pedro Gomes dos Santos",
+      "url": "https://jpgsantos.github.io",
+      "image": "https://jpgsantos.github.io/assets/images/Profile.jpg",
+      "jobTitle": "Computational Neuroscience PhD | Scientific Software Developer",
+      "description": "Scientific software developer with 8+ years of experience in computational neuroscience, ODE modeling, and algorithm implementation.",
+      "email": "mailto:jpgs.12390@gmail.com",
+      "telephone": "+351963264450",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Copenhagen, Amsterdam or Remote"
+      },
+      "sameAs": [
+        "https://github.com/jpgsantos",
+        "https://linkedin.com/in/joaosantos1992"
+      ],
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "University of Porto",
+          "url": "https://www.up.pt"
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Karolinska Institutet",
+          "url": "https://ki.se"
+        }
+      ],
+      "knowsAbout": [
+        "Computational Neuroscience",
+        "Scientific Software Development",
+        "MATLAB",
+        "Python",
+        "Kotlin",
+        "Android Development",
+        "ODE Modeling",
+        "Parameter Estimation",
+        "Sensitivity Analysis"
+      ],
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "PhD in Computational Neuroscience",
+          "credentialCategory": "degree",
+          "educationalLevel": "Doctoral"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "MSc in Biochemistry",
+          "credentialCategory": "degree",
+          "educationalLevel": "Master's"
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "BSc in Biochemistry",
+          "credentialCategory": "degree",
+          "educationalLevel": "Bachelor's"
+        }
+      ]
+    }
+    </script>
+    
+    {% if page.title == "Home" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "João Pedro Gomes dos Santos",
+      "url": "https://jpgsantos.github.io",
+      "description": "Personal portfolio of João Pedro Gomes dos Santos - Computational Neuroscience PhD and Scientific Software Developer",
+      "author": {
+        "@type": "Person",
+        "name": "João Pedro Gomes dos Santos"
+      }
+    }
+    </script>
+    {% endif %}
   </head>
   <body data-page="{{ page.title | downcase | default: 'home' }}" class="preload">
     <header role="banner">
