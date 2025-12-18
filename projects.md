@@ -14,7 +14,17 @@ permalink: /projects/
           <i class="fas fa-laptop-code"></i>
         </div>
         <div class="project-title-container">
-          <h2 class="project-title">{{ site.data.featured-project.title }}</h2>
+          <div class="project-title-row">
+            <h2 class="project-title">{{ site.data.featured-project.title }}</h2>
+            <div class="project-title-links">
+              {% for link in site.data.featured-project.links %}
+              <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="button project-link" aria-label="{{ link.text }}">
+                <i class="{{ link.icon }}"></i>
+                <span class="project-link-text">{{ link.text }}</span>
+              </a>
+              {% endfor %}
+            </div>
+          </div>
           <p class="project-meta">PhD Project ({{ site.data.featured-project.timeframe }}) &rsaquo; MATLAB, Python, Git</p>
         </div>
       </div>
@@ -47,13 +57,6 @@ permalink: /projects/
           </div>
         </div>
         
-        <div class="project-links">
-          {% for link in site.data.featured-project.links %}
-          <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="button">
-            <i class="{{ link.icon }}"></i> {{ link.text }}
-          </a>
-          {% endfor %}
-        </div>
       </div>
     </div>
     
@@ -120,7 +123,15 @@ permalink: /projects/
           <i class="fas fa-flask"></i>
         </div>
         <div class="project-title-container">
-          <h2 class="project-title">Porphyrin Materials Research</h2>
+          <div class="project-title-row">
+            <h2 class="project-title">Porphyrin Materials Research</h2>
+            <div class="project-title-links">
+              <a href="https://doi.org/10.1016/j.tet.2016.09.030" target="_blank" rel="noopener noreferrer" class="button project-link" aria-label="Publication">
+                <i class="fas fa-file-alt"></i>
+                <span class="project-link-text">Publication</span>
+              </a>
+            </div>
+          </div>
           <p class="project-meta">MSc Thesis & Research Scholarship (2013-2015)</p>
         </div>
       </div>
@@ -146,12 +157,6 @@ permalink: /projects/
             <span>Data Analysis</span>
 		    <span>Chromatography</span>
           </div>
-        </div>
-        
-        <div class="project-links">
-          <a href="https://doi.org/10.1016/j.tet.2016.09.030" target="_blank" rel="noopener noreferrer" class="button">
-            <i class="fas fa-file-alt"></i> Publication
-          </a>
         </div>
         
         <div class="project-image-container">
