@@ -3796,12 +3796,17 @@ html {
 @media (max-width: 480px) {
   .project-header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 0.8em;
   }
 
   .project-icon {
     align-self: center;
+  }
+
+  .project-title-container {
+    width: 100%;
+    align-items: center;
   }
 
   .project-title-row {
