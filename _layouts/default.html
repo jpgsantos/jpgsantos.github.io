@@ -121,16 +121,16 @@
   </head>
   <body data-page="{{ page.title | downcase | default: 'home' }}" class="preload">
     <header role="banner">
-      <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+      <p class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></p>
       <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation">
         <span class="hamburger" aria-hidden="true"></span>
       </button>
       <nav id="main-nav" role="navigation" aria-label="Main navigation">
         <a href="{{ '/' | relative_url }}" {% if page.url == "/" %}aria-current="page"{% endif %}>Home</a>
-        <a href="{{ '/about' | relative_url }}" {% if page.url == "/about/" %}aria-current="page"{% endif %}>About</a>
-        <a href="{{ '/projects' | relative_url }}" {% if page.url == "/projects/" %}aria-current="page"{% endif %}>Projects</a>
-        <a href="{{ '/cv' | relative_url }}" {% if page.url == "/cv/" %}aria-current="page"{% endif %}>CV</a>
-        <a href="{{ '/contact' | relative_url }}" {% if page.url == "/contact/" %}aria-current="page"{% endif %}>Contact</a>
+        <a href="{{ '/about/' | relative_url }}" {% if page.url == "/about/" %}aria-current="page"{% endif %}>About</a>
+        <a href="{{ '/projects/' | relative_url }}" {% if page.url == "/projects/" %}aria-current="page"{% endif %}>Projects</a>
+        <a href="{{ '/cv/' | relative_url }}" {% if page.url == "/cv/" %}aria-current="page"{% endif %}>CV</a>
+        <a href="{{ '/contact/' | relative_url }}" {% if page.url == "/contact/" %}aria-current="page"{% endif %}>Contact</a>
         <span class="theme-icons" role="group" aria-label="Theme selection">
           <button class="theme-icon" id="light-theme" aria-label="Switch to light theme" title="Light theme">
             <i class="fas fa-sun" aria-hidden="true"></i>
@@ -145,9 +145,10 @@
       </nav>
     </header>
     
-    <canvas id="neural-canvas" class="neural-canvas"></canvas>
+    <canvas id="neural-canvas" class="neural-canvas" aria-hidden="true" role="presentation"></canvas>
     
     <main id="main-content">
+      <h1 class="visually-hidden">{{ page.title | default: site.title }}</h1>
       <div class="main-container">
         {{ content }}
       </div>
@@ -174,7 +175,7 @@
       </div>
       <p>&copy; {{ site.time | date: '%Y' }} João Pedro Gomes dos Santos. All rights reserved.</p>
       <p class="availability">
-        <span class="available-indicator" aria-hidden="true">●</span>
+        <span class="available-indicator" aria-hidden="true">&bull;</span>
         <span class="visually-hidden">Status:</span> Available for new opportunities in Copenhagen, Amsterdam or Remote
       </p>
     </footer>
@@ -190,7 +191,6 @@
       }, 100);
     </script>
     <script src="{{ '/assets/js/theme-switcher.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/animations.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/header-scroll.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/nav-toggle.js' | relative_url }}"></script>
     <script src="{{ '/assets/js/scroll-reveal.js' | relative_url }}"></script>
@@ -198,3 +198,9 @@
     <script src="{{ '/assets/js/neural-network.js' | relative_url }}"></script>
   </body>
 </html>
+
+
+
+
+
+

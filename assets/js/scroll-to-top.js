@@ -1,6 +1,7 @@
 // Scroll to Top Button
 document.addEventListener('DOMContentLoaded', function() {
   const scrollToTopBtn = document.getElementById('scrollToTop');
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   
   if (!scrollToTopBtn) return;
 
@@ -17,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function scrollToTop() {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: prefersReducedMotion ? 'auto' : 'smooth'
     });
   }
 
@@ -28,6 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initial check
   toggleScrollButton();
 });
+
+
+
+
+
 
 
 

@@ -9,6 +9,12 @@
   const canvas = document.getElementById('neural-canvas');
   if (!canvas) return;
 
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    canvas.style.display = 'none';
+    return;
+  }
+
   const ctx = canvas.getContext('2d');
   let animationId;
   let particles = [];

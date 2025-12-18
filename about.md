@@ -2,13 +2,14 @@
 layout: default
 title: About
 description: "Learn about João Pedro Santos - background, skills, career goals, and professional journey from Biochemistry to Computational Neuroscience."
+permalink: /about/
 ---
 
 <section class="bio-section">
   <div class="bio-content">
     <div class="bio-main">
       <div class="bio-avatar">
-        <div class="bio-avatar-image"></div>
+        <img src="{{ '/assets/images/Profile.jpg' | relative_url }}" alt="João Pedro Gomes dos Santos" class="bio-avatar-image" loading="lazy">
         <div class="avatar-quotes">
           <div class="avatar-quote">
             <i class="fas fa-quote-left"></i>
@@ -35,10 +36,10 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
         <p>I'm now seeking to transition from academia to industry, looking for roles in Copenhagen, Amsterdam or remotely where I can apply my computational skills, problem-solving abilities, and software development experience to innovative projects.</p>
         
         <div class="bio-cta">
-          <a href="/contact" class="button">
+          <a href="{{ '/contact/' | relative_url }}" class="button">
             <i class="fas fa-envelope"></i> Get in Touch
           </a>
-          <a href="/cv" class="button button--secondary">
+          <a href="{{ '/cv/' | relative_url }}" class="button button--secondary">
             <i class="fas fa-file-alt"></i> View CV
           </a>
         </div>
@@ -110,11 +111,11 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
 </section>
 
 <section class="section">
-  <div class="main-container" style="text-align: center; margin-bottom: 2rem;">
+  <div class="main-container" style="text-align: center; margin-bottom: 1rem;">
     <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-code"></i></span> Technical Expertise</h2>
     <p style="max-width: 700px; margin: 0 auto 2rem; color: var(--text-light);">
       My technical toolkit spans scientific modeling, software development, and data analysis.
-      For a detailed breakdown of my proficiency levels, please view my <a href="{{ '/cv' | relative_url }}">CV</a>.
+      For a detailed breakdown of my proficiency levels, please view my <a href="{{ '/cv/' | relative_url }}">CV</a>.
     </p>
     
     <div class="pills" style="gap: 1em;">
@@ -204,3 +205,8 @@ description: "Learn about João Pedro Santos - background, skills, career goals,
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-route"></i></span> My Journey</h2>
   {% include timeline.html %}
 </section>
+
+
+
+
+

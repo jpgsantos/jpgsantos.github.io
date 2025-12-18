@@ -2,6 +2,7 @@
 layout: default
 title: Contact
 description: "Get in touch with João Pedro Santos - email, phone, LinkedIn, and GitHub contact information."
+permalink: /contact/
 ---
 
 <section class="contact-hero">
@@ -79,9 +80,14 @@ description: "Get in touch with João Pedro Santos - email, phone, LinkedIn, and
       <a href="mailto:jpgs.12390@gmail.com?subject=Let's%20Schedule%20a%20Call" class="button">
         <i class="fas fa-calendar"></i> Schedule a Call
       </a>
-      <a href="/cv" class="button button--secondary">
+      <a href="{{ '/cv/' | relative_url }}" class="button button--secondary">
         <i class="fas fa-file-alt"></i> View My CV
       </a>
     </div>
   </div>
 </section>
+
+
+
+
+

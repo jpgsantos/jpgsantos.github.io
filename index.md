@@ -28,16 +28,16 @@ description: "João Pedro Gomes dos Santos - Computational Neuroscience PhD and 
           <i class="fas fa-map-marker-alt"></i> Seeking opportunities in Copenhagen, Amsterdam or Remote
         </div>
         <div class="hero-buttons">
-          <a href="{{ '/cv' | relative_url }}" class="hero-button primary-button">
+          <a href="{{ '/cv/' | relative_url }}" class="hero-button primary-button">
             <i class="fas fa-file-alt"></i> View CV
           </a>
-          <a href="{{ '/projects' | relative_url }}" class="hero-button secondary-button">
+          <a href="{{ '/projects/' | relative_url }}" class="hero-button secondary-button">
             <i class="fas fa-laptop-code"></i> Projects
           </a>
-          <a href="{{ '/contact' | relative_url }}" class="hero-button secondary-button">
+          <a href="{{ '/contact/' | relative_url }}" class="hero-button secondary-button">
             <i class="fas fa-envelope"></i> Contact
           </a>
-          <a href="{{ '/about' | relative_url }}" class="hero-button secondary-button">
+          <a href="{{ '/about/' | relative_url }}" class="hero-button secondary-button">
             <i class="fas fa-user"></i> About Me
           </a>
         </div>
@@ -57,8 +57,12 @@ description: "João Pedro Gomes dos Santos - Computational Neuroscience PhD and 
   {% include featured-project.html %}
   
   <div class="view-more-projects">
-    <a href="{{ '/projects' | relative_url }}" class="view-more-link">
+    <a href="{{ '/projects/' | relative_url }}" class="view-more-link">
       View All Projects <i class="fas fa-arrow-right"></i>
     </a>
   </div>
 </section>
+
+
+
+

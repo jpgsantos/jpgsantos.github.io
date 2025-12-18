@@ -1,5 +1,10 @@
 // Scroll Reveal Animation using Intersection Observer
 document.addEventListener('DOMContentLoaded', function() {
+  const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) {
+    return;
+  }
+
   // Elements to reveal on scroll
   const revealElements = document.querySelectorAll('[data-reveal], .card, .project-card, .timeline__entry, .stat-card, .skill-category, .core-value-card, .goal-card, .expertise-card, .contact-card, .publication-card');
   

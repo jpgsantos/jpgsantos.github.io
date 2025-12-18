@@ -2,6 +2,7 @@
 layout: default
 title: Projects
 description: "Explore João Pedro Santos's projects including the Subcellular_Workflow MATLAB framework, Android development, and porphyrin materials research."
+permalink: /projects/
 ---
 
 <section id="all-projects" class="projects-section">
@@ -14,7 +15,7 @@ description: "Explore João Pedro Santos's projects including the Subcellular_Wo
         </div>
         <div class="project-title-container">
           <h2 class="project-title">{{ site.data.featured-project.title }}</h2>
-          <p class="project-meta">PhD Project ({{ site.data.featured-project.timeframe }}) • MATLAB, Python, Git</p>
+          <p class="project-meta">PhD Project ({{ site.data.featured-project.timeframe }}) &rsaquo; MATLAB, Python, Git</p>
         </div>
       </div>
       
@@ -64,7 +65,7 @@ description: "Explore João Pedro Santos's projects including the Subcellular_Wo
         </div>
         <div class="project-title-container">
           <h2 class="project-title">Chore Division Android App</h2>
-          <p class="project-meta">Personal Project (2025) • Kotlin, Android Studio</p>
+          <p class="project-meta">Personal Project (2025) &rsaquo; Kotlin, Android Studio</p>
         </div>
       </div>
       
@@ -197,3 +198,11 @@ description: "Explore João Pedro Santos's projects including the Subcellular_Wo
     </div>
   </div>
 </section>
+
+
+
+
+
+
+
+
