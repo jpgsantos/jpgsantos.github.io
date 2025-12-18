@@ -60,11 +60,8 @@ permalink: /cv/
 </section>
 
 <section class="cv-summary-section">
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-user-tie"></i></span> Professional Summary</h2>
   <div class="cv-section">
-    <div class="cv-section-header">
-      <i class="fas fa-user-tie"></i>
-      <h2>Professional Summary</h2>
-    </div>
     <div class="cv-entry">
       <div class="cv-entry-content">
         <p>I solve complex problems with algorithms and scientific software. Combining mathematical rigor with practical engineering, I'm particularly good at turning technical complexity into clear insights that help teams make decisions.</p>
@@ -76,12 +73,8 @@ permalink: /cv/
 </section>
 
 <section class="cv-main-section">
+    <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-briefcase"></i></span> Experience</h2>
     <div class="cv-section">
-      <div class="cv-section-header">
-        <i class="fas fa-briefcase"></i>
-        <h2>Experience</h2>
-      </div>
-      
       <div class="cv-entry">
         <div class="cv-entry-header">
           <h3>PhD Researcher</h3>
@@ -120,12 +113,8 @@ permalink: /cv/
 </section>
 
 <section class="cv-projects-section">
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-laptop-code"></i></span> Projects</h2>
   <div class="cv-section">
-    <div class="cv-section-header">
-      <i class="fas fa-laptop-code"></i>
-      <h2>Projects</h2>
-    </div>
-    
     <div class="cv-entry">
       <div class="cv-entry-header">
         <h3>Chore Division Android App</h3>
@@ -144,17 +133,13 @@ permalink: /cv/
 </section>
 
 <section class="section">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-cogs"></i></span>Technical Skills</h2>
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-cogs"></i></span> Technical Skills</h2>
   {% include skills-grid.html %}
 </section>
 
 <section class="cv-education-section">
+    <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-graduation-cap"></i></span> Education</h2>
     <div class="cv-section">
-      <div class="cv-section-header">
-        <i class="fas fa-graduation-cap"></i>
-        <h2>Education</h2>
-      </div>
-      
       <div class="cv-entry">
         <div class="cv-entry-header">
           <h3>PhD, Computational Neuroscience</h3>
@@ -211,7 +196,7 @@ permalink: /cv/
 
 
 <section class="section">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-file-alt"></i></span>Publications</h2>
+  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-file-alt"></i></span> Publications</h2>
   {% include publications.html %}
 </section>
 

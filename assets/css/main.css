@@ -4101,15 +4101,24 @@ html {
 /* CV Summary & Projects Sections */
 .cv-summary-section,
 .cv-main-section,
-.cv-projects-section {
+.cv-projects-section,
+.cv-education-section {
   padding: 0 var(--content-padding);
   margin-bottom: 1.5rem;
 }
 
 .cv-summary-section .cv-section,
 .cv-main-section .cv-section,
-.cv-projects-section .cv-section {
+.cv-projects-section .cv-section,
+.cv-education-section .cv-section {
   max-width: 100%;
+}
+
+.cv-summary-section .section-heading,
+.cv-main-section .section-heading,
+.cv-projects-section .section-heading,
+.cv-education-section .section-heading {
+  margin-bottom: 1.2em;
 }
 
 .cv-summary-section .cv-entry-content p {
@@ -4311,7 +4320,8 @@ html {
 
   .cv-summary-section,
   .cv-main-section,
-  .cv-projects-section {
+  .cv-projects-section,
+  .cv-education-section {
     padding: 0 1.5rem;
   }
 }
@@ -4404,7 +4414,8 @@ html {
 
   .cv-summary-section,
   .cv-main-section,
-  .cv-projects-section {
+  .cv-projects-section,
+  .cv-education-section {
     padding: 0 1rem;
   }
 }
@@ -4462,7 +4473,8 @@ html {
 
   .cv-summary-section,
   .cv-main-section,
-  .cv-projects-section {
+  .cv-projects-section,
+  .cv-education-section {
     padding: 0 0.8rem;
   }
 }
