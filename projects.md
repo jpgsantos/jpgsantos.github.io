@@ -160,14 +160,46 @@ permalink: /projects/
         </div>
         
         <div class="project-image-container">
-          <div class="molecule-visualization">
-            <div class="atom atom1"></div>
-            <div class="atom atom2"></div>
-            <div class="atom atom3"></div>
-            <div class="atom atom4"></div>
-            <div class="bond bond1"></div>
-            <div class="bond bond2"></div>
-            <div class="bond bond3"></div>
+          <div class="porphyrin-assembly" role="img" aria-label="Porphyrin units assembling into nanostructures">
+            <svg class="porphyrin-assembly-svg" viewBox="0 0 480 240" aria-hidden="true">
+              <title>Porphyrin self-assembly into nanostructures</title>
+              <defs>
+                <marker id="assembly-arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="8" markerHeight="8" orient="auto">
+                  <path class="assembly-arrowhead" d="M0 0 L8 4 L0 8 Z"></path>
+                </marker>
+                <g id="porphyrin-unit">
+                  <circle class="porphyrin-ring" cx="0" cy="0" r="22"></circle>
+                  <rect class="porphyrin-core" x="-12" y="-12" width="24" height="24" rx="4" ry="4" transform="rotate(45)"></rect>
+                  <circle class="porphyrin-metal" cx="0" cy="0" r="3.6"></circle>
+                  <circle class="porphyrin-node" cx="0" cy="-16" r="3.2"></circle>
+                  <circle class="porphyrin-node" cx="16" cy="0" r="3.2"></circle>
+                  <circle class="porphyrin-node" cx="0" cy="16" r="3.2"></circle>
+                  <circle class="porphyrin-node" cx="-16" cy="0" r="3.2"></circle>
+                  <line class="porphyrin-link" x1="-8" y1="-8" x2="8" y2="8"></line>
+                  <line class="porphyrin-link" x1="-8" y1="8" x2="8" y2="-8"></line>
+                </g>
+              </defs>
+              <circle class="cluster-ring" cx="340" cy="120" r="90"></circle>
+              <circle class="cluster-ring inner" cx="340" cy="120" r="64"></circle>
+              <path class="assembly-path path-a" d="M100 50 C 180 20, 250 40, 300 80" marker-end="url(#assembly-arrow)"></path>
+              <path class="assembly-path path-b" d="M120 150 C 190 190, 260 180, 300 145" marker-end="url(#assembly-arrow)"></path>
+              <path class="assembly-path path-c" d="M90 200 C 170 230, 240 210, 295 170" marker-end="url(#assembly-arrow)"></path>
+              <circle class="assembly-ion ion-1" cx="165" cy="70" r="3.2"></circle>
+              <circle class="assembly-ion ion-2" cx="220" cy="55" r="2.6"></circle>
+              <circle class="assembly-ion ion-3" cx="185" cy="165" r="3"></circle>
+              <circle class="assembly-ion ion-4" cx="240" cy="175" r="2.6"></circle>
+              <circle class="assembly-ion ion-5" cx="170" cy="205" r="2.6"></circle>
+              <use href="#porphyrin-unit" class="porphyrin-unit unit-a" transform="translate(70 60) scale(0.85)"></use>
+              <use href="#porphyrin-unit" class="porphyrin-unit unit-b" transform="translate(135 120) scale(0.9)"></use>
+              <use href="#porphyrin-unit" class="porphyrin-unit unit-c" transform="translate(90 190) scale(0.78)"></use>
+              <g class="porphyrin-cluster">
+                <use href="#porphyrin-unit" class="porphyrin-unit unit-d" transform="translate(300 70) scale(1)"></use>
+                <use href="#porphyrin-unit" class="porphyrin-unit unit-e" transform="translate(360 120) scale(1)"></use>
+                <use href="#porphyrin-unit" class="porphyrin-unit unit-f" transform="translate(300 170) scale(1)"></use>
+                <use href="#porphyrin-unit" class="porphyrin-unit unit-g" transform="translate(260 120) scale(1)"></use>
+                <use href="#porphyrin-unit" class="porphyrin-unit unit-h" transform="translate(330 120) scale(0.95)"></use>
+              </g>
+            </svg>
           </div>
         </div>
       </div>

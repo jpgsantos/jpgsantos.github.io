@@ -119,13 +119,14 @@ permalink: /about/
     </p>
     
     <div class="pills" style="gap: 1em;">
+      <span class="badge"><i class="fab fa-python"></i> Python (NumPy/SciPy/Pandas)</span>
       <span class="badge"><i class="fas fa-terminal"></i> MATLAB</span>
-      <span class="badge"><i class="fab fa-python"></i> Python</span>
       <span class="badge"><i class="fab fa-android"></i> Kotlin</span>
-      <span class="badge"><i class="fab fa-git-alt"></i> Git/GitHub</span>
-      <span class="badge"><i class="fas fa-chart-line"></i> ODE Modeling</span>
-      <span class="badge"><i class="fas fa-search"></i> Sensitivity Analysis</span>
-      <span class="badge"><i class="fas fa-brain"></i> Comp. Neuroscience</span>
+      <span class="badge"><i class="fas fa-project-diagram"></i> ODE Modeling</span>
+      <span class="badge"><i class="fas fa-sitemap"></i> SBML</span>
+      <span class="badge"><i class="fas fa-wave-square"></i> Time-series Analysis</span>
+      <span class="badge"><i class="fab fa-github"></i> GitHub Actions</span>
+      <span class="badge"><i class="fas fa-book"></i> Jupyter Notebooks</span>
     </div>
   </div>
 </section>

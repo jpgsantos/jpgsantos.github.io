@@ -132,9 +132,11 @@ permalink: /cv/
   </div>
 </section>
 
-<section class="section">
+<section class="section cv-skills-section">
   <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-cogs"></i></span> Technical Skills</h2>
-  {% include skills-grid.html %}
+  <div class="cv-section">
+    {% include skills-grid.html %}
+  </div>
 </section>
 
 <section class="cv-education-section">
