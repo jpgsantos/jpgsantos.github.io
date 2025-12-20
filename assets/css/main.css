@@ -1148,9 +1148,10 @@ body[data-page="contact"] .contact-cta {
     overflow: visible;
     border-radius: 0;
     border: none;
-    border-bottom: 1px solid var(--border-light);
     background: transparent;
     box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .cv-skills-section .card::before,
@@ -1193,8 +1194,19 @@ body[data-page="contact"] .contact-cta {
     text-align: left;
   }
 
-  .cv-skills-section .card:last-child {
-    border-bottom: none;
+  .cv-skills-section .card + .card {
+    border-top: 1px solid var(--border-light);
+  }
+}
+
+@media (max-width: 900px) {
+  .cv-skills-section .cv-section {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }
 
@@ -1538,7 +1550,8 @@ body[data-page="contact"] .contact-cta {
 @media (max-width: 600px) {
   .timeline__header {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     gap: 0.6em;
   }
   
@@ -1548,6 +1561,15 @@ body[data-page="contact"] .contact-cta {
   
   .timeline__header h3 {
     order: 1;
+  }
+
+  body[data-page="about"] .education-timeline-section .timeline__header {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  body[data-page="about"] .education-timeline-section .timeline__header h3 {
+    text-align: left;
   }
 }
 
@@ -1858,6 +1880,14 @@ body[data-page="contact"] .contact-cta {
 @media (max-width: 768px) {
   .project-showcase {
     flex-direction: column;
+  }
+
+  .project-showcase-content h3 {
+    text-align: center;
+  }
+
+  .project-showcase-badges {
+    justify-content: center;
   }
 
   .project-showcase-visual {
@@ -2959,6 +2989,18 @@ html {
   }
 }
 
+@media (max-width: 600px) {
+  .skill-category-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .skill-category-header h3 {
+    text-align: center;
+  }
+}
+
 @media (max-width: 480px) {
   .skill-category {
     padding: 1.2em;
@@ -3049,6 +3091,18 @@ html {
   .bio-main {
     padding: 1.2em;
     gap: 1.2em;
+    align-items: stretch;
+  }
+
+  .bio-avatar,
+  .bio-text,
+  .avatar-quotes {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .bio-text {
+    min-width: 0;
   }
 
   .bio-avatar-image {
@@ -3085,6 +3139,7 @@ html {
 
   .avatar-quote {
     padding: 0.8em;
+    max-width: 100%;
   }
 
   .avatar-quote i {
@@ -3213,10 +3268,10 @@ html {
     padding: 1.2em;
     border-radius: var(--border-radius-lg);
     display: grid;
-    grid-template-columns: 48px 1fr;
-    column-gap: 0.9em;
-    align-items: start;
-    text-align: left;
+    grid-template-columns: 1fr;
+    row-gap: 0.3em;
+    justify-items: center;
+    text-align: center;
     max-width: none;
   }
 
@@ -3225,15 +3280,15 @@ html {
     height: 48px;
     font-size: 1.2em;
     border-radius: 14px;
-    margin: 0;
+    margin: 0 0 0.6em;
     flex-shrink: 0;
-    grid-row: 1 / span 2;
+    grid-row: auto;
   }
 
   .core-value-card h3 {
     font-size: 1em;
     margin-bottom: 0.35em;
-    text-align: left;
+    text-align: center;
   }
 
   .core-value-card p {
@@ -4093,6 +4148,7 @@ html {
   .project-showcase-badges {
     gap: 0.5em;
     flex-wrap: wrap;
+    justify-content: center;
   }
 
   .project-badge {
@@ -4469,9 +4525,8 @@ html {
 
 .cv-entry-content li {
   margin-bottom: 0.5em;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6em;
+  position: relative;
+  padding-left: 1.4em;
 }
 
 .cv-entry-content li > span {
@@ -4483,7 +4538,9 @@ html {
   content: '\2192';
   color: var(--primary-color);
   font-weight: 500;
-  flex-shrink: 0;
+  position: absolute;
+  left: 0;
+  top: 0.1em;
 }
 
 .cv-entry-content li:last-child {
@@ -4493,7 +4550,7 @@ html {
 @media (max-width: 480px) {
   .cv-entry-content li {
     font-size: 0.9em;
-    gap: 0.5em;
+    padding-left: 1.2em;
   }
 
   .cv-entry-content p {
@@ -4604,6 +4661,7 @@ html {
 
   .publication-content {
     padding: 1em;
+    text-align: center;
   }
 
   .publication-content h3 {
@@ -4758,6 +4816,25 @@ html {
   .cv-projects-section,
   .cv-education-section {
     padding: 0 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .cv-entry-header {
+    align-items: center;
+    text-align: center;
+  }
+
+  .cv-entry-header h3 {
+    text-align: center;
+  }
+
+  .cv-date {
+    align-self: center;
+  }
+
+  .cv-entry-subtitle {
+    text-align: center;
   }
 }
 
@@ -5929,5 +6006,21 @@ html {
 
   .error-page p {
     font-size: 0.9em;
+  }
+}
+
+@media (max-width: 900px) {
+  body[data-page="cv"] .cv-skills-section .cv-section {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  body[data-page="cv"] .cv-skills-section .cv-section:hover {
+    box-shadow: none;
   }
 }
