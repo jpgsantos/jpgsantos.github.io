@@ -95,18 +95,17 @@ html {
 }
 
 /* Smooth transitions - applied globally for consistent theme changes and hover effects */
+/* Note: opacity and transform are excluded to prevent conflicts with CSS animations */
 *,
 *::before,
 *::after {
-  transition: 
+  transition:
     background-color var(--transition),
     border-color var(--transition),
     color var(--transition),
     box-shadow var(--transition),
     fill var(--transition),
-    stroke var(--transition),
-    opacity var(--transition),
-    transform var(--transition);
+    stroke var(--transition);
 }
 
 /* Prefer-reduced-motion: keep theme switching accessible and avoid long animations */
