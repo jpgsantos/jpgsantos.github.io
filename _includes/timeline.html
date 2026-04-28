@@ -1,26 +1,27 @@
 <div class="timeline">
   {% for entry in site.data.timeline %}
-  <div class="timeline__entry">
-    <div class="timeline__dot">
-      <i class="{{ entry.icon }}"></i>
+  <article class="timeline__entry" data-reveal>
+    <div class="timeline__marker">
+      {% include icon.html name=entry.icon %}
     </div>
     <div class="timeline__card {% if entry.type == 'future' %}timeline__card--future{% endif %}">
       <div class="timeline__header">
-        <h3>{{ entry.title }}</h3>
-        {% unless entry.type == 'future' %}
-        <div class="timeline__period">{{ entry.period }}</div>
-        {% endunless %}
+        <div>
+          <p class="eyebrow">{{ entry.period }}</p>
+          <h3>{{ entry.title }}</h3>
+        </div>
+        <span class="timeline__type">{{ entry.type }}</span>
       </div>
-      <div class="timeline__subtitle">{{ entry.institution }}</div>
+      <p class="timeline__subtitle">{{ entry.institution }}</p>
       <div class="timeline__details">
         {{ entry.description | markdownify }}
         {% if entry.show_contact_button %}
-        <a href="{{ '/contact' | relative_url }}" class="button">Let's Connect</a>
+        <a href="{{ '/#contact' | relative_url }}" class="button button--primary">
+          {% include icon.html name="email" %} Let's connect
+        </a>
         {% endif %}
       </div>
     </div>
-  </div>
+  </article>
   {% endfor %}
 </div>
-
-

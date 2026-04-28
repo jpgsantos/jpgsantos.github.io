@@ -1,245 +1,145 @@
 ---
 layout: default
-title: Projects
-description: "Explore João Pedro Santos's projects including the Subcellular_Workflow MATLAB framework, Android development, and porphyrin materials research."
+title: Work
+description: "Selected work by João Pedro Santos across scientific software, Android product engineering, and quantitative research."
 permalink: /projects/
 ---
 
-<section id="all-projects" class="projects-section">
-  <div class="projects-container">
-    <!-- Project 1 - Subcellular_Workflow -->
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon">
-          <i class="fas fa-laptop-code"></i>
+{% include projects-mondrian.html %}
+
+<div class="default-only">
+
+{% assign work_copy = site.data.page_copy.work %}
+
+<section class="page-hero">
+  <p class="eyebrow">{{ work_copy.eyebrow }}</p>
+  <h1>{{ work_copy.headline }}</h1>
+  <p>{{ work_copy.intro }}</p>
+  <aside class="work-hero-index" aria-label="Project index">
+    {% for item in site.data.work %}
+    <a href="#default-work-{{ item.slug }}">
+      <span>0{{ forloop.index }}</span>
+      <strong>{{ item.title }}</strong>
+      <small>{{ item.category }}</small>
+    </a>
+    {% endfor %}
+  </aside>
+</section>
+
+<section class="section-block">
+  {% for item in site.data.work %}
+  {% assign modifier = "research" %}
+  {% if item.slug == "subcellular-workflow" %}
+    {% assign modifier = "workflow" %}
+  {% elsif item.slug == "octidy-android-app" %}
+    {% assign modifier = "app" %}
+  {% endif %}
+  <article class="project-feature project-feature--{{ modifier }}" id="default-work-{{ item.slug }}" data-reveal>
+    <div class="project-feature__content">
+      <p class="eyebrow">{{ item.eyebrow }}</p>
+      <h2>{{ item.title }}</h2>
+      <p>{{ item.description }}</p>
+      <div class="work-summary-grid">
+        <div><strong>Problem</strong><span>{{ item.problem }}</span></div>
+        <div><strong>Contribution</strong><span>{{ item.contribution }}</span></div>
+        <div><strong>Outcome</strong><span>{{ item.outcome }}</span></div>
+      </div>
+      <ul class="check-list">
+        {% for highlight in item.highlights %}
+        <li>{% include icon.html name="check" %}<span>{{ highlight }}</span></li>
+        {% endfor %}
+      </ul>
+      <div class="tag-list">
+        {% for stack_item in item.stack %}
+        <span>{{ stack_item }}</span>
+        {% endfor %}
+      </div>
+      <div class="button-row">
+        {% for link in item.links %}
+        <a href="{% if link.external %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}" {% if link.external %}target="_blank" rel="noopener noreferrer"{% endif %} class="button {% if link.primary %}button--primary{% else %}button--secondary{% endif %}">
+          {% include icon.html name=link.icon %} {{ link.text }}
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if item.slug == "subcellular-workflow" %}
+    <div class="project-feature__media project-feature__media--workflow">
+      <div class="workflow-card">
+        <div class="workflow-card__header">
+          <p class="eyebrow">Architecture</p>
+          <strong>Reusable ODE modeling pipeline</strong>
+          <span>From model setup through simulation, parameter estimation, sensitivity analysis, and result validation.</span>
         </div>
-        <div class="project-title-container">
-          <div class="project-title-row">
-            <h2 class="project-title">{{ site.data.featured-project.title }}</h2>
-            <div class="project-title-links">
-              {% for link in site.data.featured-project.links %}
-              <a href="{{ link.url }}" target="_blank" rel="noopener noreferrer" class="button project-link" aria-label="{{ link.text }}">
-                <i class="{{ link.icon }}"></i>
-                <span class="project-link-text">{{ link.text }}</span>
-              </a>
-              {% endfor %}
-            </div>
-          </div>
-          <p class="project-meta">PhD Project ({{ site.data.featured-project.timeframe }}) &rsaquo; MATLAB, Python, Git</p>
+        {% include workflow-diagram.html %}
+        <div class="workflow-card__footer" aria-label="Workflow outputs">
+          <span>FAIR structure</span>
+          <span>MATLAB solvers</span>
+          <span>COPASI bridge</span>
         </div>
       </div>
-      
-      <div class="project-content">
-        <p>{{ site.data.featured-project.description }}</p>
-        
-        <div class="project-achievements">
-          <h3><i class="fas fa-trophy"></i> Key Achievements</h3>
-          <ul>
-            {% for feature in site.data.featured-project.features %}
-            <li>{{ feature }}</li>
+    </div>
+    {% elsif item.slug == "octidy-android-app" %}
+    <div class="project-feature__media project-feature__media--app">
+      <div class="app-carousel" data-carousel aria-label="Octidy Android app screenshots">
+        <div class="app-carousel__viewport" tabindex="0">
+          {% for shot in item.screenshots %}
+          <figure class="app-slide">
+            <div class="phone-frame">
+              {% include project-screenshot.html src=shot.src alt=shot.alt loading="lazy" width="1080" height="2400" %}
+            </div>
+            <figcaption><strong>{{ shot.caption }}</strong><span>{{ shot.alt | remove: 'Octidy ' | capitalize }}.</span></figcaption>
+          </figure>
+          {% endfor %}
+        </div>
+        <div class="app-carousel__controls" aria-label="Octidy screenshot controls">
+          <button class="carousel-button" type="button" data-carousel-prev aria-label="Previous screenshot">{% include icon.html name="chevron-up" %}</button>
+          <div class="app-carousel__dots">
+            {% for shot in item.screenshots %}
+            <button type="button" data-carousel-dot {% if forloop.first %}aria-current="true"{% endif %}>{{ shot.caption }}</button>
             {% endfor %}
-            <li>Developed tools for converting between SBtab format and other standard formats (SBML)</li>
-            <li>Applied the workflow to analyze benchmark models in systems biology and neuroscience</li>
-          </ul>
-        </div>
-        
-        <div class="project-skills">
-          <h3><i class="fas fa-tools"></i> Technologies</h3>
-		  <div class="pills">
-            <span>MATLAB</span>
-            <span>SimBiology</span>
-            <span>Optimization Toolbox</span>
-		    <span>Python</span>
-		    <span>COPASI</span>
-		    <span>Git</span>
-		    <span>SBML</span>
-		    <span>SBtab</span>
           </div>
-        </div>
-        
-      </div>
-    </div>
-    
-    <!-- Project 2 - Chore Division Android App -->
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon">
-          <i class="fas fa-mobile-alt"></i>
-        </div>
-        <div class="project-title-container">
-          <h2 class="project-title">Chore Division Android App</h2>
-          <p class="project-meta">Personal Project (2025) &rsaquo; Kotlin, Android Studio</p>
-        </div>
-      </div>
-      
-      <div class="project-content">
-        <p>Independently developed full-stack Android application from concept to Google Play deployment, managing the entire development lifecycle.</p>
-        
-        <div class="project-achievements">
-          <h3><i class="fas fa-trophy"></i> Key Achievements</h3>
-          <ul>
-            <li>Built and shipped a complete Android app now in Play Store testing</li>
-            <li>Implemented modern app architecture with Jetpack Compose and ViewModel-based architecture using Hilt</li>
-            <li>Designed local data persistence with Room and background task management with WorkManager</li>
-            <li>Integrated Firebase for analytics and notifications</li>
-            <li>Set up solid Git workflows and documentation for future collaborators</li>
-            <li>Used LLM-assisted programming to accelerate development without sacrificing code quality</li>
-          </ul>
-        </div>
-        
-        <div class="project-skills">
-          <h3><i class="fas fa-tools"></i> Technologies</h3>
-		  <div class="pills">
-            <span>Kotlin</span>
-            <span>Jetpack Compose</span>
-            <span>Hilt</span>
-            <span>Room</span>
-            <span>WorkManager</span>
-            <span>Firebase</span>
-            <span>Play Console</span>
-          </div>
-        </div>
-        
-        <div class="project-image-container">
-          <div class="phone-mockup">
-            <div class="phone-screen">
-              <div class="app-header"></div>
-              <div class="app-content">
-                <div class="app-item"></div>
-                <div class="app-item"></div>
-                <div class="app-item"></div>
-              </div>
-              <div class="app-footer"></div>
-            </div>
-          </div>
+          <button class="carousel-button" type="button" data-carousel-next aria-label="Next screenshot">{% include icon.html name="chevron-up" %}</button>
         </div>
       </div>
     </div>
-    
-    <!-- Project 3 - Porphyrin Materials Research -->
-    <div class="project-card">
-      <div class="project-header">
-        <div class="project-icon">
-          <i class="fas fa-flask"></i>
+    {% else %}
+    <div class="project-feature__media project-feature__media--research">
+      <div class="research-visual" role="img" aria-label="Porphyrin synthesis and spectroscopy analysis workflow">
+        <div class="research-visual__molecule" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
-        <div class="project-title-container">
-          <div class="project-title-row">
-            <h2 class="project-title">Porphyrin Materials Research</h2>
-            <div class="project-title-links">
-              <a href="https://doi.org/10.1016/j.tet.2016.09.030" target="_blank" rel="noopener noreferrer" class="button project-link" aria-label="Publication">
-                <i class="fas fa-file-alt"></i>
-                <span class="project-link-text">Publication</span>
-              </a>
-            </div>
-          </div>
-          <p class="project-meta">MSc Thesis & Research Scholarship (2013-2015)</p>
+        <div class="research-visual__panel">
+          <p class="eyebrow">Materials workflow</p>
+          <strong>Ionic self-assembly</strong>
+          <span>Synthesis, purification, spectroscopy, and quantitative signal analysis.</span>
         </div>
-      </div>
-      
-      <div class="project-content">
-        <p>Research project focused on synthesizing and characterizing porphyrin nanomaterials via ionic self-assembly.</p>
-        
-        <div class="project-achievements">
-          <h3><i class="fas fa-trophy"></i> Key Achievements</h3>
-          <ul>
-            <li>Performed synthesis, purification, and characterization of porphyrin nanomaterials</li>
-            <li>Analyzed IR spectrograms for species concentrations</li>
-            <li>Supervised two undergraduate students during their extracurricular internships</li>
-            <li>Published in <a href="https://doi.org/10.1016/j.tet.2016.09.030" target="_blank" rel="noopener noreferrer"><em>Tetrahedron</em></a></li>
-          </ul>
-        </div>
-        
-        <div class="project-skills">
-          <h3><i class="fas fa-tools"></i> Technologies/Skills</h3>
-		  <div class="pills">
-            <span>Organic Synthesis</span>
-            <span>Spectroscopy</span>
-            <span>Data Analysis</span>
-		    <span>Chromatography</span>
-          </div>
-        </div>
-        
-        <div class="project-image-container">
-          <div class="porphyrin-assembly" role="img" aria-label="Porphyrin units assembling into nanostructures">
-            <svg class="porphyrin-assembly-svg" viewBox="0 0 480 240" aria-hidden="true">
-              <title>Porphyrin self-assembly into nanostructures</title>
-              <defs>
-                <marker id="assembly-arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="8" markerHeight="8" orient="auto">
-                  <path class="assembly-arrowhead" d="M0 0 L8 4 L0 8 Z"></path>
-                </marker>
-                <g id="porphyrin-unit">
-                  <circle class="porphyrin-ring" cx="0" cy="0" r="22"></circle>
-                  <rect class="porphyrin-core" x="-12" y="-12" width="24" height="24" rx="4" ry="4" transform="rotate(45)"></rect>
-                  <circle class="porphyrin-metal" cx="0" cy="0" r="3.6"></circle>
-                  <circle class="porphyrin-node" cx="0" cy="-16" r="3.2"></circle>
-                  <circle class="porphyrin-node" cx="16" cy="0" r="3.2"></circle>
-                  <circle class="porphyrin-node" cx="0" cy="16" r="3.2"></circle>
-                  <circle class="porphyrin-node" cx="-16" cy="0" r="3.2"></circle>
-                  <line class="porphyrin-link" x1="-8" y1="-8" x2="8" y2="8"></line>
-                  <line class="porphyrin-link" x1="-8" y1="8" x2="8" y2="-8"></line>
-                </g>
-              </defs>
-              <circle class="cluster-ring" cx="340" cy="120" r="90"></circle>
-              <circle class="cluster-ring inner" cx="340" cy="120" r="64"></circle>
-              <path class="assembly-path path-a" d="M100 50 C 180 20, 250 40, 300 80" marker-end="url(#assembly-arrow)"></path>
-              <path class="assembly-path path-b" d="M120 150 C 190 190, 260 180, 300 145" marker-end="url(#assembly-arrow)"></path>
-              <path class="assembly-path path-c" d="M90 200 C 170 230, 240 210, 295 170" marker-end="url(#assembly-arrow)"></path>
-              <circle class="assembly-ion ion-1" cx="165" cy="70" r="3.2"></circle>
-              <circle class="assembly-ion ion-2" cx="220" cy="55" r="2.6"></circle>
-              <circle class="assembly-ion ion-3" cx="185" cy="165" r="3"></circle>
-              <circle class="assembly-ion ion-4" cx="240" cy="175" r="2.6"></circle>
-              <circle class="assembly-ion ion-5" cx="170" cy="205" r="2.6"></circle>
-              <use href="#porphyrin-unit" class="porphyrin-unit unit-a" transform="translate(70 60) scale(0.85)"></use>
-              <use href="#porphyrin-unit" class="porphyrin-unit unit-b" transform="translate(135 120) scale(0.9)"></use>
-              <use href="#porphyrin-unit" class="porphyrin-unit unit-c" transform="translate(90 190) scale(0.78)"></use>
-              <g class="porphyrin-cluster">
-                <use href="#porphyrin-unit" class="porphyrin-unit unit-d" transform="translate(300 70) scale(1)"></use>
-                <use href="#porphyrin-unit" class="porphyrin-unit unit-e" transform="translate(360 120) scale(1)"></use>
-                <use href="#porphyrin-unit" class="porphyrin-unit unit-f" transform="translate(300 170) scale(1)"></use>
-                <use href="#porphyrin-unit" class="porphyrin-unit unit-g" transform="translate(260 120) scale(1)"></use>
-                <use href="#porphyrin-unit" class="porphyrin-unit unit-h" transform="translate(330 120) scale(0.95)"></use>
-              </g>
-            </svg>
-          </div>
+        <div class="spectrum-mini" aria-hidden="true">
+          <span style="height: 28%"></span>
+          <span style="height: 72%"></span>
+          <span style="height: 46%"></span>
+          <span style="height: 88%"></span>
+          <span style="height: 36%"></span>
+          <span style="height: 58%"></span>
         </div>
       </div>
     </div>
+    {% endif %}
+  </article>
+  {% endfor %}
+</section>
+
+<section class="section-block section-block--cta">
+  <h2>{{ work_copy.cta_heading }}</h2>
+  <p>{{ work_copy.cta_text }}</p>
+  <div class="button-row">
+    <a href="{{ '/cv/' | relative_url }}" class="button button--primary">
+      {% include icon.html name="file" %} View CV
+    </a>
+    <a href="{{ '/#contact' | relative_url }}" class="button button--secondary">
+      {% include icon.html name="email" %} Contact
+    </a>
   </div>
 </section>
 
-<section class="section" style="margin-bottom: 0;">
-  <h2 class="section-heading"><span class="heading-icon"><i class="fas fa-rocket"></i></span> Future Directions</h2>
-  <div class="grid">
-    <div class="card">
-      <div class="card-icon">
-        <i class="fas fa-brain"></i>
-      </div>
-      <h3>Computational Neuroscience Models</h3>
-      <p>Expanding the Subcellular_Workflow to support multi-scale neural modeling, from molecular interactions to network activity.</p>
-    </div>
-    
-    <div class="card">
-      <div class="card-icon">
-        <i class="fas fa-robot"></i>
-      </div>
-      <h3>ML Algorithm Implementation</h3>
-      <p>Implementing specialized machine learning algorithms for analyzing complex biological datasets and time series.</p>
-    </div>
-    
-    <div class="card">
-      <div class="card-icon">
-        <i class="fas fa-plug"></i>
-      </div>
-      <h3>API Development</h3>
-      <p>Creating APIs and interfaces to connect various computational tools and facilitate data exchange between platforms.</p>
-    </div>
-  </div>
-</section>
-
-
-
-
-
-
-
-
+</div>

@@ -1,0 +1,90 @@
+{% assign icon_name = include.name | default: "spark" %}
+<svg class="icon{% if include.class %} {{ include.class }}{% endif %}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" {% unless include.title %}aria-hidden="true"{% endunless %} focusable="false">
+  {% if include.title %}<title>{{ include.title }}</title>{% endif %}
+  {% case icon_name %}
+  {% when "android", "fab fa-android" %}
+    <path d="M7 9h10v8a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2Z"></path><path d="M9 9 7.5 6.5"></path><path d="m15 9 1.5-2.5"></path><path d="M7 13H5"></path><path d="M19 13h-2"></path><path d="M10 13h.01"></path><path d="M14 13h.01"></path>
+  {% when "arrow-right" %}
+    <path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path>
+  {% when "award", "star" %}
+    <path d="m12 3 2.7 5.5 6.1.9-4.4 4.3 1 6.1-5.4-2.9-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z"></path>
+  {% when "book", "fas fa-book", "book-open" %}
+    <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H7a3 3 0 0 0-3 3Z"></path><path d="M4 5.5V22"></path><path d="M8 7h8"></path><path d="M8 11h7"></path>
+  {% when "brain", "fas fa-brain" %}
+    <path d="M8.5 4.5a3 3 0 0 0-3 3v.4A3.5 3.5 0 0 0 4 14.5 3.5 3.5 0 0 0 8.5 20"></path><path d="M15.5 4.5a3 3 0 0 1 3 3v.4a3.5 3.5 0 0 1 1.5 6.6 3.5 3.5 0 0 1-4.5 5.5"></path><path d="M12 5v14"></path><path d="M8 9h4"></path><path d="M12 13h4"></path>
+  {% when "briefcase", "fas fa-briefcase" %}
+    <path d="M9 6V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1"></path><path d="M4 8h16v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"></path><path d="M4 12h16"></path>
+  {% when "calendar", "calendar-check", "fas fa-calendar-alt", "fas fa-calendar-check" %}
+    <path d="M7 3v3"></path><path d="M17 3v3"></path><path d="M4 8h16"></path><rect x="4" y="5" width="16" height="16" rx="2"></rect><path d="m9 15 2 2 4-5"></path>
+  {% when "chart", "chart-line", "fas fa-chart-line", "fas fa-chart-bar" %}
+    <path d="M4 19V5"></path><path d="M4 19h16"></path><path d="m7 15 4-4 3 3 5-7"></path>
+  {% when "check", "check-circle", "fas fa-check", "fas fa-check-circle" %}
+    <path d="m5 12 4 4L19 6"></path><circle cx="12" cy="12" r="9"></circle>
+  {% when "chevron-up" %}
+    <path d="m6 15 6-6 6 6"></path>
+  {% when "code", "fas fa-code", "fas fa-laptop-code" %}
+    <path d="m8 9-4 3 4 3"></path><path d="m16 9 4 3-4 3"></path><path d="m14 5-4 14"></path>
+  {% when "cog", "cogs", "fas fa-cogs" %}
+    <circle cx="12" cy="12" r="3"></circle><path d="M12 2v3"></path><path d="M12 19v3"></path><path d="m4.9 4.9 2.1 2.1"></path><path d="m17 17 2.1 2.1"></path><path d="M2 12h3"></path><path d="M19 12h3"></path><path d="m4.9 19.1 2.1-2.1"></path><path d="m17 7 2.1-2.1"></path>
+  {% when "database", "sitemap", "fas fa-sitemap" %}
+    <ellipse cx="12" cy="5" rx="7" ry="3"></ellipse><path d="M5 5v6c0 1.7 3.1 3 7 3s7-1.3 7-3V5"></path><path d="M5 11v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"></path>
+  {% when "desktop", "fas fa-desktop" %}
+    <rect x="3" y="4" width="18" height="12" rx="2"></rect><path d="M8 20h8"></path><path d="M12 16v4"></path>
+  {% when "download", "fas fa-download" %}
+    <path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path>
+  {% when "email", "envelope", "fas fa-envelope", "fas fa-paper-plane" %}
+    <rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path>
+  {% when "external", "fas fa-external-link-alt" %}
+    <path d="M14 4h6v6"></path><path d="m10 14 10-10"></path><path d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"></path>
+  {% when "file", "file-alt", "fas fa-file-alt" %}
+    <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"></path><path d="M14 3v6h6"></path><path d="M8 13h8"></path><path d="M8 17h6"></path>
+  {% when "flag", "fas fa-flag-checkered" %}
+    <path d="M5 22V4"></path><path d="M5 4c4-2 7 2 14 0v10c-7 2-10-2-14 0"></path>
+  {% when "flask", "fas fa-flask" %}
+    <path d="M9 3h6"></path><path d="M10 3v6l-5 8a3 3 0 0 0 2.6 4.5h8.8A3 3 0 0 0 19 17l-5-8V3"></path><path d="M8 15h8"></path>
+  {% when "github", "fab fa-github" %}
+    <path d="M12 2.8a9.2 9.2 0 0 0-2.9 17.9c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.2-3.4-1.2-.5-1.1-1.1-1.4-1.1-1.4-.9-.6.1-.6.1-.6 1 0 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 2.9.8.1-.7.4-1.1.7-1.4-2.2-.3-4.6-1.1-4.6-5a3.9 3.9 0 0 1 1-2.7 3.6 3.6 0 0 1 .1-2.7s.8-.3 2.8 1a9.5 9.5 0 0 1 5.1 0c1.9-1.3 2.8-1 2.8-1a3.6 3.6 0 0 1 .1 2.7 3.9 3.9 0 0 1 1 2.7c0 3.9-2.4 4.7-4.7 5 .4.3.7.9.7 1.8v2.7c0 .3.2.6.7.5A9.2 9.2 0 0 0 12 2.8Z"></path>
+  {% when "graduation", "fas fa-graduation-cap" %}
+    <path d="m22 10-10-5-10 5 10 5 10-5Z"></path><path d="M6 12v5c2 2 10 2 12 0v-5"></path>
+  {% when "home", "fas fa-home" %}
+    <path d="m3 11 9-8 9 8"></path><path d="M5 10v10h14V10"></path><path d="M10 20v-6h4v6"></path>
+  {% when "language", "fas fa-language" %}
+    <path d="M4 5h8"></path><path d="M8 3v2"></path><path d="M6 9c1 2 3 3.5 6 4"></path><path d="M12 5c-.7 3.5-2.8 6-7 8"></path><path d="M14 21l4-9 4 9"></path><path d="M15.5 18h5"></path>
+  {% when "linkedin", "fab fa-linkedin" %}
+    <path d="M6.5 9.5V20"></path><path d="M6.5 6.2v.1"></path><path d="M11 20v-7c0-2 1.3-3.5 3.4-3.5S18 11 18 13.6V20"></path><rect x="3" y="3" width="18" height="18" rx="2"></rect>
+  {% when "location", "map-marker", "fas fa-map-marker-alt" %}
+    <path d="M12 21s7-5.4 7-11a7 7 0 1 0-14 0c0 5.6 7 11 7 11Z"></path><circle cx="12" cy="10" r="2.5"></circle>
+  {% when "moon", "fas fa-moon" %}
+    <path d="M20 14.5A8 8 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5Z"></path>
+  {% when "phone", "fas fa-phone" %}
+    <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.6 19.6 0 0 1-8.5-3 19.2 19.2 0 0 1-6-6A19.6 19.6 0 0 1 2.1 4.3 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6.4 6.4l1.2-1.2a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2Z"></path>
+  {% when "play", "fas fa-play" %}
+    <path d="m8 5 11 7-11 7Z"></path>
+  {% when "quote" %}
+    <path d="M9 8H5v8h4v-5H7a3 3 0 0 1 2-3Z"></path><path d="M19 8h-4v8h4v-5h-2a3 3 0 0 1 2-3Z"></path>
+  {% when "rocket", "fas fa-rocket" %}
+    <path d="M5 15c-1 1-1.5 3.5-1.5 3.5S6 18 7 17"></path><path d="M9 15 5 11l5-5c3-3 7-3 9-2 1 2 1 6-2 9l-5 5Z"></path><path d="M15 9h.01"></path>
+  {% when "search", "fas fa-search" %}
+    <circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path>
+  {% when "seedling", "fas fa-seedling" %}
+    <path d="M12 21V10"></path><path d="M12 10C8 10 6 7 6 4c4 0 6 3 6 6Z"></path><path d="M12 12c4 0 6-3 6-6-4 0-6 3-6 6Z"></path>
+  {% when "sliders", "fas fa-sliders-h" %}
+    <path d="M4 6h9"></path><path d="M17 6h3"></path><path d="M4 12h3"></path><path d="M11 12h9"></path><path d="M4 18h11"></path><path d="M19 18h1"></path><circle cx="15" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="17" cy="18" r="2"></circle>
+  {% when "sun", "fas fa-sun" %}
+    <circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.9 4.9 1.4 1.4"></path><path d="m17.7 17.7 1.4 1.4"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m4.9 19.1 1.4-1.4"></path><path d="m17.7 6.3 1.4-1.4"></path>
+  {% when "target", "bullseye", "fas fa-bullseye" %}
+    <circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1.5"></circle>
+  {% when "terminal", "fas fa-terminal" %}
+    <path d="m4 7 5 5-5 5"></path><path d="M12 17h8"></path>
+  {% when "tools", "fas fa-tools" %}
+    <path d="m14.7 6.3 3-3a3 3 0 0 1 3 3l-3 3"></path><path d="M4 20 14.7 9.3"></path><path d="m7 5 3 3"></path><path d="m3 3 5 5"></path><path d="m15 15 4 4"></path><path d="m13 17 4 4"></path>
+  {% when "user", "fas fa-user", "user-check", "fas fa-user-check" %}
+    <circle cx="9" cy="8" r="4"></circle><path d="M3 21a6 6 0 0 1 12 0"></path><path d="m16 14 2 2 4-5"></path>
+  {% when "users", "fas fa-users", "collaboration", "fas fa-hands-helping" %}
+    <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"></path><circle cx="9.5" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.9"></path><path d="M16 3.1a4 4 0 0 1 0 7.8"></path>
+  {% when "wave", "fas fa-wave-square" %}
+    <path d="M3 12h4l2-6 4 12 2-6h6"></path>
+  {% else %}
+    <path d="m12 3 2.2 6.2 6.8.2-5.4 4.1 1.9 6.5-5.5-3.8L6.5 20l1.9-6.5L3 9.4l6.8-.2Z"></path>
+  {% endcase %}
+</svg>

@@ -1,5 +1,5 @@
 - title: "Scientific Software Development"
-  icon: "fas fa-laptop-code"
+  icon: "code"
   description: "Building robust, modular, and FAIR-compliant scientific tools with 8+ years in MATLAB and Python."
   skills:
     - "Python"
@@ -9,7 +9,7 @@
     - "FAIR Principles"
 
 - title: "Computational Modeling"
-  icon: "fas fa-brain"
+  icon: "brain"
   description: "Designing and validating ODE-based models of biological systems with standardized formats and reproducible workflows."
   skills:
     - "ODE modeling"
@@ -18,7 +18,7 @@
     - "SimBiology"
 
 - title: "Data Science & Analysis"
-  icon: "fas fa-chart-line"
+  icon: "chart-line"
   description: "Statistical and time-series analysis with clear visualizations for decision-ready insights."
   skills:
     - "Time-series analysis"

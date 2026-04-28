@@ -1,0 +1,21 @@
+work:
+  eyebrow: "Work"
+  headline: "Selected technical work across scientific software, Android engineering, and quantitative research."
+  intro: "This is the canonical project overview. The CV keeps the chronology; these entries focus on problem, contribution, outcome, stack, and links."
+  cta_eyebrow: "Looking for more?"
+  cta_heading: "Need the chronology?"
+  cta_text: "The CV has the full experience, education, skills, and publications record."
+
+cv:
+  summary_eyebrow: "Summary"
+  summary_heading: "Scientific computing, modeling, and production-minded implementation."
+  experience_eyebrow: "Experience"
+  experience_heading: "Research and software work"
+  work_reference_eyebrow: "Work reference"
+  work_reference_heading: "Project detail lives on the Work page."
+  skills_eyebrow: "Skills"
+  skills_heading: "Technical toolkit"
+  education_eyebrow: "Education"
+  education_heading: "Academic background"
+  publications_eyebrow: "Publications"
+  publications_heading: "Peer-reviewed work"

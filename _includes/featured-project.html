@@ -1,160 +1,22 @@
-{% assign project = site.data.featured-project %}
+{% assign project = site.data.work | where: "slug", "subcellular-workflow" | first %}
 
-<div class="project-showcase">
-  <div class="project-showcase-content">
-    <h3>{{ project.title }}</h3>
-    <div class="project-showcase-badges">
-      {% for badge in project.badges %}
-      {% if badge.url %}
-      <a href="{{ badge.url }}" target="_blank" rel="noopener noreferrer" class="project-badge project-badge--link">
-        <i class="{{ badge.icon }}"></i> {{ badge.text }}
-      </a>
-      {% else %}
-      <span class="project-badge"><i class="{{ badge.icon }}"></i> {{ badge.text }}</span>
-      {% endif %}
-      {% endfor %}
-    </div>
-    <p class="project-showcase-description">
-      {{ project.description }}
-    </p>
-    <ul class="project-showcase-features">
-      {% for feature in project.features %}
-      <li><i class="fas fa-check"></i> {{ feature }}</li>
+<article class="featured-case" data-reveal>
+  <div class="featured-case__content">
+    <p>{{ project.description }}</p>
+    <ul class="check-list">
+      {% for feature in project.highlights %}
+      <li>{% include icon.html name="check" %}<span>{{ feature }}</span></li>
       {% endfor %}
     </ul>
-  </div>
-  <div class="project-showcase-visual">
-    <!-- Desktop Diagram (Branching View) -->
-    <div class="workflow-diagram clean desktop-diagram">
-      <!-- Start node -->
-      <div class="diagram-row">
-        <div class="diagram-node start-node">
-          <i class="fas fa-play"></i>
-          <span>Start</span>
-        </div>
-      </div>
-      
-      <!-- Arrow -->
-      <div class="diagram-arrow">
-        <i class="fas fa-chevron-down"></i>
-      </div>
-      
-      <!-- Model Setup node -->
-      <div class="diagram-row">
-        <div class="diagram-node regular-node">
-          <i class="fas fa-cogs"></i>
-          <span>Model Setup</span>
-        </div>
-      </div>
-      
-      <!-- Arrow -->
-      <div class="diagram-arrow">
-        <i class="fas fa-chevron-down"></i>
-      </div>
-      
-      <!-- Simulation node -->
-      <div class="diagram-row">
-        <div class="diagram-node regular-node">
-          <i class="fas fa-chart-line"></i>
-          <span>Simulation</span>
-        </div>
-      </div>
-      
-      <!-- Branching arrows with more space between them -->
-      <div class="branching-arrows">
-        <div class="branch-arrow left">
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="branch-arrow center">
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="branch-arrow right">
-          <i class="fas fa-chevron-down"></i>
-        </div>
-      </div>
-      
-      <!-- Three parallel nodes -->
-      <div class="diagram-branching">
-        <div class="diagram-node regular-node">
-          <i class="fas fa-sliders-h"></i>
-          <span>Parameter Estimation</span>
-        </div>
-        <div class="diagram-node regular-node">
-          <i class="fas fa-search"></i>
-          <span>Sensitivity Analysis</span>
-        </div>
-        <div class="diagram-node regular-node">
-          <i class="fas fa-chart-bar"></i>
-          <span>Profile Likelihood Analysis</span>
-        </div>
-      </div>
-      
-      <!-- Arrow -->
-      <div class="diagram-arrow">
-        <i class="fas fa-chevron-down"></i>
-      </div>
-      
-      <!-- Results node -->
-      <div class="diagram-row">
-        <div class="diagram-node end-node">
-          <i class="fas fa-check-circle"></i>
-          <span>Results</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mobile Diagram (Linear structure with all elements) -->
-    <div class="workflow-diagram clean mobile-diagram">
-      <div class="diagram-node start-node">
-        <i class="fas fa-play"></i>
-        <span>Start</span>
-      </div>
-
-      <div class="diagram-arrow">
-        <i class="fas fa-chevron-down"></i>
-      </div>
-
-      <div class="diagram-node regular-node">
-        <i class="fas fa-cogs"></i>
-        <span>Model Setup</span>
-      </div>
-
-      <div class="diagram-arrow">
-        <i class="fas fa-chevron-down"></i>
-      </div>
-
-      <div class="diagram-node regular-node">
-        <i class="fas fa-chart-line"></i>
-        <span>Simulation</span>
-      </div>
-
-      <div class="diagram-arrow">
-        <i class="fas fa-chevron-down"></i>
-      </div>
-
-      <div class="diagram-node regular-node">
-        <i class="fas fa-sliders-h"></i>
-        <span>Parameter Estimation</span>
-      </div>
-
-      <div class="diagram-node regular-node">
-        <i class="fas fa-search"></i>
-        <span>Sensitivity Analysis</span>
-      </div>
-
-      <div class="diagram-node regular-node">
-        <i class="fas fa-chart-bar"></i>
-        <span>Profile Likelihood Analysis</span>
-      </div>
-
-      <div class="diagram-arrow">
-        <i class="fas fa-chevron-down"></i>
-      </div>
-
-      <div class="diagram-node end-node">
-        <i class="fas fa-check-circle"></i>
-        <span>Results</span>
-      </div>
+    <div class="button-row">
+      {% for link in project.links %}
+      <a href="{% if link.external %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}" {% if link.external %}target="_blank" rel="noopener noreferrer"{% endif %} class="button {% if link.primary %}button--primary{% else %}button--secondary{% endif %}">
+        {% include icon.html name=link.icon %} {{ link.text }}
+      </a>
+      {% endfor %}
     </div>
   </div>
-</div>
+  <div class="featured-case__visual">
+    {% include workflow-diagram.html %}
+  </div>
+</article>

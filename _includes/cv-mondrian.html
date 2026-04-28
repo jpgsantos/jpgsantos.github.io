@@ -1,0 +1,250 @@
+{% assign profile = site.data.profile %}
+{% assign octidy = site.data.work | where: "slug", "octidy-android-app" | first %}
+{% assign cv_copy = site.data.page_copy.cv %}
+
+<section class="cv-mondrian" aria-label="Curriculum Vitae — Mondrian view">
+
+  {%- comment -%} Hero rows: photo + name + role + colour blocks + contact tiles {%- endcomment -%}
+  <header class="mond-tile cv-tile--name">
+    <p class="mond-eyebrow">Curriculum vitae</p>
+    <h1 class="mond-hero__title">{{ profile.name }}</h1>
+    <p class="mond-hero__lede">{{ profile.role | replace: " | ", " · " }}</p>
+    <div class="mond-actions">
+      <a href="{{ profile.cv_pdf | relative_url }}" target="_blank" rel="noopener noreferrer" class="mond-button mond-button--primary">{% include icon.html name="download" %} Download CV</a>
+      <a href="{{ '/#contact' | relative_url }}" class="mond-button">{% include icon.html name="email" %} Contact</a>
+    </div>
+  </header>
+
+  <div class="mond-tile cv-tile--photo">
+    {% include profile-image.html loading="eager" fetchpriority="high" width="220" height="260" sizes="220px" %}
+  </div>
+
+  <div class="mond-tile mond-tile--yellow cv-tile--swatch-y" aria-hidden="true"></div>
+  <div class="mond-tile mond-tile--red    cv-tile--swatch-r" aria-hidden="true"></div>
+  <div class="mond-tile mond-tile--blue   cv-tile--swatch-b" aria-hidden="true"></div>
+
+  {%- comment -%} Contact tiles — grouped by type {%- endcomment -%}
+  <a href="mailto:{{ profile.contact.email }}" class="mond-tile cv-tile--contact cv-tile--contact-email">
+    {% include icon.html name="email" %}
+    <span><strong>Email</strong>{{ profile.contact.email }}</span>
+  </a>
+  <a href="tel:{{ profile.contact.phone_uri }}" class="mond-tile cv-tile--contact cv-tile--contact-phone">
+    {% include icon.html name="phone" %}
+    <span><strong>Phone</strong>{{ profile.contact.phone }}</span>
+  </a>
+  <span class="mond-tile cv-tile--contact cv-tile--contact-location">
+    {% include icon.html name="location" %}
+    <span><strong>Location</strong>{{ profile.location }}</span>
+  </span>
+  <span class="mond-tile cv-tile--contact cv-tile--contact-flag">
+    {% include icon.html name="flag" %}
+    <span><strong>Citizenship</strong>{{ profile.citizenship }}</span>
+  </span>
+  <a href="{{ profile.socials.linkedin.url }}" target="_blank" rel="noopener noreferrer" class="mond-tile cv-tile--contact cv-tile--contact-linkedin">
+    {% include icon.html name="linkedin" %}
+    <span><strong>LinkedIn</strong>{{ profile.socials.linkedin.username }}</span>
+  </a>
+  <a href="{{ profile.socials.github.url }}" target="_blank" rel="noopener noreferrer" class="mond-tile cv-tile--contact cv-tile--contact-github">
+    {% include icon.html name="github" %}
+    <span><strong>GitHub</strong>{{ profile.socials.github.username }}</span>
+  </a>
+  <span class="mond-tile cv-tile--contact cv-tile--contact-language">
+    {% include icon.html name="language" %}
+    <span><strong>Languages</strong>{{ profile.languages }}</span>
+  </span>
+  <span class="mond-tile cv-tile--contact cv-tile--contact-current">
+    {% include icon.html name="briefcase" %}
+    <span><strong>Current</strong>{{ profile.current_work }}</span>
+  </span>
+
+  {%- comment -%} Summary section {%- endcomment -%}
+  <header class="mond-tile cv-tile--summary-head">
+    <p class="mond-eyebrow">{{ cv_copy.summary_eyebrow }}</p>
+    <h2 class="mond-section-title">{{ cv_copy.summary_heading }}</h2>
+  </header>
+  <article class="mond-tile cv-tile--summary-1">
+    <p>{{ profile.about }}</p>
+  </article>
+  <article class="mond-tile cv-tile--summary-2">
+    <p>{{ profile.summary }}</p>
+  </article>
+
+  {%- comment -%} Experience — 4 entries, each as a Mondrian block {%- endcomment -%}
+  <header class="mond-tile cv-tile--xp-head">
+    <p class="mond-eyebrow">{{ cv_copy.experience_eyebrow }}</p>
+    <h2 class="mond-section-title">{{ cv_copy.experience_heading }}</h2>
+  </header>
+
+  {%- comment -%} XP1: AI / Systems Engineer (red) {%- endcomment -%}
+  <header class="mond-tile cv-xp-head cv-xp-head--red cv-tile--xp1-head">
+    <p class="mond-eyebrow">Apr 2026 → Present</p>
+    <h3>AI / Systems Engineer</h3>
+    <p class="cv-xp-inst">Vectonomous Labs</p>
+  </header>
+  <article class="mond-tile cv-xp-body cv-tile--xp1-body">
+    <p>Working on applied AI systems across data, backend, machine learning, and agentic engineering workflows.</p>
+    <ul>
+      <li>Contributing to AI/ML systems, backend infrastructure, data pipelines, and intelligence services.</li>
+      <li>Applying strong analytical and systems-thinking skills from computational neuroscience to practical engineering problems.</li>
+      <li>Operating in a high-autonomy environment where architecture, implementation quality, and end-to-end ownership matter.</li>
+    </ul>
+  </article>
+
+  {%- comment -%} XP2: Founder / Octidy (yellow) {%- endcomment -%}
+  <header class="mond-tile cv-xp-head cv-xp-head--yellow cv-tile--xp2-head">
+    <p class="mond-eyebrow">2025 → Present</p>
+    <h3>Founder</h3>
+    <p class="cv-xp-inst">Octidy</p>
+  </header>
+  <article class="mond-tile cv-xp-body cv-tile--xp2-body">
+    <p>Founded and built Octidy, a Firebase-first Android app for coordinating household chores through bidding, assignment, and progress tracking.</p>
+    <ul>
+      <li>Built invite-code households, task creation, bidding deadlines, automatic assignment, tie handling, recurring chores, calendar views, and progress statistics.</li>
+      <li>Implemented Kotlin, Jetpack Compose, Navigation Compose, Hilt, Coroutines/Flow, Firebase Auth, Firestore, offline persistence, and WorkManager.</li>
+      <li>Owned product definition, architecture, UI/UX, debugging, documentation, production packaging, and Play Console testing.</li>
+    </ul>
+  </article>
+
+  {%- comment -%} XP3: PhD Researcher (blue) {%- endcomment -%}
+  <header class="mond-tile cv-xp-head cv-xp-head--blue cv-tile--xp3-head">
+    <p class="mond-eyebrow">Jan 2016 → Mar 2025</p>
+    <h3>PhD Researcher</h3>
+    <p class="cv-xp-inst">University of Porto / Karolinska Institutet / KTH / SciLifeLab</p>
+  </header>
+  <article class="mond-tile cv-xp-body cv-tile--xp3-body">
+    <p><strong>Thesis:</strong> A workflow for developing biochemical pathway models using ordinary differential equations.</p>
+    <ul>
+      <li>Built Subcellular Workflow, a modular FAIR-compliant MATLAB framework for ODE-based pathway modeling with simulation, analysis, and parameterization capabilities.</li>
+      <li>Implemented parameter estimation, local/global sensitivity analysis, and profile likelihood analysis.</li>
+      <li>Validated on LIRMO, LIREM, TM-M, and G-PIPK models spanning ligand-receptor interactions, effector responses, CaMKII autophosphorylation dynamics, and basal ganglia signaling.</li>
+      <li>Published in <a href="https://doi.org/10.1007/s12021-021-09546-3" target="_blank" rel="noopener noreferrer">Neuroinformatics</a>.</li>
+    </ul>
+  </article>
+
+  {%- comment -%} XP4: Research Scholar (ink/dark) {%- endcomment -%}
+  <header class="mond-tile cv-xp-head cv-xp-head--ink cv-tile--xp4-head">
+    <p class="mond-eyebrow">Apr 2015 → Dec 2015</p>
+    <h3>Research Scholar</h3>
+    <p class="cv-xp-inst">UCIBIO @ REQUIMTE, University of Porto</p>
+  </header>
+  <article class="mond-tile cv-xp-body cv-tile--xp4-body">
+    <p>Conducted research on porphyrin nanomaterials via ionic self-assembly.</p>
+    <ul>
+      <li>Performed synthesis, purification, and characterization of materials.</li>
+      <li>Analyzed IR spectrograms for species concentrations.</li>
+      <li>Supervised two undergraduate students.</li>
+      <li>Published in <a href="https://doi.org/10.1016/j.tet.2016.09.030" target="_blank" rel="noopener noreferrer">Tetrahedron</a>.</li>
+    </ul>
+  </article>
+
+  {%- comment -%} Skills section — categories with chip grids {%- endcomment -%}
+  <header class="mond-tile cv-tile--skills-head">
+    <p class="mond-eyebrow">{{ cv_copy.skills_eyebrow }}</p>
+    <h2 class="mond-section-title">{{ cv_copy.skills_heading }}</h2>
+  </header>
+
+  {% for cat in site.data.skills %}
+  {% assign sidx = forloop.index %}
+  {%- assign chip_count = cat.items | size -%}
+  {%- if chip_count <= 4 -%}
+    {%- assign cv_cols = chip_count -%}
+  {%- else -%}
+    {%- assign cv_cols = chip_count | divided_by: 2.0 | ceil -%}
+  {%- endif -%}
+  {%- assign cv_partial = chip_count | modulo: cv_cols -%}
+  {%- assign cv_full_rows = chip_count | divided_by: cv_cols -%}
+  {%- if cv_partial > 0 -%}
+    {%- assign cv_grid_cols = cv_cols | times: cv_partial -%}
+    {%- assign cv_normal_span = cv_partial -%}
+    {%- assign cv_partial_span = cv_cols -%}
+  {%- else -%}
+    {%- assign cv_grid_cols = cv_cols -%}
+    {%- assign cv_normal_span = 1 -%}
+    {%- assign cv_partial_span = 1 -%}
+  {%- endif -%}
+  <header class="mond-tile cv-skill-head cv-tile--skill-{{ sidx }}-head">
+    <div class="cv-skill-icon">{% include icon.html name=cat.icon %}</div>
+    <span class="mond-card__num">0{{ sidx }}</span>
+    <h3>{{ cat.category }}</h3>
+  </header>
+  <div class="mond-tile cv-skill-chips cv-tile--skill-{{ sidx }}-chips" style="grid-template-columns: repeat({{ cv_grid_cols }}, 1fr);">
+    {%- for s in cat.items -%}
+      {%- assign idx0 = forloop.index0 -%}
+      {%- assign row0 = idx0 | divided_by: cv_cols -%}
+      {%- assign in_partial = false -%}
+      {%- if cv_partial > 0 and row0 == cv_full_rows -%}{%- assign in_partial = true -%}{%- endif -%}
+      {%- if in_partial -%}{%- assign span = cv_partial_span -%}{%- else -%}{%- assign span = cv_normal_span -%}{%- endif -%}
+      {%- assign extra = "" -%}
+      {%- assign next_idx = idx0 | plus: 1 -%}
+      {%- assign next_row0 = next_idx | divided_by: cv_cols -%}
+      {%- if forloop.last or next_row0 != row0 -%}{%- assign extra = extra | append: " no-br" -%}{%- endif -%}
+      {%- if cv_partial > 0 -%}
+        {%- if row0 == cv_full_rows -%}{%- assign extra = extra | append: " no-bb" -%}{%- endif -%}
+      {%- else -%}
+        {%- assign last_row0 = cv_full_rows | minus: 1 -%}
+        {%- if row0 == last_row0 -%}{%- assign extra = extra | append: " no-bb" -%}{%- endif -%}
+      {%- endif -%}
+      <span style="grid-column: span {{ span }};"{% if extra != "" %} class="{{ extra | strip }}"{% endif %}>{{ s }}</span>
+    {%- endfor -%}
+  </div>
+  {% endfor %}
+
+  {%- comment -%} Education section — 3 entries {%- endcomment -%}
+  <header class="mond-tile cv-tile--edu-head">
+    <p class="mond-eyebrow">{{ cv_copy.education_eyebrow }}</p>
+    <h2 class="mond-section-title">{{ cv_copy.education_heading }}</h2>
+  </header>
+
+  {%- comment -%} EDU1: PhD (yellow) {%- endcomment -%}
+  <header class="mond-tile cv-xp-head cv-xp-head--yellow cv-tile--edu1-head">
+    <p class="mond-eyebrow">Jan 2016 → Mar 2025</p>
+    <h3>PhD, Computational Neuroscience</h3>
+    <p class="cv-xp-inst">University of Porto (FCUP/ICBAS/FMUP/GABBA)</p>
+  </header>
+  <article class="mond-tile cv-xp-body cv-tile--edu1-body">
+    <p>Doctoral coursework with strong quantitative and computational focus through the GABBA programme — biostatistics, systems and synthetic bioinformatics, neurosciences, and more.</p>
+    <p><strong>Thesis:</strong> A workflow for developing biochemical pathway models using ordinary differential equations.</p>
+  </article>
+
+  {%- comment -%} EDU2: MSc (blue) {%- endcomment -%}
+  <header class="mond-tile cv-xp-head cv-xp-head--blue cv-tile--edu2-head">
+    <p class="mond-eyebrow">2013 → 2015</p>
+    <h3>MSc, Biochemistry</h3>
+    <p class="cv-xp-inst">University of Porto (FCUP, ICBAS) · Grade 16/20</p>
+  </header>
+  <article class="mond-tile cv-xp-body cv-tile--edu2-body">
+    <p>Specialized in computational and analytical approaches to biochemistry, with coursework in computational biochemistry, bioinformatics, instrumental analysis, and bioanalytical chemistry.</p>
+    <p><strong>Thesis:</strong> Exploring the Boundaries of Porphyrin Materials Synthesis by Ionic Self-Assembly.</p>
+  </article>
+
+  {%- comment -%} EDU3: BSc (red) {%- endcomment -%}
+  <header class="mond-tile cv-xp-head cv-xp-head--red cv-tile--edu3-head">
+    <p class="mond-eyebrow">2010 → 2013</p>
+    <h3>BSc, Biochemistry</h3>
+    <p class="cv-xp-inst">University of Porto (FCUP, ICBAS) · Grade 16/20</p>
+  </header>
+  <article class="mond-tile cv-xp-body cv-tile--edu3-body">
+    <p>Three-year program combining biological sciences with quantitative and analytical methods, including mathematics, statistical methods, and mathematical models.</p>
+    <p>Research internship at the Institute for Molecular and Cell Biology (i3S) on protein depletion and cell cycle regulation in <em>Drosophila melanogaster</em>.</p>
+  </article>
+
+  {%- comment -%} Publications {%- endcomment -%}
+  <header class="mond-tile cv-tile--pub-head">
+    <p class="mond-eyebrow">{{ cv_copy.publications_eyebrow }}</p>
+    <h2 class="mond-section-title">{{ cv_copy.publications_heading }}</h2>
+  </header>
+
+  {% for pub in site.data.publications %}
+  {% assign pidx = forloop.index %}
+  <article class="mond-tile cv-pub-card cv-tile--pub-{{ pidx }}">
+    <div class="cv-pub-year cv-pub-year--{% cycle 'red','blue','yellow' %}">{{ pub.year }}</div>
+    <div class="cv-pub-body">
+      <h3>{{ pub.title }}</h3>
+      <p class="cv-pub-authors">{{ pub.authors }}</p>
+      <p class="cv-pub-journal"><em>{{ pub.journal }}</em>{% if pub.volume %}, {{ pub.volume }}{% endif %}.</p>
+      <a href="https://doi.org/{{ pub.doi }}" target="_blank" rel="noopener noreferrer" class="cv-pub-doi">DOI: {{ pub.doi }} ↗</a>
+    </div>
+  </article>
+  {% endfor %}
+
+</section>

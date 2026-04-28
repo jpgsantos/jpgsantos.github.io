@@ -1,17 +1,15 @@
-<div class="grid">
+<div class="skills-grid">
   {% for skill_group in site.data.skills %}
-  <div class="card">
-    <div class="card-icon">
-      <i class="{{ skill_group.icon }}"></i>
+  <article class="surface-card skill-card" data-reveal>
+    <div class="surface-card__icon">
+      {% include icon.html name=skill_group.icon %}
     </div>
     <h3>{{ skill_group.category }}</h3>
-    <div class="pills">
+    <div class="tag-list" aria-label="{{ skill_group.category }} skills">
       {% for item in skill_group.items %}
       <span>{{ item }}</span>
       {% endfor %}
     </div>
-  </div>
+  </article>
   {% endfor %}
 </div>
-
-

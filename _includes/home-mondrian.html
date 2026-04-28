@@ -1,0 +1,176 @@
+{% assign profile = site.data.profile %}
+
+<section class="home-mondrian" aria-label="Home - Mondrian view">
+
+  <header class="mond-tile mond-tile--title">
+    <p class="mond-eyebrow">{{ profile.role }}</p>
+    <h1 class="mond-hero__title">{{ profile.headline }}</h1>
+    <p class="mond-hero__lede">{{ profile.summary }}</p>
+  </header>
+
+  <div class="mond-tile mond-tile--neural" aria-hidden="true">
+    <canvas class="neural-canvas" data-neural></canvas>
+  </div>
+
+  <article class="mond-tile mond-tile--intro">
+    <p class="mond-eyebrow">About</p>
+    <p class="mond-intro__body">{{ profile.about }}</p>
+    <span class="mond-intro__rule" aria-hidden="true"></span>
+  </article>
+
+  <div class="mond-tile mond-tile--yellow mond-tile--swatch-y" aria-hidden="true"></div>
+  <div class="mond-tile mond-tile--red mond-tile--swatch-r" aria-hidden="true"></div>
+
+  <div class="mond-tile mond-tile--photo">
+    {% include profile-image.html class="mond-photo" loading="eager" fetchpriority="high" width="220" height="260" sizes="220px" %}
+  </div>
+
+  <header class="mond-tile mond-tile--name">
+    <p class="mond-eyebrow">Technical focus</p>
+    <h2 class="mond-name">Modeling + implementation</h2>
+  </header>
+
+  <div class="mond-tile mond-tile--red mond-tile--m1">
+    <strong>{{ profile.metrics[0].value }}</strong>
+    <span>{{ profile.metrics[0].label }}</span>
+  </div>
+  <div class="mond-tile mond-tile--m2">
+    <strong>{{ profile.metrics[1].value }}</strong>
+    <span>{{ profile.metrics[1].label }}</span>
+  </div>
+
+  <div class="mond-tile mond-tile--blue mond-tile--hero-field" aria-hidden="true"></div>
+
+  <ul class="mond-tile mond-tile--creds">
+    <li>{% include icon.html name="graduation" %} {{ profile.role | split: " | " | last }}</li>
+    <li>{% include icon.html name="briefcase" %} Current: {{ profile.current_work }}</li>
+    <li>{% include icon.html name="location" %} {{ profile.location }}</li>
+  </ul>
+
+  <div class="mond-tile mond-tile--yellow mond-tile--m3">
+    <strong>{{ profile.metrics[2].value }}</strong>
+    <span>{{ profile.metrics[2].label }}</span>
+  </div>
+  <div class="mond-tile mond-tile--m4">
+    <strong>{{ profile.metrics[3].value }}</strong>
+    <span>{{ profile.metrics[3].label }}</span>
+  </div>
+
+  <nav class="mond-tile mond-tile--socials" aria-label="Profile social links">
+    <a href="{{ profile.socials.github.url }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">{% include icon.html name="github" %}</a>
+    <a href="{{ profile.socials.linkedin.url }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">{% include icon.html name="linkedin" %}</a>
+    <a href="mailto:{{ profile.contact.email }}" aria-label="Email">{% include icon.html name="email" %}</a>
+  </nav>
+
+  <div class="mond-tile mond-tile--chips">
+    {% for skill in profile.skill_chips %}<span>{{ skill }}</span>{% endfor %}
+  </div>
+
+  <div class="mond-tile mond-tile--proofs">
+    {% for proof in profile.proof_points %}
+    <span><strong>{{ proof.title }}</strong> {{ proof.text }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="mond-tile mond-tile--red mond-tile--strip-r" aria-hidden="true"></div>
+  <div class="mond-tile mond-tile--blue mond-tile--strip-b" aria-hidden="true"></div>
+  <div class="mond-tile mond-tile--yellow mond-tile--strip-y" aria-hidden="true"></div>
+
+  <header class="mond-tile mond-tile--about-head">
+    <p class="mond-eyebrow">About</p>
+    <h2 class="mond-section-title">{{ profile.about_heading }}</h2>
+  </header>
+
+  <article class="mond-tile mond-tile--about-body">
+    <p>{{ profile.about }}</p>
+    <p>{{ profile.about_background }}</p>
+  </article>
+
+  {% for principle in profile.principles %}
+  <article class="mond-tile mond-about-card mond-tile--about-p{{ forloop.index }}">
+    <div class="mond-exp-head__icon">{% include icon.html name=principle.icon %}</div>
+    <h3>{{ principle.title }}</h3>
+    <p>{{ principle.description }}</p>
+  </article>
+  {% endfor %}
+
+  <header class="mond-tile mond-tile--exp-head">
+    <p class="mond-eyebrow">Technical toolkit</p>
+    <h2 class="mond-section-title">{{ profile.toolkit_heading }}</h2>
+  </header>
+
+  {% for area in profile.focus_areas %}
+  {% assign idx = forloop.index %}
+  <header class="mond-tile mond-exp-head mond-tile--exp-{{ idx }}-head">
+    <div class="mond-exp-head__icon">{% include icon.html name=area.icon %}</div>
+    <span class="mond-exp-head__num">0{{ idx }}</span>
+    <h3>{{ area.title }}</h3>
+  </header>
+  <article class="mond-tile mond-exp-body mond-tile--exp-{{ idx }}-body">
+    <p>{{ area.description }}</p>
+  </article>
+  <div class="mond-tile mond-exp-chips mond-tile--exp-{{ idx }}-chips">
+    {% assign chip_offset = forloop.index0 | times: 2 %}
+    {% for skill in profile.skill_chips offset: chip_offset limit:2 %}<span>{{ skill }}</span>{% endfor %}
+  </div>
+  {% endfor %}
+
+  <header class="mond-tile mond-tile--feat-head">
+    <p class="mond-eyebrow">Selected work</p>
+    <h2 class="mond-section-title">{{ profile.selected_work_heading }}</h2>
+    <p class="mond-section-lede">{{ profile.selected_work_intro }}</p>
+  </header>
+
+  {% for item in site.data.work limit:2 %}
+  <article class="mond-tile mond-work-card mond-tile--work-{{ forloop.index }}">
+    <div class="mond-work-card__head">
+      <div class="mond-exp-head__icon">{% include icon.html name=item.icon %}</div>
+      <div>
+        <p class="mond-eyebrow">{{ item.category }}</p>
+        <h3>{{ item.title }}</h3>
+      </div>
+    </div>
+    <p>{{ item.description }}</p>
+    <a href="{{ item.url | relative_url }}" class="mond-card__link">
+      Read case study {% include icon.html name="arrow-right" %}
+    </a>
+  </article>
+  {% endfor %}
+
+  <header class="mond-tile mond-tile--contact-head" data-contact-anchor="mondrian">
+    <p class="mond-eyebrow">Contact</p>
+    <h2 class="mond-section-title">{{ profile.contact_heading }}</h2>
+    <p class="mond-section-lede">{{ profile.contact_intro }}</p>
+  </header>
+
+  <a href="mailto:{{ profile.contact.email }}" class="mond-tile mond-contact-card mond-contact-card--compact mond-tile--contact-email">
+    {% include icon.html name="email" %}
+    <span><strong>Email</strong>{{ profile.contact.email }}</span>
+    {% include icon.html name="arrow-right" %}
+  </a>
+
+  <a href="tel:{{ profile.contact.phone_uri }}" class="mond-tile mond-contact-card mond-contact-card--compact mond-tile--contact-phone">
+    {% include icon.html name="phone" %}
+    <span><strong>Phone</strong>{{ profile.contact.phone }}</span>
+    {% include icon.html name="arrow-right" %}
+  </a>
+
+  {% for social in profile.socials %}
+  {% assign item = social[1] %}
+  <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" class="mond-tile mond-contact-card mond-contact-card--compact mond-tile--contact-{{ social[0] }}">
+    {% include icon.html name=item.icon %}
+    <span><strong>{{ item.label }}</strong>{{ item.username }}</span>
+    {% include icon.html name="arrow-right" %}
+  </a>
+  {% endfor %}
+
+  <div class="mond-tile mond-tile--actions">
+    <a href="{{ '/projects/' | relative_url }}" class="mond-button mond-button--primary">
+      View work {% include icon.html name="arrow-right" %}
+    </a>
+    <a href="{{ profile.cv_pdf | relative_url }}" class="mond-button" target="_blank" rel="noopener noreferrer">
+      {% include icon.html name="download" %} Download CV
+    </a>
+  </div>
+
+</section>

@@ -1,0 +1,240 @@
+{% assign profile = site.data.profile %}
+
+<section class="about-mondrian" aria-label="About João Pedro Santos">
+
+  {%- comment -%} Row 1-2: hero + photo + quote + colour swatches {%- endcomment -%}
+  <header class="mond-tile about-tile--hero">
+    <p class="mond-eyebrow">About · Researcher · Engineer</p>
+    <h1 class="mond-hero__title">From <span class="mond-accent">biochemical</span> systems to software systems.</h1>
+    <p class="mond-hero__lede">I solve complex problems with algorithms and scientific software — combining mathematical rigor with practical engineering, especially when technical complexity needs to become something a team can understand, validate, and use.</p>
+    <div class="mond-actions">
+      <a href="{{ '/#contact' | relative_url }}" class="mond-button mond-button--primary">{% include icon.html name="email" %} Get in touch</a>
+      <a href="{{ '/cv/' | relative_url }}" class="mond-button">{% include icon.html name="file" %} View CV</a>
+    </div>
+  </header>
+
+  <div class="mond-tile about-tile--photo">
+    {% include profile-image.html class="about-photo" loading="lazy" width="320" height="380" sizes="320px" %}
+  </div>
+  <div class="mond-tile mond-tile--yellow about-tile--swatch-y" aria-hidden="true"></div>
+
+  <div class="mond-tile about-tile--quote">
+    <blockquote class="mond-quote">{% include icon.html name="quote" %}<span>Translating complex biological systems into computational models and reliable software.</span></blockquote>
+  </div>
+  <div class="mond-tile mond-tile--red  about-tile--swatch-r" aria-hidden="true"></div>
+  <div class="mond-tile mond-tile--blue about-tile--swatch-b" aria-hidden="true"></div>
+
+  {%- comment -%} Row 3: story header — Row 4: prose left + right {%- endcomment -%}
+  <header class="mond-tile about-tile--story-head">
+    <p class="mond-eyebrow">01 · Story</p>
+    <h2 class="mond-section-title">Research depth, product-minded implementation</h2>
+    <p class="mond-section-lede">Two threads run through my work: scientific modeling that earns trust through rigor, and product engineering that gets useful tools into people's hands.</p>
+  </header>
+
+  <article class="mond-tile about-tile--story-1">
+    <p class="mond-eyebrow">Now · Engineering</p>
+    <p>Since April 2026, I have been an <strong>AI / Systems Engineer at Vectonomous Labs</strong>, working at the intersection of applied AI systems, backend infrastructure, data pipelines, and agentic engineering workflows.</p>
+    <p>In 2025, I founded <strong>Octidy</strong>, a Kotlin and Jetpack Compose Android app for household chore coordination. I owned the full path from product concept to Play Store testing: bidding logic, Firebase Auth, Firestore realtime sync, offline persistence, WorkManager deadlines, responsive UI, release management, Git workflows, and documentation.</p>
+  </article>
+
+  <article class="mond-tile about-tile--story-2">
+    <p class="mond-eyebrow">Background · Research</p>
+    <p>I hold a PhD in Computational Neuroscience with <strong>8+ years of experience</strong> working with ODE-based models, parameter estimation, sensitivity analysis, and profile likelihood analysis in MATLAB and Python. My thesis, <em>A workflow for developing biochemical pathway models using ordinary differential equations</em>, introduced an integrated FAIR-compliant software framework for biochemical pathway modeling.</p>
+    <p>Earlier, my MSc and research scholarship work focused on porphyrin nanomaterials via ionic self-assembly, combining wet-lab synthesis, characterization, and a publication in <em>Tetrahedron</em>.</p>
+  </article>
+
+  {%- comment -%} Row 5: 4-up stat band {%- endcomment -%}
+  <div class="mond-tile mond-tile--red about-tile--stat-1">
+    <p class="about-stat__num">8+</p>
+    <p class="about-stat__label">Years in research</p>
+  </div>
+  <div class="mond-tile mond-tile--blue about-tile--stat-2">
+    <p class="about-stat__num">2</p>
+    <p class="about-stat__label">Publications</p>
+  </div>
+  <div class="mond-tile mond-tile--yellow about-tile--stat-3">
+    <p class="about-stat__num">3</p>
+    <p class="about-stat__label">Major project areas</p>
+  </div>
+  <div class="mond-tile about-tile--stat-4">
+    <p class="about-stat__num">3</p>
+    <p class="about-stat__label">Countries worked in</p>
+  </div>
+
+  {%- comment -%} Operating principles — head + body per item, varied widths {%- endcomment -%}
+  <header class="mond-tile about-tile--principles-head">
+    <p class="mond-eyebrow">02 · Operating principles</p>
+    <h2 class="mond-section-title">How I work</h2>
+    <p class="mond-section-lede">Five things I optimize for, in roughly the order I lean on them when the work gets hard.</p>
+  </header>
+
+  {%- assign principles = profile.principles -%}
+  {%- assign extra_principles = "Continuous learning|seedling|New tools are useful when they make the work more reproducible, maintainable, or easier to validate.||User-centered tools|user-check|Scientific software should be rigorous, but also usable enough to survive outside its original author." | split: "||" -%}
+
+  {%- assign p1 = principles[0] -%}
+  <header class="mond-tile about-prin-head about-tile--p1-head">
+    <div class="about-prin-head__icon">{% include icon.html name=p1.icon %}</div>
+    <span class="about-prin-head__num">01</span>
+    <h3>{{ p1.title }}</h3>
+  </header>
+  <article class="mond-tile about-prin-body about-tile--p1-body">
+    <p>{{ p1.description }}</p>
+  </article>
+
+  {%- assign p2_parts = extra_principles[0] | split: "|" -%}
+  {%- assign p2_title = p2_parts[0] -%}
+  {%- assign p2_icon = p2_parts[1] -%}
+  {%- assign p2_desc = p2_parts[2] -%}
+  <header class="mond-tile about-prin-head about-tile--p2-head">
+    <div class="about-prin-head__icon">{% include icon.html name=p2_icon %}</div>
+    <span class="about-prin-head__num">02</span>
+    <h3>{{ p2_title }}</h3>
+  </header>
+  <article class="mond-tile about-prin-body about-tile--p2-body">
+    <p>{{ p2_desc }}</p>
+  </article>
+
+  {%- assign p3 = principles[1] -%}
+  <header class="mond-tile about-prin-head about-tile--p3-head">
+    <div class="about-prin-head__icon">{% include icon.html name=p3.icon %}</div>
+    <span class="about-prin-head__num">03</span>
+    <h3>{{ p3.title }}</h3>
+  </header>
+  <article class="mond-tile about-prin-body about-tile--p3-body">
+    <p>{{ p3.description }}</p>
+  </article>
+
+  {%- assign p4 = principles[2] -%}
+  <header class="mond-tile about-prin-head about-tile--p4-head">
+    <div class="about-prin-head__icon">{% include icon.html name=p4.icon %}</div>
+    <span class="about-prin-head__num">04</span>
+    <h3>{{ p4.title }}</h3>
+  </header>
+  <article class="mond-tile about-prin-body about-tile--p4-body">
+    <p>{{ p4.description }}</p>
+  </article>
+
+  {%- assign p5_parts = extra_principles[1] | split: "|" -%}
+  {%- assign p5_title = p5_parts[0] -%}
+  {%- assign p5_icon = p5_parts[1] -%}
+  {%- assign p5_desc = p5_parts[2] -%}
+  <header class="mond-tile about-prin-head about-tile--p5-head">
+    <div class="about-prin-head__icon">{% include icon.html name=p5_icon %}</div>
+    <span class="about-prin-head__num">05</span>
+    <h3>{{ p5_title }}</h3>
+  </header>
+  <article class="mond-tile about-prin-body about-tile--p5-body">
+    <p>{{ p5_desc }}</p>
+  </article>
+
+  {%- comment -%} Tools header + chips tile {%- endcomment -%}
+  <header class="mond-tile about-tile--tools-head">
+    <p class="mond-eyebrow">03 · Technical toolkit</p>
+    <h2 class="mond-section-title">Tools and methods</h2>
+    <p class="mond-section-lede">For a detailed breakdown of skills and experience, see the <a href="{{ '/cv/' | relative_url }}">CV ↗</a>.</p>
+  </header>
+  <div class="mond-tile about-tile--tools">
+    <div class="about-tags">
+      <span>Python</span>
+      <span>NumPy / SciPy / Pandas</span>
+      <span>MATLAB</span>
+      <span>Kotlin</span>
+      <span>Jetpack Compose</span>
+      <span>ODE modeling</span>
+      <span>SBML</span>
+      <span>Time-series analysis</span>
+      <span>GitHub Actions</span>
+      <span>Jupyter Notebooks</span>
+      <span>Firebase</span>
+      <span>SimBiology</span>
+      <span>FAIR principles</span>
+      <span>Parameter estimation</span>
+      <span>Sensitivity analysis</span>
+    </div>
+  </div>
+
+  {%- comment -%} Roles section: 4 roles, each head + 5 items, with intermittent colour blocks {%- endcomment -%}
+  <header class="mond-tile about-tile--roles-head">
+    <p class="mond-eyebrow">04 · How I add value</p>
+    <h2 class="mond-section-title">Roles, contributions, and focus areas</h2>
+    <p class="mond-section-lede">What I'm currently shaped for, how I tend to contribute on a team, and the kinds of problems I'm drawn to.</p>
+  </header>
+
+  {%- comment -%} Role 1 — Current role shape {%- endcomment -%}
+  <header class="mond-tile about-role-head about-tile--r1-head">
+    <div class="about-role-head__icon">{% include icon.html name="briefcase" %}</div>
+    <span class="mond-card__num">01 · Current shape</span>
+    <h3>Current role shape</h3>
+  </header>
+  <article class="mond-tile about-role-item about-tile--r1-i1">AI / Systems Engineer</article>
+  <article class="mond-tile about-role-item mond-tile--red about-tile--r1-i2">Applied AI systems</article>
+  <article class="mond-tile about-role-item about-tile--r1-i3">Backend & data infrastructure</article>
+  <article class="mond-tile about-role-item about-tile--r1-i4">Agentic engineering workflows</article>
+  <article class="mond-tile about-role-item mond-tile--yellow about-tile--r1-i5">Scientific software & modeling</article>
+
+  {%- comment -%} Role 2 — How I contribute {%- endcomment -%}
+  <header class="mond-tile about-role-head about-tile--r2-head">
+    <div class="about-role-head__icon">{% include icon.html name="tools" %}</div>
+    <span class="mond-card__num">02 · Contribution</span>
+    <h3>How I contribute</h3>
+  </header>
+  <article class="mond-tile about-role-item mond-tile--blue about-tile--r2-i1">Design & validate algorithms</article>
+  <article class="mond-tile about-role-item about-tile--r2-i2">Write clean, testable scientific code</article>
+  <article class="mond-tile about-role-item about-tile--r2-i3">Integrate tools & data sources end to end</article>
+  <article class="mond-tile about-role-item about-tile--r2-i4">Implement & benchmark methods from literature</article>
+  <article class="mond-tile about-role-item about-tile--r2-i5">De-risk ambiguous technical exploration</article>
+
+  {%- comment -%} Role 3 — How I work best {%- endcomment -%}
+  <header class="mond-tile about-role-head about-tile--r3-head">
+    <div class="about-role-head__icon">{% include icon.html name="users" %}</div>
+    <span class="mond-card__num">03 · Team fit</span>
+    <h3>How I work best</h3>
+  </header>
+  <article class="mond-tile about-role-item mond-tile--yellow about-tile--r3-i1">Collaborative teams with clear goals</article>
+  <article class="mond-tile about-role-item about-tile--r3-i2">Ambiguous problems where rigor matters</article>
+  <article class="mond-tile about-role-item about-tile--r3-i3">Modern tooling & reproducible workflows</article>
+  <article class="mond-tile about-role-item about-tile--r3-i4">High standards for testing & maintainability</article>
+  <article class="mond-tile about-role-item mond-tile--red about-tile--r3-i5">Fast iteration & ownership</article>
+
+  {%- comment -%} Role 4 — Focus areas {%- endcomment -%}
+  <header class="mond-tile about-role-head about-tile--r4-head">
+    <div class="about-role-head__icon">{% include icon.html name="target" %}</div>
+    <span class="mond-card__num">04 · Focus</span>
+    <h3>Focus areas</h3>
+  </header>
+  <article class="mond-tile about-role-item about-tile--r4-i1">Neurotechnology</article>
+  <article class="mond-tile about-role-item mond-tile--blue about-tile--r4-i2">Scientific computing & research tooling</article>
+  <article class="mond-tile about-role-item mond-tile--yellow about-tile--r4-i3">Applied ML / AI research</article>
+  <article class="mond-tile about-role-item about-tile--r4-i4">Biotech & pharma modeling and analytics</article>
+
+  {%- comment -%} Journey / timeline header + entries {%- endcomment -%}
+  <header class="mond-tile about-tile--journey-head">
+    <p class="mond-eyebrow">05 · Journey</p>
+    <h2 class="mond-section-title">Education, research, and projects</h2>
+    <p class="mond-section-lede">A reverse-chronological view of the path: current work first, foundational research at the bottom.</p>
+  </header>
+
+  <ol class="about-timeline" aria-label="Career timeline">
+    {% assign tl_index = 0 %}
+    {% for entry in site.data.timeline %}
+    {% assign tl_index = tl_index | plus: 1 %}
+    {% assign tl_row = forloop.index | plus: 21 %}
+    {% assign tl_side = forloop.index | modulo: 2 %}
+    <li class="about-timeline__item" style="--tl-row: {{ tl_row }};">
+      <header class="mond-tile about-timeline-head about-timeline__item--{{ entry.type }}{% if tl_side == 0 %} tl-right{% endif %}" style="--tl-row: {{ tl_row }};">
+        <div class="about-timeline__icon">{% include icon.html name=entry.icon %}</div>
+        <div class="about-timeline-head__meta">
+          <p class="mond-eyebrow">{{ entry.period }} · {{ entry.type | upcase }}</p>
+          <h3>{{ entry.title }}</h3>
+          <p class="about-timeline__inst">{{ entry.institution }}</p>
+        </div>
+        <span class="about-timeline__num">{% if tl_index < 10 %}0{% endif %}{{ tl_index }}</span>
+      </header>
+      <article class="mond-tile about-timeline-body{% if tl_side == 0 %} tl-right{% endif %}" style="--tl-row: {{ tl_row }};">
+        {{ entry.description | markdownify }}
+      </article>
+    </li>
+    {% endfor %}
+  </ol>
+
+</section>

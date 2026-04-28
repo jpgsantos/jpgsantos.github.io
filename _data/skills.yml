@@ -1,5 +1,5 @@
 - category: "Programming"
-  icon: "fas fa-code"
+  icon: "code"
   items:
     - "Python"
     - "NumPy"
@@ -10,7 +10,7 @@
     - "MATLAB"
 
 - category: "Data Science"
-  icon: "fas fa-chart-line"
+  icon: "chart-line"
   items:
     - "Statistical analysis"
     - "Time-series analysis"
@@ -19,7 +19,7 @@
     - "Sensitivity analysis"
 
 - category: "Scientific Computing"
-  icon: "fas fa-flask"
+  icon: "flask"
   items:
     - "ODE modeling"
     - "SBML"
@@ -28,18 +28,22 @@
     - "Reproducibility (FAIR)"
 
 - category: "Android (Kotlin)"
-  icon: "fab fa-android"
+  icon: "android"
   items:
     - "Jetpack Compose"
+    - "Navigation Compose"
     - "ViewModel + Hilt"
-    - "Room"
+    - "Firebase Auth"
+    - "Firestore"
+    - "Realtime listeners"
+    - "Offline persistence"
     - "WorkManager"
-    - "Firebase"
+    - "Coroutines/Flow"
     - "Notifications"
     - "Play Console testing"
 
 - category: "Tools & Platforms"
-  icon: "fas fa-tools"
+  icon: "tools"
   items:
     - "Git/GitHub"
     - "GitHub Actions"
@@ -57,7 +61,7 @@
     - "Markdown"
 
 - category: "Productivity & Collaboration"
-  icon: "fas fa-users"
+  icon: "users"
   items:
     - "Microsoft Office"
     - "Excel"

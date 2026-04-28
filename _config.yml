@@ -1,5 +1,5 @@
 title: João Pedro Gomes dos Santos
-description: Computational Neuroscience PhD | Scientific Software Developer
+description: AI / Systems Engineer | Computational Neuroscience PhD
 author: João Pedro Gomes dos Santos
 email: jpgs.12390@gmail.com
 baseurl: ""
@@ -22,16 +22,10 @@ plugins:
 # Navigation
 header_pages:
   - index.md
-  - about.md
   - projects.md
   - cv.md
-  - contact.md
 
 # Custom variables
 location: "Copenhagen, Amsterdam or Remote"
-position: "Computational Neuroscience PhD | Scientific Software Developer"
-available: true
-
-
-
-
+position: "AI / Systems Engineer | Computational Neuroscience PhD"
+available: false

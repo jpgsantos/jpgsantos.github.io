@@ -1,33 +1,35 @@
-- id: "future"
-  type: "future"
-  icon: "fas fa-briefcase"
-  period: "2025 →"
-  title: "Your Company?"
-  institution: "Copenhagen, Amsterdam or Remote"
-  description: "I'm seeking opportunities in algorithm development, scientific software creation, and computational problem-solving."
-  show_contact_button: true
+- id: "vectonomous"
+  type: "work"
+  icon: "briefcase"
+  period: "Apr 2026 - Present"
+  title: "AI / Systems Engineer"
+  institution: "Vectonomous Labs"
+  description: |
+    Working on applied AI systems across AI/ML systems, backend infrastructure, data pipelines, intelligence services, and agentic engineering workflows.
 
 - id: "android-app"
   type: "project"
-  icon: "fab fa-android"
-  period: "2025"
-  title: "Chore Division Android App"
-  institution: "Personal Project • Now in Play Store Testing"
+  icon: "android"
+  period: "2025 - Present"
+  title: "Founder, Octidy"
+  institution: "Firebase-first Android app • Play Store testing"
   description: |
-    Full-stack Android application from concept to Google Play deployment.
+    Founded and built Octidy, a household chore coordination app based on bidding, assignment, and progress tracking.
     
-    Built with Kotlin, Jetpack Compose, Room, WorkManager, and Firebase. Used LLM-assisted programming to accelerate development.
+    Built with Kotlin, Jetpack Compose, Navigation Compose, Hilt, Firebase Auth, Firestore offline persistence, realtime snapshot listeners, WorkManager, Coroutines, and Flow. Used LLM-assisted programming to accelerate development while keeping architecture and documentation explicit.
 
 - id: "phd"
   type: "education"
-  icon: "fas fa-graduation-cap"
-  period: "2016 - 2025"
+  icon: "graduation"
+  period: "Jan 2016 - Mar 2025"
   title: "PhD in Computational Neuroscience"
   institution: "University of Porto / Karolinska Institutet / KTH / SciLifeLab"
   description: |
     **Thesis:** A workflow for developing biochemical pathway models using ordinary differential equations.
     
-    Built **Subcellular Workflow**: modular, FAIR-compliant MATLAB framework for ODE modeling with simulation, parameter estimation, and sensitivity/likelihood analysis.
+    Built **Subcellular Workflow**: modular, FAIR-compliant MATLAB framework for ODE modeling with simulation, parameter estimation, sensitivity/likelihood analysis, and standard-format interoperability.
+
+    Validated the workflow across **LIRMO**, **LIREM**, **TM-M**, and **G-PIPK**, covering ligand-receptor interactions, effector responses, CaMKII autophosphorylation dynamics, and basal ganglia signaling that integrates glutamatergic and cholinergic inputs.
 
     The PhD started with the **GABBA doctoral programme (Basic and Applied Biology)**, which provided structured training in statistics, molecular/cellular biology, genetics, and systems bioinformatics during the first semester.
 
@@ -61,7 +63,7 @@
 
 - id: "research-scholar"
   type: "work"
-  icon: "fas fa-flask"
+  icon: "flask"
   period: "Apr 2015 - Dec 2015"
   title: "Research Scholar"
   institution: "UCIBIO @ REQUIMTE, University of Porto"
@@ -69,7 +71,7 @@
 
 - id: "msc"
   type: "education"
-  icon: "fas fa-graduation-cap"
+  icon: "graduation"
   period: "2013 - 2015"
   title: "MSc in Biochemistry"
   institution: "University of Porto (FCUP, ICBAS)"
@@ -125,7 +127,7 @@
 
 - id: "bsc"
   type: "education"
-  icon: "fas fa-graduation-cap"
+  icon: "graduation"
   period: "2010 - 2013"
   title: "BSc in Biochemistry"
   institution: "University of Porto (FCUP, ICBAS)"
@@ -215,4 +217,3 @@
     </details>
 
     </details>
-

@@ -1,0 +1,5882 @@
+/* ==========================================================================
+   Mondrian style — alternative visual system
+   Activated by <html data-style="mondrian">.
+   Default style is unaffected when data-style="default" (or absent).
+   ========================================================================== */
+
+/* --- Dual content trees: a bespoke Mondrian grid lives in .home-mondrian /
+       .about-mondrian / .projects-mondrian / .cv-mondrian, while the
+       consolidated default tree lives in .default-only. Toggle via
+       data-style on the html element. -------------------------------------- */
+.home-mondrian,
+.about-mondrian,
+.projects-mondrian,
+.cv-mondrian { display: none; }
+
+[data-style="mondrian"] .home-mondrian,
+[data-style="mondrian"] .about-mondrian,
+[data-style="mondrian"] .projects-mondrian,
+[data-style="mondrian"] .cv-mondrian { display: grid; }
+
+[data-style="mondrian"] .default-only { display: none; }
+
+/* ==========================================================================
+   MONDRIAN STYLE — site-wide
+   ========================================================================== */
+
+[data-style="mondrian"] {
+  --mond-ink: #0d0d0d;
+  --mond-paper: #f6f3ec;
+  --mond-paper-soft: #ece7da;
+  --mond-rule: 4px;
+  --mond-red: #e63946;
+  --mond-blue: #1d4ed8;
+  --mond-yellow: #facc15;
+  --mond-on-yellow: #14110f;
+  --mond-on-ink: var(--mond-paper);
+  --mond-text: #14110f;
+  --mond-text-soft: #4a4540;
+  --mond-shadow: 0 0 0 4px var(--mond-ink);
+
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  --font-display: "Playfair Display", Georgia, serif;
+}
+
+[data-style="mondrian"][data-theme="dark"] {
+  --mond-ink: #f1ece1;
+  --mond-paper: #171512;
+  --mond-paper-soft: #242018;
+  --mond-on-yellow: #14110f;
+  --mond-on-ink: var(--mond-paper);
+  --mond-text: #f7f1e7;
+  --mond-text-soft: #c8bfb0;
+}
+
+[data-style="mondrian"] body {
+  font-family: var(--font-sans);
+  background: var(--mond-paper);
+  color: var(--mond-text);
+}
+
+[data-style="mondrian"] body::before { display: none; }
+
+[data-style="mondrian"] h1,
+[data-style="mondrian"] h2,
+[data-style="mondrian"] h3,
+[data-style="mondrian"] h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--mond-text);
+}
+
+[data-style="mondrian"] .eyebrow,
+[data-style="mondrian"] code,
+[data-style="mondrian"] kbd,
+[data-style="mondrian"] .signal-list span {
+  font-family: var(--font-mono);
+}
+
+/* --- Header --- */
+[data-style="mondrian"] .site-header {
+  background: var(--mond-paper);
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+  backdrop-filter: none;
+}
+
+[data-style="mondrian"] .site-brand__mark {
+  font-family: var(--font-mono);
+  background: var(--mond-ink);
+  color: var(--mond-paper);
+  padding: 4px 8px;
+  border-radius: 0;
+  letter-spacing: 0.04em;
+}
+
+[data-style="mondrian"] .site-brand__text {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+[data-style="mondrian"] .site-nav a {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+[data-style="mondrian"] .site-nav a[aria-current="page"] {
+  color: var(--mond-red);
+  font-weight: 600;
+}
+
+[data-style="mondrian"] .theme-switcher,
+[data-style="mondrian"] .style-switcher {
+  background: var(--mond-paper);
+  border: 2px solid var(--mond-ink);
+  border-radius: 0;
+}
+
+[data-style="mondrian"] .theme-menu__trigger,
+[data-style="mondrian"] .style-menu__trigger,
+[data-style="mondrian"] .theme-button,
+[data-style="mondrian"] .style-button {
+  border-radius: 0;
+  color: var(--mond-text-soft);
+}
+
+[data-style="mondrian"] .theme-menu__trigger,
+[data-style="mondrian"] .style-menu__trigger {
+  border: 0;
+  background: var(--mond-paper);
+  color: var(--mond-text);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+[data-style="mondrian"] .theme-menu__trigger::after,
+[data-style="mondrian"] .style-menu__trigger::after,
+[data-style="mondrian"] .theme-menu__current-icon,
+[data-style="mondrian"] .style-menu__current-icon,
+[data-style="mondrian"] .style-icon {
+  color: var(--mond-ink);
+}
+
+[data-style="mondrian"] .theme-menu__panel,
+[data-style="mondrian"] .style-menu__panel {
+  border: 3px solid var(--mond-ink);
+  border-radius: 0;
+  background: var(--mond-paper);
+  box-shadow: 4px 4px 0 var(--mond-ink);
+}
+
+[data-style="mondrian"] .theme-button,
+[data-style="mondrian"] .style-button {
+  color: var(--mond-text);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+[data-style="mondrian"] .theme-button:hover,
+[data-style="mondrian"] .theme-button.is-active,
+[data-style="mondrian"] .style-button:hover,
+[data-style="mondrian"] .style-button.is-active {
+  background: var(--mond-ink);
+  color: var(--mond-paper);
+  box-shadow: none;
+}
+
+[data-style="mondrian"] .theme-button:hover .icon,
+[data-style="mondrian"] .theme-button.is-active .icon,
+[data-style="mondrian"] .style-button:hover .style-icon,
+[data-style="mondrian"] .style-button.is-active .style-icon {
+  color: var(--mond-paper);
+}
+
+/* --- Footer --- */
+[data-style="mondrian"] .site-footer {
+  background: var(--mond-paper);
+  border-top: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .site-footer__name {
+  font-family: var(--font-display);
+}
+
+/* ==========================================================================
+   HOME PAGE — Mondrian mosaic
+   ========================================================================== */
+
+[data-style="mondrian"] .home-mondrian {
+  --tile-pad: clamp(1rem, 2.2vw, 1.6rem);
+  --tile-rule: 4px;
+  background: var(--mond-ink);
+  padding: var(--tile-rule);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(60px, auto);
+  gap: var(--tile-rule);
+  margin: 0 auto;
+  max-width: 1320px;
+}
+
+.mond-tile {
+  background: var(--mond-paper);
+  padding: var(--tile-pad);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-width: 0;
+  color: var(--mond-text);
+}
+
+.mond-tile--red    { background: var(--mond-red); color: #fff; }
+.mond-tile--blue   { background: var(--mond-blue); color: #fff; }
+.mond-tile--yellow { background: var(--mond-yellow); color: var(--mond-on-yellow); }
+.mond-tile--ink    { background: var(--mond-ink); color: var(--mond-on-ink); }
+
+/* Force readable text inside coloured tiles (overrides global muted-paragraph rule) */
+[data-style="mondrian"] .mond-tile--red p,
+[data-style="mondrian"] .mond-tile--red li,
+[data-style="mondrian"] .mond-tile--red strong,
+[data-style="mondrian"] .mond-tile--blue p,
+[data-style="mondrian"] .mond-tile--blue li,
+[data-style="mondrian"] .mond-tile--blue strong,
+[data-style="mondrian"] .mond-tile--ink p,
+[data-style="mondrian"] .mond-tile--ink li,
+[data-style="mondrian"] .mond-tile--ink strong { color: var(--mond-on-ink); }
+
+[data-style="mondrian"] .mond-tile--yellow p,
+[data-style="mondrian"] .mond-tile--yellow li,
+[data-style="mondrian"] .mond-tile--yellow strong { color: var(--mond-on-yellow); }
+
+[data-style="mondrian"] .mond-tile--red .mond-eyebrow,
+[data-style="mondrian"] .mond-tile--blue .mond-eyebrow,
+[data-style="mondrian"] .mond-tile--ink .mond-eyebrow { color: rgba(255, 255, 255, 0.85); }
+[data-style="mondrian"] .mond-tile--yellow .mond-eyebrow { color: var(--mond-on-yellow); opacity: 0.7; }
+
+.mond-tile--solid { padding: 0; min-height: 80px; }
+
+[data-style="mondrian"][data-theme="dark"] .mond-tile.mond-tile--red    { background: var(--mond-red);    color: #fff; }
+[data-style="mondrian"][data-theme="dark"] .mond-tile.mond-tile--blue   { background: var(--mond-blue);   color: #fff; }
+[data-style="mondrian"][data-theme="dark"] .mond-tile.mond-tile--yellow { background: var(--mond-yellow); color: var(--mond-on-yellow); }
+[data-style="mondrian"][data-theme="dark"] .mond-tile.mond-tile--neural {
+  background: #18150f;
+}
+[data-style="mondrian"][data-theme="dark"] .mond-tile.mond-tile--molecule,
+[data-style="mondrian"][data-theme="dark"] .mond-tile.mond-tile--feat-visual {
+  background: #1a1813;
+}
+[data-style="mondrian"][data-theme="dark"] .mond-tile.mond-tile--ink {
+  background: var(--mond-ink);
+  color: var(--mond-on-ink);
+}
+
+/* Eyebrow / labels */
+.mond-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--mond-text-soft);
+  margin: 0 0 0.75rem;
+}
+
+.mond-tile--red .mond-eyebrow,
+.mond-tile--blue .mond-eyebrow,
+.mond-tile--ink .mond-eyebrow {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Tile placement (desktop) ------------------------------------------------- */
+.mond-tile--title       { grid-column: 1 / span 9; grid-row: 1 / span 2; }
+.mond-tile--neural      { display: none; }
+.mond-tile--intro       { grid-column: 10 / span 3; grid-row: 1 / span 1; }
+.mond-tile--swatch-y    { grid-column: 10 / span 2; grid-row: 2 / span 1; }
+.mond-tile--swatch-r    { grid-column: 12 / span 1; grid-row: 2 / span 1; }
+
+/* --- Profile + metrics flatten (rows 3-5) --- */
+.mond-tile--photo       { grid-column: 1 / span 2;  grid-row: 3 / span 2; padding: 0; overflow: hidden; }
+.mond-tile--name        { grid-column: 3 / span 3;  grid-row: 3 / span 1; }
+.mond-tile--m1          { grid-column: 6 / span 2;  grid-row: 3 / span 1; }
+.mond-tile--m2          { grid-column: 8 / span 2;  grid-row: 3 / span 1; }
+.mond-tile--hero-field  { grid-column: 10 / span 3; grid-row: 3 / span 2; padding: 0; overflow: hidden; }
+
+.mond-tile--creds       { grid-column: 3 / span 3;  grid-row: 4 / span 1; }
+.mond-tile--m3          { grid-column: 6 / span 2;  grid-row: 4 / span 1; }
+.mond-tile--m4          { grid-column: 8 / span 2;  grid-row: 4 / span 1; }
+
+.mond-tile--socials     { grid-column: 1 / span 2;  grid-row: 5 / span 1; }
+.mond-tile--chips       { grid-column: 3 / span 7;  grid-row: 5 / span 1; }
+.mond-tile--swatch-blue { grid-column: 10 / span 3; grid-row: 5 / span 1; }
+.mond-tile--proofs      { grid-column: 10 / span 3; grid-row: 5 / span 1; }
+
+/* Strip section (row 6) — three colour strips spanning the full 12-col row */
+.mond-tile--strip-r     { grid-column: 1 / span 4;  grid-row: 6 / span 1; }
+.mond-tile--strip-b     { grid-column: 5 / span 4;  grid-row: 6 / span 1; }
+.mond-tile--strip-y     { grid-column: 9 / span 4;  grid-row: 6 / span 1; }
+
+/* About flatten */
+.mond-tile--about-head   { grid-column: 1 / span 12; grid-row: 7 / span 1; }
+.mond-tile--about-body   { grid-column: 1 / span 6;  grid-row: 8 / span 2; }
+.mond-tile--about-p1     { grid-column: 7 / span 3;  grid-row: 8 / span 1; border-top: 6px solid var(--mond-red); }
+.mond-tile--about-p2     { grid-column: 10 / span 3; grid-row: 8 / span 1; border-top: 6px solid var(--mond-blue); }
+.mond-tile--about-p3     { grid-column: 7 / span 6;  grid-row: 9 / span 1; border-top: 6px solid var(--mond-yellow); }
+
+/* Expertise flatten — head + body + chips per item */
+.mond-tile--exp-head    { grid-column: 1 / span 12; grid-row: 10 / span 1; }
+.mond-tile--exp-1-head  { grid-column: 1 / span 4;  grid-row: 11 / span 1; border-top: 6px solid var(--mond-red); }
+.mond-tile--exp-2-head  { grid-column: 5 / span 4;  grid-row: 11 / span 1; border-top: 6px solid var(--mond-blue); }
+.mond-tile--exp-3-head  { grid-column: 9 / span 4;  grid-row: 11 / span 1; border-top: 6px solid var(--mond-yellow); }
+.mond-tile--exp-1-body  { grid-column: 1 / span 4;  grid-row: 12 / span 1; }
+.mond-tile--exp-2-body  { grid-column: 5 / span 4;  grid-row: 12 / span 1; }
+.mond-tile--exp-3-body  { grid-column: 9 / span 4;  grid-row: 12 / span 1; }
+.mond-tile--exp-1-chips { grid-column: 1 / span 4;  grid-row: 13 / span 1; }
+.mond-tile--exp-2-chips { grid-column: 5 / span 4;  grid-row: 13 / span 1; }
+.mond-tile--exp-3-chips { grid-column: 9 / span 4;  grid-row: 13 / span 1; }
+
+/* Selected work flatten */
+.mond-tile--feat-head    { grid-column: 1 / span 12; grid-row: 14 / span 1; }
+.mond-tile--work-1       { grid-column: 1 / span 6;  grid-row: 15 / span 2; border-top: 6px solid var(--mond-blue); }
+.mond-tile--work-2       { grid-column: 7 / span 6;  grid-row: 15 / span 2; border-top: 6px solid var(--mond-red); }
+
+/* Contact flatten */
+.mond-tile--contact-head     { grid-column: 1 / span 12; grid-row: 17 / span 1; }
+.mond-tile--contact-email    { grid-column: 1 / span 6;  grid-row: 18 / span 1; }
+.mond-tile--contact-phone    { grid-column: 7 / span 3;  grid-row: 18 / span 1; }
+.mond-tile--contact-github   { grid-column: 10 / span 3; grid-row: 18 / span 1; }
+.mond-tile--contact-linkedin { grid-column: 1 / span 6;  grid-row: 19 / span 1; }
+
+.mond-tile--actions          { grid-column: 1 / span 12; grid-row: 20 / span 1; }
+
+/* --- Hero title tile --- */
+.mond-hero__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  line-height: 0.98;
+  margin: 0.4rem 0 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.mond-hero__title .mond-accent { color: var(--mond-red); }
+
+.home-mondrian .mond-tile--title .mond-hero__title {
+  max-width: none;
+  font-size: clamp(2.75rem, 5.1vw, 4.55rem);
+}
+
+.mond-hero__lede {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  line-height: 1.45;
+  color: var(--mond-text-soft);
+  margin: auto 0 0;
+  max-width: 36ch;
+  border-top: 1px solid var(--mond-ink);
+  padding-top: 1rem;
+}
+
+.home-mondrian .mond-tile--title .mond-hero__lede {
+  max-width: 66ch;
+}
+
+[data-style="mondrian"][data-theme="dark"] .mond-hero__lede {
+  border-top-color: var(--mond-text);
+}
+
+/* --- Intro tile --- */
+.mond-intro__body {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--mond-text);
+  margin: 0;
+}
+
+.mond-intro__rule {
+  width: 32px;
+  height: 2px;
+  background: var(--mond-yellow);
+  margin: 0.9rem 0 0;
+}
+
+/* --- Profile tile --- */
+.mond-profile {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.mond-profile__photo {
+  width: 110px;
+  height: 130px;
+  object-fit: cover;
+  filter: grayscale(0.95) contrast(1.05);
+  background: var(--mond-paper-soft);
+  display: block;
+  border: 2px solid var(--mond-ink);
+}
+
+.mond-profile__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.mond-profile__role {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--mond-text-soft);
+  margin: 0.45rem 0 0.65rem;
+}
+
+.mond-profile__rule {
+  width: 30px;
+  height: 3px;
+  background: var(--mond-yellow);
+  margin: 0 0 0.75rem;
+}
+
+.mond-profile__creds {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.mond-profile__creds li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.82rem;
+  color: var(--mond-text);
+}
+
+.mond-profile__creds .icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: var(--mond-ink);
+}
+
+[data-style="mondrian"] .mond-profile__creds .icon {
+  color: var(--mond-ink);
+}
+
+.mond-profile__socials {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  grid-column: 1 / -1;
+}
+
+.mond-profile__socials a {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--mond-ink);
+  color: var(--mond-ink);
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease;
+}
+
+.mond-profile__socials a:hover {
+  background: var(--mond-ink);
+  color: var(--mond-paper);
+}
+
+[data-style="mondrian"] .mond-profile__socials a {
+  border-color: var(--mond-ink);
+  color: var(--mond-ink);
+}
+
+/* --- Metrics tile --- */
+.mond-metrics__title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
+  line-height: 1.15;
+  margin: 0.3rem 0 1rem;
+}
+
+.mond-metrics__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border: 2px solid var(--mond-ink);
+  margin-bottom: 1rem;
+}
+
+.mond-metrics__grid > div {
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--mond-ink);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.mond-metrics__grid strong {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  line-height: 1;
+  color: var(--mond-blue);
+}
+.mond-metrics__grid > div:nth-child(2) strong { color: var(--mond-red); }
+.mond-metrics__grid > div:nth-child(3) strong { color: var(--mond-ink); }
+.mond-metrics__grid > div:nth-child(4) strong { color: var(--mond-blue); }
+
+.mond-metrics__grid span {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mond-text-soft);
+  line-height: 1.3;
+}
+
+.mond-metrics__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: auto;
+}
+
+.mond-metrics__chips span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 3px 7px;
+  border: 1.5px solid var(--mond-ink);
+  background: var(--mond-paper);
+  color: var(--mond-ink);
+  letter-spacing: 0.04em;
+}
+
+[data-style="mondrian"] .mond-metrics__chips span {
+  background: transparent;
+  border-color: var(--mond-ink);
+  color: var(--mond-text);
+}
+
+/* --- Neural canvas tile --- */
+.mond-tile--neural {
+  background: var(--mond-paper-soft);
+}
+.mond-tile--neural canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* --- Visual utility tiles --- */
+.mond-tile--hero-field {
+  min-height: 100%;
+}
+
+/* --- Molecule SVG tile --- */
+.mond-tile--molecule {
+  background: var(--mond-paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mond-molecule {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+}
+
+[data-style="mondrian"] .m-stroke { stroke: var(--mond-ink); }
+[data-style="mondrian"] .m-paper  { fill: var(--mond-paper); }
+[data-style="mondrian"] .m-ink    { fill: var(--mond-ink); }
+[data-style="mondrian"] .m-text   { fill: var(--mond-ink); }
+[data-style="mondrian"][data-theme="dark"] .m-paper { fill: #1f1c17; }
+
+.mond-workflow { width: 100%; height: 100%; max-height: 320px; }
+
+/* --- Color strip --- */
+.mond-tile--strip-quote {
+  background: var(--mond-paper);
+  display: flex;
+  align-items: center;
+  padding: 0.9rem 1.2rem;
+}
+.mond-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  margin: 0;
+  color: var(--mond-text);
+  line-height: 1.4;
+}
+
+/* --- Section header tiles --- */
+.mond-section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 1.5rem;
+  align-items: end;
+}
+.mond-section-head h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  margin: 0.3rem 0 0;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.mond-section-head p {
+  margin: 0;
+  color: var(--mond-text-soft);
+  font-size: 0.95rem;
+  max-width: 50ch;
+}
+
+.mond-section-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.55rem, 2.3vw, 2.05rem);
+  line-height: 1.08;
+  margin: 0.25rem 0 0;
+}
+
+.mond-section-lede {
+  color: var(--mond-text-soft);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0.75rem 0 0;
+  max-width: 64ch;
+}
+
+.mond-tile--about-body {
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.mond-tile--about-body p,
+.mond-about-card p,
+.mond-work-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.mond-about-card {
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.mond-about-card h3,
+.mond-work-card h3,
+.mond-contact-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.mond-work-card {
+  gap: 0.8rem;
+}
+
+.mond-work-card__head {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--mond-ink);
+}
+
+.mond-work-card__head .mond-eyebrow {
+  margin: 0 0 0.35rem;
+}
+
+.mond-work-card .mond-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: auto;
+}
+
+.mond-contact-card {
+  text-decoration: none;
+  color: var(--mond-text);
+}
+
+.mond-contact-card--primary {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    "icon title action"
+    "icon value action";
+  align-items: center;
+  gap: 0.35rem 0.85rem;
+  justify-content: stretch;
+}
+
+.mond-contact-card--primary .mond-exp-head__icon {
+  grid-area: icon;
+}
+
+.mond-contact-card--primary h3 {
+  grid-area: title;
+  margin: 0;
+}
+
+.mond-contact-card__value {
+  grid-area: value;
+  color: var(--mond-ink);
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  overflow-wrap: anywhere;
+}
+
+.mond-contact-card--primary .mond-button {
+  grid-area: action;
+  align-self: center;
+  white-space: nowrap;
+}
+
+.mond-contact-card--compact {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.mond-contact-card--compact > .icon {
+  width: 21px;
+  height: 21px;
+  color: var(--mond-ink);
+}
+
+.mond-contact-card--compact span {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.mond-contact-card--compact strong {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.1;
+  color: var(--mond-text);
+}
+
+/* --- Expertise cards --- */
+.mond-exp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100%;
+}
+.mond-exp__head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--mond-ink);
+}
+.mond-exp__head .icon {
+  width: 22px;
+  height: 22px;
+  color: var(--mond-ink);
+}
+.mond-exp__num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--mond-text-soft);
+}
+.mond-exp h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin: 0.4rem 0 0.2rem;
+  line-height: 1.1;
+}
+.mond-exp p {
+  margin: 0 0 0.6rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--mond-text);
+}
+.mond-exp__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: auto;
+}
+.mond-exp__chips span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 2px 7px;
+  border: 1.5px solid var(--mond-ink);
+  letter-spacing: 0.04em;
+}
+
+.mond-tile--exp-1 { border-top: 6px solid var(--mond-red); }
+.mond-tile--exp-2 { border-top: 6px solid var(--mond-blue); }
+.mond-tile--exp-3 { border-top: 6px solid var(--mond-yellow); }
+
+/* --- Featured project --- */
+.mond-feat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  height: 100%;
+}
+.mond-feat h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  margin: 0;
+}
+.mond-feat__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+.mond-feat__list li {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.mond-feat__list .icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  color: var(--mond-blue);
+  margin-top: 2px;
+}
+.mond-feat__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.mond-tile--feat-visual {
+  background: var(--mond-paper-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- Direction cards --- */
+.mond-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  height: 100%;
+}
+.mond-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: 0.3rem 0 0;
+  line-height: 1.1;
+}
+.mond-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+.mond-card__head {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--mond-ink);
+}
+.mond-card__head .icon { width: 22px; height: 22px; }
+.mond-card__num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: var(--mond-text-soft);
+}
+.mond-tile--card-1 { border-top: 6px solid var(--mond-blue); }
+.mond-tile--card-2 { border-top: 6px solid var(--mond-yellow); }
+
+.mond-card__link {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--mond-ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--mond-yellow);
+  align-self: flex-start;
+  padding-bottom: 2px;
+  margin-top: auto;
+}
+
+.mond-card__link:hover {
+  color: var(--mond-red);
+  border-bottom-color: var(--mond-red);
+}
+
+[data-style="mondrian"] .mond-card__link {
+  color: var(--mond-ink);
+}
+
+/* --- Actions tile (CTA row) --- */
+.mond-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.mond-button {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  padding: 0.7rem 1rem;
+  border: 2px solid var(--mond-ink);
+  background: var(--mond-paper);
+  color: var(--mond-ink);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.mond-button .icon { width: 16px; height: 16px; }
+
+.mond-button:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--mond-ink);
+}
+
+[data-style="mondrian"] .mond-button--primary {
+  background: var(--mond-red);
+  color: #fff;
+}
+
+/* Actions tiles: lay out buttons horizontally */
+.mond-tile--actions,
+.mond-tile--feat-actions,
+.about-tile--hero .mond-actions {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.7rem;
+}
+.about-tile--hero .mond-actions {
+  margin-top: 1.2rem;
+  display: flex;
+}
+
+[data-style="mondrian"] .mond-button--red    { background: var(--mond-red);    color: #fff; border-color: var(--mond-ink); }
+[data-style="mondrian"] .mond-button--blue   { background: var(--mond-blue);   color: #fff; border-color: var(--mond-ink); }
+[data-style="mondrian"] .mond-button--yellow { background: var(--mond-yellow); color: var(--mond-on-yellow); }
+
+[data-style="mondrian"][data-theme="dark"] .mond-button {
+  background: transparent;
+  border-color: var(--mond-ink);
+  color: var(--mond-ink);
+}
+[data-style="mondrian"][data-theme="dark"] .mond-button--primary {
+  background: var(--mond-red);
+  color: #fff;
+}
+[data-style="mondrian"][data-theme="dark"] .mond-button--red    { background: var(--mond-red);    color: #fff; }
+[data-style="mondrian"][data-theme="dark"] .mond-button--blue   { background: var(--mond-blue);   color: #fff; }
+[data-style="mondrian"][data-theme="dark"] .mond-button--yellow { background: var(--mond-yellow); color: var(--mond-on-yellow); }
+
+/* ==========================================================================
+   ABOUT PAGE — Mondrian mosaic
+   ========================================================================== */
+
+[data-style="mondrian"] .about-mondrian {
+  --tile-pad: clamp(1rem, 2.2vw, 1.6rem);
+  --tile-rule: 4px;
+  background: var(--mond-ink);
+  padding: var(--tile-rule);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(60px, auto);
+  gap: var(--tile-rule);
+  margin: 0 auto;
+  max-width: 1320px;
+}
+
+/* Row 1-2: hero + photo + quote + swatches */
+.about-tile--hero       { grid-column: 1 / span 7; grid-row: 1 / span 2; }
+.about-tile--photo      { grid-column: 8 / span 3; grid-row: 1 / span 1; padding: 0; overflow: hidden; }
+.about-tile--swatch-y   { grid-column: 11 / span 2; grid-row: 1 / span 1; }
+.about-tile--quote      { grid-column: 8 / span 3; grid-row: 2 / span 1; display: flex; align-items: center; }
+.about-tile--swatch-r   { grid-column: 11 / span 1; grid-row: 2 / span 1; }
+.about-tile--swatch-b   { grid-column: 12 / span 1; grid-row: 2 / span 1; }
+
+/* Row 3: story header */
+.about-tile--story-head { grid-column: 1 / span 12; grid-row: 3 / span 1; }
+.about-tile--story-1    { grid-column: 1 / span 6; grid-row: 4 / span 1; }
+.about-tile--story-2    { grid-column: 7 / span 6; grid-row: 4 / span 1; }
+
+/* Row 5: stats */
+.about-tile--stat-1 { grid-column: 1 / span 3; grid-row: 5 / span 1; }
+.about-tile--stat-2 { grid-column: 4 / span 3; grid-row: 5 / span 1; }
+.about-tile--stat-3 { grid-column: 7 / span 3; grid-row: 5 / span 1; }
+.about-tile--stat-4 { grid-column: 10 / span 3; grid-row: 5 / span 1; }
+
+/* Row 6+: principles — flattened head + body per principle, varied widths */
+.about-tile--principles-head { grid-column: 1 / span 12; grid-row: 6 / span 1; }
+
+.about-tile--p1-head { grid-column: 1  / span 3; grid-row: 7 / span 1; border-top: 6px solid var(--mond-red); }
+.about-tile--p1-body { grid-column: 4  / span 4; grid-row: 7 / span 1; }
+.about-tile--p2-head { grid-column: 8  / span 2; grid-row: 7 / span 1; border-top: 6px solid var(--mond-blue); }
+.about-tile--p2-body { grid-column: 10 / span 3; grid-row: 7 / span 1; }
+
+.about-tile--p3-head { grid-column: 1  / span 3; grid-row: 8 / span 1; border-top: 6px solid var(--mond-yellow); }
+.about-tile--p3-body { grid-column: 4  / span 5; grid-row: 8 / span 1; }
+.about-tile--p4-head { grid-column: 9  / span 2; grid-row: 8 / span 1; border-top: 6px solid var(--mond-blue); }
+.about-tile--p4-body { grid-column: 11 / span 2; grid-row: 8 / span 1; }
+
+.about-tile--p5-head { grid-column: 1  / span 3; grid-row: 9 / span 1; border-top: 6px solid var(--mond-red); }
+.about-tile--p5-body { grid-column: 4  / span 9; grid-row: 9 / span 1; }
+
+/* Tools section */
+.about-tile--tools-head { grid-column: 1 / span 12; grid-row: 10 / span 1; }
+.about-tile--tools      { grid-column: 1 / span 12; grid-row: 11 / span 1; padding: 0; }
+
+/* Roles grid — flattened: head + 5 item tiles per role, varied widths */
+.about-tile--roles-head { grid-column: 1 / span 12; grid-row: 12 / span 1; }
+
+/* Role 1 — rows 13-14, anchor head + 5 items */
+.about-tile--r1-head { grid-column: 1  / span 3; grid-row: 13 / span 2; border-top: 6px solid var(--mond-red); }
+.about-tile--r1-i1   { grid-column: 4  / span 5; grid-row: 13 / span 1; }
+.about-tile--r1-i2   { grid-column: 9  / span 4; grid-row: 13 / span 1; }
+.about-tile--r1-i3   { grid-column: 4  / span 3; grid-row: 14 / span 1; }
+.about-tile--r1-i4   { grid-column: 7  / span 3; grid-row: 14 / span 1; }
+.about-tile--r1-i5   { grid-column: 10 / span 3; grid-row: 14 / span 1; }
+
+/* Role 2 — rows 15-16 */
+.about-tile--r2-head { grid-column: 1  / span 3; grid-row: 15 / span 2; border-top: 6px solid var(--mond-yellow); }
+.about-tile--r2-i1   { grid-column: 4  / span 4; grid-row: 15 / span 1; }
+.about-tile--r2-i2   { grid-column: 8  / span 5; grid-row: 15 / span 1; }
+.about-tile--r2-i3   { grid-column: 4  / span 4; grid-row: 16 / span 1; }
+.about-tile--r2-i4   { grid-column: 8  / span 2; grid-row: 16 / span 1; }
+.about-tile--r2-i5   { grid-column: 10 / span 3; grid-row: 16 / span 1; }
+
+/* Role 3 — rows 17-18 */
+.about-tile--r3-head { grid-column: 1  / span 3; grid-row: 17 / span 2; border-top: 6px solid var(--mond-blue); }
+.about-tile--r3-i1   { grid-column: 4  / span 6; grid-row: 17 / span 1; }
+.about-tile--r3-i2   { grid-column: 10 / span 3; grid-row: 17 / span 1; }
+.about-tile--r3-i3   { grid-column: 4  / span 3; grid-row: 18 / span 1; }
+.about-tile--r3-i4   { grid-column: 7  / span 3; grid-row: 18 / span 1; }
+.about-tile--r3-i5   { grid-column: 10 / span 3; grid-row: 18 / span 1; }
+
+/* Role 4 — rows 19-20, only 4 items */
+.about-tile--r4-head { grid-column: 1  / span 3; grid-row: 19 / span 2; border-top: 6px solid var(--mond-ink); }
+.about-tile--r4-i1   { grid-column: 4  / span 5; grid-row: 19 / span 1; }
+.about-tile--r4-i2   { grid-column: 9  / span 4; grid-row: 19 / span 1; }
+.about-tile--r4-i3   { grid-column: 4  / span 4; grid-row: 20 / span 1; }
+.about-tile--r4-i4   { grid-column: 8  / span 5; grid-row: 20 / span 1; }
+
+/* Journey/timeline */
+.about-tile--journey-head { grid-column: 1 / span 12; grid-row: 21 / span 1; }
+.about-timeline { list-style: none; margin: 0; padding: 0; display: contents; }
+.about-timeline__item { display: contents; }
+
+/* About-specific element styles */
+.about-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.95) contrast(1.05);
+  background: var(--mond-paper-soft);
+}
+
+.about-stat__num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 4.4vw, 3.6rem);
+  margin: 0;
+  line-height: 1;
+  color: inherit;
+}
+.about-tile--stat-1 .about-stat__num,
+.about-tile--stat-2 .about-stat__num { color: #fff; }
+.about-tile--stat-3 .about-stat__num { color: var(--mond-ink); }
+.about-tile--stat-4 .about-stat__num { color: var(--mond-blue); }
+[data-style="mondrian"][data-theme="dark"] .about-tile--stat-4 .about-stat__num {
+  color: #ffd23f;
+}
+.about-stat__label {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+  margin: 0.5rem 0 0;
+  font-weight: 500;
+}
+.about-tile--stat-1 .about-stat__label,
+.about-tile--stat-2 .about-stat__label { color: rgba(255,255,255,0.95); }
+
+.about-tags {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 0;
+  align-content: stretch;
+  width: 100%;
+  height: 100%;
+}
+.about-tags span {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.95rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  color: var(--mond-ink);
+  letter-spacing: 0.04em;
+  box-shadow:
+    -1px 0 0 var(--mond-ink),
+    0 -1px 0 var(--mond-ink);
+}
+.about-tags span:nth-child(5n+1) { box-shadow: 0 -1px 0 var(--mond-ink); }
+.about-tags span:nth-child(-n+5) { box-shadow: -1px 0 0 var(--mond-ink); }
+.about-tags span:first-child { box-shadow: none; }
+/* Mondrian colour accents */
+.about-tags span:nth-child(4) { background: var(--mond-yellow); }
+.about-tags span:nth-child(8) { background: var(--mond-red); color: #fff; }
+.about-tags span:nth-child(13) { background: var(--mond-blue); color: #fff; }
+[data-style="mondrian"][data-theme="dark"] .about-tags span {
+  color: var(--mond-ink);
+}
+
+.about-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+.about-list li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.about-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  background: var(--mond-yellow);
+  border: 1.5px solid var(--mond-ink);
+}
+.about-tile--role-1 .about-list li::before { background: var(--mond-red); }
+.about-tile--role-2 .about-list li::before { background: var(--mond-yellow); }
+.about-tile--role-3 .about-list li::before { background: var(--mond-blue); }
+.about-tile--role-4 .about-list li::before { background: var(--mond-paper); }
+
+/* Flattened role tiles — each item is a direct grid child */
+.about-role-head {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.7rem;
+  padding: 1rem 1.1rem;
+}
+.about-role-head__icon {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--mond-ink);
+  background: var(--mond-paper);
+  color: var(--mond-ink);
+}
+.about-role-head__icon svg { width: 20px; height: 20px; }
+[data-style="mondrian"][data-theme="dark"] .about-role-head__icon { background: var(--mond-paper); }
+.about-role-head .mond-card__num {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.about-role-head h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.about-role-item {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  padding: 0.85rem 1rem;
+  text-transform: none;
+}
+.about-role-item.mond-tile--red,
+.about-role-item.mond-tile--blue { font-weight: 600; }
+
+/* Flattened principle tiles — head (icon+num+title) + body (description) */
+.about-prin-head {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 0.7rem;
+  row-gap: 0.4rem;
+  align-content: center;
+  align-items: center;
+  padding: 1rem 1.1rem;
+}
+.about-prin-head__icon {
+  grid-row: 1 / span 2;
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--mond-ink);
+  background: var(--mond-paper);
+  color: var(--mond-ink);
+}
+.about-prin-head__icon svg { width: 20px; height: 20px; }
+.about-prin-head__num {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mond-ink-muted, var(--mond-ink));
+  opacity: 0.65;
+}
+.about-prin-head h3 {
+  grid-column: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  margin: 0;
+  line-height: 1.1;
+}
+.about-prin-body {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.1rem;
+}
+.about-prin-body p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   Home page flat tiles
+   ============================================================ */
+
+/* Photo tile */
+.mond-tile--photo { background: var(--mond-paper-soft); }
+.mond-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.95) contrast(1.05);
+}
+
+/* Name + role */
+.mond-tile--name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem 1.1rem;
+}
+.mond-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.9vw, 1.55rem);
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.mond-role {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  color: var(--mond-text-soft);
+  margin: 0.5rem 0 0;
+}
+
+/* Metric tiles */
+.mond-tile--m1, .mond-tile--m2,
+.mond-tile--m3, .mond-tile--m4 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.9rem 1rem;
+  gap: 0.2rem;
+}
+.mond-tile--m1 strong, .mond-tile--m2 strong,
+.mond-tile--m3 strong, .mond-tile--m4 strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.8vw, 2.3rem);
+  line-height: 1;
+}
+.mond-tile--m1 span, .mond-tile--m2 span,
+.mond-tile--m3 span, .mond-tile--m4 span {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.mond-tile--m2 strong, .mond-tile--m4 strong { color: var(--mond-blue); }
+[data-style="mondrian"][data-theme="dark"] .mond-tile--m4 strong { color: #ffd23f; }
+
+/* Creds tile */
+.mond-tile--creds {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  justify-content: center;
+  padding: 0.9rem 1.1rem;
+}
+.mond-tile--creds li {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.78rem;
+  color: var(--mond-text);
+  line-height: 1.3;
+}
+.mond-tile--creds .icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  color: var(--mond-ink);
+}
+
+/* Socials tile */
+.mond-tile--socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem;
+}
+.mond-tile--socials a {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--mond-ink);
+  color: var(--mond-ink);
+  text-decoration: none;
+  background: var(--mond-paper);
+  transition: background-color 160ms ease, color 160ms ease;
+}
+.mond-tile--socials a:hover {
+  background: var(--mond-ink);
+  color: var(--mond-paper);
+}
+
+/* Chips strip — internal Mondrian sub-grid filling the tile edge to edge */
+.mond-tile--chips {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 0;
+  padding: 0;
+  align-content: stretch;
+}
+.mond-tile--chips span {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.7rem 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  color: var(--mond-ink);
+  letter-spacing: 0.04em;
+  box-shadow:
+    -1px 0 0 var(--mond-ink),
+    0 -1px 0 var(--mond-ink);
+}
+.mond-tile--chips span:nth-child(3n+1) { box-shadow: 0 -1px 0 var(--mond-ink); }
+.mond-tile--chips span:nth-child(-n+3) { box-shadow: -1px 0 0 var(--mond-ink); }
+.mond-tile--chips span:first-child { box-shadow: none; }
+.mond-tile--chips span:nth-child(2),
+.mond-tile--chips span:nth-child(3) { box-shadow: -1px 0 0 var(--mond-ink); }
+/* Mondrian color accent on one cell */
+.mond-tile--chips span:nth-child(5) {
+  background: var(--mond-yellow);
+}
+
+.mond-tile--proofs {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  padding: 0;
+}
+
+.mond-tile--proofs span {
+  display: grid;
+  align-content: center;
+  min-height: 0;
+  padding: clamp(0.55rem, 1.1vw, 0.8rem) clamp(0.65rem, 1.2vw, 0.95rem);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  color: var(--mond-text);
+}
+
+.mond-tile--proofs span + span {
+  border-top: var(--tile-rule) solid var(--mond-ink);
+}
+
+.mond-tile--proofs span:nth-child(2) {
+  background: var(--mond-yellow);
+  color: var(--mond-on-yellow);
+}
+
+.mond-tile--proofs strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+  color: var(--mond-ink);
+}
+
+.mond-tile--proofs span:nth-child(2) strong {
+  color: var(--mond-on-yellow);
+}
+
+/* Expertise flat: head, body, chips */
+.mond-exp-head {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 0.7rem;
+  row-gap: 0.4rem;
+  align-items: center;
+  align-content: center;
+  padding: 1rem 1.1rem;
+}
+.mond-exp-head__icon {
+  grid-row: 1 / span 2;
+  width: 38px; height: 38px;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  border: 2px solid var(--mond-ink);
+  background: var(--mond-paper);
+  color: var(--mond-ink);
+}
+.mond-exp-head__icon svg { width: 20px; height: 20px; }
+.mond-exp-head__num {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+.mond-exp-head h3 {
+  grid-column: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  margin: 0;
+  line-height: 1.1;
+}
+.mond-exp-body {
+  display: flex;
+  align-items: center;
+  padding: 0.9rem 1.1rem;
+}
+.mond-exp-body p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.mond-exp-chips {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 0;
+  padding: 0;
+  align-content: stretch;
+}
+.mond-exp-chips span {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.6rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  color: var(--mond-ink);
+  letter-spacing: 0.04em;
+  box-shadow:
+    -1px 0 0 var(--mond-ink),
+    0 -1px 0 var(--mond-ink);
+}
+.mond-exp-chips span:nth-child(odd) { box-shadow: 0 -1px 0 var(--mond-ink); }
+.mond-exp-chips span:first-child { box-shadow: none; }
+.mond-exp-chips span:nth-child(2) { box-shadow: -1px 0 0 var(--mond-ink); }
+/* Last odd chip spans full row when count is odd */
+.mond-exp-chips span:nth-last-child(1):nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+/* Featured project flat */
+.mond-tile--feat-intro {
+  display: flex;
+  align-items: center;
+  padding: 1.1rem 1.2rem;
+}
+.mond-tile--feat-intro p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+.mond-feat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+.mond-feat-item .icon {
+  width: 18px; height: 18px;
+  flex: 0 0 18px;
+  color: var(--mond-blue);
+}
+.mond-tile--feat-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1rem;
+}
+
+/* Direction flat */
+.mond-dir-head {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 0.7rem;
+  row-gap: 0.35rem;
+  align-items: center;
+  align-content: center;
+  padding: 1rem 1.1rem;
+}
+.mond-dir-head__icon {
+  grid-row: 1 / span 2;
+  width: 38px; height: 38px;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  border: 2px solid var(--mond-ink);
+  background: var(--mond-paper);
+  color: var(--mond-ink);
+}
+.mond-dir-head__icon svg { width: 20px; height: 20px; }
+.mond-dir-head__num {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+.mond-dir-head h3 {
+  grid-column: 2;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  margin: 0;
+  line-height: 1.1;
+}
+.mond-dir-body {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.1rem;
+}
+.mond-dir-body p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.mond-dir-link {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1.1rem;
+}
+.mond-dir-link .mond-card__link {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mond-ink);
+  text-decoration: none;
+  border-bottom: 2px solid var(--mond-ink);
+  padding-bottom: 2px;
+}
+.mond-dir-link .mond-card__link:hover { background: var(--mond-yellow); }
+
+/* Timeline flat */
+.about-timeline { display: contents; }
+.about-timeline__item { display: contents; }
+.about-timeline-head {
+  grid-column: 1 / span 5;
+  grid-row: var(--tl-row);
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 1.1rem;
+}
+.about-timeline-head.tl-right {
+  grid-column: 8 / span 5;
+}
+.about-timeline-body {
+  grid-column: 6 / span 7;
+  grid-row: var(--tl-row);
+  padding: 1rem 1.1rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.about-timeline-body.tl-right {
+  grid-column: 1 / span 7;
+}
+.about-timeline-body p { margin: 0 0 0.55rem; }
+.about-timeline-body p:last-child { margin-bottom: 0; }
+.about-timeline-body strong { color: var(--mond-text); }
+.about-timeline-body em { font-family: var(--font-display); font-style: italic; }
+.about-timeline-body details,
+[data-style="mondrian"] .about-timeline-body .coursework-details {
+  margin-top: 0.6rem;
+  border: 0;
+  border-top: 1.5px solid var(--mond-ink);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.55rem 0 0;
+}
+[data-style="mondrian"] .about-timeline-body .coursework-details[open] {
+  padding-bottom: 0.3rem;
+}
+.about-timeline-body details summary,
+[data-style="mondrian"] .about-timeline-body .coursework-details summary {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--mond-ink);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.15rem 0;
+}
+[data-style="mondrian"] .about-timeline-body .coursework-details summary::-webkit-details-marker { display: none; }
+[data-style="mondrian"] .about-timeline-body .coursework-details summary::before {
+  content: "+";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--mond-ink);
+  font-size: 0.9rem;
+  line-height: 1;
+  font-weight: 700;
+  flex: 0 0 16px;
+}
+[data-style="mondrian"] .about-timeline-body .coursework-details[open] summary::before {
+  content: "−";
+  background: var(--mond-yellow);
+}
+[data-style="mondrian"] .about-timeline-body .coursework-terms {
+  margin-top: 0.6rem;
+  gap: 0.6rem;
+}
+[data-style="mondrian"] .about-timeline-body .coursework-terms h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  margin: 0 0 0.35rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--mond-ink);
+}
+[data-style="mondrian"] .about-timeline-body .course-list li {
+  color: var(--mond-text);
+  padding: 0.18rem 0;
+  border-bottom: 1px dashed color-mix(in srgb, var(--mond-ink) 30%, transparent);
+}
+[data-style="mondrian"] .about-timeline-body .course-list li:last-child { border-bottom: 0; }
+[data-style="mondrian"] .about-timeline-body .course-grade {
+  color: var(--mond-red);
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+.about-timeline-body ul {
+  margin: 0.4rem 0 0;
+  padding-left: 1.2rem;
+}
+.about-timeline-body ul li { margin: 0.2rem 0; }
+.about-timeline-head__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.about-timeline-head__meta h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin: 0.15rem 0;
+  line-height: 1.15;
+}
+.about-timeline-head__meta .about-timeline__inst {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--mond-text-soft);
+  margin: 0;
+}
+
+/* Story prose */
+.about-tile--story-1 p,
+.about-tile--story-2 p {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin: 0 0 0.7rem;
+}
+.about-tile--story-1 p:last-child,
+.about-tile--story-2 p:last-child { margin-bottom: 0; }
+.about-tile--story-1 strong,
+.about-tile--story-2 strong { color: var(--mond-text); }
+
+/* Timeline icon (shared by both legacy and new flat structure) */
+.about-timeline__icon {
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--mond-yellow);
+  color: var(--mond-ink);
+  border: 2px solid var(--mond-ink);
+}
+.about-timeline__item--education .about-timeline__icon { background: var(--mond-blue); color: #fff; }
+.about-timeline__item--work .about-timeline__icon      { background: var(--mond-red); color: #fff; }
+.about-timeline__item--project .about-timeline__icon   { background: var(--mond-yellow); }
+.about-timeline__item--future .about-timeline__icon    { background: var(--mond-paper); }
+[data-style="mondrian"][data-theme="dark"] .about-timeline__item--future .about-timeline__icon {
+  background: #1f1c17;
+  color: var(--mond-ink);
+}
+.about-timeline__inst {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  color: var(--mond-text-soft);
+  margin: 0;
+}
+.about-timeline__num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  color: var(--mond-text-soft);
+  align-self: center;
+}
+
+/* --- About responsive --- */
+@media (max-width: 960px) {
+  [data-style="mondrian"] .about-mondrian {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .about-tile--hero,
+  .about-tile--photo,
+  .about-tile--quote,
+  .about-tile--story-head,
+  .about-tile--story-1,
+  .about-tile--story-2,
+  .about-tile--principles-head,
+  .about-tile--p1-head, .about-tile--p1-body,
+  .about-tile--p2-head, .about-tile--p2-body,
+  .about-tile--p3-head, .about-tile--p3-body,
+  .about-tile--p4-head, .about-tile--p4-body,
+  .about-tile--p5-head, .about-tile--p5-body,
+  .about-tile--tools-head, .about-tile--tools,
+  .about-tile--roles-head,
+  .about-tile--r1-head, .about-tile--r2-head, .about-tile--r3-head, .about-tile--r4-head,
+  .about-tile--r1-i1, .about-tile--r1-i2, .about-tile--r1-i3, .about-tile--r1-i4, .about-tile--r1-i5,
+  .about-tile--r2-i1, .about-tile--r2-i2, .about-tile--r2-i3, .about-tile--r2-i4, .about-tile--r2-i5,
+  .about-tile--r3-i1, .about-tile--r3-i2, .about-tile--r3-i3, .about-tile--r3-i4, .about-tile--r3-i5,
+  .about-tile--r4-i1, .about-tile--r4-i2, .about-tile--r4-i3, .about-tile--r4-i4,
+  .about-tile--journey-head { grid-column: 1 / -1; grid-row: auto; }
+  .about-tile--r1-head, .about-tile--r2-head, .about-tile--r3-head, .about-tile--r4-head { grid-row: auto; }
+  .about-tile--photo { min-height: 280px; }
+  .about-tile--swatch-y, .about-tile--swatch-r, .about-tile--swatch-b { grid-column: span 2; grid-row: auto; min-height: 50px; }
+  .about-tile--stat-1, .about-tile--stat-2, .about-tile--stat-3, .about-tile--stat-4 { grid-column: span 3; grid-row: auto; }
+}
+
+@media (max-width: 540px) {
+  [data-style="mondrian"] .about-mondrian { grid-template-columns: 1fr; }
+  .about-tile--stat-1, .about-tile--stat-2, .about-tile--stat-3, .about-tile--stat-4 { grid-column: 1 / -1; }
+  .about-timeline-head { grid-template-columns: 40px 1fr; }
+  .about-timeline__num { display: none; }
+}
+
+/* --- Responsive: collapse mosaic --------------------------------------- */
+@media (max-width: 960px) {
+  [data-style="mondrian"] .home-mondrian {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .mond-tile--title       { grid-column: 1 / -1; grid-row: auto; }
+  .mond-tile--neural      { grid-column: 1 / span 4; grid-row: auto; min-height: 220px; }
+  .mond-tile--intro       { grid-column: 5 / span 2; grid-row: auto; }
+  .mond-tile--swatch-y    { grid-column: 1 / span 3; grid-row: auto; min-height: 50px; }
+  .mond-tile--swatch-r    { grid-column: 4 / span 3; grid-row: auto; min-height: 50px; }
+  .mond-tile--photo       { grid-column: 1 / span 2; grid-row: auto; min-height: 220px; }
+  .mond-tile--name        { grid-column: 3 / span 4; grid-row: auto; }
+  .mond-tile--m1, .mond-tile--m2,
+  .mond-tile--m3, .mond-tile--m4 { grid-column: span 3; grid-row: auto; }
+  .mond-tile--creds       { grid-column: 1 / -1; grid-row: auto; }
+  .mond-tile--socials     { grid-column: span 2; grid-row: auto; }
+  .mond-tile--chips       { grid-column: span 4; grid-row: auto; }
+  .mond-tile--proofs      { grid-column: span 6; grid-row: auto; }
+  .mond-tile--swatch-blue { grid-column: span 6; grid-row: auto; min-height: 50px; }
+  .mond-tile--hero-field  { grid-column: span 6; grid-row: auto; min-height: 80px; }
+  .mond-tile--molecule    { grid-column: 1 / -1; grid-row: auto; min-height: 240px; }
+  .mond-tile--strip-r,
+  .mond-tile--strip-b,
+  .mond-tile--strip-y     { grid-column: span 2; grid-row: auto; min-height: 60px; }
+  .mond-tile--strip-quote { grid-column: 1 / -1; grid-row: auto; }
+  .mond-tile--about-head,
+  .mond-tile--about-body,
+  .mond-tile--about-p1, .mond-tile--about-p2, .mond-tile--about-p3,
+  .mond-tile--exp-head,
+  .mond-tile--feat-head,
+  .mond-tile--work-1, .mond-tile--work-2,
+  .mond-tile--contact-head,
+  .mond-tile--contact-email,
+  .mond-tile--contact-phone,
+  .mond-tile--contact-github,
+  .mond-tile--contact-linkedin,
+  .mond-tile--dir-head,
+  .mond-tile--exp-1-head, .mond-tile--exp-2-head, .mond-tile--exp-3-head,
+  .mond-tile--exp-1-body, .mond-tile--exp-2-body, .mond-tile--exp-3-body,
+  .mond-tile--exp-1-chips, .mond-tile--exp-2-chips, .mond-tile--exp-3-chips,
+  .mond-tile--feat-intro,
+  .mond-tile--feat-visual,
+  .mond-tile--feat-f1, .mond-tile--feat-f2,
+  .mond-tile--feat-f3, .mond-tile--feat-f4,
+  .mond-tile--feat-actions,
+  .mond-tile--dir1-head, .mond-tile--dir1-body, .mond-tile--dir1-link,
+  .mond-tile--dir2-head, .mond-tile--dir2-body, .mond-tile--dir2-link,
+  .mond-tile--actions     { grid-column: 1 / -1; grid-row: auto; }
+  .mond-tile--feat-visual { min-height: 240px; }
+  .mond-section-head      { grid-template-columns: 1fr; gap: 0.6rem; }
+  /* Timeline collapses to single column */
+  .about-timeline-head, .about-timeline-body,
+  .about-timeline-head.tl-right, .about-timeline-body.tl-right { grid-column: 1 / -1; grid-row: auto; }
+}
+
+@media (max-width: 540px) {
+  [data-style="mondrian"] .home-mondrian {
+    grid-template-columns: 1fr;
+  }
+  .mond-tile, .mond-tile--solid {
+    grid-column: 1 / -1 !important;
+  }
+  .mond-tile--solid { min-height: 60px; }
+  .mond-profile { grid-template-columns: 80px 1fr; }
+  .mond-profile__photo { width: 80px; height: 100px; }
+}
+
+/* ==========================================================================
+   Shared content presentation for the consolidated IA
+   ========================================================================== */
+
+[data-style="mondrian"] h1,
+[data-style="mondrian"] h2,
+[data-style="mondrian"] h3 {
+  letter-spacing: 0;
+}
+
+[data-style="mondrian"] .hero,
+[data-style="mondrian"] .page-hero,
+[data-style="mondrian"] .case-hero,
+[data-style="mondrian"] .cv-hero,
+[data-style="mondrian"] .section-block {
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .hero {
+  position: relative;
+  min-height: auto;
+  margin-top: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: var(--mond-rule) solid var(--mond-ink);
+  box-shadow: none;
+}
+
+[data-style="mondrian"] .section-block {
+  margin-top: var(--mond-rule);
+  padding: clamp(2.25rem, 5vw, 4.25rem) 0;
+  border-top: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .page-hero,
+[data-style="mondrian"] .case-hero,
+[data-style="mondrian"] .cv-hero {
+  padding: clamp(2.5rem, 6vw, 4.75rem) 0 clamp(1.8rem, 4vw, 3rem);
+}
+
+[data-style="mondrian"] .button,
+[data-style="mondrian"] .surface-card,
+[data-style="mondrian"] .contact-card,
+[data-style="mondrian"] .cv-entry,
+[data-style="mondrian"] .publication-card,
+[data-style="mondrian"] .timeline__card,
+[data-style="mondrian"] .case-section,
+[data-style="mondrian"] .profile-console,
+[data-style="mondrian"] .project-feature,
+[data-style="mondrian"] .featured-case,
+[data-style="mondrian"] .project-feature__media,
+[data-style="mondrian"] .featured-case__visual,
+[data-style="mondrian"] .case-media,
+[data-style="mondrian"] .work-summary-grid div,
+[data-style="mondrian"] .workflow-card__header,
+[data-style="mondrian"] .workflow-card__footer span,
+[data-style="mondrian"] .workflow-card__notes span,
+[data-style="mondrian"] .tag-list span,
+[data-style="mondrian"] .tag-cloud span,
+[data-style="mondrian"] .signal-list span,
+[data-style="mondrian"] .availability-strip {
+  border-radius: 0;
+  border-color: var(--mond-ink);
+  box-shadow: none;
+}
+
+[data-style="mondrian"] .button--primary {
+  color: #ffffff;
+  background: var(--mond-red);
+}
+
+[data-style="mondrian"] .button--secondary {
+  color: var(--mond-ink);
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .surface-card__icon,
+[data-style="mondrian"] .timeline__marker,
+[data-style="mondrian"] .publication-card__year {
+  border-radius: 0;
+  color: var(--mond-paper);
+  background: var(--mond-ink);
+}
+
+[data-style="mondrian"] .hero-proof,
+[data-style="mondrian"] .metric-grid,
+[data-style="mondrian"] .section-block + .section-block {
+  border-color: var(--mond-ink);
+}
+
+[data-style="mondrian"] .profile-console,
+[data-style="mondrian"] .project-feature,
+[data-style="mondrian"] .featured-case {
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .project-feature__media,
+[data-style="mondrian"] .case-media,
+[data-style="mondrian"] .profile-console__photo {
+  background: var(--mond-paper-soft);
+}
+
+[data-style="mondrian"] .tag-list span,
+[data-style="mondrian"] .tag-cloud span,
+[data-style="mondrian"] .signal-list span {
+  color: var(--mond-ink);
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .work-summary-grid div:nth-child(1),
+[data-style="mondrian"] .project-feature:nth-of-type(1) .surface-card__icon {
+  border-top: 6px solid var(--mond-red);
+}
+
+[data-style="mondrian"] .work-summary-grid div:nth-child(2) {
+  border-top: 6px solid var(--mond-blue);
+}
+
+[data-style="mondrian"] .work-summary-grid div:nth-child(3) {
+  border-top: 6px solid var(--mond-yellow);
+}
+
+/* --- Consolidated Mondrian pages: paper grid, not the technical theme ----- */
+[data-style="mondrian"] {
+  color-scheme: light;
+  --bg: var(--mond-paper);
+  --bg-strong: var(--mond-paper);
+  --bg-warm: var(--mond-paper-soft);
+  --surface: var(--mond-paper);
+  --surface-solid: var(--mond-paper);
+  --surface-muted: var(--mond-paper-soft);
+  --text: var(--mond-text);
+  --text-muted: var(--mond-text-soft);
+  --text-soft: var(--mond-text-soft);
+  --border: var(--mond-ink);
+  --border-strong: var(--mond-ink);
+  --primary: #0f766e;
+  --primary-strong: var(--mond-ink);
+  --primary-soft: color-mix(in srgb, var(--mond-yellow) 24%, var(--mond-paper));
+  --secondary: var(--mond-blue);
+  --secondary-soft: color-mix(in srgb, var(--mond-blue) 12%, var(--mond-paper));
+  --accent: var(--mond-red);
+  --accent-soft: color-mix(in srgb, var(--mond-red) 13%, var(--mond-paper));
+  --ink: var(--mond-ink);
+  --shadow: none;
+  --shadow-soft: none;
+  --content: 1220px;
+}
+
+[data-style="mondrian"][data-theme="dark"] {
+  color-scheme: dark;
+  --primary: #5eead4;
+  --primary-strong: var(--mond-ink);
+  --primary-soft: color-mix(in srgb, var(--mond-blue) 22%, var(--mond-paper));
+  --secondary-soft: color-mix(in srgb, var(--mond-blue) 24%, var(--mond-paper));
+  --accent-soft: color-mix(in srgb, var(--mond-red) 24%, var(--mond-paper));
+}
+
+[data-style="mondrian"] body {
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] body::before {
+  display: none;
+}
+
+[data-style="mondrian"] main {
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] p,
+[data-style="mondrian"] li,
+[data-style="mondrian"] span {
+  color: inherit;
+}
+
+[data-style="mondrian"] p {
+  color: var(--mond-text-soft);
+}
+
+[data-style="mondrian"] a {
+  color: var(--mond-ink);
+}
+
+[data-style="mondrian"] .site-header {
+  min-height: 70px;
+  background: var(--mond-paper);
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+  box-shadow: none;
+}
+
+[data-style="mondrian"] .site-brand__mark {
+  width: auto;
+  min-width: 2.4rem;
+  height: 2.4rem;
+  padding: 0 0.5rem;
+  border: 2px solid var(--mond-ink);
+  background: var(--mond-ink);
+  color: var(--mond-paper);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+[data-style="mondrian"] .site-brand__text {
+  color: var(--mond-ink);
+}
+
+[data-style="mondrian"] .site-nav a {
+  color: var(--mond-text-soft);
+  border-radius: 0;
+  background: transparent;
+}
+
+[data-style="mondrian"] .site-nav a:hover,
+[data-style="mondrian"] .site-nav a[aria-current="page"] {
+  color: var(--mond-red);
+  background: color-mix(in srgb, var(--mond-ink) 8%, transparent);
+}
+
+[data-style="mondrian"] .style-switcher,
+[data-style="mondrian"] .theme-switcher {
+  border: 3px solid var(--mond-ink);
+  border-radius: 0;
+  background: var(--mond-paper);
+  align-items: center;
+}
+
+[data-style="mondrian"] .theme-button:hover,
+[data-style="mondrian"] .theme-button.is-active,
+[data-style="mondrian"] .style-button:hover,
+[data-style="mondrian"] .style-button.is-active {
+  color: var(--mond-paper);
+  background: var(--mond-ink);
+}
+
+[data-style="mondrian"] .hero,
+[data-style="mondrian"] .page-hero,
+[data-style="mondrian"] .cv-hero,
+[data-style="mondrian"] .case-hero,
+[data-style="mondrian"] .section-block {
+  width: min(1220px, calc(100% - (var(--gutter) * 2)));
+  border-right: var(--mond-rule) solid var(--mond-ink);
+  border-left: var(--mond-rule) solid var(--mond-ink);
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .hero,
+[data-style="mondrian"] .page-hero,
+[data-style="mondrian"] .cv-hero,
+[data-style="mondrian"] .case-hero {
+  margin-top: 0;
+  border-top: 0;
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .hero {
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.85fr);
+  gap: 0;
+  padding: 0;
+}
+
+[data-style="mondrian"] .hero__content,
+[data-style="mondrian"] .hero__visual {
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+[data-style="mondrian"] .hero__visual {
+  border-left: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .hero h1,
+[data-style="mondrian"] .page-hero h1,
+[data-style="mondrian"] .cv-hero h1,
+[data-style="mondrian"] .case-hero h1 {
+  max-width: 17ch;
+  color: var(--mond-text);
+  font-size: clamp(2.9rem, 4.3vw, 4.35rem);
+  line-height: 1;
+}
+
+[data-style="mondrian"] .page-hero h1,
+[data-style="mondrian"] .cv-hero h1,
+[data-style="mondrian"] .case-hero h1 {
+  max-width: 20ch;
+}
+
+[data-style="mondrian"] .hero__summary,
+[data-style="mondrian"] .page-hero > p,
+[data-style="mondrian"] .case-hero > div > p,
+[data-style="mondrian"] .contact-hero > p {
+  color: var(--mond-text-soft);
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+[data-style="mondrian"] .hero__visual {
+  min-height: auto;
+  align-content: center;
+  background:
+    linear-gradient(90deg, transparent 0 58%, var(--mond-yellow) 58% 78%, transparent 78%),
+    linear-gradient(180deg, transparent 0 62%, var(--mond-red) 62% 79%, var(--mond-blue) 79% 100%);
+  background-blend-mode: normal;
+}
+
+[data-style="mondrian"][data-theme="dark"] .hero__visual {
+  background:
+    linear-gradient(90deg, transparent 0 58%, color-mix(in srgb, var(--mond-yellow) 78%, #000) 58% 78%, transparent 78%),
+    linear-gradient(180deg, transparent 0 62%, color-mix(in srgb, var(--mond-red) 82%, #000) 62% 79%, color-mix(in srgb, var(--mond-blue) 82%, #000) 79% 100%);
+}
+
+[data-style="mondrian"] .eyebrow {
+  color: var(--mond-text-soft);
+  letter-spacing: 0.18em;
+}
+
+[data-style="mondrian"] .hero-proof {
+  border-color: var(--mond-ink);
+}
+
+[data-style="mondrian"] .hero-proof span,
+[data-style="mondrian"] .hero-proof strong {
+  color: var(--mond-text);
+}
+
+[data-style="mondrian"] .profile-console {
+  border: 2px solid var(--mond-ink);
+  background: var(--mond-paper);
+  width: min(100%, 560px);
+  padding: 0;
+}
+
+[data-style="mondrian"] .profile-console__photo {
+  border-radius: 0;
+  border: 2px solid var(--mond-ink);
+  filter: grayscale(1) contrast(1.08);
+}
+
+[data-style="mondrian"] .profile-console__header {
+  display: grid;
+  grid-template-columns: minmax(120px, 0.55fr) minmax(0, 1fr);
+  gap: 0;
+  margin: 0;
+  border-bottom: 2px solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .profile-console__header > div {
+  display: grid;
+  align-content: center;
+  padding: 1rem;
+}
+
+[data-style="mondrian"] .profile-console__photo {
+  width: 100%;
+  height: 100%;
+  min-height: 135px;
+  border-width: 0 2px 0 0;
+}
+
+[data-style="mondrian"] .profile-console h2 {
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+}
+
+[data-style="mondrian"] .metric-grid div,
+[data-style="mondrian"] .metric-grid {
+  border-color: var(--mond-ink);
+}
+
+[data-style="mondrian"] .metric-grid {
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+  border-bottom: 2px solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .metric-grid div {
+  padding: 1rem;
+  border-left: 2px solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .metric-grid div:first-child {
+  border-left: 0;
+}
+
+[data-style="mondrian"] .metric-grid div:nth-child(1) {
+  color: #fff;
+  background: var(--mond-red);
+}
+
+[data-style="mondrian"] .metric-grid div:nth-child(2) {
+  color: #fff;
+  background: var(--mond-blue);
+}
+
+[data-style="mondrian"] .metric-grid div:nth-child(3) {
+  color: #14110f;
+  background: var(--mond-yellow);
+}
+
+[data-style="mondrian"] .metric-grid div:nth-child(-n+3) strong,
+[data-style="mondrian"] .metric-grid div:nth-child(-n+3) span {
+  color: inherit;
+}
+
+[data-style="mondrian"] .metric-grid strong,
+[data-style="mondrian"] .stat-band strong {
+  color: var(--mond-text);
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+[data-style="mondrian"] .signal-list {
+  gap: 0;
+  padding: 0;
+}
+
+[data-style="mondrian"] .signal-list span {
+  margin: -2px 0 0 -2px;
+}
+
+[data-style="mondrian"] .button,
+[data-style="mondrian"] .tag-list span,
+[data-style="mondrian"] .tag-cloud span,
+[data-style="mondrian"] .signal-list span {
+  border: 2px solid var(--mond-ink);
+  border-radius: 0;
+  box-shadow: none;
+}
+
+[data-style="mondrian"] .button--primary {
+  color: #fff;
+  background: var(--mond-red);
+}
+
+[data-style="mondrian"][data-theme="dark"] .button--primary {
+  color: #fff;
+}
+
+[data-style="mondrian"] .button--secondary {
+  color: var(--mond-ink);
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .availability-strip {
+  color: var(--mond-ink);
+  background: color-mix(in srgb, var(--mond-blue) 18%, var(--mond-paper));
+}
+
+[data-style="mondrian"] .section-block {
+  margin-top: 0;
+  padding: clamp(1.6rem, 4vw, 2.6rem);
+  border-top: 0;
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .section-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(1rem, 4vw, 3rem);
+  align-items: end;
+  max-width: none;
+  margin-bottom: clamp(1.2rem, 3vw, 2rem);
+  text-align: left;
+}
+
+[data-style="mondrian"] .section-intro .eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+[data-style="mondrian"] .section-intro h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3.8vw, 3.1rem);
+  line-height: 1;
+}
+
+[data-style="mondrian"] .section-intro p {
+  margin: 0;
+  max-width: 52ch;
+  font-family: var(--font-sans);
+  font-style: normal;
+}
+
+[data-style="mondrian"] .surface-card,
+[data-style="mondrian"] .contact-card,
+[data-style="mondrian"] .cv-entry,
+[data-style="mondrian"] .publication-card,
+[data-style="mondrian"] .case-section,
+[data-style="mondrian"] .project-feature,
+[data-style="mondrian"] .project-feature__media,
+[data-style="mondrian"] .workflow-card__header,
+[data-style="mondrian"] .workflow-card__footer span,
+[data-style="mondrian"] .workflow-card__notes span,
+[data-style="mondrian"] .work-summary-grid div {
+  border: 2px solid var(--mond-ink);
+  border-radius: 0;
+  background: var(--mond-paper);
+  box-shadow: none;
+}
+
+[data-style="mondrian"] .surface-card__icon,
+[data-style="mondrian"] .timeline__marker,
+[data-style="mondrian"] .publication-card__year {
+  border: 2px solid var(--mond-ink);
+  border-radius: 0;
+  color: var(--mond-paper);
+  background: var(--mond-ink);
+}
+
+[data-style="mondrian"] .surface-card:nth-child(3n+1) {
+  border-top: 6px solid var(--mond-red);
+}
+
+[data-style="mondrian"] .surface-card:nth-child(3n+2) {
+  border-top: 6px solid var(--mond-blue);
+}
+
+[data-style="mondrian"] .surface-card:nth-child(3n) {
+  border-top: 6px solid var(--mond-yellow);
+}
+
+[data-style="mondrian"] .project-feature {
+  gap: 0;
+  padding: 0;
+  overflow: visible;
+  border-width: 3px;
+}
+
+[data-style="mondrian"] .project-feature__content,
+[data-style="mondrian"] .project-feature__media {
+  padding: clamp(1.2rem, 3vw, 2rem);
+}
+
+[data-style="mondrian"] .project-feature__media {
+  border-width: 0 0 0 3px;
+  background: var(--mond-paper-soft);
+}
+
+[data-style="mondrian"] .work-summary-grid {
+  gap: 0;
+}
+
+[data-style="mondrian"] .work-summary-grid div {
+  border-width: 2px;
+  border-bottom: 0;
+}
+
+[data-style="mondrian"] .work-summary-grid div:last-child {
+  border-bottom: 2px solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .work-summary-grid strong,
+[data-style="mondrian"] .work-summary-grid span {
+  color: var(--mond-text);
+}
+
+[data-style="mondrian"] .check-list li {
+  color: var(--mond-text-soft);
+}
+
+[data-style="mondrian"] .check-list .icon,
+[data-style="mondrian"] .text-link {
+  color: var(--primary);
+}
+
+[data-style="mondrian"] .stat-band {
+  gap: 0;
+}
+
+[data-style="mondrian"] .stat-band div {
+  border: 3px solid var(--mond-ink);
+  border-radius: 0;
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .stat-band div:nth-child(1) {
+  color: #fff;
+  background: var(--mond-red);
+}
+
+[data-style="mondrian"] .stat-band div:nth-child(2) {
+  color: #fff;
+  background: var(--mond-blue);
+}
+
+[data-style="mondrian"] .stat-band div:nth-child(3) {
+  color: #14110f;
+  background: var(--mond-yellow);
+}
+
+[data-style="mondrian"] .stat-band div:nth-child(-n+3) span,
+[data-style="mondrian"] .stat-band div:nth-child(-n+3) strong {
+  color: inherit;
+}
+
+[data-style="mondrian"] .cv-entry {
+  border-width: 3px;
+}
+
+[data-style="mondrian"] .cv-entry__header > span,
+[data-style="mondrian"] .course-grade {
+  color: var(--mond-red);
+}
+
+[data-style="mondrian"] .cv-contact-grid a,
+[data-style="mondrian"] .cv-contact-grid > span {
+  border: 2px solid var(--mond-ink);
+  border-radius: 0;
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .site-footer {
+  color: var(--mond-text);
+  background: var(--mond-paper);
+  border-top: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .site-footer__links a,
+[data-style="mondrian"] .scroll-to-top {
+  border: 2px solid var(--mond-ink);
+  border-radius: 0;
+  color: var(--mond-ink);
+  background: var(--mond-paper);
+}
+
+@media (max-width: 980px) {
+  [data-style="mondrian"] .hero {
+    grid-template-columns: 1fr;
+  }
+
+  [data-style="mondrian"] .hero__visual,
+  [data-style="mondrian"] .project-feature__media {
+    border-left: 0;
+    border-top: var(--mond-rule) solid var(--mond-ink);
+  }
+
+  [data-style="mondrian"] .section-intro {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  [data-style="mondrian"] .site-nav {
+    border: 3px solid var(--mond-ink);
+    border-radius: 0;
+    background: var(--mond-paper);
+  }
+
+  [data-style="mondrian"] .hero,
+  [data-style="mondrian"] .page-hero,
+  [data-style="mondrian"] .cv-hero,
+  [data-style="mondrian"] .case-hero,
+  [data-style="mondrian"] .section-block {
+    width: calc(100% - (var(--gutter) * 2));
+  }
+
+  [data-style="mondrian"] .hero h1,
+  [data-style="mondrian"] .page-hero h1,
+  [data-style="mondrian"] .cv-hero h1,
+  [data-style="mondrian"] .case-hero h1 {
+    font-size: clamp(2.4rem, 12vw, 3.4rem);
+  }
+}
+
+/* ==========================================================================
+   Mondrian composition refinements for consolidated pages
+   ========================================================================== */
+
+[data-style="mondrian"] .page-hero,
+[data-style="mondrian"] .cv-hero,
+[data-style="mondrian"] .case-hero {
+  box-sizing: border-box;
+  padding-inline: clamp(1.4rem, 4vw, 3rem);
+  overflow: hidden;
+}
+
+[data-style="mondrian"] body[data-page="work"] .page-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(260px, 4fr);
+  grid-template-rows: auto 1fr auto;
+  min-height: clamp(360px, 36vw, 500px);
+  padding: 0;
+}
+
+[data-style="mondrian"] body[data-page="work"] .page-hero::before {
+  content: "";
+  z-index: 0;
+  grid-column: 2;
+  grid-row: 1 / 4;
+  min-height: 100%;
+  border-left: var(--mond-rule) solid var(--mond-ink);
+  background:
+    linear-gradient(180deg, var(--mond-yellow) 0 54%, var(--mond-red) 54% 74%, var(--mond-blue) 74% 100%);
+}
+
+[data-style="mondrian"][data-theme="dark"] body[data-page="work"] .page-hero::before {
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--mond-yellow) 82%, #000) 0 54%,
+      color-mix(in srgb, var(--mond-red) 84%, #000) 54% 74%,
+      color-mix(in srgb, var(--mond-blue) 84%, #000) 74% 100%
+    );
+}
+
+[data-style="mondrian"] body[data-page="work"] .page-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+[data-style="mondrian"] body[data-page="work"] .page-hero .eyebrow {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  padding: clamp(1.6rem, 4vw, 3rem) clamp(1.4rem, 4vw, 3rem) 0;
+}
+
+[data-style="mondrian"] body[data-page="work"] .page-hero h1 {
+  grid-column: 1;
+  grid-row: 2 / 4;
+  align-self: end;
+  max-width: 22ch;
+  margin: 0;
+  padding: 0 clamp(1.4rem, 4vw, 3rem) clamp(1.6rem, 4vw, 3rem);
+  font-size: clamp(2.75rem, 4.2vw, 4rem);
+}
+
+[data-style="mondrian"] body[data-page="work"] .page-hero > p:not(.eyebrow) {
+  grid-column: 2;
+  grid-row: 3;
+  align-self: end;
+  max-width: none;
+  min-height: 34%;
+  margin: 0;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border-top: var(--mond-rule) solid var(--mond-ink);
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] body[data-page="work"] .page-hero + .section-block {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0;
+  padding: 0;
+  border-top: 0;
+}
+
+[data-style="mondrian"] body[data-page="work"] .project-feature {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  border: 0;
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="work"] .project-feature__content {
+  grid-column: 1 / span 7;
+  padding: clamp(1.5rem, 3.5vw, 2.7rem);
+  border-right: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="work"] .project-feature__media {
+  grid-column: 8 / -1;
+  min-height: clamp(440px, 48vw, 620px);
+  padding: clamp(1.2rem, 3vw, 2.2rem);
+  border: 0;
+  background: var(--mond-paper-soft);
+}
+
+[data-style="mondrian"] body[data-page="work"] .project-feature:nth-child(even) .project-feature__content {
+  grid-column: 6 / -1;
+  grid-row: 1;
+  border-right: 0;
+  border-left: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="work"] .project-feature:nth-child(even) .project-feature__media {
+  grid-column: 1 / span 5;
+  grid-row: 1;
+}
+
+[data-style="mondrian"] body[data-page="work"] .project-feature h2 {
+  max-width: 12ch;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  line-height: 0.98;
+}
+
+[data-style="mondrian"] body[data-page="work"] .work-summary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: clamp(1.2rem, 3vw, 2rem) 0 0;
+}
+
+[data-style="mondrian"] body[data-page="work"] .work-summary-grid div {
+  margin: -2px 0 0 -2px;
+  padding: 1rem;
+}
+
+[data-style="mondrian"] body[data-page="work"] .work-summary-grid div:nth-child(1) {
+  border-top: 6px solid var(--mond-red);
+}
+
+[data-style="mondrian"] body[data-page="work"] .work-summary-grid div:nth-child(2) {
+  border-top: 6px solid var(--mond-blue);
+}
+
+[data-style="mondrian"] body[data-page="work"] .work-summary-grid div:nth-child(3) {
+  border-top: 6px solid var(--mond-yellow);
+}
+
+[data-style="mondrian"] body[data-page="work"] .check-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1rem;
+}
+
+[data-style="mondrian"] body[data-page="work"] .tag-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0;
+}
+
+[data-style="mondrian"] body[data-page="work"] .tag-list span {
+  justify-content: center;
+  margin: -2px 0 0 -2px;
+  padding: 0.65rem 0.7rem;
+  text-align: center;
+}
+
+[data-style="mondrian"] body[data-page="work"] .section-block--cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(1rem, 3vw, 2rem);
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 2.7rem);
+}
+
+[data-style="mondrian"] body[data-page="work"] .section-block--cta h2,
+[data-style="mondrian"] body[data-page="work"] .section-block--cta p {
+  margin: 0;
+}
+
+[data-style="mondrian"] body[data-page="work"] .section-block--cta .button-row {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+[data-style="mondrian"] body[data-page="home"] #about {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0;
+  padding: 0;
+}
+
+[data-style="mondrian"] body[data-page="home"] #about .section-intro {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: clamp(1.5rem, 4vw, 2.7rem);
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="home"] #about .prose-grid {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0;
+}
+
+[data-style="mondrian"] body[data-page="home"] #about .prose {
+  grid-column: 1 / span 5;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  border-right: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="home"] #about .values-grid {
+  grid-column: 6 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+}
+
+[data-style="mondrian"] body[data-page="home"] #about .surface-card {
+  min-height: 100%;
+  border-width: 0 0 2px 2px;
+}
+
+[data-style="mondrian"] body[data-page="home"] #about .surface-card:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .two-column,
+[data-style="mondrian"] body[data-page="home"] main > .section-block .three-column,
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid {
+  gap: 0;
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .two-column > *,
+[data-style="mondrian"] body[data-page="home"] main > .section-block .three-column > *,
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > * {
+  margin: -2px 0 0 -2px;
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(320px, 0.95fr);
+  gap: 0;
+  min-height: clamp(430px, 45vw, 610px);
+  padding: 0;
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-hero__identity {
+  position: relative;
+  padding: clamp(1.6rem, 4vw, 3rem);
+  border-right: var(--mond-rule) solid var(--mond-ink);
+  overflow: hidden;
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-hero__identity::after {
+  content: "";
+  position: absolute;
+  right: clamp(1.4rem, 4vw, 3rem);
+  bottom: clamp(0.75rem, 2vw, 1.25rem);
+  width: clamp(7rem, 16vw, 13rem);
+  height: clamp(4rem, 12%, 4.8rem);
+  border: var(--mond-rule) solid var(--mond-ink);
+  background:
+    linear-gradient(90deg, var(--mond-red) 0 34%, var(--mond-blue) 34% 68%, var(--mond-yellow) 68% 100%);
+}
+
+[data-style="mondrian"][data-theme="dark"] body[data-page="cv"] .cv-hero__identity::after {
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--mond-red) 82%, #000) 0 34%,
+      color-mix(in srgb, var(--mond-blue) 82%, #000) 34% 68%,
+      color-mix(in srgb, var(--mond-yellow) 82%, #000) 68% 100%
+    );
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-hero__identity > * {
+  position: relative;
+  z-index: 1;
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-contact-grid {
+  gap: 0;
+  padding: clamp(1.3rem, 3vw, 2.2rem);
+  align-content: center;
+  background: var(--mond-paper-soft);
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-contact-grid a,
+[data-style="mondrian"] body[data-page="cv"] .cv-contact-grid > span {
+  margin-top: -2px;
+  border-width: 2px;
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-hero + .section-block {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 0;
+  padding: 0;
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-hero + .section-block .section-intro {
+  margin: 0;
+  padding: clamp(1.5rem, 4vw, 2.7rem);
+  border-right: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-hero + .section-block .prose {
+  padding: clamp(1.5rem, 4vw, 2.7rem);
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-list {
+  gap: 0;
+}
+
+[data-style="mondrian"] body[data-page="cv"] .section-intro--left {
+  display: block;
+}
+
+[data-style="mondrian"] body[data-page="cv"] .section-intro--left h2 {
+  max-width: 14ch;
+  font-size: clamp(2.35rem, 4vw, 3.45rem);
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-entry {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.52fr) minmax(0, 1fr);
+  gap: 0;
+  padding: 0;
+  border-width: 0;
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-entry__header {
+  grid-column: 1;
+  grid-row: 1 / span 5;
+  flex-direction: column;
+  justify-content: flex-start;
+  min-height: 100%;
+  margin: 0;
+  padding: clamp(1.2rem, 3vw, 2rem);
+  border-right: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-entry__header > span {
+  order: -1;
+  color: var(--mond-red);
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-entry > p,
+[data-style="mondrian"] body[data-page="cv"] .cv-entry > ul,
+[data-style="mondrian"] body[data-page="cv"] .cv-entry > .button-row {
+  grid-column: 2;
+  margin: 0;
+  padding: 0 clamp(1.2rem, 3vw, 2rem) 1rem;
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-entry > p:first-of-type {
+  padding-top: clamp(1.2rem, 3vw, 2rem);
+}
+
+@media (max-width: 980px) {
+  [data-style="mondrian"] body[data-page="work"] .page-hero,
+  [data-style="mondrian"] body[data-page="cv"] .cv-hero,
+  [data-style="mondrian"] body[data-page="cv"] .cv-hero + .section-block {
+    grid-template-columns: 1fr;
+  }
+
+  [data-style="mondrian"] body[data-page="work"] .page-hero::before {
+    grid-column: 1;
+    grid-row: 3;
+    min-height: 8rem;
+    border-top: var(--mond-rule) solid var(--mond-ink);
+    border-left: 0;
+  }
+
+  [data-style="mondrian"] body[data-page="work"] .page-hero h1 {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  [data-style="mondrian"] body[data-page="work"] .page-hero > p:not(.eyebrow) {
+    grid-column: 1;
+    grid-row: 4;
+    min-height: 0;
+    border-left: 0;
+  }
+
+  [data-style="mondrian"] body[data-page="work"] .project-feature,
+  [data-style="mondrian"] body[data-page="work"] .project-feature:nth-child(even) .project-feature__content,
+  [data-style="mondrian"] body[data-page="work"] .project-feature:nth-child(even) .project-feature__media {
+    grid-template-columns: 1fr;
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  [data-style="mondrian"] body[data-page="work"] .project-feature__content,
+  [data-style="mondrian"] body[data-page="work"] .project-feature:nth-child(even) .project-feature__content,
+  [data-style="mondrian"] body[data-page="cv"] .cv-hero__identity,
+  [data-style="mondrian"] body[data-page="cv"] .cv-hero + .section-block .section-intro {
+    border-right: 0;
+    border-left: 0;
+    border-bottom: var(--mond-rule) solid var(--mond-ink);
+  }
+
+  [data-style="mondrian"] body[data-page="work"] .project-feature__media,
+  [data-style="mondrian"] body[data-page="work"] .project-feature:nth-child(even) .project-feature__media {
+    min-height: auto;
+  }
+
+  [data-style="mondrian"] body[data-page="home"] #about .prose,
+  [data-style="mondrian"] body[data-page="home"] #about .values-grid,
+  [data-style="mondrian"] body[data-page="cv"] .cv-entry__header,
+  [data-style="mondrian"] body[data-page="cv"] .cv-entry > p,
+  [data-style="mondrian"] body[data-page="cv"] .cv-entry > ul,
+  [data-style="mondrian"] body[data-page="cv"] .cv-entry > .button-row {
+    grid-column: 1 / -1;
+  }
+
+  [data-style="mondrian"] body[data-page="home"] #about .prose {
+    border-right: 0;
+    border-bottom: var(--mond-rule) solid var(--mond-ink);
+  }
+
+  [data-style="mondrian"] body[data-page="cv"] .cv-entry {
+    grid-template-columns: 1fr;
+  }
+
+  [data-style="mondrian"] body[data-page="cv"] .cv-entry__header {
+    grid-row: auto;
+    border-right: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  [data-style="mondrian"] .page-hero,
+  [data-style="mondrian"] .cv-hero,
+  [data-style="mondrian"] .case-hero {
+    padding-inline: 0;
+  }
+
+  [data-style="mondrian"] body[data-page="work"] .page-hero h1 {
+    max-width: 11ch;
+    font-size: clamp(2.45rem, 12vw, 3.6rem);
+  }
+
+  [data-style="mondrian"] body[data-page="work"] .work-summary-grid,
+  [data-style="mondrian"] body[data-page="work"] .check-list,
+  [data-style="mondrian"] body[data-page="home"] #about .values-grid,
+  [data-style="mondrian"] body[data-page="home"] main > .section-block .two-column,
+  [data-style="mondrian"] body[data-page="home"] main > .section-block .three-column,
+  [data-style="mondrian"] body[data-page="work"] .section-block--cta {
+    grid-template-columns: 1fr;
+  }
+
+  [data-style="mondrian"] body[data-page="work"] .section-block--cta .button-row {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+/* ==========================================================================
+   Mondrian rhythm — home selected work, toolkit, contact, CV body
+   ========================================================================== */
+
+/* Drop the section padding so internal grids can run edge-to-edge */
+[data-style="mondrian"] body[data-page="home"] main > .section-block:not(#about) {
+  padding: 0;
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block:not(#about) > .section-intro {
+  margin: 0;
+  padding: clamp(1.5rem, 4vw, 2.7rem);
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+}
+
+/* --- Selected work (.two-column) ---------------------------------------- */
+[data-style="mondrian"] body[data-page="home"] main > .section-block .two-column {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-auto-rows: minmax(0, auto);
+  gap: 0;
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .two-column > .surface-card {
+  margin: 0;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  border: 0;
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .two-column > .surface-card:nth-child(1) {
+  grid-column: 1 / span 7;
+  border-top: 8px solid var(--mond-red);
+  border-right: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .two-column > .surface-card:nth-child(2) {
+  grid-column: 8 / -1;
+  border-top: 8px solid var(--mond-blue);
+}
+
+/* If a 3rd item ever appears, give it a yellow row */
+[data-style="mondrian"] body[data-page="home"] main > .section-block .two-column > .surface-card:nth-child(3) {
+  grid-column: 1 / -1;
+  border-top: 8px solid var(--mond-yellow);
+}
+
+/* --- Technical toolkit (.three-column + tag-cloud) ---------------------- */
+[data-style="mondrian"] body[data-page="home"] main > .section-block .three-column {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0;
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .three-column > .surface-card {
+  margin: 0;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  border: 0;
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .three-column > .surface-card:nth-child(1) {
+  grid-column: 1 / span 5;
+  border-top: 8px solid var(--mond-red);
+  border-right: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .three-column > .surface-card:nth-child(2) {
+  grid-column: 6 / span 4;
+  border-top: 8px solid var(--mond-blue);
+  border-right: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .three-column > .surface-card:nth-child(3) {
+  grid-column: 10 / -1;
+  border-top: 8px solid var(--mond-yellow);
+}
+
+/* Pull the tag-cloud below the three-column into the same composition */
+[data-style="mondrian"] body[data-page="home"] main > .section-block .tag-cloud {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .tag-cloud span {
+  margin: 0;
+  padding: 1rem 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--mond-ink);
+  background: transparent;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  border: 0;
+  box-shadow:
+    -1px 0 0 var(--mond-ink),
+    0 -1px 0 var(--mond-ink);
+}
+
+/* Highlight a few chips as Mondrian colour accents */
+[data-style="mondrian"] body[data-page="home"] main > .section-block .tag-cloud span:nth-child(3) {
+  background: var(--mond-yellow);
+  color: var(--mond-ink);
+}
+[data-style="mondrian"] body[data-page="home"] main > .section-block .tag-cloud span:nth-child(5) {
+  background: var(--mond-red);
+  color: #fff;
+}
+[data-style="mondrian"] body[data-page="home"] main > .section-block .tag-cloud span:nth-last-child(2) {
+  background: var(--mond-blue);
+  color: #fff;
+}
+
+/* --- Contact (.contact-grid) -------------------------------------------- */
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 0;
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > .contact-card--primary {
+  grid-column: 1 / span 5;
+  margin: 0;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  border: 0;
+  border-right: var(--mond-rule) solid var(--mond-ink);
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+  background: var(--mond-yellow);
+  color: var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > .contact-card--primary .surface-card__icon {
+  background: var(--mond-ink);
+  color: var(--mond-yellow);
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > .contact-card--primary h3,
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > .contact-card--primary .contact-card__value,
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > .contact-card--primary p {
+  color: var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > .contact-card-list {
+  grid-column: 6 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > .contact-card-list .contact-card {
+  margin: 0;
+  padding: clamp(0.85rem, 2vw, 1.1rem) clamp(1.2rem, 3vw, 1.8rem);
+  border: 0;
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > .contact-card-list .contact-card:nth-child(2) {
+  background: color-mix(in srgb, var(--mond-blue) 12%, var(--mond-paper));
+}
+
+[data-style="mondrian"][data-theme="dark"] body[data-page="home"] main > .section-block .contact-grid > .contact-card--primary {
+  background: var(--mond-yellow);
+}
+
+/* --- About surface-cards: stronger Mondrian rhythm (one bold colour tile) */
+[data-style="mondrian"] body[data-page="home"] #about .surface-card:nth-child(1) {
+  border-top: 8px solid var(--mond-red);
+}
+[data-style="mondrian"] body[data-page="home"] #about .surface-card:nth-child(2) {
+  border-top: 8px solid var(--mond-blue);
+}
+[data-style="mondrian"] body[data-page="home"] #about .surface-card:nth-child(3) {
+  border-top: 8px solid var(--mond-yellow);
+}
+[data-style="mondrian"] body[data-page="home"] #about .surface-card:nth-child(4) {
+  border-top: 8px solid var(--mond-ink);
+}
+[data-style="mondrian"] body[data-page="home"] #about .surface-card:nth-child(5) {
+  background: var(--mond-yellow);
+  color: var(--mond-ink);
+  border-top: 8px solid var(--mond-ink);
+}
+/* When there are exactly 3 principles, let the last span the full width
+   to fill the second values-grid row as a Mondrian wide tile */
+[data-style="mondrian"] body[data-page="home"] #about .values-grid .surface-card:nth-child(3):last-child {
+  grid-column: 1 / -1;
+  background: var(--mond-yellow);
+  color: var(--mond-ink);
+  border-top: 8px solid var(--mond-ink);
+}
+[data-style="mondrian"] body[data-page="home"] #about .values-grid .surface-card:nth-child(3):last-child .surface-card__icon {
+  background: var(--mond-ink);
+  color: var(--mond-yellow);
+}
+[data-style="mondrian"] body[data-page="home"] #about .values-grid .surface-card:nth-child(3):last-child h3,
+[data-style="mondrian"] body[data-page="home"] #about .values-grid .surface-card:nth-child(3):last-child p {
+  color: var(--mond-ink);
+}
+[data-style="mondrian"][data-theme="dark"] body[data-page="home"] #about .values-grid .surface-card:nth-child(3):last-child {
+  background: color-mix(in srgb, var(--mond-yellow) 78%, #000);
+}
+[data-style="mondrian"] body[data-page="home"] #about .surface-card:nth-child(5) .surface-card__icon {
+  background: var(--mond-ink);
+  color: var(--mond-yellow);
+}
+[data-style="mondrian"] body[data-page="home"] #about .surface-card:nth-child(5) h3,
+[data-style="mondrian"] body[data-page="home"] #about .surface-card:nth-child(5) p {
+  color: var(--mond-ink);
+}
+
+/* --- CV body: alternating coloured headers + tighter tile rhythm -------- */
+[data-style="mondrian"] body[data-page="cv"] .cv-entry:nth-child(4n+1) .cv-entry__header {
+  background: color-mix(in srgb, var(--mond-red) 14%, var(--mond-paper));
+  border-top: 8px solid var(--mond-red);
+}
+[data-style="mondrian"] body[data-page="cv"] .cv-entry:nth-child(4n+2) .cv-entry__header {
+  background: color-mix(in srgb, var(--mond-blue) 14%, var(--mond-paper));
+  border-top: 8px solid var(--mond-blue);
+}
+[data-style="mondrian"] body[data-page="cv"] .cv-entry:nth-child(4n+3) .cv-entry__header {
+  background: color-mix(in srgb, var(--mond-yellow) 22%, var(--mond-paper));
+  border-top: 8px solid var(--mond-yellow);
+}
+[data-style="mondrian"] body[data-page="cv"] .cv-entry:nth-child(4n) .cv-entry__header {
+  background: var(--mond-paper-soft);
+  border-top: 8px solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-list {
+  border-top: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] body[data-page="cv"] .cv-entry:last-child {
+  border-bottom: 0;
+}
+
+/* CV publication entries — keep the year tile coloured */
+[data-style="mondrian"] body[data-page="cv"] .publication-card .publication-card__year {
+  background: var(--mond-red);
+  color: #fff;
+}
+[data-style="mondrian"] body[data-page="cv"] .publication-card:nth-child(2) .publication-card__year {
+  background: var(--mond-blue);
+}
+[data-style="mondrian"] body[data-page="cv"] .publication-card:nth-child(3) .publication-card__year {
+  background: var(--mond-yellow);
+  color: var(--mond-ink);
+}
+
+/* --- Mobile collapse -------------------------------------------------- */
+@media (max-width: 980px) {
+  [data-style="mondrian"] body[data-page="home"] main > .section-block .two-column,
+  [data-style="mondrian"] body[data-page="home"] main > .section-block .three-column,
+  [data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  [data-style="mondrian"] body[data-page="home"] main > .section-block .two-column > .surface-card,
+  [data-style="mondrian"] body[data-page="home"] main > .section-block .three-column > .surface-card,
+  [data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > * {
+    grid-column: 1 / -1;
+    border-right: 0;
+  }
+}
+
+/* ==========================================================================
+   PROJECTS / WORK PAGE — Mondrian mosaic
+   ========================================================================== */
+
+.projects-mondrian,
+.cv-mondrian { display: none; }
+
+[data-style="mondrian"] .projects-mondrian,
+[data-style="mondrian"] .cv-mondrian {
+  --tile-pad: clamp(1rem, 2.2vw, 1.6rem);
+  --tile-rule: 4px;
+  background: var(--mond-ink);
+  padding: var(--tile-rule);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(60px, auto);
+  gap: var(--tile-rule);
+  margin: 0 auto;
+  max-width: 1320px;
+}
+
+/* --- Projects hero (rows 1-2) --- */
+.proj-tile--hero        { grid-column: 1 / span 8; grid-row: 1 / span 2; }
+.proj-tile--swatch-y    { grid-column: 9 / span 4; grid-row: 1 / span 1; min-height: 90px; }
+.proj-tile--meta        { grid-column: 9 / span 2; grid-row: 2 / span 1; }
+.proj-tile--swatch-r    { grid-column: 11 / span 1; grid-row: 2 / span 1; min-height: 60px; }
+.proj-tile--swatch-b    { grid-column: 12 / span 1; grid-row: 2 / span 1; min-height: 60px; }
+
+.proj-index {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.84rem;
+  font-family: var(--font-mono);
+}
+.proj-index li { display: flex; gap: 0.6rem; }
+.proj-index li span {
+  color: var(--mond-text-soft);
+  letter-spacing: 0.06em;
+}
+
+.proj-index a {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.12rem 0.55rem;
+  color: var(--mond-text);
+  text-decoration: none;
+}
+
+.proj-index a:hover strong {
+  color: var(--mond-red);
+}
+
+.proj-index a span {
+  grid-row: 1 / span 2;
+}
+
+.proj-index a strong {
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.proj-index a small {
+  color: var(--mond-text-soft);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* --- Per-project block (each occupies ~6 rows, total 5 rows of CSS) ----- */
+
+/* Project 1 — rows 3-8 */
+.proj-tile--head-1      { grid-column: 1 / span 12; grid-row: 3 / span 1; border-top: 8px solid var(--mond-red); }
+.proj-pco-1-p           { grid-column: 1 / span 4;  grid-row: 4 / span 1; }
+.proj-pco-1-c           { grid-column: 5 / span 4;  grid-row: 4 / span 1; }
+.proj-pco-1-o           { grid-column: 9 / span 4;  grid-row: 4 / span 1; }
+.proj-h-1-1             { grid-column: 1 / span 4;  grid-row: 5 / span 1; }
+.proj-h-1-2             { grid-column: 5 / span 3;  grid-row: 5 / span 1; }
+.proj-h-1-3             { grid-column: 1 / span 3;  grid-row: 6 / span 1; }
+.proj-h-1-4             { grid-column: 4 / span 4;  grid-row: 6 / span 1; }
+.proj-tile--visual-1    { grid-column: 8 / span 5;  grid-row: 5 / span 2; padding: 0.6rem; overflow: hidden; }
+.proj-stack-1           { grid-column: 1 / span 8;  grid-row: 7 / span 1; }
+.proj-actions-1         { grid-column: 9 / span 4;  grid-row: 7 / span 1; }
+
+/* Project 2 — rows 8-13 (alternate side: visual on left) */
+.proj-tile--head-2      { grid-column: 1 / span 12; grid-row: 8 / span 1; border-top: 8px solid var(--mond-blue); }
+.proj-tile--visual-2    { grid-column: 1 / span 4;  grid-row: 9 / span 4; padding: 0.6rem; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--mond-paper-soft); }
+.proj-pco-2-p           { grid-column: 5 / span 3;  grid-row: 9 / span 1; }
+.proj-pco-2-c           { grid-column: 8 / span 5;  grid-row: 9 / span 1; }
+.proj-pco-2-o           { grid-column: 5 / span 8;  grid-row: 10 / span 1; }
+.proj-h-2-1             { grid-column: 5 / span 4;  grid-row: 11 / span 1; }
+.proj-h-2-2             { grid-column: 9 / span 4;  grid-row: 11 / span 1; }
+.proj-h-2-3             { grid-column: 5 / span 5;  grid-row: 12 / span 1; }
+.proj-h-2-4             { grid-column: 10 / span 3; grid-row: 12 / span 1; }
+.proj-stack-2           { grid-column: 1 / span 7;  grid-row: 13 / span 1; }
+.proj-actions-2         { grid-column: 8 / span 5;  grid-row: 13 / span 1; }
+
+/* Project 3 — rows 14-19 */
+.proj-tile--head-3      { grid-column: 1 / span 12; grid-row: 14 / span 1; border-top: 8px solid var(--mond-yellow); }
+.proj-pco-3-p           { grid-column: 1 / span 4;  grid-row: 15 / span 1; }
+.proj-pco-3-c           { grid-column: 5 / span 4;  grid-row: 15 / span 1; }
+.proj-pco-3-o           { grid-column: 9 / span 4;  grid-row: 15 / span 1; }
+.proj-tile--visual-3    { grid-column: 9 / span 4;  grid-row: 16 / span 2; padding: 1.5rem; overflow: hidden; }
+.proj-h-3-1             { grid-column: 1 / span 5;  grid-row: 16 / span 1; }
+.proj-h-3-2             { grid-column: 6 / span 3;  grid-row: 16 / span 1; }
+.proj-h-3-3             { grid-column: 1 / span 4;  grid-row: 17 / span 1; }
+.proj-h-3-4             { grid-column: 5 / span 4;  grid-row: 17 / span 1; }
+.proj-stack-3           { grid-column: 1 / span 8;  grid-row: 18 / span 1; }
+.proj-actions-3         { grid-column: 9 / span 4;  grid-row: 18 / span 1; }
+
+/* CTA strip */
+.proj-tile--cta-head    { grid-column: 1 / span 8; grid-row: 19 / span 1; border-top: 8px solid var(--mond-ink); }
+.proj-tile--cta-swatch  { grid-column: 9 / span 4; grid-row: 19 / span 1; min-height: 80px; }
+.proj-tile--cta-actions { grid-column: 1 / span 12; grid-row: 20 / span 1; }
+
+/* Project tile content styles */
+.proj-tile--hero h1 { font-size: clamp(2.6rem, 5vw, 4.2rem); margin: 0.6rem 0 1rem; }
+.proj-tile--hero p { color: var(--mond-text-soft); font-family: var(--font-display); font-style: italic; max-width: 50ch; }
+
+.proj-tile--head h2,
+.proj-tile--head .mond-section-title { font-size: clamp(1.8rem, 3vw, 2.6rem); margin: 0; line-height: 1.05; }
+
+/* Two-column layout for project header: large title on the left, date/eyebrow
+   and short description on the right. */
+.proj-tile--head {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  align-items: center;
+  gap: 1.5rem;
+}
+.proj-head__meta { display: flex; flex-direction: column; gap: 0.4rem; }
+.proj-head__meta .mond-eyebrow { margin: 0; }
+.proj-head__meta .mond-section-lede { margin: 0; font-size: 0.95rem; line-height: 1.45; color: var(--mond-text-soft); }
+
+.proj-tile--problem,
+.proj-tile--contribution,
+.proj-tile--outcome { padding: var(--tile-pad); }
+.proj-tile--problem p,
+.proj-tile--contribution p,
+.proj-tile--outcome p { margin: 0.4rem 0 0; line-height: 1.45; font-size: 0.92rem; }
+
+.proj-tile--highlight {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 0.6rem;
+  align-items: start;
+  padding: var(--tile-pad);
+}
+.proj-tile--highlight .icon { width: 22px; height: 22px; color: var(--mond-blue); }
+.proj-tile--highlight p { margin: 0; font-size: 0.88rem; line-height: 1.4; }
+
+.proj-tile--visual { display: flex; align-items: center; justify-content: center; background: var(--mond-paper-soft); }
+.proj-tile--visual svg { max-width: 100%; height: auto; }
+.proj-tile--visual-phone { background: var(--mond-paper-soft); }
+.proj-tile--visual-phone .phone-frame {
+  border: 3px solid var(--mond-ink);
+  border-radius: 18px;
+  padding: 6px;
+  background: var(--mond-paper);
+  width: 70%;
+  max-width: 220px;
+}
+.proj-tile--visual-phone .phone-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+}
+
+.proj-molecule {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 8px;
+  padding: 1rem;
+}
+.proj-molecule span {
+  background: var(--mond-paper);
+  border: 2px solid var(--mond-ink);
+  border-radius: 50%;
+  aspect-ratio: 1;
+}
+.proj-molecule span:nth-child(1) { background: var(--mond-red); }
+.proj-molecule span:nth-child(3) { background: var(--mond-yellow); }
+.proj-molecule span:nth-child(5) { background: var(--mond-blue); }
+
+.proj-tile--stack { padding: var(--tile-pad); }
+.proj-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 0;
+  margin-top: 0.5rem;
+}
+.proj-chips span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  padding: 0.5rem 0.4rem;
+  text-align: center;
+  background: transparent;
+  color: var(--mond-ink);
+  letter-spacing: 0.04em;
+  box-shadow:
+    -1px 0 0 var(--mond-ink),
+    0 -1px 0 var(--mond-ink);
+}
+
+.proj-tile--actions { padding: var(--tile-pad); display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; flex-direction: row; }
+
+.proj-tile--cta-head h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); margin: 0.3rem 0 0.4rem; }
+.proj-tile--cta-actions { padding: var(--tile-pad); display: flex; flex-wrap: wrap; gap: 0.7rem; flex-direction: row; }
+
+/* ==========================================================================
+   CV PAGE — Mondrian mosaic
+   ========================================================================== */
+
+/* --- CV hero rows 1-3 --- */
+.cv-tile--name           { grid-column: 1 / span 7; grid-row: 1 / span 2; }
+.cv-tile--photo          { grid-column: 8 / span 2; grid-row: 1 / span 2; padding: 0; overflow: hidden; }
+.cv-tile--photo img      { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.95) contrast(1.05); display: block; }
+.cv-tile--swatch-y       { grid-column: 10 / span 3; grid-row: 1 / span 1; min-height: 60px; }
+.cv-tile--swatch-r       { grid-column: 10 / span 1; grid-row: 2 / span 1; min-height: 60px; }
+.cv-tile--swatch-b       { grid-column: 11 / span 2; grid-row: 2 / span 1; min-height: 60px; }
+
+.cv-tile--name h1 { font-size: clamp(2.6rem, 4.8vw, 4rem); margin: 0.5rem 0 0.6rem; line-height: 1.05; }
+.cv-tile--name p.mond-hero__lede {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  color: var(--mond-text-soft);
+  border-top: 1px solid var(--mond-ink);
+  padding-top: 0.8rem;
+  margin: 0 0 1.2rem;
+  font-style: normal;
+}
+
+/* Contact tiles row 3 — 4 cols × 2 rows */
+.cv-tile--contact-email     { grid-column: 1 / span 3; grid-row: 3 / span 1; }
+.cv-tile--contact-phone     { grid-column: 4 / span 3; grid-row: 3 / span 1; }
+.cv-tile--contact-location  { grid-column: 7 / span 3; grid-row: 3 / span 1; }
+.cv-tile--contact-flag      { grid-column: 10 / span 3; grid-row: 3 / span 1; }
+.cv-tile--contact-linkedin  { grid-column: 1 / span 3; grid-row: 4 / span 1; }
+.cv-tile--contact-github    { grid-column: 4 / span 3; grid-row: 4 / span 1; }
+.cv-tile--contact-language  { grid-column: 7 / span 3; grid-row: 4 / span 1; }
+.cv-tile--contact-current   { grid-column: 10 / span 3; grid-row: 4 / span 1; }
+
+.cv-tile--contact {
+  display: grid;
+  grid-template-columns: 26px 1fr;
+  gap: 0.7rem;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  text-decoration: none;
+  color: var(--mond-text);
+}
+.cv-tile--contact .icon { width: 22px; height: 22px; color: var(--mond-ink); }
+.cv-tile--contact span span,
+.cv-tile--contact > span {
+  display: block;
+  font-size: 0.84rem;
+  line-height: 1.3;
+}
+.cv-tile--contact strong {
+  display: block;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.66rem;
+  color: var(--mond-text-soft);
+  font-weight: 500;
+  margin-bottom: 0.15rem;
+}
+
+/* --- Summary section — rows 5-6 --- */
+.cv-tile--summary-head   { grid-column: 1 / span 12; grid-row: 5 / span 1; border-top: 8px solid var(--mond-red); }
+.cv-tile--summary-1      { grid-column: 1 / span 7;  grid-row: 6 / span 1; }
+.cv-tile--summary-2      { grid-column: 8 / span 5;  grid-row: 6 / span 1; background: var(--mond-paper-soft); }
+
+.cv-tile--summary-1 p,
+.cv-tile--summary-2 p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--mond-text);
+}
+
+/* --- Experience: 4 entries — rows 7-15 --- */
+.cv-tile--xp-head        { grid-column: 1 / span 12; grid-row: 7 / span 1; }
+
+.cv-tile--xp1-head       { grid-column: 1 / span 4; grid-row: 8 / span 1; }
+.cv-tile--xp1-body       { grid-column: 5 / span 8; grid-row: 8 / span 1; }
+.cv-tile--xp2-head       { grid-column: 1 / span 4; grid-row: 9 / span 1; }
+.cv-tile--xp2-body       { grid-column: 5 / span 8; grid-row: 9 / span 1; }
+.cv-tile--xp3-head       { grid-column: 1 / span 4; grid-row: 10 / span 1; }
+.cv-tile--xp3-body       { grid-column: 5 / span 8; grid-row: 10 / span 1; }
+.cv-tile--xp4-head       { grid-column: 1 / span 4; grid-row: 11 / span 1; }
+.cv-tile--xp4-body       { grid-column: 5 / span 8; grid-row: 11 / span 1; }
+
+.cv-xp-head {
+  padding: var(--tile-pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cv-xp-head .mond-eyebrow { font-size: 0.7rem; letter-spacing: 0.18em; color: var(--mond-text-soft); margin: 0 0 0.6rem; }
+.cv-xp-head h3 { margin: 0; font-family: var(--font-display); font-size: 1.25rem; line-height: 1.1; letter-spacing: -0.005em; }
+.cv-xp-head .cv-xp-inst { margin: 0.35rem 0 0; font-family: var(--font-mono); font-size: 0.78rem; color: var(--mond-text-soft); }
+
+.cv-xp-head--red    { background: var(--mond-red); color: #fff; }
+.cv-xp-head--blue   { background: var(--mond-blue); color: #fff; }
+.cv-xp-head--yellow { background: var(--mond-yellow); color: var(--mond-on-yellow); }
+.cv-xp-head--ink    { background: var(--mond-ink); color: var(--mond-on-ink); }
+
+.cv-xp-head--red h3,
+.cv-xp-head--blue h3 { color: #fff; }
+.cv-xp-head--yellow h3 { color: var(--mond-on-yellow); }
+.cv-xp-head--ink h3 { color: var(--mond-on-ink); }
+
+.cv-xp-head--red .mond-eyebrow,
+.cv-xp-head--red .cv-xp-inst,
+.cv-xp-head--blue .mond-eyebrow,
+.cv-xp-head--blue .cv-xp-inst,
+.cv-xp-head--ink .mond-eyebrow,
+.cv-xp-head--ink .cv-xp-inst { color: rgba(255,255,255,0.85); }
+
+.cv-xp-head--yellow .mond-eyebrow,
+.cv-xp-head--yellow .cv-xp-inst {
+  color: var(--mond-on-yellow);
+}
+
+.cv-xp-head--ink .mond-eyebrow,
+.cv-xp-head--ink .cv-xp-inst {
+  color: var(--mond-on-ink);
+}
+
+.cv-xp-body { padding: var(--tile-pad); }
+.cv-xp-body p { margin: 0 0 0.55rem; font-size: 0.88rem; line-height: 1.5; }
+.cv-xp-body p:last-child { margin-bottom: 0; }
+.cv-xp-body ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+.cv-xp-body li { margin: 0.25rem 0; font-size: 0.86rem; line-height: 1.45; }
+.cv-xp-body strong { color: var(--mond-text); }
+.cv-xp-body a { color: var(--mond-red); }
+
+/* --- Skills section — rows 12-18 --- */
+.cv-tile--skills-head    { grid-column: 1 / span 12; grid-row: 12 / span 1; border-top: 8px solid var(--mond-blue); }
+
+.cv-tile--skill-1-head   { grid-column: 1 / span 3;  grid-row: 13 / span 1; border-top: 6px solid var(--mond-red); }
+.cv-tile--skill-1-chips  { grid-column: 4 / span 9;  grid-row: 13 / span 1; padding: 0; }
+.cv-tile--skill-2-head   { grid-column: 1 / span 3;  grid-row: 14 / span 1; border-top: 6px solid var(--mond-blue); }
+.cv-tile--skill-2-chips  { grid-column: 4 / span 9;  grid-row: 14 / span 1; padding: 0; }
+.cv-tile--skill-3-head   { grid-column: 1 / span 3;  grid-row: 15 / span 1; border-top: 6px solid var(--mond-yellow); }
+.cv-tile--skill-3-chips  { grid-column: 4 / span 9;  grid-row: 15 / span 1; padding: 0; }
+.cv-tile--skill-4-head   { grid-column: 1 / span 3;  grid-row: 16 / span 1; border-top: 6px solid var(--mond-red); }
+.cv-tile--skill-4-chips  { grid-column: 4 / span 9;  grid-row: 16 / span 1; padding: 0; }
+.cv-tile--skill-5-head   { grid-column: 1 / span 3;  grid-row: 17 / span 1; border-top: 6px solid var(--mond-blue); }
+.cv-tile--skill-5-chips  { grid-column: 4 / span 9;  grid-row: 17 / span 1; padding: 0; }
+.cv-tile--skill-6-head   { grid-column: 1 / span 3;  grid-row: 18 / span 1; border-top: 6px solid var(--mond-yellow); }
+.cv-tile--skill-6-chips  { grid-column: 4 / span 9;  grid-row: 18 / span 1; padding: 0; }
+
+.cv-skill-head {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 0.7rem;
+  row-gap: 0.3rem;
+  align-items: center;
+  align-content: center;
+  padding: 0.9rem 1rem;
+}
+.cv-skill-icon {
+  grid-row: 1 / span 2;
+  width: 36px; height: 36px;
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  border: 2px solid var(--mond-ink);
+  background: var(--mond-paper);
+  color: var(--mond-ink);
+}
+.cv-skill-icon svg { width: 20px; height: 20px; }
+.cv-skill-head .mond-card__num {
+  grid-column: 2;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--mond-text-soft);
+}
+.cv-skill-head h3 {
+  grid-column: 2;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.1;
+}
+
+.cv-skill-chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-auto-rows: 1fr;
+  gap: 0;
+  align-content: stretch;
+}
+.cv-skill-chips span {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  padding: 0.7rem 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  color: var(--mond-ink);
+  letter-spacing: 0.04em;
+  box-shadow:
+    -1px 0 0 var(--mond-ink),
+    0 -1px 0 var(--mond-ink);
+}
+
+/* --- Education section — rows 19-22 --- */
+.cv-tile--edu-head       { grid-column: 1 / span 12; grid-row: 19 / span 1; border-top: 8px solid var(--mond-yellow); }
+.cv-tile--edu1-head      { grid-column: 1 / span 4; grid-row: 20 / span 1; }
+.cv-tile--edu1-body      { grid-column: 5 / span 8; grid-row: 20 / span 1; }
+.cv-tile--edu2-head      { grid-column: 1 / span 4; grid-row: 21 / span 1; }
+.cv-tile--edu2-body      { grid-column: 5 / span 8; grid-row: 21 / span 1; }
+.cv-tile--edu3-head      { grid-column: 1 / span 4; grid-row: 22 / span 1; }
+.cv-tile--edu3-body      { grid-column: 5 / span 8; grid-row: 22 / span 1; }
+
+/* --- Publications — rows 23+ --- */
+.cv-tile--pub-head       { grid-column: 1 / span 12; grid-row: 23 / span 1; border-top: 8px solid var(--mond-red); }
+.cv-tile--pub-1          { grid-column: 1 / span 12; grid-row: 24 / span 1; }
+.cv-tile--pub-2          { grid-column: 1 / span 12; grid-row: 25 / span 1; }
+
+.cv-pub-card {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  gap: 0;
+  padding: 0;
+}
+.cv-pub-year {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  border-right: 2px solid var(--mond-ink);
+}
+.cv-pub-year--red    { background: var(--mond-red);    color: #fff; }
+.cv-pub-year--blue   { background: var(--mond-blue);   color: #fff; }
+.cv-pub-year--yellow { background: var(--mond-yellow); color: var(--mond-on-yellow); }
+
+.cv-pub-body {
+  padding: 1rem 1.2rem;
+}
+.cv-pub-body h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin: 0 0 0.45rem;
+  line-height: 1.25;
+  color: var(--mond-text);
+}
+.cv-pub-authors,
+.cv-pub-journal {
+  margin: 0 0 0.3rem;
+  font-size: 0.84rem;
+  color: var(--mond-text-soft);
+  line-height: 1.45;
+}
+.cv-pub-doi {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--mond-red);
+  letter-spacing: 0.04em;
+}
+
+/* --- Mondrian projects/cv responsive collapse --- */
+@media (max-width: 980px) {
+  [data-style="mondrian"] .projects-mondrian,
+  [data-style="mondrian"] .cv-mondrian {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  [data-style="mondrian"] .projects-mondrian > .mond-tile,
+  [data-style="mondrian"] .cv-mondrian > .mond-tile {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: auto;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .mond-tile[class*="proj-pco-"],
+  [data-style="mondrian"] .projects-mondrian .mond-tile[class*="proj-h-"],
+  [data-style="mondrian"] .cv-mondrian .mond-tile[class*="cv-tile--contact"] {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 540px) {
+  [data-style="mondrian"] .projects-mondrian,
+  [data-style="mondrian"] .cv-mondrian {
+    grid-template-columns: 1fr;
+  }
+  [data-style="mondrian"] .projects-mondrian .mond-tile[class*="proj-pco-"],
+  [data-style="mondrian"] .projects-mondrian .mond-tile[class*="proj-h-"],
+  [data-style="mondrian"] .cv-mondrian .mond-tile[class*="cv-tile--contact"] {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ==========================================================================
+   Mondrian: page chrome
+   Body keeps the base palette color (paper in light, dark in dark theme) so
+   the ink frame stays tight around the grid only — never bleeds outside.
+   ========================================================================== */
+[data-style="mondrian"] .home-mondrian,
+[data-style="mondrian"] .about-mondrian,
+[data-style="mondrian"] .projects-mondrian,
+[data-style="mondrian"] .cv-mondrian {
+  margin-top: var(--tile-rule, 4px);
+  margin-bottom: var(--tile-rule, 4px);
+}
+
+/* Header as a Mondrian band: paper tile w/ hairline cell rules between
+   brand, nav, style switcher, theme switcher. */
+[data-style="mondrian"] .site-header {
+  gap: 0;
+  padding: 0 0 0 0;
+  border-bottom: var(--mond-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .site-brand {
+  padding: 0 clamp(0.9rem, 2vw, 1.4rem);
+  border-right: 2px solid var(--mond-ink);
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+}
+
+[data-style="mondrian"] .site-nav {
+  align-self: stretch;
+  padding: 0 clamp(0.4rem, 1vw, 0.8rem);
+  gap: 0;
+}
+
+[data-style="mondrian"] .site-nav a {
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 clamp(0.7rem, 1.6vw, 1.1rem);
+  border-left: 1px solid color-mix(in srgb, var(--mond-ink) 18%, transparent);
+}
+
+[data-style="mondrian"] .site-nav a:first-child {
+  border-left: 0;
+}
+
+[data-style="mondrian"] .site-nav a:hover,
+[data-style="mondrian"] .site-nav a[aria-current="page"] {
+  color: var(--mond-red);
+  background: color-mix(in srgb, var(--mond-yellow) 22%, transparent);
+}
+
+[data-style="mondrian"] .style-switcher {
+  margin-left: 0;
+  margin-right: 0;
+  border-left: 2px solid var(--mond-ink);
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 0;
+  align-self: stretch;
+  border-radius: 0;
+  padding: 4px;
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .theme-switcher {
+  margin-left: 0;
+  border-left: 2px solid var(--mond-ink);
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 0;
+  align-self: stretch;
+  border-radius: 0;
+  padding: 4px;
+  background: var(--mond-paper);
+}
+
+/* Footer integrated as a paper band with the same dark frame */
+[data-style="mondrian"] .site-footer {
+  border-top: var(--mond-rule) solid var(--mond-ink);
+  border-bottom: 0;
+}
+
+[data-style="mondrian"] .site-footer__inner {
+  padding-left: clamp(1rem, 3vw, 2rem);
+  padding-right: clamp(1rem, 3vw, 2rem);
+}
+
+[data-style="mondrian"] .site-footer__copyright {
+  padding-left: clamp(1rem, 3vw, 2rem);
+  padding-right: clamp(1rem, 3vw, 2rem);
+}
+
+/* ==========================================================================
+   CV contact tiles: add Mondrian color accents to break the uniform paper
+   ========================================================================== */
+[data-style="mondrian"] .cv-tile--contact-email {
+  background: var(--mond-red);
+  color: #fff;
+}
+[data-style="mondrian"] .cv-tile--contact-email .icon,
+[data-style="mondrian"] .cv-tile--contact-email strong,
+[data-style="mondrian"] .cv-tile--contact-email span span {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+[data-style="mondrian"] .cv-tile--contact-flag {
+  background: var(--mond-yellow);
+  color: var(--mond-on-yellow);
+}
+[data-style="mondrian"] .cv-tile--contact-flag .icon,
+[data-style="mondrian"] .cv-tile--contact-flag strong,
+[data-style="mondrian"] .cv-tile--contact-flag span span {
+  color: var(--mond-on-yellow);
+}
+
+[data-style="mondrian"] .cv-tile--contact-linkedin {
+  background: var(--mond-blue);
+  color: #fff;
+}
+[data-style="mondrian"] .cv-tile--contact-linkedin .icon,
+[data-style="mondrian"] .cv-tile--contact-linkedin strong,
+[data-style="mondrian"] .cv-tile--contact-linkedin span span {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* ==========================================================================
+   Home hero: drop a Mondrian fallback into the neural tile so it never reads
+   as an empty rectangle, and balance the metric color rhythm.
+   ========================================================================== */
+[data-style="mondrian"] .mond-tile--neural {
+  background:
+    linear-gradient(180deg, transparent 0 62%, var(--mond-blue) 62% 100%),
+    linear-gradient(90deg, transparent 0 62%, var(--mond-red) 62% 100%),
+    var(--mond-paper-soft);
+  background-blend-mode: normal;
+}
+
+[data-style="mondrian"] .mond-tile--neural canvas {
+  position: relative;
+  z-index: 1;
+}
+
+/* Add a blue accent to one of the otherwise-paper metric tiles
+   so the row reads R / Blue / Y / paper instead of R / paper / Y / paper. */
+[data-style="mondrian"] .mond-tile--m2 {
+  background: var(--mond-blue);
+  color: #fff;
+}
+[data-style="mondrian"] .mond-tile--m2 strong,
+[data-style="mondrian"] .mond-tile--m2 span {
+  color: #fff;
+}
+
+/* ==========================================================================
+   Mondrianize sub-components: workflow diagram, phone frame, stack chips,
+   highlight check marks. All sharp-edged, hard ink borders, primary colors.
+   ========================================================================== */
+
+/* ---- Workflow diagram (Start, Model setup, Simulation, ..., Results) ---- */
+[data-style="mondrian"] .workflow-map {
+  gap: 0;
+  padding: 0;
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .workflow-map__node {
+  min-height: 2.6rem;
+  padding: 0.55rem 0.7rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--mond-paper);
+  color: var(--mond-ink);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  border-bottom: 2px solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .workflow-map__node .icon {
+  width: 16px;
+  height: 16px;
+  color: var(--mond-ink);
+}
+
+[data-style="mondrian"] .workflow-map__node--start {
+  background: var(--mond-red);
+  color: #fff;
+}
+
+[data-style="mondrian"] .workflow-map__node--start .icon {
+  color: #fff;
+}
+
+[data-style="mondrian"] .workflow-map__node--end {
+  background: var(--mond-blue);
+  color: #fff;
+  border-bottom: 0;
+}
+
+[data-style="mondrian"] .workflow-map__node--end .icon {
+  color: #fff;
+}
+
+/* The vertical "path" between nodes — render as a hard ink rule, not a thin
+   gray hairline. Collapses out of the way since gap is already 0 and the
+   node already has a bottom border. */
+[data-style="mondrian"] .workflow-map__path {
+  display: none;
+}
+
+[data-style="mondrian"] .workflow-map__branch {
+  gap: 0;
+  border-bottom: 2px solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .workflow-map__branch .workflow-map__node {
+  border-bottom: 0;
+  border-right: 2px solid var(--mond-ink);
+  background: var(--mond-yellow);
+  color: var(--mond-ink);
+}
+
+[data-style="mondrian"] .workflow-map__branch .workflow-map__node:last-child {
+  border-right: 0;
+}
+
+[data-style="mondrian"] .workflow-map__branch .workflow-map__node .icon {
+  color: var(--mond-ink);
+}
+
+/* ---- Phone frame on Octidy project visual ---- */
+[data-style="mondrian"] .phone-frame {
+  padding: 6px;
+  border: 4px solid var(--mond-ink);
+  border-radius: 0;
+  background: var(--mond-paper);
+  box-shadow: 8px 8px 0 var(--mond-ink);
+}
+
+[data-style="mondrian"] .phone-frame::before {
+  display: none;
+}
+
+[data-style="mondrian"] .phone-frame img {
+  border: 2px solid var(--mond-ink);
+  border-radius: 0;
+}
+
+[data-style="mondrian"] .proj-tile--visual-phone .phone-frame {
+  border-radius: 0;
+  border-width: 4px;
+}
+
+[data-style="mondrian"] .proj-tile--visual-phone .phone-frame img {
+  border-radius: 0;
+}
+
+/* ---- Stack / skill / project chip strips: stronger ink rules + accents ---- */
+[data-style="mondrian"] .proj-chips {
+  gap: 0;
+  margin-top: 0.6rem;
+}
+
+[data-style="mondrian"] .proj-chips {
+  gap: 0;
+}
+
+[data-style="mondrian"] .proj-chips span {
+  border-right: 2px solid var(--mond-ink);
+  border-bottom: 2px solid var(--mond-ink);
+  box-shadow: none;
+  padding: 0.6rem 0.5rem;
+  font-size: 0.72rem;
+}
+
+/* Chips at the chip-group's outer right / outer bottom drop their right /
+   bottom borders so the page-grid 4px gap is the only line at the outer
+   edge — no doubled inner border. */
+[data-style="mondrian"] .proj-chips span.no-br { border-right: 0; }
+[data-style="mondrian"] .proj-chips span.no-bb { border-bottom: 0; }
+
+/* Sprinkle Mondrian primary colors across stack chips for visual rhythm */
+[data-style="mondrian"] .proj-chips span:nth-child(3n+1) {
+  background: var(--mond-paper);
+}
+[data-style="mondrian"] .proj-chips span:nth-child(5n) {
+  background: var(--mond-yellow);
+  color: var(--mond-ink);
+}
+[data-style="mondrian"] .proj-chips span:nth-child(7n) {
+  background: var(--mond-red);
+  color: #fff;
+}
+[data-style="mondrian"] .proj-chips span:nth-child(11n) {
+  background: var(--mond-blue);
+  color: #fff;
+}
+
+/* CV skill chips — chips carry inner divider borders; chips at the group's
+   outer right / outer bottom drop those borders so the page-grid 4px gap is
+   the only outer line. */
+[data-style="mondrian"] .cv-skill-chips {
+  gap: 0;
+}
+
+[data-style="mondrian"] .cv-skill-chips span {
+  border-right: 2px solid var(--mond-ink);
+  border-bottom: 2px solid var(--mond-ink);
+  box-shadow: none;
+}
+
+[data-style="mondrian"] .cv-skill-chips span.no-br { border-right: 0; }
+[data-style="mondrian"] .cv-skill-chips span.no-bb { border-bottom: 0; }
+
+[data-style="mondrian"] .cv-skill-chips span:nth-child(4n) {
+  background: var(--mond-yellow);
+  color: var(--mond-ink);
+}
+
+[data-style="mondrian"] .cv-skill-chips span:nth-child(7n) {
+  background: var(--mond-blue);
+  color: #fff;
+}
+
+/* ---- Highlight check marks: replace circular outline with a Mondrian
+        accent block. The ::before square is purely decorative — the icon
+        itself stays (covered) for accessibility. ---- */
+[data-style="mondrian"] .proj-tile--highlight {
+  position: relative;
+  padding-left: calc(var(--tile-pad) + 1.4rem);
+}
+
+[data-style="mondrian"] .proj-tile--highlight::before {
+  content: "";
+  position: absolute;
+  left: var(--tile-pad);
+  top: var(--tile-pad);
+  width: 14px;
+  height: 14px;
+  background: var(--mond-yellow);
+  border: 2px solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .proj-tile--highlight .icon {
+  display: none;
+}
+
+[data-style="mondrian"] .proj-tile--highlight {
+  grid-template-columns: 1fr;
+}
+
+/* Same treatment for home page featured-project highlight tiles */
+[data-style="mondrian"] .mond-feat-item {
+  position: relative;
+  padding-left: calc(1rem + 1.4rem);
+}
+
+[data-style="mondrian"] .mond-feat-item::before {
+  content: "";
+  position: absolute;
+  left: 1rem;
+  top: calc(50% - 7px);
+  width: 14px;
+  height: 14px;
+  background: var(--mond-red);
+  border: 2px solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .mond-feat-item .icon {
+  display: none;
+}
+
+/* Vary the accent block color across the highlights row so they read as a
+   Mondrian palette set instead of a uniform stripe */
+[data-style="mondrian"] .mond-tile--feat-f1::before { background: var(--mond-red); }
+[data-style="mondrian"] .mond-tile--feat-f2::before { background: var(--mond-blue); }
+[data-style="mondrian"] .mond-tile--feat-f3::before { background: var(--mond-yellow); }
+[data-style="mondrian"] .mond-tile--feat-f4::before { background: var(--mond-paper); }
+
+/* ==========================================================================
+   Edge-to-edge content: remove tile padding so non-button content fills the
+   tile and the only spacing is the grid gap itself.
+   ========================================================================== */
+
+/* Workflow visual tile — let the workflow map fill the tile completely */
+[data-style="mondrian"] .proj-tile--visual-workflow {
+  padding: 0;
+}
+
+/* Stack chip tile — chips fill edge-to-edge; only the eyebrow keeps padding.
+   The tile stretches to the row height (so the page-grid ink doesn't show
+   behind a too-short tile); the chip grid sits at content height with
+   paper bg filling any leftover space below. */
+[data-style="mondrian"] .proj-tile--stack {
+  padding: 0;
+}
+[data-style="mondrian"] .proj-tile--stack > .mond-eyebrow {
+  padding: 0.7rem 0.9rem 0;
+  margin: 0 0 0.4rem;
+}
+[data-style="mondrian"] .proj-tile--stack > .proj-chips {
+  margin-top: 0;
+  /* Top separator line between the eyebrow and the chip grid. This is an
+     INNER line (not at the tile's outer edge), so it doesn't double with the
+     page-grid 4px gap. */
+  border-top: 2px solid var(--mond-ink);
+  /* Stretch chip rows to fill the rest of the tile so there's no empty paper
+     area when the adjacent actions tile is taller. With 2 rows of chips the
+     stretched height is ~half the tile each, which doesn't look too tall. */
+  flex: 1;
+  grid-auto-rows: 1fr;
+  align-content: stretch;
+}
+
+/* CV skill chip tile — same treatment */
+[data-style="mondrian"] .cv-tile--skills,
+[data-style="mondrian"] .cv-skills-wrap {
+  padding: 0;
+}
+[data-style="mondrian"] .cv-skills-wrap > .mond-eyebrow {
+  padding: 0.7rem 0.9rem 0;
+  margin: 0 0 0.4rem;
+}
+
+/* Quote strip — let the quote sit flush against the tile edges (small inline
+   padding so the text doesn't touch the ink rules). Zero the default
+   <blockquote> margin so the tile fills its grid cell instead of leaving
+   ink-coloured page-grid gap above and below. */
+[data-style="mondrian"] .mond-tile--strip-quote {
+  padding: 0 1rem;
+  margin: 0;
+}
+
+/* Chip grid columns are set inline per section (column count adapts to chip
+   count). Partial last rows leave paper to the right of the rightmost chip;
+   no filler cells needed. */
+
+/* ==========================================================================
+   Case study pages — Mondrian-ize all the soft default components so they
+   match the rest of the site (hard ink borders, sharp corners, no shadows).
+   ========================================================================== */
+
+/* ==========================================================================
+   Case study Mondrian grid — flat tiles, no nested boxes.
+   ========================================================================== */
+
+[data-style="mondrian"] .case-mondrian {
+  --tile-pad: clamp(1rem, 2.2vw, 1.6rem);
+  --tile-rule: 2px;
+  background: var(--mond-ink);
+  padding: var(--tile-rule);
+  display: grid;
+  /* 60-col grid (LCM of 12 for the main layout and 5 for the phone row) so
+     phones can each span exactly 1/5 of the row width. */
+  grid-template-columns: repeat(60, 1fr);
+  grid-auto-rows: minmax(60px, auto);
+  gap: var(--tile-rule);
+  margin: 1.5rem auto;
+  max-width: 1320px;
+  width: min(1320px, calc(100% - (var(--gutter, 1.5rem) * 2)));
+}
+
+[data-style="mondrian"] .case-mondrian .mond-tile {
+  background: var(--mond-paper);
+  padding: var(--tile-pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  min-width: 0;
+}
+
+[data-style="mondrian"] .case-mondrian h1,
+[data-style="mondrian"] .case-mondrian h2,
+[data-style="mondrian"] .case-mondrian h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+/* Hero tile (cols 1-8, rows 1-2) and 4 meta tiles (cols 9-12) */
+[data-style="mondrian"] .case-mondrian .case-tile--hero {
+  grid-column: 1 / span 40;
+  grid-row: 1 / span 2;
+  border-top: 8px solid var(--mond-red);
+}
+[data-style="mondrian"] .case-mondrian .case-tile--hero h1 {
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.05;
+  margin: 0.4rem 0 0.6rem;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--hero .mond-section-lede {
+  font-size: 0.98rem;
+  line-height: 1.5;
+  color: var(--mond-text-soft);
+  margin: 0;
+  max-width: 60ch;
+}
+
+[data-style="mondrian"] .case-mondrian .case-tile--meta {
+  justify-content: center;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--meta .case-meta__value {
+  margin: 0.3rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  line-height: 1.2;
+  color: var(--mond-ink);
+}
+[data-style="mondrian"] .case-mondrian .case-tile--meta-1 { grid-column: 41 / span 10; grid-row: 1 / span 1; border-top: 6px solid var(--mond-red); }
+[data-style="mondrian"] .case-mondrian .case-tile--meta-2 { grid-column: 51 / span 10; grid-row: 1 / span 1; border-top: 6px solid var(--mond-blue); }
+[data-style="mondrian"] .case-mondrian .case-tile--meta-3 { grid-column: 41 / span 10; grid-row: 2 / span 1; border-top: 6px solid var(--mond-yellow); }
+[data-style="mondrian"] .case-mondrian .case-tile--meta-4 { grid-column: 51 / span 10; grid-row: 2 / span 1; border-top: 6px solid var(--mond-ink); }
+
+/* Phone screenshots — 5 tiles in row 3-4 */
+/* Single screenshots tile holding the whole gallery — paper bg surround,
+   no ink between phones. */
+[data-style="mondrian"] .case-mondrian .case-tile--screenshots {
+  grid-column: 1 / span 60;
+  grid-row: auto;
+  padding: clamp(1rem, 2vw, 1.6rem);
+  background: var(--mond-paper);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: clamp(0.8rem, 1.6vw, 1.4rem);
+  align-items: flex-start;
+  justify-content: space-between;
+}
+[data-style="mondrian"] .case-mondrian .case-shot {
+  flex: 1 1 180px;
+  min-width: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+/* Double-border phone frame: outer thick ink + 6px paper gap + inner thin
+   ink, with offset shadow — matches the Work-page .phone-frame look. */
+[data-style="mondrian"] .case-mondrian .case-shot__frame {
+  display: block;
+  aspect-ratio: 9 / 19.4;
+  overflow: hidden;
+  padding: 6px;
+  border: 4px solid var(--mond-ink);
+  background: var(--mond-paper);
+  box-shadow: 8px 8px 0 var(--mond-ink);
+}
+[data-style="mondrian"] .case-mondrian .case-shot__frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+  border: 2px solid var(--mond-ink);
+  background: var(--mond-paper);
+}
+[data-style="mondrian"] .case-mondrian .case-shot figcaption {
+  margin: 0.6rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mond-text-soft);
+  text-align: center;
+}
+/* Subcellular Workflow visual — full-width tile with the workflow diagram.
+   Workflow fills the tile edge-to-edge with no padding and no gaps. */
+[data-style="mondrian"] .case-mondrian .case-tile--workflow-visual {
+  grid-column: 1 / span 60;
+  grid-row: auto;
+  padding: 0;
+  overflow: hidden;
+  background: var(--mond-paper);
+}
+[data-style="mondrian"] .case-mondrian .case-tile--workflow-visual .workflow-map {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  gap: 0;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--workflow-visual .workflow-map__node {
+  min-height: 3rem;
+  padding: 0.7rem 0.9rem;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--workflow-visual .workflow-map__branch {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+}
+
+/* 5 phone screenshots — each spans 12 of the 60 sub-cols = 1/5 width.
+   Equal widths -> equal natural heights, no empty paper around shorter phones. */
+[data-style="mondrian"] .case-mondrian .case-tile--shot {
+  grid-row: auto;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--shot-1 { grid-column: 1  / span 12; border-top: 4px solid var(--mond-red); }
+[data-style="mondrian"] .case-mondrian .case-tile--shot-2 { grid-column: 13 / span 12; }
+[data-style="mondrian"] .case-mondrian .case-tile--shot-3 { grid-column: 25 / span 12; border-top: 4px solid var(--mond-blue); }
+[data-style="mondrian"] .case-mondrian .case-tile--shot-4 { grid-column: 37 / span 12; }
+[data-style="mondrian"] .case-mondrian .case-tile--shot-5 { grid-column: 49 / span 12; border-top: 4px solid var(--mond-yellow); }
+
+/* Architecture tiles — 6 in row 5 */
+[data-style="mondrian"] .case-mondrian .case-tile--arch { justify-content: center; }
+[data-style="mondrian"] .case-mondrian .case-tile--arch .case-arch__value {
+  margin: 0.3rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--mond-ink);
+}
+[data-style="mondrian"] .case-mondrian .case-tile--arch-1 { grid-column: 1  / span 10; grid-row: auto; border-top: 4px solid var(--mond-red); }
+[data-style="mondrian"] .case-mondrian .case-tile--arch-2 { grid-column: 11 / span 10; grid-row: auto; }
+[data-style="mondrian"] .case-mondrian .case-tile--arch-3 { grid-column: 21 / span 10; grid-row: auto; background: var(--mond-yellow); }
+[data-style="mondrian"] .case-mondrian .case-tile--arch-4 { grid-column: 31 / span 10; grid-row: auto; }
+[data-style="mondrian"] .case-mondrian .case-tile--arch-5 { grid-column: 41 / span 10; grid-row: auto; background: var(--mond-blue); color: #fff; }
+[data-style="mondrian"] .case-mondrian .case-tile--arch-5 .case-arch__value,
+[data-style="mondrian"] .case-mondrian .case-tile--arch-5 .mond-eyebrow { color: #fff; }
+[data-style="mondrian"] .case-mondrian .case-tile--arch-6 { grid-column: 51 / span 10; grid-row: auto; border-top: 4px solid var(--mond-ink); }
+
+/* Problem + Ownership — coloured tiles in row 6-7 */
+[data-style="mondrian"] .case-mondrian .case-tile--problem,
+[data-style="mondrian"] .case-mondrian .case-tile--ownership {
+  grid-row: auto;
+  color: #fff;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--problem { grid-column: 1  / span 30; background: var(--mond-red); }
+[data-style="mondrian"] .case-mondrian .case-tile--ownership { grid-column: 31 / span 30; background: var(--mond-blue); }
+[data-style="mondrian"] .case-mondrian .case-tile--problem h2,
+[data-style="mondrian"] .case-mondrian .case-tile--ownership h2 {
+  font-size: 1.3rem;
+  line-height: 1.2;
+  margin: 0.4rem 0 0.6rem;
+  color: #fff;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--problem p,
+[data-style="mondrian"] .case-mondrian .case-tile--ownership p {
+  margin: 0;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.5;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--problem .mond-eyebrow,
+[data-style="mondrian"] .case-mondrian .case-tile--ownership .mond-eyebrow {
+  color: rgba(255,255,255,0.8);
+}
+
+/* Section header tiles (full-width row) */
+[data-style="mondrian"] .case-mondrian .case-tile--section-head {
+  grid-column: 1 / span 60;
+  border-top: 6px solid var(--mond-ink);
+}
+[data-style="mondrian"] .case-mondrian .case-tile--section-head h2 {
+  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  margin: 0.3rem 0 0;
+  line-height: 1.1;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--behavior-head { grid-row: auto; }
+[data-style="mondrian"] .case-mondrian .case-tile--eng-head { grid-row: auto; }
+
+/* Behavior + Engineering — 3 tiles each, accents on first card */
+[data-style="mondrian"] .case-mondrian .case-tile--behavior,
+[data-style="mondrian"] .case-mondrian .case-tile--eng {
+  padding: var(--tile-pad);
+}
+[data-style="mondrian"] .case-mondrian .case-tile--behavior h3,
+[data-style="mondrian"] .case-mondrian .case-tile--eng h3 {
+  font-size: 1.1rem;
+  line-height: 1.2;
+  margin: 0.5rem 0 0.4rem;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--behavior p,
+[data-style="mondrian"] .case-mondrian .case-tile--eng p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  color: var(--mond-text-soft);
+}
+[data-style="mondrian"] .case-feat__icon {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--mond-ink);
+  background: var(--mond-paper);
+  color: var(--mond-ink);
+}
+[data-style="mondrian"] .case-feat__icon svg { width: 20px; height: 20px; }
+
+[data-style="mondrian"] .case-mondrian .case-tile--behavior-1 { grid-column: 1  / span 20; grid-row: auto; border-top: 4px solid var(--mond-red); }
+[data-style="mondrian"] .case-mondrian .case-tile--behavior-2 { grid-column: 21 / span 20; grid-row: auto; border-top: 4px solid var(--mond-blue); }
+[data-style="mondrian"] .case-mondrian .case-tile--behavior-3 { grid-column: 41 / span 20; grid-row: auto; border-top: 4px solid var(--mond-yellow); }
+
+[data-style="mondrian"] .case-mondrian .case-tile--eng-1 { grid-column: 1  / span 20; grid-row: auto; border-top: 4px solid var(--mond-red); }
+[data-style="mondrian"] .case-mondrian .case-tile--eng-2 { grid-column: 21 / span 20; grid-row: auto; border-top: 4px solid var(--mond-blue); }
+[data-style="mondrian"] .case-mondrian .case-tile--eng-3 { grid-column: 41 / span 20; grid-row: auto; border-top: 4px solid var(--mond-yellow); }
+
+/* Workflow + Stack — row 12 */
+[data-style="mondrian"] .case-mondrian .case-tile--workflow {
+  grid-column: 1 / span 30;
+  grid-row: span 2;
+  border-top: 6px solid var(--mond-blue);
+}
+[data-style="mondrian"] .case-mondrian .case-tile--workflow h2 {
+  font-size: 1.25rem;
+  margin: 0.4rem 0 0.6rem;
+  line-height: 1.2;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--workflow p {
+  margin: 0;
+  line-height: 1.5;
+  color: var(--mond-text-soft);
+}
+
+[data-style="mondrian"] .case-mondrian .case-tile--stack-head {
+  grid-column: 31 / span 30;
+  grid-row: auto;
+  border-top: 6px solid var(--mond-yellow);
+  padding: 0.7rem 0.9rem;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--stack-head h3 {
+  font-size: 1.1rem;
+  margin: 0.2rem 0 0;
+}
+
+[data-style="mondrian"] .case-mondrian .case-tile--stack-chips {
+  grid-column: 31 / span 30;
+  grid-row: auto;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+/* CTA — full-width row */
+[data-style="mondrian"] .case-mondrian .case-tile--cta-head {
+  grid-column: 1 / span 40;
+  grid-row: auto;
+  border-top: 8px solid var(--mond-ink);
+}
+[data-style="mondrian"] .case-mondrian .case-tile--cta-head h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  margin: 0.3rem 0 0.4rem;
+}
+[data-style="mondrian"] .case-mondrian .case-tile--cta-head p {
+  margin: 0;
+  color: var(--mond-text-soft);
+}
+[data-style="mondrian"] .case-mondrian .case-tile--cta-actions {
+  grid-column: 41 / span 20;
+  grid-row: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  align-items: center;
+  flex-direction: row;
+}
+
+/* Hide the original soft case-hero / section-block layout once a case
+   page uses .case-mondrian (the .md file decides which to render). */
+[data-style="mondrian"] .case-mondrian + section.section-block,
+[data-style="mondrian"] section.case-hero { display: none; }
+
+/* Responsive: collapse to single column on narrow viewports */
+@media (max-width: 760px) {
+  [data-style="mondrian"] .case-mondrian {
+    grid-template-columns: 1fr;
+  }
+  [data-style="mondrian"] .case-mondrian .case-tile--hero,
+  [data-style="mondrian"] .case-mondrian .case-tile--meta,
+  [data-style="mondrian"] .case-mondrian .case-tile--shot,
+  [data-style="mondrian"] .case-mondrian .case-tile--arch,
+  [data-style="mondrian"] .case-mondrian .case-tile--problem,
+  [data-style="mondrian"] .case-mondrian .case-tile--ownership,
+  [data-style="mondrian"] .case-mondrian .case-tile--section-head,
+  [data-style="mondrian"] .case-mondrian .case-tile--behavior,
+  [data-style="mondrian"] .case-mondrian .case-tile--eng,
+  [data-style="mondrian"] .case-mondrian .case-tile--workflow,
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-head,
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips,
+  [data-style="mondrian"] .case-mondrian .case-tile--cta-head,
+  [data-style="mondrian"] .case-mondrian .case-tile--cta-actions {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+}
+
+/* Hero meta cards (Timeframe / Role / Status / Stack) */
+[data-style="mondrian"] .case-hero__meta {
+  gap: 0;
+}
+[data-style="mondrian"] .case-hero__meta div {
+  border: 2px solid var(--mond-ink);
+  border-radius: 0;
+  background: var(--mond-paper);
+  padding: 0.85rem 1rem;
+  border-bottom: 0;
+}
+[data-style="mondrian"] .case-hero__meta div:last-child {
+  border-bottom: 2px solid var(--mond-ink);
+}
+[data-style="mondrian"] .case-hero__meta span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mond-text-soft);
+}
+[data-style="mondrian"] .case-hero__meta strong {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--mond-ink);
+  font-weight: 600;
+}
+
+/* Cycle accent colors on the meta cards for Mondrian rhythm */
+[data-style="mondrian"] .case-hero__meta div:nth-child(1) { border-left-width: 6px; border-left-color: var(--mond-red); }
+[data-style="mondrian"] .case-hero__meta div:nth-child(2) { border-left-width: 6px; border-left-color: var(--mond-blue); }
+[data-style="mondrian"] .case-hero__meta div:nth-child(3) { border-left-width: 6px; border-left-color: var(--mond-yellow); }
+[data-style="mondrian"] .case-hero__meta div:nth-child(4) { border-left-width: 6px; border-left-color: var(--mond-ink); }
+
+/* Phone-like screenshot frames — hard borders, no rounded corners */
+[data-style="mondrian"] .screenshot-frame {
+  border: 3px solid var(--mond-ink);
+  border-radius: 0;
+  background: var(--mond-paper);
+  box-shadow: 6px 6px 0 var(--mond-ink);
+  padding: 6px;
+}
+[data-style="mondrian"] .screenshot-frame img {
+  border: 2px solid var(--mond-ink);
+  border-radius: 0;
+}
+[data-style="mondrian"] .screenshot-frame figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-align: center;
+  margin-top: 0.5rem;
+  color: var(--mond-text-soft);
+}
+
+/* App architecture grid (UI / State / Data / Work / Sync / Release) */
+[data-style="mondrian"] .app-architecture {
+  gap: 0;
+  border-top: 2px solid var(--mond-ink);
+  border-left: 2px solid var(--mond-ink);
+}
+[data-style="mondrian"] .app-architecture div {
+  border-right: 2px solid var(--mond-ink);
+  border-bottom: 2px solid var(--mond-ink);
+  border-radius: 0;
+  background: var(--mond-paper);
+  padding: 0.9rem 0.7rem;
+}
+[data-style="mondrian"] .app-architecture div:nth-child(2n) { background: var(--mond-paper-soft); }
+[data-style="mondrian"] .app-architecture div:nth-child(3) { background: var(--mond-yellow); }
+[data-style="mondrian"] .app-architecture div:nth-child(5) { background: var(--mond-blue); color: #fff; }
+[data-style="mondrian"] .app-architecture strong {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+[data-style="mondrian"] .app-architecture div:nth-child(5) strong { color: #fff; }
+[data-style="mondrian"] .app-architecture span {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--mond-text-soft);
+}
+[data-style="mondrian"] .app-architecture div:nth-child(5) span { color: rgba(255,255,255,0.85); }
+
+/* Stat band / metric grid — Mondrian-ize too */
+[data-style="mondrian"] .stat-band div,
+[data-style="mondrian"] .metric-grid div {
+  border: 2px solid var(--mond-ink);
+  border-radius: 0;
+  background: var(--mond-paper);
+}
+[data-style="mondrian"] .signal-list span,
+[data-style="mondrian"] .tag-list span,
+[data-style="mondrian"] .tag-cloud span {
+  border: 2px solid var(--mond-ink);
+  border-radius: 0;
+  background: var(--mond-paper);
+  padding: 0.35rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+/* Final Mondrian color safety pass.
+   Dark mode inverts --mond-ink so ink blocks become light blocks; yellow keeps
+   a fixed dark foreground because yellow is bright in both themes. */
+[data-style="mondrian"] .mond-tile--red :where(h1, h2, h3, h4, p, li, strong, span, a, .icon),
+[data-style="mondrian"] .mond-tile--blue :where(h1, h2, h3, h4, p, li, strong, span, a, .icon) {
+  color: #fff;
+}
+
+[data-style="mondrian"] .mond-tile--yellow,
+[data-style="mondrian"] .mond-tile--yellow :where(h1, h2, h3, h4, p, li, strong, span, a, .icon),
+[data-style="mondrian"] .mond-button--yellow,
+[data-style="mondrian"] .mond-button--yellow :where(.icon, span),
+[data-style="mondrian"] .about-tags span:nth-child(4),
+[data-style="mondrian"] .mond-tile--chips span:nth-child(5),
+[data-style="mondrian"] .about-timeline__item--project .about-timeline__icon,
+[data-style="mondrian"] .metric-grid div:nth-child(3),
+[data-style="mondrian"] .metric-grid div:nth-child(3) :where(strong, span),
+[data-style="mondrian"] .stat-band div:nth-child(3),
+[data-style="mondrian"] .stat-band div:nth-child(3) :where(strong, span),
+[data-style="mondrian"] body[data-page="home"] main > .section-block .tag-cloud span:nth-child(3),
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > .contact-card--primary,
+[data-style="mondrian"] body[data-page="home"] main > .section-block .contact-grid > .contact-card--primary :where(h3, p, a, span, .icon),
+[data-style="mondrian"] body[data-page="home"] #about .values-grid .surface-card:nth-child(3):last-child,
+[data-style="mondrian"] body[data-page="home"] #about .values-grid .surface-card:nth-child(3):last-child :where(h3, p, span, .icon),
+[data-style="mondrian"] body[data-page="cv"] .publication-card:nth-child(3) .publication-card__year,
+[data-style="mondrian"] .cv-xp-head--yellow,
+[data-style="mondrian"] .cv-xp-head--yellow :where(h3, p, span),
+[data-style="mondrian"] .cv-pub-year--yellow,
+[data-style="mondrian"] .cv-tile--contact-flag,
+[data-style="mondrian"] .cv-tile--contact-flag :where(.icon, span, strong),
+[data-style="mondrian"] .workflow-map__branch .workflow-map__node,
+[data-style="mondrian"] .workflow-map__branch .workflow-map__node :where(.icon, span),
+[data-style="mondrian"] .proj-chips span:nth-child(5n),
+[data-style="mondrian"] .cv-skill-chips span:nth-child(4n),
+[data-style="mondrian"] .case-mondrian .case-tile--arch-3,
+[data-style="mondrian"] .case-mondrian .case-tile--arch-3 :where(.mond-eyebrow, .case-arch__value),
+[data-style="mondrian"] .app-architecture div:nth-child(3),
+[data-style="mondrian"] .app-architecture div:nth-child(3) :where(strong, span) {
+  color: var(--mond-on-yellow);
+}
+
+[data-style="mondrian"] .mond-tile--ink,
+[data-style="mondrian"] .cv-xp-head--ink {
+  background: var(--mond-ink);
+  color: var(--mond-on-ink);
+}
+
+[data-style="mondrian"] .mond-tile--ink :where(h1, h2, h3, h4, p, li, strong, span, a, .icon),
+[data-style="mondrian"] .cv-xp-head--ink :where(h3, p, span, .mond-eyebrow, .cv-xp-inst) {
+  color: var(--mond-on-ink);
+}
+
+[data-style="mondrian"][data-theme="dark"] .about-timeline__item--future .about-timeline__icon {
+  background: var(--mond-ink);
+  color: var(--mond-on-ink);
+}
+
+[data-style="mondrian"] .mond-tile.mond-tile--red h1,
+[data-style="mondrian"] .mond-tile.mond-tile--red h2,
+[data-style="mondrian"] .mond-tile.mond-tile--red h3,
+[data-style="mondrian"] .mond-tile.mond-tile--red h4,
+[data-style="mondrian"] .mond-tile.mond-tile--red p,
+[data-style="mondrian"] .mond-tile.mond-tile--red li,
+[data-style="mondrian"] .mond-tile.mond-tile--red strong,
+[data-style="mondrian"] .mond-tile.mond-tile--red span,
+[data-style="mondrian"] .mond-tile.mond-tile--red a,
+[data-style="mondrian"] .mond-tile.mond-tile--red .icon,
+[data-style="mondrian"] .mond-tile.mond-tile--blue h1,
+[data-style="mondrian"] .mond-tile.mond-tile--blue h2,
+[data-style="mondrian"] .mond-tile.mond-tile--blue h3,
+[data-style="mondrian"] .mond-tile.mond-tile--blue h4,
+[data-style="mondrian"] .mond-tile.mond-tile--blue p,
+[data-style="mondrian"] .mond-tile.mond-tile--blue li,
+[data-style="mondrian"] .mond-tile.mond-tile--blue strong,
+[data-style="mondrian"] .mond-tile.mond-tile--blue span,
+[data-style="mondrian"] .mond-tile.mond-tile--blue a,
+[data-style="mondrian"] .mond-tile.mond-tile--blue .icon {
+  color: #fff;
+}
+
+[data-style="mondrian"] .mond-tile.mond-tile--yellow h1,
+[data-style="mondrian"] .mond-tile.mond-tile--yellow h2,
+[data-style="mondrian"] .mond-tile.mond-tile--yellow h3,
+[data-style="mondrian"] .mond-tile.mond-tile--yellow h4,
+[data-style="mondrian"] .mond-tile.mond-tile--yellow p,
+[data-style="mondrian"] .mond-tile.mond-tile--yellow li,
+[data-style="mondrian"] .mond-tile.mond-tile--yellow strong,
+[data-style="mondrian"] .mond-tile.mond-tile--yellow span,
+[data-style="mondrian"] .mond-tile.mond-tile--yellow a,
+[data-style="mondrian"] .mond-tile.mond-tile--yellow .icon {
+  color: var(--mond-on-yellow);
+}
+
+[data-style="mondrian"] .mond-tile.mond-tile--ink h1,
+[data-style="mondrian"] .mond-tile.mond-tile--ink h2,
+[data-style="mondrian"] .mond-tile.mond-tile--ink h3,
+[data-style="mondrian"] .mond-tile.mond-tile--ink h4,
+[data-style="mondrian"] .mond-tile.mond-tile--ink p,
+[data-style="mondrian"] .mond-tile.mond-tile--ink li,
+[data-style="mondrian"] .mond-tile.mond-tile--ink strong,
+[data-style="mondrian"] .mond-tile.mond-tile--ink span,
+[data-style="mondrian"] .mond-tile.mond-tile--ink a,
+[data-style="mondrian"] .mond-tile.mond-tile--ink .icon {
+  color: var(--mond-on-ink);
+}
+
+[data-style="mondrian"][data-theme="dark"] .cv-mondrian .mond-tile.cv-xp-head--red {
+  background: var(--mond-red);
+  color: #fff;
+}
+
+[data-style="mondrian"][data-theme="dark"] .cv-mondrian .mond-tile.cv-xp-head--blue {
+  background: var(--mond-blue);
+  color: #fff;
+}
+
+[data-style="mondrian"][data-theme="dark"] .cv-mondrian .mond-tile.cv-xp-head--yellow {
+  background: var(--mond-yellow);
+  color: var(--mond-on-yellow);
+}
+
+[data-style="mondrian"][data-theme="dark"] .cv-mondrian .mond-tile.cv-xp-head--ink {
+  background: var(--mond-ink);
+  color: var(--mond-on-ink);
+}
+
+[data-style="mondrian"][data-theme="dark"] .cv-mondrian .mond-tile.cv-xp-head--yellow :where(h3, p, span, .mond-eyebrow, .cv-xp-inst) {
+  color: var(--mond-on-yellow);
+}
+
+[data-style="mondrian"][data-theme="dark"] .cv-mondrian .mond-tile.cv-xp-head--ink :where(h3, p, span, .mond-eyebrow, .cv-xp-inst) {
+  color: var(--mond-on-ink);
+}
+
+/* Final approved Mondrian density overrides. Kept at the end so they win over
+   the base grid placement rules above. */
+[data-style="mondrian"] .mond-tile--about-body {
+  grid-column: 1 / span 5;
+  grid-row: 8 / span 1;
+  align-content: center;
+}
+
+[data-style="mondrian"] .mond-tile--about-body p + p {
+  margin-top: 0.65rem;
+}
+
+[data-style="mondrian"] .mond-tile--about-p1 {
+  grid-column: 6 / span 3;
+  grid-row: 8 / span 1;
+}
+
+[data-style="mondrian"] .mond-tile--about-p2 {
+  grid-column: 9 / span 4;
+  grid-row: 8 / span 1;
+}
+
+[data-style="mondrian"] .mond-tile--about-p3 {
+  grid-column: 1 / span 12;
+  grid-row: 9 / span 1;
+  display: grid;
+  grid-template-columns: auto minmax(0, 0.26fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+}
+
+[data-style="mondrian"] .mond-tile--about-p3 p {
+  margin: 0;
+}
+
+[data-style="mondrian"] .proj-tile--swatch-y {
+  grid-column: 9 / span 4;
+  min-height: 72px;
+}
+
+[data-style="mondrian"] .proj-tile--meta {
+  grid-column: 9 / span 4;
+  padding: 0;
+  background: var(--mond-ink);
+}
+
+[data-style="mondrian"] .proj-tile--swatch-r,
+[data-style="mondrian"] .proj-tile--swatch-b {
+  display: none;
+}
+
+[data-style="mondrian"] .proj-index {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: minmax(5.7rem, 1fr);
+  gap: var(--tile-rule);
+  height: 100%;
+  margin: 0;
+}
+
+[data-style="mondrian"] .proj-index__label,
+[data-style="mondrian"] .proj-index a {
+  min-width: 0;
+  min-height: 5.7rem;
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .proj-index a {
+  position: relative;
+  padding: 0.78rem 0.72rem 0.72rem;
+  border: 0;
+  align-content: start;
+}
+
+[data-style="mondrian"] .proj-index__label {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0.82rem 0.72rem;
+  color: var(--mond-text);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.22em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+[data-style="mondrian"] .proj-index a:hover {
+  background: var(--mond-yellow);
+}
+
+[data-style="mondrian"] .proj-index a::after {
+  content: "";
+  position: absolute;
+  right: 0.62rem;
+  bottom: 0.62rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-top: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  opacity: 0.58;
+  transform: rotate(45deg);
+}
+
+[data-style="mondrian"] .proj-tile--head {
+  min-height: 6.2rem;
+}
+
+[data-style="mondrian"] .proj-tile--visual-phone .phone-frame {
+  max-height: 360px;
+}
+
+[data-style="mondrian"] .proj-h-1-1,
+[data-style="mondrian"] .proj-h-1-2,
+[data-style="mondrian"] .proj-h-1-3,
+[data-style="mondrian"] .proj-h-1-4 {
+  min-height: 8rem;
+}
+
+[data-style="mondrian"] .proj-tile--highlight {
+  align-content: start;
+}
+
+@media (min-width: 1101px) {
+  [data-style="mondrian"] .projects-mondrian .proj-pco-1-p {
+    grid-column: 1 / span 4;
+    grid-row: 4 / span 1;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-pco-1-c {
+    grid-column: 1 / span 4;
+    grid-row: 5 / span 1;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-pco-1-o {
+    grid-column: 1 / span 4;
+    grid-row: 6 / span 1;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-h-1-1 {
+    grid-column: 5 / span 4;
+    grid-row: 4 / span 1;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-h-1-2 {
+    grid-column: 5 / span 4;
+    grid-row: 5 / span 1;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-h-1-3 {
+    grid-column: 5 / span 2;
+    grid-row: 6 / span 1;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-h-1-4 {
+    grid-column: 7 / span 2;
+    grid-row: 6 / span 1;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-tile--visual-1 {
+    grid-column: 9 / span 4;
+    grid-row: 4 / span 4;
+    padding: clamp(0.75rem, 1.6vw, 1.15rem);
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-stack-1 {
+    grid-column: 1 / span 5;
+    grid-row: 7 / span 1;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-actions-1 {
+    grid-column: 6 / span 3;
+    grid-row: 7 / span 1;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-pco-1-p,
+  [data-style="mondrian"] .projects-mondrian .proj-pco-1-c,
+  [data-style="mondrian"] .projects-mondrian .proj-pco-1-o,
+  [data-style="mondrian"] .projects-mondrian .proj-h-1-1,
+  [data-style="mondrian"] .projects-mondrian .proj-h-1-2,
+  [data-style="mondrian"] .projects-mondrian .proj-h-1-3,
+  [data-style="mondrian"] .projects-mondrian .proj-h-1-4 {
+    min-height: 6.4rem;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-tile--visual-phone .phone-frame {
+    width: min(68%, 230px);
+    max-height: none;
+  }
+}
+
+[data-style="mondrian"] .case-mondrian .case-tile--workflow-visual {
+  padding-block: 0.55rem;
+}
+
+[data-style="mondrian"] .case-mondrian .case-tile--workflow-visual .workflow-map {
+  gap: 0.12rem;
+}
+
+[data-style="mondrian"] .case-mondrian .case-tile--workflow-visual .workflow-map__node {
+  min-height: 2rem;
+  padding-block: 0.3rem;
+}
+
+@media (max-width: 1100px) and (min-width: 761px) {
+  [data-style="mondrian"] .proj-index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+[data-style="mondrian"] .mond-tile--about-p3 {
+  grid-template-columns: auto minmax(0, 1fr);
+}
+}
+
+@media (max-width: 540px) {
+  [data-style="mondrian"] .proj-index {
+    grid-template-columns: 1fr;
+  }
+}
+
+[data-style="mondrian"] .mond-tile--contact-email {
+  grid-column: 1 / span 6;
+  grid-row: 18 / span 1;
+}
+
+[data-style="mondrian"] .mond-tile--contact-phone {
+  grid-column: 7 / span 3;
+  grid-row: 18 / span 1;
+}
+
+[data-style="mondrian"] .mond-tile--contact-github {
+  grid-column: 10 / span 3;
+  grid-row: 18 / span 1;
+}
+
+[data-style="mondrian"] .mond-tile--contact-linkedin {
+  grid-column: 1 / span 6;
+  grid-row: 19 / span 1;
+}
+
+[data-style="mondrian"] .mond-contact-card--primary {
+  min-height: 7rem;
+}
+
+[data-style="mondrian"] .mond-contact-card--compact {
+  min-height: 7rem;
+}
+
+/* Contact card equalization. Final override so the Mondrian contact block uses
+   four equal arrow cards in a single row. */
+[data-style="mondrian"] .mond-tile--contact-email,
+[data-style="mondrian"] .mond-tile--contact-phone,
+[data-style="mondrian"] .mond-tile--contact-github,
+[data-style="mondrian"] .mond-tile--contact-linkedin {
+  min-height: 6.35rem;
+}
+
+[data-style="mondrian"] .mond-tile--contact-email {
+  grid-column: 1 / span 3;
+  grid-row: 18 / span 1;
+}
+
+[data-style="mondrian"] .mond-tile--contact-phone {
+  grid-column: 4 / span 3;
+  grid-row: 18 / span 1;
+}
+
+[data-style="mondrian"] .mond-tile--contact-github {
+  grid-column: 7 / span 3;
+  grid-row: 18 / span 1;
+}
+
+[data-style="mondrian"] .mond-tile--contact-linkedin {
+  grid-column: 10 / span 3;
+  grid-row: 18 / span 1;
+}
+
+[data-style="mondrian"] .mond-tile--actions {
+  grid-row: 19 / span 1;
+}
+
+[data-style="mondrian"] .mond-contact-card--compact {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 0.72rem;
+}
+
+[data-style="mondrian"] .mond-contact-card--compact span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* Mondrian Work visual density. Keep the diagrams/screenshots from forcing
+   tall empty tiles and redistribute the freed space to adjacent controls. */
+@media (min-width: 1101px) {
+  [data-style="mondrian"] .projects-mondrian .proj-h-1-1,
+  [data-style="mondrian"] .projects-mondrian .proj-h-1-2 {
+    grid-column: 5 / span 5;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-h-1-4 {
+    grid-column: 7 / span 3;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-tile--visual-1 {
+    grid-column: 10 / span 3;
+    grid-row: 4 / span 4;
+    position: relative;
+    min-height: 0;
+    padding: 0;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-tile--visual-1 .mond-shot-carousel {
+    position: absolute;
+    inset: 0;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-stack-1 {
+    grid-column: 1 / span 6;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-actions-1 {
+    grid-column: 7 / span 3;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-tile--visual-phone .phone-frame {
+    box-sizing: border-box;
+    width: auto;
+    height: clamp(245px, 24vw, 305px);
+    max-height: calc(100% - 0.5rem);
+    aspect-ratio: 9 / 19.4;
+    overflow: hidden;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-tile--visual-phone .phone-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-tile--visual-2 {
+    grid-row: 9 / span 3;
+    padding: 0.4rem;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-tile--visual-workflow .workflow-map {
+    width: 100%;
+    max-width: none;
+    gap: 0.12rem;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-tile--visual-workflow .workflow-map__node {
+    min-height: 2rem;
+    padding: 0.3rem 0.45rem;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-tile--visual-workflow .workflow-map__path {
+    height: 0.3rem;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-actions-2 {
+    grid-column: 1 / span 4;
+    grid-row: 12 / span 1;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-stack-2 {
+    grid-column: 1 / span 12;
+    grid-row: 13 / span 1;
+  }
+}
+
+/* Mondrian screenshot navigator for the Octidy work tile. */
+[data-style="mondrian"] .mond-shot-carousel {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: var(--tile-rule);
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  background: var(--mond-ink);
+}
+
+[data-style="mondrian"] .mond-shot-carousel__viewport {
+  display: grid;
+  grid-auto-columns: 100%;
+  grid-auto-flow: column;
+  gap: 0;
+  min-width: 0;
+  min-height: 0;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  background: var(--mond-paper-soft);
+}
+
+[data-style="mondrian"] .mond-shot-carousel__viewport::-webkit-scrollbar {
+  display: none;
+}
+
+[data-style="mondrian"] .mond-shot-slide {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  gap: 0;
+  align-items: center;
+  justify-items: center;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0.35rem;
+  scroll-snap-align: start;
+}
+
+[data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame {
+  width: auto;
+  height: 100%;
+  max-width: calc(100% - 0.4rem);
+  max-height: 100%;
+  aspect-ratio: 9 / 19.4;
+}
+
+[data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+[data-style="mondrian"] .mond-shot-carousel__controls {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--tile-rule);
+  align-items: stretch;
+  min-height: 4.25rem;
+  background: var(--mond-ink);
+}
+
+[data-style="mondrian"] .mond-shot-carousel__arrows {
+  display: grid;
+  grid-template-columns: repeat(2, 2.8rem);
+  gap: var(--tile-rule);
+}
+
+[data-style="mondrian"] .mond-shot-carousel__button {
+  appearance: none;
+  border: 0;
+  color: var(--mond-text);
+  background: var(--mond-paper);
+  font: inherit;
+  cursor: pointer;
+}
+
+[data-style="mondrian"] .mond-shot-carousel__button {
+  display: grid;
+  place-items: center;
+}
+
+[data-style="mondrian"] .mond-shot-carousel__button:first-child .icon {
+  transform: rotate(180deg);
+}
+
+[data-style="mondrian"] .mond-shot-carousel__button .icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+[data-style="mondrian"] .mond-shot-carousel__caption-track {
+  display: grid;
+  min-width: 0;
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .mond-shot-carousel__caption {
+  display: grid;
+  align-content: center;
+  gap: 0.18rem;
+  min-width: 0;
+  min-height: 4rem;
+  margin: 0;
+  padding: 0.58rem 0.72rem;
+}
+
+[data-style="mondrian"] .mond-shot-carousel__caption[hidden] {
+  display: none;
+}
+
+[data-style="mondrian"] .mond-shot-carousel__caption strong {
+  color: var(--mond-text);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  line-height: 1.08;
+}
+
+[data-style="mondrian"] .mond-shot-carousel__caption span {
+  color: var(--mond-text-soft);
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.28;
+}
+
+[data-style="mondrian"] .mond-shot-carousel__button:hover {
+  background: var(--mond-yellow);
+  color: var(--mond-on-yellow);
+}
+
+[data-style="mondrian"] .mond-shot-carousel__button:disabled {
+  color: color-mix(in srgb, var(--mond-text) 42%, var(--mond-paper));
+  background: var(--mond-paper);
+  cursor: default;
+}
+
+[data-style="mondrian"] .mond-shot-carousel__button:focus-visible {
+  outline: 3px solid var(--mond-red);
+  outline-offset: -3px;
+}
+
+/* Responsive audit repairs. These live at the end because several approved
+   desktop density overrides above intentionally move tiles around; tablet
+   Mondrian needs its own map so those desktop spans do not create implicit,
+   unreadably narrow grid columns. */
+@media (max-width: 960px) and (min-width: 541px) {
+  [data-style="mondrian"] .home-mondrian {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  [data-style="mondrian"] .home-mondrian > .mond-tile {
+    grid-row: auto !important;
+    min-width: 0;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--title,
+  [data-style="mondrian"] .home-mondrian .mond-tile--hero-field,
+  [data-style="mondrian"] .home-mondrian .mond-tile--creds,
+  [data-style="mondrian"] .home-mondrian .mond-tile--proofs,
+  [data-style="mondrian"] .home-mondrian .mond-tile--about-head,
+  [data-style="mondrian"] .home-mondrian .mond-tile--about-body,
+  [data-style="mondrian"] .home-mondrian .mond-tile--about-p3,
+  [data-style="mondrian"] .home-mondrian .mond-tile--exp-head,
+  [data-style="mondrian"] .home-mondrian .mond-tile--exp-1-head,
+  [data-style="mondrian"] .home-mondrian .mond-tile--exp-1-body,
+  [data-style="mondrian"] .home-mondrian .mond-tile--exp-1-chips,
+  [data-style="mondrian"] .home-mondrian .mond-tile--exp-2-head,
+  [data-style="mondrian"] .home-mondrian .mond-tile--exp-2-body,
+  [data-style="mondrian"] .home-mondrian .mond-tile--exp-2-chips,
+  [data-style="mondrian"] .home-mondrian .mond-tile--exp-3-head,
+  [data-style="mondrian"] .home-mondrian .mond-tile--exp-3-body,
+  [data-style="mondrian"] .home-mondrian .mond-tile--exp-3-chips,
+  [data-style="mondrian"] .home-mondrian .mond-tile--feat-head,
+  [data-style="mondrian"] .home-mondrian .mond-tile--contact-head,
+  [data-style="mondrian"] .home-mondrian .mond-tile--actions {
+    grid-column: 1 / -1 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--intro {
+    grid-column: 1 / span 2 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--swatch-y {
+    grid-column: 3 / span 1 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--swatch-r {
+    grid-column: 4 / span 1 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--photo {
+    grid-column: 1 / span 2 !important;
+    min-height: 240px;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--name {
+    grid-column: 3 / span 2 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--m1,
+  [data-style="mondrian"] .home-mondrian .mond-tile--m2,
+  [data-style="mondrian"] .home-mondrian .mond-tile--m3,
+  [data-style="mondrian"] .home-mondrian .mond-tile--m4 {
+    grid-column: span 2 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--socials {
+    grid-column: 1 / span 1 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--chips {
+    grid-column: 2 / span 3 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--strip-r {
+    grid-column: 1 / span 1 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--strip-b {
+    grid-column: 2 / span 2 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--strip-y {
+    grid-column: 4 / span 1 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--about-p1 {
+    grid-column: 1 / span 2 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--about-p2 {
+    grid-column: 3 / span 2 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--work-1 {
+    grid-column: 1 / span 2 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--work-2 {
+    grid-column: 3 / span 2 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--contact-email,
+  [data-style="mondrian"] .home-mondrian .mond-tile--contact-github {
+    grid-column: 1 / span 2 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--contact-phone,
+  [data-style="mondrian"] .home-mondrian .mond-tile--contact-linkedin {
+    grid-column: 3 / span 2 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  [data-style="mondrian"] .projects-mondrian .proj-chips {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-chips span {
+    grid-column: auto !important;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: break-word;
+    line-height: 1.25;
+  }
+
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips,
+  [data-style="mondrian"] .cv-skill-chips {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips span,
+  [data-style="mondrian"] .cv-skill-chips span {
+    grid-column: auto !important;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: break-word;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 1100px) {
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips {
+    grid-template-columns: repeat(auto-fit, minmax(112px, 1fr)) !important;
+  }
+
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips span {
+    grid-column: auto !important;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: break-word;
+    line-height: 1.25;
+  }
+}
+
+@media (max-width: 860px) and (min-width: 541px) {
+  [data-style="mondrian"] .case-mondrian {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  [data-style="mondrian"] .case-mondrian > .mond-tile {
+    grid-row: auto !important;
+    min-width: 0;
+  }
+
+  [data-style="mondrian"] .case-mondrian .case-tile--hero,
+  [data-style="mondrian"] .case-mondrian .case-tile--screenshots,
+  [data-style="mondrian"] .case-mondrian .case-tile--workflow-visual,
+  [data-style="mondrian"] .case-mondrian .case-tile--section-head,
+  [data-style="mondrian"] .case-mondrian .case-tile--workflow,
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-head,
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips,
+  [data-style="mondrian"] .case-mondrian .case-tile--cta-head,
+  [data-style="mondrian"] .case-mondrian .case-tile--cta-actions {
+    grid-column: 1 / -1 !important;
+  }
+
+  [data-style="mondrian"] .case-mondrian .case-tile--meta,
+  [data-style="mondrian"] .case-mondrian .case-tile--arch,
+  [data-style="mondrian"] .case-mondrian .case-tile--problem,
+  [data-style="mondrian"] .case-mondrian .case-tile--ownership,
+  [data-style="mondrian"] .case-mondrian .case-tile--behavior,
+  [data-style="mondrian"] .case-mondrian .case-tile--eng {
+    grid-column: span 2 !important;
+  }
+}
+
+@media (max-width: 420px) {
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips span,
+  [data-style="mondrian"] .cv-skill-chips span {
+    padding-inline: 0.45rem;
+    font-size: 0.68rem;
+  }
+}
+
+/* Mondrian polish pass: mobile menu and phone mockup scale. */
+@media (max-width: 760px) {
+  [data-style="mondrian"] .nav-toggle {
+    position: relative;
+    overflow: hidden;
+    width: 3rem;
+    height: 3rem;
+    border: 2px solid var(--mond-ink);
+    border-radius: 0;
+    color: var(--mond-ink);
+    background: var(--mond-paper);
+    box-shadow: none;
+  }
+
+  [data-style="mondrian"] .nav-toggle::before,
+  [data-style="mondrian"] .nav-toggle::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+
+  [data-style="mondrian"] .nav-toggle::before {
+    left: 0;
+    bottom: 0;
+    width: 46%;
+    height: 0.42rem;
+    background: var(--mond-yellow);
+  }
+
+  [data-style="mondrian"] .nav-toggle::after {
+    top: 0;
+    right: 0;
+    width: 0.42rem;
+    height: 58%;
+    background: var(--mond-red);
+  }
+
+  [data-style="mondrian"] .nav-toggle__line {
+    position: relative;
+    z-index: 1;
+    width: 1.34rem;
+    height: 2px;
+    margin: 3px 0;
+    background: var(--mond-ink);
+  }
+
+  [data-style="mondrian"] .site-nav {
+    top: calc(100% + var(--mond-rule));
+    left: 0;
+    right: 0;
+    padding: 0;
+    border: var(--mond-rule) solid var(--mond-ink);
+    border-inline: 0;
+    border-radius: 0;
+    background: var(--mond-paper);
+    box-shadow: none;
+  }
+
+  [data-style="mondrian"] .site-nav a {
+    min-height: 2.95rem;
+    justify-content: center;
+    border-bottom: var(--mond-rule) solid var(--mond-ink);
+    border-radius: 0;
+    background: var(--mond-paper);
+    color: var(--mond-ink);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  [data-style="mondrian"] .site-nav a:last-child {
+    border-bottom: 0;
+  }
+
+  [data-style="mondrian"] .site-nav a:hover,
+  [data-style="mondrian"] .site-nav a[aria-current="page"] {
+    background: var(--mond-red);
+    color: #fff;
+  }
+}
+
+[data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame {
+  height: clamp(230px, 28vw, 315px);
+  max-height: calc(100% - 0.75rem);
+}
+
+@media (max-width: 1100px) {
+  [data-style="mondrian"] .projects-mondrian .mond-shot-carousel__viewport {
+    min-height: clamp(300px, 46vw, 420px);
+  }
+
+  [data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame {
+    height: clamp(245px, 38vw, 345px);
+  }
+}
+
+@media (max-width: 540px) {
+  [data-style="mondrian"] .projects-mondrian .mond-shot-carousel__viewport {
+    min-height: clamp(300px, 86vw, 370px);
+  }
+
+  [data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame {
+    height: clamp(245px, 76vw, 320px);
+  }
+}
+
+[data-style="mondrian"] .case-mondrian .case-tile--screenshots {
+  justify-content: center;
+}
+
+[data-style="mondrian"] .case-mondrian .case-shot {
+  flex: 0 1 clamp(150px, 16vw, 205px);
+  max-width: 205px;
+}
+
+[data-style="mondrian"] .case-mondrian .case-shot__frame {
+  width: 100%;
+}
+
+@media (max-width: 1100px) {
+  [data-style="mondrian"] .case-mondrian .case-shot {
+    flex-basis: clamp(145px, 24vw, 195px);
+    max-width: 195px;
+  }
+}
+
+@media (max-width: 760px) {
+  [data-style="mondrian"] .case-mondrian .case-shot {
+    flex-basis: clamp(150px, 54vw, 210px);
+    max-width: 210px;
+  }
+}
+
+/* Phone layouts should read in document order. Some desktop refinement rules
+   above intentionally pin tiles to named rows; reset those final coordinates
+   after all other Mondrian overrides so narrow screens do not interleave
+   unrelated sections. */
+@media (max-width: 540px) {
+  [data-style="mondrian"] .home-mondrian,
+  [data-style="mondrian"] .about-mondrian,
+  [data-style="mondrian"] .projects-mondrian,
+  [data-style="mondrian"] .cv-mondrian,
+  [data-style="mondrian"] .case-mondrian {
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+  }
+
+  [data-style="mondrian"] .home-mondrian > .mond-tile,
+  [data-style="mondrian"] .about-mondrian > .mond-tile,
+  [data-style="mondrian"] .projects-mondrian > .mond-tile,
+  [data-style="mondrian"] .cv-mondrian > .mond-tile,
+  [data-style="mondrian"] .case-mondrian > .mond-tile {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--swatch-y,
+  [data-style="mondrian"] .home-mondrian .mond-tile--swatch-r,
+  [data-style="mondrian"] .home-mondrian .mond-tile--hero-field,
+  [data-style="mondrian"] .home-mondrian .mond-tile--strip-r,
+  [data-style="mondrian"] .home-mondrian .mond-tile--strip-b,
+  [data-style="mondrian"] .home-mondrian .mond-tile--strip-y,
+  [data-style="mondrian"] .projects-mondrian .proj-tile--swatch-y,
+  [data-style="mondrian"] .projects-mondrian .proj-tile--swatch-r,
+  [data-style="mondrian"] .projects-mondrian .proj-tile--swatch-b,
+  [data-style="mondrian"] .cv-mondrian .cv-tile--swatch-y,
+  [data-style="mondrian"] .cv-mondrian .cv-tile--swatch-r,
+  [data-style="mondrian"] .cv-mondrian .cv-tile--swatch-b {
+    display: none;
+  }
+}
+
+/* Octidy Work carousel: keep the phone mockup using the available tile area
+   without letting the controls float inside a padded card on narrower widths. */
+[data-style="mondrian"] .projects-mondrian .proj-tile--visual-phone {
+  padding: 0 !important;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+[data-style="mondrian"] .projects-mondrian .proj-tile--visual-phone .mond-shot-carousel {
+  gap: 0;
+  background: var(--mond-paper-soft);
+}
+
+[data-style="mondrian"] .projects-mondrian .mond-shot-carousel__viewport {
+  border-bottom: var(--tile-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .projects-mondrian .mond-shot-slide {
+  padding: clamp(0.45rem, 1vw, 0.8rem);
+}
+
+[data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame {
+  height: clamp(280px, 32vw, 390px);
+  max-height: calc(100% - 0.6rem);
+}
+
+[data-style="mondrian"] .projects-mondrian .mond-shot-carousel__controls {
+  grid-template-columns: 3rem 3rem minmax(0, 1fr);
+  gap: 0;
+  min-height: 4.65rem;
+  background: var(--mond-paper);
+}
+
+[data-style="mondrian"] .projects-mondrian .mond-shot-carousel__arrows {
+  display: contents;
+}
+
+[data-style="mondrian"] .projects-mondrian .mond-shot-carousel__button {
+  min-height: 4.65rem;
+  border-right: var(--tile-rule) solid var(--mond-ink);
+}
+
+[data-style="mondrian"] .projects-mondrian .mond-shot-carousel__caption-track,
+[data-style="mondrian"] .projects-mondrian .mond-shot-carousel__caption {
+  min-height: 4.65rem;
+}
+
+@media (max-width: 1100px) {
+  [data-style="mondrian"] .projects-mondrian .mond-shot-carousel__viewport {
+    min-height: clamp(355px, 54vw, 480px);
+  }
+
+  [data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame {
+    height: clamp(280px, 45vw, 370px);
+  }
+}
+
+@media (max-width: 540px) {
+  [data-style="mondrian"] .projects-mondrian .mond-shot-carousel__viewport {
+    min-height: clamp(345px, 90vw, 415px);
+  }
+
+  [data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame {
+    height: clamp(285px, 82vw, 350px);
+  }
+
+  [data-style="mondrian"] .projects-mondrian .mond-shot-carousel__controls {
+    grid-template-columns: 3rem 3rem minmax(0, 1fr);
+  }
+}
+
+/* Responsive chip grids: the generated no-br/no-bb classes are based on the
+   desktop column count. Once narrow layouts become two columns, recompute the
+   internal borders here so lines stay single and continuous. */
+@media (max-width: 760px) {
+  [data-style="mondrian"] .projects-mondrian .proj-chips,
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips,
+  [data-style="mondrian"] .cv-skill-chips {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-chips span,
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips span,
+  [data-style="mondrian"] .cv-skill-chips span {
+    grid-column: auto !important;
+    border-right: 2px solid var(--mond-ink) !important;
+    border-bottom: 2px solid var(--mond-ink) !important;
+    box-shadow: none;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-chips span:nth-child(even),
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips span:nth-child(even),
+  [data-style="mondrian"] .cv-skill-chips span:nth-child(even) {
+    border-right: 0 !important;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-chips span:last-child,
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips span:last-child,
+  [data-style="mondrian"] .cv-skill-chips span:last-child,
+  [data-style="mondrian"] .projects-mondrian .proj-chips span:nth-last-child(2):nth-child(odd),
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips span:nth-last-child(2):nth-child(odd),
+  [data-style="mondrian"] .cv-skill-chips span:nth-last-child(2):nth-child(odd) {
+    border-bottom: 0 !important;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-chips span:last-child:nth-child(odd),
+  [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips span:last-child:nth-child(odd),
+  [data-style="mondrian"] .cv-skill-chips span:last-child:nth-child(odd) {
+    grid-column: 1 / -1 !important;
+    border-right: 0 !important;
+  }
+}
+
+/* Work / Octidy carousel: use the phone stage more fully in the tall desktop
+   column, then keep the single-column tablet and phone versions compact. */
+[data-style="mondrian"] .projects-mondrian .mond-shot-slide {
+  padding: clamp(0.25rem, 0.7vw, 0.55rem);
+}
+
+[data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame {
+  height: min(calc(100% - 0.75rem), clamp(340px, 44vw, 560px));
+  max-width: calc(100% - 0.75rem);
+  max-height: calc(100% - 0.75rem);
+}
+
+@media (max-width: 1100px) {
+  [data-style="mondrian"] .projects-mondrian .mond-shot-carousel__viewport {
+    min-height: clamp(335px, 47vw, 430px);
+  }
+
+  [data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame {
+    height: clamp(330px, 48vw, 430px);
+    max-height: none;
+  }
+}
+
+@media (max-width: 540px) {
+  [data-style="mondrian"] .projects-mondrian .mond-shot-carousel__viewport {
+    min-height: clamp(320px, 88vw, 390px);
+  }
+
+  [data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame {
+    height: clamp(315px, 88vw, 385px);
+    max-height: none;
+  }
+}

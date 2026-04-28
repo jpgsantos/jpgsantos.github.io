@@ -1,0 +1,31 @@
+{% assign image_path = include.src %}
+{% assign image_relative_path = image_path | remove_first: "/" %}
+{% assign image_exists = false %}
+{% for static_file in site.static_files %}
+  {% if static_file.path == image_path or static_file.path == image_relative_path or static_file.relative_path == image_relative_path %}
+    {% assign image_exists = true %}
+  {% endif %}
+{% endfor %}
+
+{% if image_exists %}
+  <img
+    src="{{ image_path | relative_url }}"
+    alt="{{ include.alt | escape }}"
+    class="{{ include.class }}"
+    loading="{{ include.loading | default: 'lazy' }}"
+    decoding="async"
+    {% if include.width %}width="{{ include.width }}"{% endif %}
+    {% if include.height %}height="{{ include.height }}"{% endif %}
+  >
+{% else %}
+  <div class="media-fallback media-fallback--{{ include.kind | default: 'technical' }} {{ include.class }}" role="img" aria-label="{{ include.alt | escape }}">
+    <div class="media-fallback__grid" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="media-fallback__content">
+      {% include icon.html name=include.icon class="media-fallback__icon" %}
+      <strong>{{ include.title | default: "Technical visual" }}</strong>
+      <span>{{ include.caption | default: "Technical overview diagram." }}</span>
+    </div>
+  </div>
+{% endif %}

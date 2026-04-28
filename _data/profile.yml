@@ -1,0 +1,86 @@
+name: "João Pedro Gomes dos Santos"
+short_name: "João Pedro Santos"
+initials: "JPGS"
+role: "AI / Systems Engineer | Computational Neuroscience PhD"
+headline: "Engineering reliable models, algorithms, and research software for complex biological systems."
+summary: "I combine 8+ years of ODE-based modeling, parameter estimation, sensitivity analysis, and scientific programming with practical software engineering. I am an AI / Systems Engineer at Vectonomous Labs and founder of Octidy, a Firebase-first Android app for fair household chore coordination."
+short_summary: "AI / Systems Engineer and computational neuroscience PhD turning scientific complexity into validated software, data systems, and product workflows."
+about: "I solve complex problems with algorithms and scientific software. I am strongest where mathematical rigor has to become software a team can understand, validate, and use."
+about_heading: "Research depth, product-minded implementation."
+about_background: "My background spans computational neuroscience, biochemical pathway modeling, Android product engineering, and current applied AI systems work."
+selected_work_heading: "Evidence across research software and product engineering."
+selected_work_intro: "Short summaries live here; the Work page carries the project-level detail and case-study links."
+toolkit_heading: "Core skills for hiring teams to scan quickly."
+contact_heading: "Discuss scientific software, modeling, applied AI, or collaboration."
+contact_intro: "Email is the best first step for professional inquiries. Include context and a few possible times if a quick call is useful."
+current_work: "Vectonomous Labs · Founder of Octidy"
+location: "Copenhagen, Amsterdam or Remote"
+citizenship: "EU Citizen"
+languages: "Portuguese native, English C2"
+image: "/assets/images/profile.jpg"
+cv_pdf: "/assets/PDFs/Joao_Pedro_Santos_CV.pdf"
+
+contact:
+  email: "jpgs.12390@gmail.com"
+  phone: "+351 963264450"
+  phone_uri: "+351963264450"
+
+socials:
+  github:
+    label: "GitHub"
+    username: "jpgsantos"
+    url: "https://github.com/jpgsantos"
+    icon: "github"
+  linkedin:
+    label: "LinkedIn"
+    username: "joaosantos1992"
+    url: "https://linkedin.com/in/joaosantos1992"
+    icon: "linkedin"
+
+proof_points:
+  - title: "Scientific AI"
+    text: "Model validation, data systems, and applied workflows"
+  - title: "Research software"
+    text: "MATLAB/Python frameworks for reproducible modeling"
+  - title: "Product engineering"
+    text: "Kotlin, Firebase, and Android delivery through Octidy"
+
+metrics:
+  - value: "8+"
+    label: "years research software"
+  - value: "2"
+    label: "peer-reviewed publications"
+  - value: "3"
+    label: "major project areas"
+  - value: "2025"
+    label: "Octidy founded"
+
+skill_chips:
+  - "Python"
+  - "MATLAB"
+  - "Kotlin"
+  - "ODE modeling"
+  - "SBML"
+  - "FAIR workflows"
+
+principles:
+  - title: "Technical excellence"
+    icon: "code"
+    description: "Clean, efficient, well-structured code that remains understandable after the first result has shipped."
+  - title: "Interdisciplinary thinking"
+    icon: "brain"
+    description: "Biology, mathematics, and software engineering each shape how I frame and solve problems."
+  - title: "Open collaboration"
+    icon: "users"
+    description: "I document decisions, share context, and build workflows that future contributors can pick up."
+
+focus_areas:
+  - title: "Applied AI systems"
+    icon: "target"
+    description: "AI/ML systems, backend infrastructure, data pipelines, and agentic engineering workflows."
+  - title: "Scientific software"
+    icon: "code"
+    description: "Reusable, validated tooling for computational biology, modeling, and reproducible research."
+  - title: "Product engineering"
+    icon: "android"
+    description: "Kotlin, Firebase, Android architecture, and end-to-end ownership through Octidy."

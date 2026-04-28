@@ -1,16 +1,16 @@
 <div class="expertise-grid">
   {% for item in site.data.expertise %}
-  <div class="expertise-card" data-reveal>
-    <div class="expertise-card-icon">
-      <i class="{{ item.icon }}"></i>
+  <article class="surface-card expertise-card" data-reveal>
+    <div class="surface-card__icon">
+      {% include icon.html name=item.icon %}
     </div>
     <h3>{{ item.title }}</h3>
     <p>{{ item.description }}</p>
-    <div class="pills">
+    <div class="tag-list" aria-label="{{ item.title }} skills">
       {% for skill in item.skills %}
       <span>{{ skill }}</span>
       {% endfor %}
     </div>
-  </div>
+  </article>
   {% endfor %}
 </div>

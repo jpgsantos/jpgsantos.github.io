@@ -1,6 +1,9 @@
+{% assign profile = site.data.profile %}
+{% assign designs = site.data.designs %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% if jekyll.environment == "production" %}
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2G376VMXHB"></script>
     <script>
@@ -9,53 +12,61 @@
       gtag('js', new Date());
       gtag('config', 'G-2G376VMXHB');
     </script>
+    {% endif %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <script>
-      // Prevent theme "flash" by applying the saved/system theme before first paint.
       (function() {
         try {
           var theme = localStorage.getItem('theme') || 'auto';
           var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
           if (theme === 'dark' || (theme === 'auto' && prefersDark)) {
             document.documentElement.setAttribute('data-theme', 'dark');
-          } else {
-            document.documentElement.removeAttribute('data-theme');
           }
+          document.documentElement.setAttribute('data-theme-choice', theme);
+          var supportedStyles = {{ designs | map: "value" | jsonify }};
+          var style = localStorage.getItem('style') || 'default';
+          if (supportedStyles.indexOf(style) === -1) {
+            style = 'default';
+          }
+          document.documentElement.setAttribute('data-style', style);
         } catch (e) {}
       })();
     </script>
-    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    {% if site.github.build_revision %}
+      {% assign asset_version = site.github.build_revision %}
+    {% else %}
+      {% assign asset_version = site.time | date: '%Y%m%d%H%M%S' %}
+    {% endif %}
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}?v={{ asset_version }}">
+    <link rel="stylesheet" href="{{ '/assets/css/mondrian.css' | relative_url }}?v={{ asset_version }}">
     <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
     {% seo %}
-    
-    <!-- Structured Data (JSON-LD) -->
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": "João Pedro Gomes dos Santos",
-      "url": "https://jpgsantos.github.io",
-      "image": "https://jpgsantos.github.io/assets/images/Profile.jpg",
-      "jobTitle": "Computational Neuroscience PhD | Scientific Software Developer",
-      "description": "Scientific software developer with 8+ years of experience in computational neuroscience, ODE modeling, and algorithm implementation.",
-      "email": "mailto:jpgs.12390@gmail.com",
-      "telephone": "+351963264450",
+      "name": {{ profile.name | jsonify }},
+      "url": {{ site.url | jsonify }},
+      "image": {{ profile.image | absolute_url | jsonify }},
+      "jobTitle": {{ profile.role | jsonify }},
+      "description": {{ profile.short_summary | jsonify }},
+      "email": {{ profile.contact.email | prepend: "mailto:" | jsonify }},
+      "telephone": {{ profile.contact.phone_uri | jsonify }},
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Copenhagen, Amsterdam or Remote"
+        "addressLocality": {{ profile.location | jsonify }}
       },
       "sameAs": [
-        "https://github.com/jpgsantos",
-        "https://linkedin.com/in/joaosantos1992"
+        {{ profile.socials.github.url | jsonify }},
+        {{ profile.socials.linkedin.url | jsonify }}
       ],
       "alumniOf": [
         {
@@ -69,17 +80,7 @@
           "url": "https://ki.se"
         }
       ],
-      "knowsAbout": [
-        "Computational Neuroscience",
-        "Scientific Software Development",
-        "MATLAB",
-        "Python",
-        "Kotlin",
-        "Android Development",
-        "ODE Modeling",
-        "Parameter Estimation",
-        "Sensitivity Analysis"
-      ],
+      "knowsAbout": {{ profile.skill_chips | jsonify }},
       "hasCredential": [
         {
           "@type": "EducationalOccupationalCredential",
@@ -102,105 +103,131 @@
       ]
     }
     </script>
-    
+
     {% if page.title == "Home" %}
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "João Pedro Gomes dos Santos",
+      "name": {{ profile.name | jsonify }},
       "url": "https://jpgsantos.github.io",
-      "description": "Personal portfolio of João Pedro Gomes dos Santos - Computational Neuroscience PhD and Scientific Software Developer",
+      "description": {{ site.description | jsonify }},
       "author": {
         "@type": "Person",
-        "name": "João Pedro Gomes dos Santos"
+        "name": {{ profile.name | jsonify }}
       }
     }
     </script>
     {% endif %}
   </head>
-  <body data-page="{{ page.title | downcase | default: 'home' }}" class="preload">
-    <header role="banner">
-      <p class="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></p>
+  <body data-page="{{ page.title | downcase | replace: ' ', '-' | default: 'home' }}" class="preload">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header" role="banner">
+      <a class="site-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
+        <span class="site-brand__mark">{{ profile.initials }}</span>
+        <span class="site-brand__text">{{ profile.short_name }}</span>
+      </a>
+
       <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Toggle navigation">
-        <span class="hamburger" aria-hidden="true"></span>
+        <span class="nav-toggle__line" aria-hidden="true"></span>
+        <span class="nav-toggle__line" aria-hidden="true"></span>
+        <span class="nav-toggle__line" aria-hidden="true"></span>
       </button>
-      <nav id="main-nav" role="navigation" aria-label="Main navigation">
+
+      <nav id="main-nav" class="site-nav" role="navigation" aria-label="Main navigation">
         <a href="{{ '/' | relative_url }}" {% if page.url == "/" %}aria-current="page"{% endif %}>Home</a>
-        <a href="{{ '/about/' | relative_url }}" {% if page.url == "/about/" %}aria-current="page"{% endif %}>About</a>
-        <a href="{{ '/projects/' | relative_url }}" {% if page.url == "/projects/" %}aria-current="page"{% endif %}>Projects</a>
+        <a href="{{ '/projects/' | relative_url }}" {% if page.url contains "/projects/" %}aria-current="page"{% endif %}>Work</a>
         <a href="{{ '/cv/' | relative_url }}" {% if page.url == "/cv/" %}aria-current="page"{% endif %}>CV</a>
-        <a href="{{ '/contact/' | relative_url }}" {% if page.url == "/contact/" %}aria-current="page"{% endif %}>Contact</a>
-        <span class="theme-icons" role="group" aria-label="Theme selection">
-          <button class="theme-icon" id="light-theme" aria-label="Switch to light theme" title="Light theme">
-            <i class="fas fa-sun" aria-hidden="true"></i>
+        <span class="style-switcher" data-style-menu>
+          <button class="style-menu__trigger" data-style-trigger type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Design: Default">
+            {% for design in designs %}
+            <span class="style-menu__current-icon style-icon style-icon--{{ design.icon }}" data-style-current-icon="{{ design.value }}" {% unless forloop.first %}hidden{% endunless %}>
+              {% if design.icon == "swatch" %}
+              <span class="style-icon__swatch" aria-hidden="true"></span>
+              {% else %}
+              <span class="style-icon__text" aria-hidden="true">Aa</span>
+              {% endif %}
+            </span>
+            {% endfor %}
+            <span class="style-menu__label" data-style-current-label>{{ designs[0].name }}</span>
           </button>
-          <button class="theme-icon" id="dark-theme" aria-label="Switch to dark theme" title="Dark theme">
-            <i class="fas fa-moon" aria-hidden="true"></i>
+          <span class="style-menu__panel" role="menu" aria-label="Design selection">
+            {% for design in designs %}
+            <button class="style-button" data-style-value="{{ design.value }}" data-style-name="{{ design.name }}" type="button" role="menuitemradio" aria-checked="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="Switch to {{ design.name }} design">
+              <span class="style-icon style-icon--{{ design.icon }}">
+                {% if design.icon == "swatch" %}
+                <span class="style-icon__swatch" aria-hidden="true"></span>
+                {% else %}
+                <span class="style-icon__text" aria-hidden="true">Aa</span>
+                {% endif %}
+              </span>
+              <span>{{ design.name }}</span>
+            </button>
+            {% endfor %}
+          </span>
+        </span>
+        <span class="theme-switcher" data-theme-menu>
+          <button class="theme-menu__trigger" data-theme-trigger type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Theme: System">
+            <span class="theme-menu__current-icon" data-theme-current-icon="light" hidden>{% include icon.html name="sun" %}</span>
+            <span class="theme-menu__current-icon" data-theme-current-icon="dark" hidden>{% include icon.html name="moon" %}</span>
+            <span class="theme-menu__current-icon" data-theme-current-icon="auto">{% include icon.html name="desktop" %}</span>
+            <span class="theme-menu__label" data-theme-current-label>System</span>
           </button>
-          <button class="theme-icon" id="auto-theme" aria-label="Use system theme" title="System theme">
-            <i class="fas fa-desktop" aria-hidden="true"></i>
-          </button>
+          <span class="theme-menu__panel" role="menu" aria-label="Theme selection">
+            <button class="theme-button" data-theme-value="light" type="button" role="menuitemradio" aria-checked="false" aria-label="Switch to light theme">
+              {% include icon.html name="sun" %}<span>Light</span>
+            </button>
+            <button class="theme-button" data-theme-value="dark" type="button" role="menuitemradio" aria-checked="false" aria-label="Switch to dark theme">
+              {% include icon.html name="moon" %}<span>Dark</span>
+            </button>
+            <button class="theme-button" data-theme-value="auto" type="button" role="menuitemradio" aria-checked="true" aria-label="Use system theme">
+              {% include icon.html name="desktop" %}<span>System</span>
+            </button>
+          </span>
         </span>
       </nav>
     </header>
-    
-    <canvas id="neural-canvas" class="neural-canvas" aria-hidden="true" role="presentation"></canvas>
-    
-    <main id="main-content">
-      <h1 class="visually-hidden">{{ page.title | default: site.title }}</h1>
-      <div class="main-container">
-        {{ content }}
-      </div>
+
+    <main id="main-content" tabindex="-1">
+      {{ content }}
     </main>
-    
-    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
-      <i class="fas fa-chevron-up"></i>
+
+    <button class="scroll-to-top" id="scrollToTop" type="button" aria-label="Scroll to top">
+      {% include icon.html name="chevron-up" %}
     </button>
-    
-    <footer role="contentinfo">
-      <div class="social-links">
-        <a href="https://github.com/jpgsantos" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">
-          <i class="fab fa-github" aria-hidden="true"></i>
-        </a>
-        <a href="https://linkedin.com/in/joaosantos1992" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">
-          <i class="fab fa-linkedin" aria-hidden="true"></i>
-        </a>
-        <a href="mailto:jpgs.12390@gmail.com" aria-label="Send email">
-          <i class="fas fa-envelope" aria-hidden="true"></i>
-        </a>
-        <a href="tel:+351963264450" aria-label="Call phone">
-          <i class="fas fa-phone" aria-hidden="true"></i>
-        </a>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer__inner">
+        <div>
+          <p class="site-footer__name">{{ profile.name }}</p>
+          <p>{{ profile.role }}</p>
+        </div>
+        <div class="site-footer__links" aria-label="Social and contact links">
+          <a href="{{ profile.socials.github.url }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile">{% include icon.html name="github" %}</a>
+          <a href="{{ profile.socials.linkedin.url }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile">{% include icon.html name="linkedin" %}</a>
+          <a href="mailto:{{ profile.contact.email }}" aria-label="Send email">{% include icon.html name="email" %}</a>
+          <a href="tel:{{ profile.contact.phone_uri }}" aria-label="Call phone">{% include icon.html name="phone" %}</a>
+        </div>
+        <p class="site-footer__availability">
+          <span aria-hidden="true"></span>
+          Current work: {{ profile.current_work }}
+        </p>
       </div>
-      <p>&copy; {{ site.time | date: '%Y' }} João Pedro Gomes dos Santos. All rights reserved.</p>
-      <p class="availability">
-        <span class="available-indicator" aria-hidden="true">&bull;</span>
-        <span class="visually-hidden">Status:</span> Available for new opportunities in Copenhagen, Amsterdam or Remote
-      </p>
+      <p class="site-footer__copyright">&copy; {{ site.time | date: '%Y' }} {{ profile.name }}. All rights reserved.</p>
     </footer>
-    
+
     <script>
-      // Remove preload class to enable transitions after page load
       window.addEventListener('load', function() {
         document.body.classList.remove('preload');
       });
-      // Fallback: remove after short delay if load event doesn't fire
       setTimeout(function() {
         document.body.classList.remove('preload');
-      }, 100);
+      }, 120);
     </script>
-    <script src="{{ '/assets/js/theme-switcher.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/header-scroll.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/nav-toggle.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/scroll-reveal.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/scroll-to-top.js' | relative_url }}"></script>
-    <script src="{{ '/assets/js/neural-network.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ asset_version }}" defer></script>
+    {% if page.url == "/" %}
+    <script src="{{ '/assets/js/neural-network.js' | relative_url }}?v={{ asset_version }}" defer></script>
+    {% endif %}
   </body>
 </html>
-
-
-
-
-
-

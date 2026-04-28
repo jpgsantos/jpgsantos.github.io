@@ -1,0 +1,9 @@
+- value: "default"
+  name: "Default"
+  description: "Professional portfolio"
+  icon: "text"
+
+- value: "mondrian"
+  name: "Mondrian"
+  description: "Geometric editorial grid"
+  icon: "swatch"

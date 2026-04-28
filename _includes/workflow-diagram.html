@@ -1,0 +1,35 @@
+<div class="workflow-map" aria-label="Subcellular Workflow architecture">
+  <div class="workflow-map__node workflow-map__node--start">
+    {% include icon.html name="play" %}
+    <span>Start</span>
+  </div>
+  <div class="workflow-map__path"></div>
+  <div class="workflow-map__node">
+    {% include icon.html name="cogs" %}
+    <span>Model setup</span>
+  </div>
+  <div class="workflow-map__path"></div>
+  <div class="workflow-map__node">
+    {% include icon.html name="chart-line" %}
+    <span>Simulation</span>
+  </div>
+  <div class="workflow-map__branch">
+    <div class="workflow-map__node">
+      {% include icon.html name="sliders" %}
+      <span>Parameter estimation</span>
+    </div>
+    <div class="workflow-map__node">
+      {% include icon.html name="search" %}
+      <span>Sensitivity analysis</span>
+    </div>
+    <div class="workflow-map__node">
+      {% include icon.html name="chart" %}
+      <span>Profile likelihood</span>
+    </div>
+  </div>
+  <div class="workflow-map__path"></div>
+  <div class="workflow-map__node workflow-map__node--end">
+    {% include icon.html name="check-circle" %}
+    <span>Results</span>
+  </div>
+</div>

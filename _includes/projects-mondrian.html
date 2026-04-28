@@ -1,0 +1,172 @@
+{% assign projects = site.data.work %}
+{% assign work_copy = site.data.page_copy.work %}
+
+<section class="projects-mondrian" aria-label="Selected work — Mondrian view">
+
+  {%- comment -%} Row 1-2: hero block + colour swatches {%- endcomment -%}
+  <header class="mond-tile proj-tile--hero">
+    <p class="mond-eyebrow">{{ work_copy.eyebrow }}</p>
+    <h1 class="mond-hero__title">{{ work_copy.headline }}</h1>
+    <p class="mond-hero__lede">{{ work_copy.intro }}</p>
+  </header>
+
+  <div class="mond-tile mond-tile--yellow proj-tile--swatch-y" aria-hidden="true"></div>
+  <div class="mond-tile proj-tile--meta">
+    <nav class="proj-index" aria-label="Project index">
+      <span class="proj-index__label">Index</span>
+      {% for p in projects %}
+      <a href="#mondrian-work-{{ p.slug }}">
+        <span>0{{ forloop.index }}</span>
+        <strong>{{ p.title }}</strong>
+        <small>{{ p.category }}</small>
+      </a>
+      {% endfor %}
+    </nav>
+  </div>
+  <div class="mond-tile mond-tile--red  proj-tile--swatch-r" aria-hidden="true"></div>
+  <div class="mond-tile mond-tile--blue proj-tile--swatch-b" aria-hidden="true"></div>
+
+  {%- comment -%} Per-project block — each spans ~6 grid rows {%- endcomment -%}
+  {% for item in projects %}
+  {% assign idx = forloop.index %}
+  {% assign even = forloop.index | modulo: 2 %}
+
+  {%- comment -%} Project header strip — title left, date+description right {%- endcomment -%}
+  <header class="mond-tile proj-tile--head proj-tile--head-{{ idx }}" id="mondrian-work-{{ item.slug }}">
+    <h2 class="mond-section-title">{{ item.title }}</h2>
+    <div class="proj-head__meta">
+      <p class="mond-eyebrow">{{ item.eyebrow }}</p>
+      <p class="mond-section-lede">{{ item.description }}</p>
+    </div>
+  </header>
+
+  {%- comment -%} Problem / Contribution / Outcome 3-up — coloured tiles {%- endcomment -%}
+  <article class="mond-tile mond-tile--red proj-tile--problem proj-pco-{{ idx }}-p">
+    <p class="mond-eyebrow">Problem</p>
+    <p>{{ item.problem }}</p>
+  </article>
+  <article class="mond-tile mond-tile--blue proj-tile--contribution proj-pco-{{ idx }}-c">
+    <p class="mond-eyebrow">Contribution</p>
+    <p>{{ item.contribution }}</p>
+  </article>
+  <article class="mond-tile mond-tile--yellow proj-tile--outcome proj-pco-{{ idx }}-o">
+    <p class="mond-eyebrow">Outcome</p>
+    <p>{{ item.outcome }}</p>
+  </article>
+
+  {%- comment -%} Highlights — 4 tiles with varied widths + a Mondrian visual block {%- endcomment -%}
+  {% for highlight in item.highlights limit:4 %}
+  <article class="mond-tile proj-tile--highlight proj-h-{{ idx }}-{{ forloop.index }}">
+    {% include icon.html name="check" %}
+    <p>{{ highlight }}</p>
+  </article>
+  {% endfor %}
+
+  {%- comment -%} Visual: workflow / phone / molecule depending on slug {%- endcomment -%}
+  <div class="mond-tile proj-tile--visual proj-tile--visual-{{ idx }}{% if item.slug == 'subcellular-workflow' %} proj-tile--visual-workflow{% elsif item.slug == 'octidy-android-app' %} proj-tile--visual-phone{% else %} proj-tile--visual-molecule{% endif %}"{% if item.slug == 'octidy-android-app' %} aria-label="Octidy Android app screenshots"{% else %} aria-hidden="true"{% endif %}>
+    {% if item.slug == 'subcellular-workflow' %}
+      {% include workflow-diagram.html %}
+    {% elsif item.slug == 'octidy-android-app' %}
+      <div class="mond-shot-carousel" data-carousel>
+        <div class="app-carousel__viewport mond-shot-carousel__viewport" tabindex="0">
+          {% for shot in item.screenshots %}
+          <figure class="app-slide mond-shot-slide">
+            <div class="phone-frame">
+              {% include project-screenshot.html src=shot.src alt=shot.alt loading="lazy" width="1080" height="2400" %}
+            </div>
+          </figure>
+          {% endfor %}
+        </div>
+        <div class="mond-shot-carousel__controls" aria-label="Octidy screenshot controls">
+          <div class="mond-shot-carousel__arrows">
+            <button class="mond-shot-carousel__button" type="button" data-carousel-prev aria-label="Previous screenshot">{% include icon.html name="arrow-right" %}</button>
+            <button class="mond-shot-carousel__button" type="button" data-carousel-next aria-label="Next screenshot">{% include icon.html name="arrow-right" %}</button>
+          </div>
+          <div class="mond-shot-carousel__caption-track" aria-live="polite">
+            {% for shot in item.screenshots %}
+            <p class="mond-shot-carousel__caption" data-carousel-caption{% unless forloop.first %} hidden{% endunless %}>
+              <strong>{{ shot.caption }}</strong>
+              <span>{{ shot.alt | remove: 'Octidy ' | capitalize }}.</span>
+            </p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="proj-molecule" role="img" aria-label="Porphyrin molecule abstract">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+    {% endif %}
+  </div>
+
+  {%- comment -%} Stack chips — column count adapts to chip count.
+       For partial last rows, expand grid track count to LCM(cols, partial)=cols*partial so row-1 chips
+       span `partial` tracks each and partial-row chips span `cols` tracks each, filling the row width
+       evenly with no empty cells and no fillers. {%- endcomment -%}
+  {%- assign stack_count = item.stack | size -%}
+  {%- if stack_count <= 4 -%}
+    {%- assign stack_cols = stack_count -%}
+  {%- else -%}
+    {%- assign stack_cols = stack_count | divided_by: 2.0 | ceil -%}
+  {%- endif -%}
+  {%- assign s_partial = stack_count | modulo: stack_cols -%}
+  {%- assign s_full_rows = stack_count | divided_by: stack_cols -%}
+  {%- if s_partial > 0 -%}
+    {%- assign s_grid_cols = stack_cols | times: s_partial -%}
+    {%- assign s_normal_span = s_partial -%}
+    {%- assign s_partial_span = stack_cols -%}
+  {%- else -%}
+    {%- assign s_grid_cols = stack_cols -%}
+    {%- assign s_normal_span = 1 -%}
+    {%- assign s_partial_span = 1 -%}
+  {%- endif -%}
+  <div class="mond-tile proj-tile--stack proj-stack-{{ idx }}">
+    <p class="mond-eyebrow">Stack</p>
+    <div class="proj-chips" style="grid-template-columns: repeat({{ s_grid_cols }}, 1fr);">
+      {%- for s in item.stack -%}
+        {%- assign idx0 = forloop.index0 -%}
+        {%- assign row0 = idx0 | divided_by: stack_cols -%}
+        {%- assign in_partial = false -%}
+        {%- if s_partial > 0 and row0 == s_full_rows -%}{%- assign in_partial = true -%}{%- endif -%}
+        {%- if in_partial -%}{%- assign span = s_partial_span -%}{%- else -%}{%- assign span = s_normal_span -%}{%- endif -%}
+        {%- assign extra = "" -%}
+        {%- comment -%} rightmost chip in its row -> no-br {%- endcomment -%}
+        {%- assign next_idx = idx0 | plus: 1 -%}
+        {%- assign next_row0 = next_idx | divided_by: stack_cols -%}
+        {%- if forloop.last or next_row0 != row0 -%}{%- assign extra = extra | append: " no-br" -%}{%- endif -%}
+        {%- comment -%} chip in the bottom row of the chip group -> no-bb {%- endcomment -%}
+        {%- if s_partial > 0 -%}
+          {%- if row0 == s_full_rows -%}{%- assign extra = extra | append: " no-bb" -%}{%- endif -%}
+        {%- else -%}
+          {%- assign last_row0 = s_full_rows | minus: 1 -%}
+          {%- if row0 == last_row0 -%}{%- assign extra = extra | append: " no-bb" -%}{%- endif -%}
+        {%- endif -%}
+        <span style="grid-column: span {{ span }};"{% if extra != "" %} class="{{ extra | strip }}"{% endif %}>{{ s }}</span>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  {%- comment -%} Actions row {%- endcomment -%}
+  <div class="mond-tile proj-tile--actions proj-actions-{{ idx }}">
+    {% for link in item.links %}
+    <a href="{% if link.external %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}"{% if link.external %} target="_blank" rel="noopener noreferrer"{% endif %} class="mond-button{% if link.primary %} mond-button--primary{% endif %}">
+      {% include icon.html name=link.icon %} {{ link.text }}
+    </a>
+    {% endfor %}
+  </div>
+
+  {% endfor %}
+
+  {%- comment -%} CTA strip {%- endcomment -%}
+  <header class="mond-tile proj-tile--cta-head">
+    <p class="mond-eyebrow">{{ work_copy.cta_eyebrow }}</p>
+    <h2 class="mond-section-title">{{ work_copy.cta_heading }}</h2>
+    <p class="mond-section-lede">{{ work_copy.cta_text }}</p>
+  </header>
+  <div class="mond-tile mond-tile--yellow proj-tile--cta-swatch" aria-hidden="true"></div>
+  <div class="mond-tile proj-tile--cta-actions">
+    <a href="{{ '/cv/' | relative_url }}" class="mond-button mond-button--primary">{% include icon.html name="file" %} View CV</a>
+    <a href="{{ '/#contact' | relative_url }}" class="mond-button">{% include icon.html name="email" %} Contact</a>
+  </div>
+
+</section>
