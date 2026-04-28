@@ -7,7 +7,7 @@ permalink: /projects/
 
 {% include projects-mondrian.html %}
 
-<div class="default-only">
+<div class="default-only" data-design-root="default">
 
 {% assign work_copy = site.data.page_copy.work %}
 
@@ -49,18 +49,8 @@ permalink: /projects/
         <li>{% include icon.html name="check" %}<span>{{ highlight }}</span></li>
         {% endfor %}
       </ul>
-      <div class="tag-list">
-        {% for stack_item in item.stack %}
-        <span>{{ stack_item }}</span>
-        {% endfor %}
-      </div>
-      <div class="button-row">
-        {% for link in item.links %}
-        <a href="{% if link.external %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}" {% if link.external %}target="_blank" rel="noopener noreferrer"{% endif %} class="button {% if link.primary %}button--primary{% else %}button--secondary{% endif %}">
-          {% include icon.html name=link.icon %} {{ link.text }}
-        </a>
-        {% endfor %}
-      </div>
+      {% include chip-list.html class="tag-list" items=item.stack %}
+      {% include action-links.html links=item.links %}
     </div>
 
     {% if item.slug == "subcellular-workflow" %}

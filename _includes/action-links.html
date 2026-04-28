@@ -1,0 +1,22 @@
+{% assign link_class = include.link_class | default: 'button' %}
+{% assign primary_class = include.primary_class | default: 'button--primary' %}
+{% if include.secondary_class == nil %}
+  {% assign secondary_class = 'button--secondary' %}
+{% else %}
+  {% assign secondary_class = include.secondary_class %}
+{% endif %}
+{% unless include.inline %}
+<div class="{{ include.wrapper_class | default: 'button-row' }}">
+{% endunless %}
+  {% for link in include.links %}
+  <a
+    href="{% if link.external %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}"
+    {% if link.external %}target="_blank" rel="noopener noreferrer"{% endif %}
+    class="{{ link_class }}{% if link.primary and primary_class %} {{ primary_class }}{% elsif secondary_class %} {{ secondary_class }}{% endif %}"
+  >
+    {% include icon.html name=link.icon %} {{ link.text }}
+  </a>
+  {% endfor %}
+{% unless include.inline %}
+</div>
+{% endunless %}

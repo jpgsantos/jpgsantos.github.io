@@ -7,7 +7,7 @@ permalink: /cv/
 
 {% include cv-mondrian.html %}
 
-<div class="default-only">
+<div class="default-only" data-design-root="default">
 
 {% assign profile = site.data.profile %}
 {% assign octidy = site.data.work | where: "slug", "octidy-android-app" | first %}

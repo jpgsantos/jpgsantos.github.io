@@ -19,6 +19,9 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
+exclude:
+  - _site_preview/
+
 # Navigation
 header_pages:
   - index.md

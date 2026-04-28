@@ -141,8 +141,15 @@
       state.animationId = window.requestAnimationFrame(draw);
     }
 
+    function isInActiveDesignRoot() {
+      const designRoot = canvas.closest('[data-design-root]');
+      if (!designRoot) return true;
+      const style = document.documentElement.getAttribute('data-style') || 'default';
+      return (designRoot.dataset.designRoot || '').split(/\s+/).includes(style);
+    }
+
     function isOnscreen() {
-      return canvas.offsetParent !== null;
+      return isInActiveDesignRoot() && canvas.offsetParent !== null;
     }
 
     function start() {

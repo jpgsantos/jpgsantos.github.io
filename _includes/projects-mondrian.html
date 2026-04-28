@@ -1,7 +1,7 @@
 {% assign projects = site.data.work %}
 {% assign work_copy = site.data.page_copy.work %}
 
-<section class="projects-mondrian" aria-label="Selected work — Mondrian view">
+<section class="projects-mondrian" data-design-root="mondrian" aria-label="Selected work — Mondrian view">
 
   {%- comment -%} Row 1-2: hero block + colour swatches {%- endcomment -%}
   <header class="mond-tile proj-tile--hero">
@@ -148,11 +148,7 @@
 
   {%- comment -%} Actions row {%- endcomment -%}
   <div class="mond-tile proj-tile--actions proj-actions-{{ idx }}">
-    {% for link in item.links %}
-    <a href="{% if link.external %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}"{% if link.external %} target="_blank" rel="noopener noreferrer"{% endif %} class="mond-button{% if link.primary %} mond-button--primary{% endif %}">
-      {% include icon.html name=link.icon %} {{ link.text }}
-    </a>
-    {% endfor %}
+    {% include action-links.html links=item.links inline=true link_class="mond-button" primary_class="mond-button--primary" secondary_class="" %}
   </div>
 
   {% endfor %}

@@ -6,7 +6,7 @@ description: "João Pedro Gomes dos Santos - AI / Systems Engineer, founder of O
 
 {% include home-mondrian.html %}
 
-<div class="default-only">
+<div class="default-only" data-design-root="default">
 
 {% assign profile = site.data.profile %}
 
@@ -44,11 +44,7 @@ description: "João Pedro Gomes dos Santos - AI / Systems Engineer, founder of O
         <div><strong>{{ metric.value }}</strong><span>{{ metric.label }}</span></div>
         {% endfor %}
       </div>
-      <div class="signal-list">
-        {% for skill in profile.skill_chips %}
-        <span>{{ skill }}</span>
-        {% endfor %}
-      </div>
+      {% include chip-list.html class="signal-list" items=profile.skill_chips %}
     </div>
     <div class="hero-proof" aria-label="Professional focus">
       {% for proof in profile.proof_points %}
@@ -115,11 +111,7 @@ description: "João Pedro Gomes dos Santos - AI / Systems Engineer, founder of O
     </article>
     {% endfor %}
   </div>
-  <div class="tag-cloud tag-cloud--centered" aria-label="Core stack">
-    {% for skill in profile.skill_chips %}
-    <span>{{ skill }}</span>
-    {% endfor %}
-  </div>
+  {% include chip-list.html class="tag-cloud tag-cloud--centered" items=profile.skill_chips aria_label="Core stack" %}
 </section>
 
 <section class="section-block" id="contact" data-contact-anchor="default">
@@ -129,23 +121,13 @@ description: "João Pedro Gomes dos Santos - AI / Systems Engineer, founder of O
     <p>{{ profile.contact_intro }}</p>
   </div>
   <div class="contact-grid">
-    <a href="mailto:{{ profile.contact.email }}" class="contact-card contact-card--compact contact-card--email">
-      {% include icon.html name="email" %}
-      <span><strong>Email</strong>{{ profile.contact.email }}</span>
-      {% include icon.html name="arrow-right" %}
-    </a>
-    <a href="tel:{{ profile.contact.phone_uri }}" class="contact-card contact-card--compact">
-      {% include icon.html name="phone" %}
-      <span><strong>Phone</strong>{{ profile.contact.phone }}</span>
-      {% include icon.html name="arrow-right" %}
-    </a>
+    {% assign email_href = profile.contact.email | prepend: 'mailto:' %}
+    {% assign phone_href = profile.contact.phone_uri | prepend: 'tel:' %}
+    {% include contact-card.html href=email_href icon="email" label="Email" value=profile.contact.email class="contact-card--email" %}
+    {% include contact-card.html href=phone_href icon="phone" label="Phone" value=profile.contact.phone %}
     {% for social in profile.socials %}
     {% assign item = social[1] %}
-    <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer" class="contact-card contact-card--compact">
-      {% include icon.html name=item.icon %}
-      <span><strong>{{ item.label }}</strong>{{ item.username }}</span>
-      {% include icon.html name="arrow-right" %}
-    </a>
+    {% include contact-card.html href=item.url icon=item.icon label=item.label value=item.username external=true %}
     {% endfor %}
   </div>
 </section>

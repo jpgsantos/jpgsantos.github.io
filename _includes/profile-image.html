@@ -1,20 +1,18 @@
 {% assign profile = site.data.profile %}
-<picture class="profile-picture">
-  <source
-    type="image/webp"
-    srcset="{{ '/assets/images/profile-320.webp' | relative_url }} 320w, {{ '/assets/images/profile-640.webp' | relative_url }} 640w"
-    sizes="{{ include.sizes | default: '220px' }}"
-  >
-  <img
-    src="{{ '/assets/images/profile-320.jpg' | relative_url }}"
-    srcset="{{ '/assets/images/profile-320.jpg' | relative_url }} 320w, {{ '/assets/images/profile-640.jpg' | relative_url }} 640w"
-    sizes="{{ include.sizes | default: '220px' }}"
-    alt="{{ include.alt | default: profile.name | escape }}"
-    {% if include.class %}class="{{ include.class }}"{% endif %}
-    loading="{{ include.loading | default: 'lazy' }}"
-    decoding="async"
-    {% if include.width %}width="{{ include.width }}"{% endif %}
-    {% if include.height %}height="{{ include.height }}"{% endif %}
-    {% if include.fetchpriority %}fetchpriority="{{ include.fetchpriority }}"{% endif %}
-  >
-</picture>
+{% assign profile_alt = include.alt | default: profile.name %}
+{% assign profile_sizes = include.sizes | default: '220px' %}
+{% capture profile_webp_srcset %}{{ '/assets/images/profile-320.webp' | relative_url }} 320w, {{ '/assets/images/profile-640.webp' | relative_url }} 640w{% endcapture %}
+{% capture profile_fallback_srcset %}{{ '/assets/images/profile-320.jpg' | relative_url }} 320w, {{ '/assets/images/profile-640.jpg' | relative_url }} 640w{% endcapture %}
+{% include optimized-image.html
+  picture_class="profile-picture"
+  src="/assets/images/profile-320.jpg"
+  webp_srcset=profile_webp_srcset
+  fallback_srcset=profile_fallback_srcset
+  sizes=profile_sizes
+  alt=profile_alt
+  img_class=include.class
+  loading=include.loading
+  width=include.width
+  height=include.height
+  fetchpriority=include.fetchpriority
+%}

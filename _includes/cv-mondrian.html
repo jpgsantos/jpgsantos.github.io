@@ -2,7 +2,7 @@
 {% assign octidy = site.data.work | where: "slug", "octidy-android-app" | first %}
 {% assign cv_copy = site.data.page_copy.cv %}
 
-<section class="cv-mondrian" aria-label="Curriculum Vitae — Mondrian view">
+<section class="cv-mondrian" data-design-root="mondrian" aria-label="Curriculum Vitae — Mondrian view">
 
   {%- comment -%} Hero rows: photo + name + role + colour blocks + contact tiles {%- endcomment -%}
   <header class="mond-tile cv-tile--name">

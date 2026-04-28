@@ -1,0 +1,14 @@
+{% assign chip_class = include.class | default: 'tag-list' %}
+{% assign chip_label = include.aria_label %}
+{% assign chip_offset = include.offset | default: 0 %}
+<div class="{{ chip_class }}"{% if chip_label %} aria-label="{{ chip_label }}"{% endif %}>
+  {% if include.limit %}
+    {% for item in include.items offset: chip_offset limit: include.limit %}
+    <span>{{ item }}</span>
+    {% endfor %}
+  {% else %}
+    {% for item in include.items offset: chip_offset %}
+    <span>{{ item }}</span>
+    {% endfor %}
+  {% endif %}
+</div>

@@ -2,18 +2,14 @@
 {% assign screenshot_webp = include.webp | default: screenshot_src | replace: '.png', '.webp' %}
 {% assign screenshot_webp_360 = screenshot_webp | replace: '.webp', '-360.webp' %}
 {% assign screenshot_webp_720 = screenshot_webp | replace: '.webp', '-720.webp' %}
-<picture class="optimized-picture">
-  <source
-    srcset="{{ screenshot_webp_360 | relative_url }} 360w, {{ screenshot_webp_720 | relative_url }} 720w, {{ screenshot_webp | relative_url }} 1080w"
-    sizes="{{ include.sizes | default: '(max-width: 760px) 70vw, 260px' }}"
-    type="image/webp"
-  >
-  <img
-    src="{{ screenshot_src | relative_url }}"
-    alt="{{ include.alt | escape }}"
-    loading="{{ include.loading | default: 'lazy' }}"
-    decoding="async"
-    {% if include.width %}width="{{ include.width }}"{% endif %}
-    {% if include.height %}height="{{ include.height }}"{% endif %}
-  >
-</picture>
+{% assign screenshot_sizes = include.sizes | default: '(max-width: 760px) 70vw, 260px' %}
+{% capture screenshot_webp_srcset %}{{ screenshot_webp_360 | relative_url }} 360w, {{ screenshot_webp_720 | relative_url }} 720w, {{ screenshot_webp | relative_url }} 1080w{% endcapture %}
+{% include optimized-image.html
+  src=screenshot_src
+  webp_srcset=screenshot_webp_srcset
+  sizes=screenshot_sizes
+  alt=include.alt
+  loading=include.loading
+  width=include.width
+  height=include.height
+%}
