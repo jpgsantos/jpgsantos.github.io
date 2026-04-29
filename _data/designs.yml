@@ -2,8 +2,12 @@
   name: "Default"
   description: "Professional portfolio"
   icon: "text"
+  stylesheet: "/assets/css/main.css"
+  css_budget_kb: 120
 
 - value: "mondrian"
   name: "Mondrian"
   description: "Geometric editorial grid"
   icon: "swatch"
+  stylesheet: "/assets/css/mondrian.css"
+  css_budget_kb: 175

@@ -1,0 +1,204 @@
+{% assign profile = site.data.profile %}
+{% assign cv_copy = site.data.page_copy.cv %}
+{% assign cv_data = site.data.cv %}
+
+<section class="cv-mondrian" data-design-root="mondrian" aria-label="Curriculum Vitae - Mondrian view">
+
+  <header class="mond-tile cv-tile--name">
+    <p class="mond-eyebrow">Curriculum vitae</p>
+    <h1 class="mond-hero__title">{{ profile.name }}</h1>
+    <p class="mond-hero__lede">{{ profile.role | replace: " | ", " / " }}</p>
+    <div class="mond-actions">
+      <a href="{{ profile.cv_pdf | relative_url }}" target="_blank" rel="noopener noreferrer" class="mond-button mond-button--primary">{% include icon.html name="download" %} Download CV</a>
+      <a href="{{ '/#contact' | relative_url }}" class="mond-button">{% include icon.html name="email" %} Contact</a>
+    </div>
+  </header>
+
+  <div class="mond-tile cv-tile--photo">
+    {% include profile-image.html loading="lazy" width="220" height="260" sizes="220px" %}
+  </div>
+
+  <div class="mond-tile mond-tile--yellow cv-tile--swatch-y" aria-hidden="true"></div>
+  <div class="mond-tile mond-tile--red    cv-tile--swatch-r" aria-hidden="true"></div>
+  <div class="mond-tile mond-tile--blue   cv-tile--swatch-b" aria-hidden="true"></div>
+
+  <a href="mailto:{{ profile.contact.email }}" class="mond-tile cv-tile--contact cv-tile--contact-email">
+    {% include icon.html name="email" %}
+    <span><strong>Email</strong>{{ profile.contact.email }}</span>
+  </a>
+  <a href="tel:{{ profile.contact.phone_uri }}" class="mond-tile cv-tile--contact cv-tile--contact-phone">
+    {% include icon.html name="phone" %}
+    <span><strong>Phone</strong>{{ profile.contact.phone }}</span>
+  </a>
+  <span class="mond-tile cv-tile--contact cv-tile--contact-location">
+    {% include icon.html name="location" %}
+    <span><strong>Location</strong>{{ profile.location }}</span>
+  </span>
+  <span class="mond-tile cv-tile--contact cv-tile--contact-flag">
+    {% include icon.html name="flag" %}
+    <span><strong>Citizenship</strong>{{ profile.citizenship }}</span>
+  </span>
+  <a href="{{ profile.socials.linkedin.url }}" target="_blank" rel="noopener noreferrer" class="mond-tile cv-tile--contact cv-tile--contact-linkedin">
+    {% include icon.html name="linkedin" %}
+    <span><strong>LinkedIn</strong>{{ profile.socials.linkedin.username }}</span>
+  </a>
+  <a href="{{ profile.socials.github.url }}" target="_blank" rel="noopener noreferrer" class="mond-tile cv-tile--contact cv-tile--contact-github">
+    {% include icon.html name="github" %}
+    <span><strong>GitHub</strong>{{ profile.socials.github.username }}</span>
+  </a>
+  <span class="mond-tile cv-tile--contact cv-tile--contact-language">
+    {% include icon.html name="language" %}
+    <span><strong>Languages</strong>{{ profile.languages }}</span>
+  </span>
+  <span class="mond-tile cv-tile--contact cv-tile--contact-current">
+    {% include icon.html name="briefcase" %}
+    <span><strong>Current</strong>{{ profile.current_work }}</span>
+  </span>
+
+  <header class="mond-tile cv-tile--summary-head">
+    <p class="mond-eyebrow">{{ cv_copy.summary_eyebrow }}</p>
+    <h2 class="mond-section-title">{{ cv_copy.summary_heading }}</h2>
+  </header>
+  <article class="mond-tile cv-tile--summary-1">
+    <p>{{ profile.about }}</p>
+  </article>
+  <article class="mond-tile cv-tile--summary-2">
+    <p>{{ profile.summary }}</p>
+  </article>
+
+  <header class="mond-tile cv-tile--xp-head">
+    <p class="mond-eyebrow">{{ cv_copy.experience_eyebrow }}</p>
+    <h2 class="mond-section-title">{{ cv_copy.experience_heading }}</h2>
+  </header>
+
+  {% for entry in cv_data.experience %}
+  <header class="mond-tile cv-xp-head cv-xp-head--{{ entry.accent }} cv-tile--xp{{ forloop.index }}-head" data-cv-entry="experience:{{ entry.id }}">
+    <p class="mond-eyebrow">{{ entry.period_mondrian | default: entry.period }}</p>
+    <h3>{{ entry.title }}</h3>
+    <p class="cv-xp-inst">{{ entry.organization }}</p>
+  </header>
+  <article class="mond-tile cv-xp-body cv-tile--xp{{ forloop.index }}-body" data-cv-entry="experience:{{ entry.id }}">
+    <p>{{ entry.summary }}</p>
+    {% if entry.bullets.size > 0 %}
+    <ul>
+      {% for bullet in entry.bullets %}
+      <li>{{ bullet }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </article>
+  {% endfor %}
+
+  <header class="mond-tile cv-tile--work-head">
+    <h2 class="mond-section-title">{{ cv_copy.work_reference_heading }}</h2>
+  </header>
+  {% for item in site.data.work %}
+  <article class="mond-tile cv-work-card cv-tile--work-{{ forloop.index }}" data-cv-project="{{ item.slug }}">
+    <p class="mond-eyebrow">0{{ forloop.index }} / {{ item.category }}</p>
+    <h3>{{ item.title }}</h3>
+    <p>{{ item.description }}</p>
+    {% include chip-list.html class="cv-work-card__chips" items=item.stack limit=3 %}
+    {% assign primary_link = item.links | first %}
+    {% if primary_link %}
+    <a href="{% if primary_link.external %}{{ primary_link.url }}{% else %}{{ primary_link.url | relative_url }}{% endif %}" {% if primary_link.external %}target="_blank" rel="noopener noreferrer"{% endif %} class="mond-card__link">
+      {{ primary_link.text }} {% include icon.html name=primary_link.icon %}
+    </a>
+    {% endif %}
+  </article>
+  {% endfor %}
+
+  <header class="mond-tile cv-tile--skills-head">
+    <p class="mond-eyebrow">{{ cv_copy.skills_eyebrow }}</p>
+    <h2 class="mond-section-title">{{ cv_copy.skills_heading }}</h2>
+  </header>
+
+  {% for cat in site.data.skills %}
+  {% assign sidx = forloop.index %}
+  {% assign chip_count = cat.items | size %}
+  {% if chip_count <= 4 %}
+    {% assign cv_cols = chip_count %}
+  {% else %}
+    {% assign cv_cols = chip_count | divided_by: 2.0 | ceil %}
+  {% endif %}
+  {% assign cv_partial = chip_count | modulo: cv_cols %}
+  {% assign cv_full_rows = chip_count | divided_by: cv_cols %}
+  {% if cv_partial > 0 %}
+    {% assign cv_grid_cols = cv_cols | times: cv_partial %}
+    {% assign cv_normal_span = cv_partial %}
+    {% assign cv_partial_span = cv_cols %}
+  {% else %}
+    {% assign cv_grid_cols = cv_cols %}
+    {% assign cv_normal_span = 1 %}
+    {% assign cv_partial_span = 1 %}
+  {% endif %}
+  <header class="mond-tile cv-skill-head cv-tile--skill-{{ sidx }}-head">
+    <div class="cv-skill-icon">{% include icon.html name=cat.icon %}</div>
+    <span class="mond-card__num">0{{ sidx }}</span>
+    <h3>{{ cat.category }}</h3>
+  </header>
+  <div class="mond-tile cv-skill-chips cv-tile--skill-{{ sidx }}-chips" style="grid-template-columns: repeat({{ cv_grid_cols }}, 1fr);">
+    {% for s in cat.items %}
+      {% assign idx0 = forloop.index0 %}
+      {% assign row0 = idx0 | divided_by: cv_cols %}
+      {% assign in_partial = false %}
+      {% if cv_partial > 0 and row0 == cv_full_rows %}{% assign in_partial = true %}{% endif %}
+      {% if in_partial %}{% assign span = cv_partial_span %}{% else %}{% assign span = cv_normal_span %}{% endif %}
+      {% assign extra = "" %}
+      {% assign next_idx = idx0 | plus: 1 %}
+      {% assign next_row0 = next_idx | divided_by: cv_cols %}
+      {% if forloop.last or next_row0 != row0 %}{% assign extra = extra | append: " no-br" %}{% endif %}
+      {% if cv_partial > 0 %}
+        {% if row0 == cv_full_rows %}{% assign extra = extra | append: " no-bb" %}{% endif %}
+      {% else %}
+        {% assign last_row0 = cv_full_rows | minus: 1 %}
+        {% if row0 == last_row0 %}{% assign extra = extra | append: " no-bb" %}{% endif %}
+      {% endif %}
+      <span style="grid-column: span {{ span }};"{% if extra != "" %} class="{{ extra | strip }}"{% endif %}>{{ s }}</span>
+    {% endfor %}
+  </div>
+  {% endfor %}
+
+  <header class="mond-tile cv-tile--edu-head">
+    <p class="mond-eyebrow">{{ cv_copy.education_eyebrow }}</p>
+    <h2 class="mond-section-title">{{ cv_copy.education_heading }}</h2>
+  </header>
+
+  {% for entry in cv_data.education %}
+  <header class="mond-tile cv-xp-head cv-xp-head--{{ entry.accent }} cv-tile--edu{{ forloop.index }}-head" data-cv-entry="education:{{ entry.id }}">
+    <p class="mond-eyebrow">{{ entry.period_mondrian | default: entry.period }}</p>
+    <h3>{{ entry.title }}</h3>
+    <p class="cv-xp-inst">{{ entry.organization }}{% if entry.meta %} / {{ entry.meta }}{% endif %}</p>
+  </header>
+  <article class="mond-tile cv-xp-body cv-tile--edu{{ forloop.index }}-body" data-cv-entry="education:{{ entry.id }}">
+    {% for paragraph in entry.paragraphs %}
+    <p>{{ paragraph }}</p>
+    {% endfor %}
+    {% if entry.bullets.size > 0 %}
+    <ul>
+      {% for bullet in entry.bullets %}
+      <li>{{ bullet }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </article>
+  {% endfor %}
+
+  <header class="mond-tile cv-tile--pub-head">
+    <p class="mond-eyebrow">{{ cv_copy.publications_eyebrow }}</p>
+    <h2 class="mond-section-title">{{ cv_copy.publications_heading }}</h2>
+  </header>
+
+  {% for pub in site.data.publications %}
+  {% assign pidx = forloop.index %}
+  <article class="mond-tile cv-pub-card cv-tile--pub-{{ pidx }}">
+    <div class="cv-pub-year cv-pub-year--{% cycle 'red','blue','yellow' %}">{{ pub.year }}</div>
+    <div class="cv-pub-body">
+      <h3>{{ pub.title }}</h3>
+      <p class="cv-pub-authors">{{ pub.authors }}</p>
+      <p class="cv-pub-journal"><em>{{ pub.journal }}</em>{% if pub.volume %}, {{ pub.volume }}{% endif %}.</p>
+      <a href="https://doi.org/{{ pub.doi }}" target="_blank" rel="noopener noreferrer" class="cv-pub-doi">DOI: {{ pub.doi }}</a>
+    </div>
+  </article>
+  {% endfor %}
+
+</section>

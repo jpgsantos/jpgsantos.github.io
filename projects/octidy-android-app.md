@@ -5,7 +5,9 @@ description: "Technical case study for Octidy, a Kotlin Android application buil
 permalink: /projects/octidy-android-app/
 ---
 
-<section class="case-mondrian" data-design-root="default mondrian" aria-label="Octidy Android App — Mondrian case study">
+{% include designs/default/case-octidy.html %}
+
+<section class="case-mondrian" data-design-root="mondrian" aria-label="Octidy Android App — Mondrian case study">
 
   {%- comment -%} Row 1-2: Hero — title tile + 4 metadata tiles {%- endcomment -%}
   <header class="mond-tile case-tile--hero">

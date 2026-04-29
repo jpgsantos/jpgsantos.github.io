@@ -1,0 +1,166 @@
+<section class="case-study default-only" data-design-root="default" aria-label="Octidy Android App case study">
+  <header class="case-study__hero">
+    <div class="case-study__hero-copy">
+      <p class="eyebrow">Case study / Android engineering</p>
+      <h1>Octidy Android App</h1>
+      <p class="case-study__lede">A Firebase-first Android application for coordinating household chores through bidding, assignment, and progress tracking. I founded the project in 2025 and built the app independently from concept to Play Store testing.</p>
+      <div class="button-row case-study__actions">
+        <a href="{{ '/projects/' | relative_url }}" class="button button--secondary">{% include icon.html name="arrow-right" %} All work</a>
+        <a href="{{ '/cv/' | relative_url }}" class="button button--secondary">{% include icon.html name="file" %} CV</a>
+      </div>
+    </div>
+    <dl class="case-study__facts" aria-label="Project facts">
+      <div>
+        <dt>Timeframe</dt>
+        <dd>2025-present</dd>
+      </div>
+      <div>
+        <dt>Role</dt>
+        <dd>Founder, solo developer</dd>
+      </div>
+      <div>
+        <dt>Status</dt>
+        <dd>Play Store testing</dd>
+      </div>
+      <div>
+        <dt>Stack</dt>
+        <dd>Kotlin, Compose, Firestore, Hilt</dd>
+      </div>
+    </dl>
+  </header>
+
+  <section class="case-study__overview" aria-label="Project overview">
+    <article class="case-study__statement case-study__statement--accent">
+      <p class="eyebrow">Problem</p>
+      <h2>Make household chores feel fair without negotiation overhead.</h2>
+      <p>Octidy turns an everyday coordination problem into a product workflow: people create chores, household members bid the number of points they would accept, the lowest bid wins, and completed work updates household progress transparently.</p>
+    </article>
+    <article class="case-study__statement case-study__statement--secondary">
+      <p class="eyebrow">Ownership</p>
+      <h2>End-to-end delivery from concept to Play Console testing.</h2>
+      <p>I handled the full development lifecycle: product definition, architecture, Firebase data modeling, responsive Compose UI, offline behavior, realtime sync, background deadlines, notifications, testing, Git workflow, documentation, production packaging, and Play Console deployment.</p>
+    </article>
+  </section>
+
+  <section class="case-study__visual case-study__visual--screens" id="screens" aria-label="Octidy app screenshots">
+    <div class="case-screen-strip">
+      <figure class="case-screen">
+        <span class="case-screen__frame">{% include project-screenshot.html src="/assets/images/projects/octidy-dashboard.png" alt="Octidy shared household chores dashboard" loading="lazy" sizes="(max-width: 360px) 78vw, (max-width: 860px) 42vw, 220px" width="1080" height="2400" %}</span>
+        <figcaption>Shared dashboard</figcaption>
+      </figure>
+      <figure class="case-screen">
+        <span class="case-screen__frame">{% include project-screenshot.html src="/assets/images/projects/octidy-bidding.png" alt="Octidy household chore bidding screen" loading="lazy" sizes="(max-width: 360px) 78vw, (max-width: 860px) 42vw, 220px" width="1080" height="2400" %}</span>
+        <figcaption>Bidding flow</figcaption>
+      </figure>
+      <figure class="case-screen">
+        <span class="case-screen__frame">{% include project-screenshot.html src="/assets/images/projects/octidy-create-task.png" alt="Octidy create household task screen" loading="lazy" sizes="(max-width: 360px) 78vw, (max-width: 860px) 42vw, 220px" width="1080" height="2400" %}</span>
+        <figcaption>Create task</figcaption>
+      </figure>
+      <figure class="case-screen">
+        <span class="case-screen__frame">{% include project-screenshot.html src="/assets/images/projects/octidy-assigned-task.png" alt="Octidy assigned household task screen" loading="lazy" sizes="(max-width: 360px) 78vw, (max-width: 860px) 42vw, 220px" width="1080" height="2400" %}</span>
+        <figcaption>Assignment</figcaption>
+      </figure>
+      <figure class="case-screen">
+        <span class="case-screen__frame">{% include project-screenshot.html src="/assets/images/projects/octidy-calendar.png" alt="Octidy household chores calendar screen" loading="lazy" sizes="(max-width: 360px) 78vw, (max-width: 860px) 42vw, 220px" width="1080" height="2400" %}</span>
+        <figcaption>Calendar</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="case-study__body">
+    <main class="case-study__main" aria-label="Case study details">
+      <section class="case-section">
+        <p class="eyebrow">Product behavior</p>
+        <h2>Core app flows</h2>
+        <div class="case-feature-list">
+          <article class="case-feature">
+            <span class="case-feature__icon">{% include icon.html name="users" %}</span>
+            <div>
+              <h3>Households</h3>
+              <p>Users authenticate with Firebase Auth, create or join houses with invite codes, and keep separate spaces for roommates, couples, or families.</p>
+            </div>
+          </article>
+          <article class="case-feature">
+            <span class="case-feature__icon">{% include icon.html name="target" %}</span>
+            <div>
+              <h3>Bidding</h3>
+              <p>Members bid on chores before a deadline. The app assigns the task to the lowest bidder and handles ties explicitly instead of hiding edge cases.</p>
+            </div>
+          </article>
+          <article class="case-feature">
+            <span class="case-feature__icon">{% include icon.html name="calendar-check" %}</span>
+            <div>
+              <h3>Accountability</h3>
+              <p>Recurring chores, due dates, calendar views, local notifications, and progress statistics keep effort visible over time.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <p class="eyebrow">Implementation details</p>
+        <h2>Engineering choices</h2>
+        <div class="case-feature-list">
+          <article class="case-feature">
+            <span class="case-feature__icon">{% include icon.html name="android" %}</span>
+            <div>
+              <h3>Modern Android UI</h3>
+              <p>Used Kotlin, Jetpack Compose, Navigation Compose, semantic typography, and responsive layouts for compact phones and tablets.</p>
+            </div>
+          </article>
+          <article class="case-feature">
+            <span class="case-feature__icon">{% include icon.html name="database" %}</span>
+            <div>
+              <h3>Realtime data layer</h3>
+              <p>Structured a Firebase-first architecture around Firestore snapshot listeners, offline persistence, cached reads/writes, repository flows, ViewModels, and Hilt.</p>
+            </div>
+          </article>
+          <article class="case-feature">
+            <span class="case-feature__icon">{% include icon.html name="calendar-check" %}</span>
+            <div>
+              <h3>Background work</h3>
+              <p>Used WorkManager for task deadlines and reminders, with Android notification channels and deep links into the relevant task flow.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section">
+        <p class="eyebrow">Workflow</p>
+        <h2>Collaborator-ready process, even as a solo project.</h2>
+        <p>The project includes Git workflows and documentation intended to make future collaboration easier. I also used LLM-assisted programming to accelerate implementation where it improved speed without sacrificing code quality.</p>
+      </section>
+    </main>
+
+    <aside class="case-study__aside" aria-label="Architecture and stack">
+      <section class="case-aside-block">
+        <h2>Architecture</h2>
+        <dl class="case-architecture-list">
+          <div><dt>UI</dt><dd>Jetpack Compose</dd></div>
+          <div><dt>State</dt><dd>ViewModel + Flow</dd></div>
+          <div><dt>Data</dt><dd>Firestore</dd></div>
+          <div><dt>Work</dt><dd>WorkManager</dd></div>
+          <div><dt>Sync</dt><dd>Snapshot listeners</dd></div>
+          <div><dt>Release</dt><dd>Play Console</dd></div>
+        </dl>
+      </section>
+      <section class="case-aside-block">
+        <h2>Android product stack</h2>
+        {% assign stack = "Kotlin,Android Studio,Jetpack Compose,Navigation Compose,ViewModel,Hilt,Firestore,Firebase Auth,Coroutines/Flow,WorkManager,Play Console" | split: "," %}
+        {% include chip-list.html class="tag-list" items=stack %}
+      </section>
+    </aside>
+  </div>
+
+  <section class="case-study__cta" aria-label="Related work">
+    <div>
+      <p class="eyebrow">Related work</p>
+      <h2>See more</h2>
+      <p>Browse all projects or review the CV for the broader research and software background.</p>
+    </div>
+    <div class="button-row">
+      <a href="{{ '/projects/' | relative_url }}" class="button button--primary">{% include icon.html name="arrow-right" %} All work</a>
+      <a href="{{ '/cv/' | relative_url }}" class="button button--secondary">{% include icon.html name="file" %} CV</a>
+    </div>
+  </section>
+</section>

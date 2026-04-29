@@ -11,12 +11,14 @@
 .home-mondrian,
 .about-mondrian,
 .projects-mondrian,
-.cv-mondrian { display: none; }
+.cv-mondrian,
+.case-mondrian { display: none; }
 
 [data-style="mondrian"] .home-mondrian,
 [data-style="mondrian"] .about-mondrian,
 [data-style="mondrian"] .projects-mondrian,
-[data-style="mondrian"] .cv-mondrian { display: grid; }
+[data-style="mondrian"] .cv-mondrian,
+[data-style="mondrian"] .case-mondrian { display: grid; }
 
 [data-style="mondrian"] .default-only { display: none; }
 
@@ -39,7 +41,7 @@
   --mond-shadow: 0 0 0 4px var(--mond-ink);
 
   --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
   --font-display: "Playfair Display", Georgia, serif;
 }
 
@@ -3659,20 +3661,57 @@
 .cv-xp-body a { color: var(--mond-red); }
 
 /* --- Skills section — rows 12-18 --- */
-.cv-tile--skills-head    { grid-column: 1 / span 12; grid-row: 12 / span 1; border-top: 8px solid var(--mond-blue); }
+.cv-tile--work-head      { grid-column: 1 / span 12; grid-row: 12 / span 1; border-top: 8px solid var(--mond-red); }
+.cv-tile--work-1         { grid-column: 1 / span 4;  grid-row: 13 / span 1; }
+.cv-tile--work-2         { grid-column: 5 / span 4;  grid-row: 13 / span 1; }
+.cv-tile--work-3         { grid-column: 9 / span 4;  grid-row: 13 / span 1; }
 
-.cv-tile--skill-1-head   { grid-column: 1 / span 3;  grid-row: 13 / span 1; border-top: 6px solid var(--mond-red); }
-.cv-tile--skill-1-chips  { grid-column: 4 / span 9;  grid-row: 13 / span 1; padding: 0; }
-.cv-tile--skill-2-head   { grid-column: 1 / span 3;  grid-row: 14 / span 1; border-top: 6px solid var(--mond-blue); }
-.cv-tile--skill-2-chips  { grid-column: 4 / span 9;  grid-row: 14 / span 1; padding: 0; }
-.cv-tile--skill-3-head   { grid-column: 1 / span 3;  grid-row: 15 / span 1; border-top: 6px solid var(--mond-yellow); }
-.cv-tile--skill-3-chips  { grid-column: 4 / span 9;  grid-row: 15 / span 1; padding: 0; }
-.cv-tile--skill-4-head   { grid-column: 1 / span 3;  grid-row: 16 / span 1; border-top: 6px solid var(--mond-red); }
-.cv-tile--skill-4-chips  { grid-column: 4 / span 9;  grid-row: 16 / span 1; padding: 0; }
-.cv-tile--skill-5-head   { grid-column: 1 / span 3;  grid-row: 17 / span 1; border-top: 6px solid var(--mond-blue); }
-.cv-tile--skill-5-chips  { grid-column: 4 / span 9;  grid-row: 17 / span 1; padding: 0; }
-.cv-tile--skill-6-head   { grid-column: 1 / span 3;  grid-row: 18 / span 1; border-top: 6px solid var(--mond-yellow); }
-.cv-tile--skill-6-chips  { grid-column: 4 / span 9;  grid-row: 18 / span 1; padding: 0; }
+.cv-work-card {
+  display: grid;
+  align-content: start;
+  gap: 0.62rem;
+}
+
+.cv-work-card h3 {
+  margin: 0;
+  font-size: clamp(1.12rem, 1.7vw, 1.45rem);
+}
+
+.cv-work-card p:not(.mond-eyebrow) {
+  margin: 0;
+  color: var(--mond-text-soft);
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.cv-work-card__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.cv-work-card__chips span {
+  padding: 0.24rem 0.42rem;
+  border: 1px solid var(--mond-ink);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+}
+
+.cv-tile--skills-head    { grid-column: 1 / span 12; grid-row: 14 / span 1; border-top: 8px solid var(--mond-blue); }
+
+.cv-tile--skill-1-head   { grid-column: 1 / span 3;  grid-row: 15 / span 1; border-top: 6px solid var(--mond-red); }
+.cv-tile--skill-1-chips  { grid-column: 4 / span 9;  grid-row: 15 / span 1; padding: 0; }
+.cv-tile--skill-2-head   { grid-column: 1 / span 3;  grid-row: 16 / span 1; border-top: 6px solid var(--mond-blue); }
+.cv-tile--skill-2-chips  { grid-column: 4 / span 9;  grid-row: 16 / span 1; padding: 0; }
+.cv-tile--skill-3-head   { grid-column: 1 / span 3;  grid-row: 17 / span 1; border-top: 6px solid var(--mond-yellow); }
+.cv-tile--skill-3-chips  { grid-column: 4 / span 9;  grid-row: 17 / span 1; padding: 0; }
+.cv-tile--skill-4-head   { grid-column: 1 / span 3;  grid-row: 18 / span 1; border-top: 6px solid var(--mond-red); }
+.cv-tile--skill-4-chips  { grid-column: 4 / span 9;  grid-row: 18 / span 1; padding: 0; }
+.cv-tile--skill-5-head   { grid-column: 1 / span 3;  grid-row: 19 / span 1; border-top: 6px solid var(--mond-blue); }
+.cv-tile--skill-5-chips  { grid-column: 4 / span 9;  grid-row: 19 / span 1; padding: 0; }
+.cv-tile--skill-6-head   { grid-column: 1 / span 3;  grid-row: 20 / span 1; border-top: 6px solid var(--mond-yellow); }
+.cv-tile--skill-6-chips  { grid-column: 4 / span 9;  grid-row: 20 / span 1; padding: 0; }
 
 .cv-skill-head {
   display: grid;
@@ -3734,18 +3773,18 @@
 }
 
 /* --- Education section — rows 19-22 --- */
-.cv-tile--edu-head       { grid-column: 1 / span 12; grid-row: 19 / span 1; border-top: 8px solid var(--mond-yellow); }
-.cv-tile--edu1-head      { grid-column: 1 / span 4; grid-row: 20 / span 1; }
-.cv-tile--edu1-body      { grid-column: 5 / span 8; grid-row: 20 / span 1; }
-.cv-tile--edu2-head      { grid-column: 1 / span 4; grid-row: 21 / span 1; }
-.cv-tile--edu2-body      { grid-column: 5 / span 8; grid-row: 21 / span 1; }
-.cv-tile--edu3-head      { grid-column: 1 / span 4; grid-row: 22 / span 1; }
-.cv-tile--edu3-body      { grid-column: 5 / span 8; grid-row: 22 / span 1; }
+.cv-tile--edu-head       { grid-column: 1 / span 12; grid-row: 21 / span 1; border-top: 8px solid var(--mond-yellow); }
+.cv-tile--edu1-head      { grid-column: 1 / span 4; grid-row: 22 / span 1; }
+.cv-tile--edu1-body      { grid-column: 5 / span 8; grid-row: 22 / span 1; }
+.cv-tile--edu2-head      { grid-column: 1 / span 4; grid-row: 23 / span 1; }
+.cv-tile--edu2-body      { grid-column: 5 / span 8; grid-row: 23 / span 1; }
+.cv-tile--edu3-head      { grid-column: 1 / span 4; grid-row: 24 / span 1; }
+.cv-tile--edu3-body      { grid-column: 5 / span 8; grid-row: 24 / span 1; }
 
 /* --- Publications — rows 23+ --- */
-.cv-tile--pub-head       { grid-column: 1 / span 12; grid-row: 23 / span 1; border-top: 8px solid var(--mond-red); }
-.cv-tile--pub-1          { grid-column: 1 / span 12; grid-row: 24 / span 1; }
-.cv-tile--pub-2          { grid-column: 1 / span 12; grid-row: 25 / span 1; }
+.cv-tile--pub-head       { grid-column: 1 / span 12; grid-row: 25 / span 1; border-top: 8px solid var(--mond-red); }
+.cv-tile--pub-1          { grid-column: 1 / span 12; grid-row: 26 / span 1; }
+.cv-tile--pub-2          { grid-column: 1 / span 12; grid-row: 27 / span 1; }
 
 .cv-pub-card {
   display: grid;

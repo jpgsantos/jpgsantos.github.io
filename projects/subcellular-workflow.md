@@ -5,7 +5,9 @@ description: "Technical case study for Subcellular Workflow, a FAIR-compliant MA
 permalink: /projects/subcellular-workflow/
 ---
 
-<section class="case-mondrian" data-design-root="default mondrian" aria-label="Subcellular Workflow — Mondrian case study">
+{% include designs/default/case-subcellular.html %}
+
+<section class="case-mondrian" data-design-root="mondrian" aria-label="Subcellular Workflow — Mondrian case study">
 
   {%- comment -%} Row 1-2: Hero + 4 metadata tiles {%- endcomment -%}
   <header class="mond-tile case-tile--hero">

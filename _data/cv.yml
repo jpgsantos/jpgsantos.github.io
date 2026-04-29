@@ -1,0 +1,94 @@
+experience:
+  - id: "vectonomous"
+    accent: "red"
+    period: "Apr 2026 - Present"
+    period_mondrian: "Apr 2026 -> Present"
+    title: "AI / Systems Engineer"
+    organization: "Vectonomous Labs"
+    summary: "Working on applied AI systems across data, backend, machine learning, and agentic engineering workflows."
+    bullets:
+      - "Contributing to AI/ML systems, backend infrastructure, data pipelines, and intelligence services."
+      - "Applying strong analytical and systems-thinking skills from computational neuroscience to practical engineering problems."
+      - "Operating in a high-autonomy environment where architecture, implementation quality, and end-to-end ownership matter."
+
+  - id: "octidy"
+    accent: "yellow"
+    period: "2025 - Present"
+    period_mondrian: "2025 -> Present"
+    title: "Founder"
+    organization: "Octidy"
+    summary: "Founded and built Octidy, a Firebase-first Android app for coordinating household chores through bidding, assignment, and progress tracking."
+    bullets:
+      - "Built invite-code households, task creation, bidding deadlines, automatic assignment, tie handling, recurring chores, calendar views, and progress statistics."
+      - "Implemented Kotlin, Jetpack Compose, Navigation Compose, Hilt, Coroutines/Flow, Firebase Auth, Firestore, offline persistence, and WorkManager."
+      - "Owned product definition, architecture, UI/UX, debugging, documentation, production packaging, and Play Console testing."
+
+  - id: "phd-researcher"
+    accent: "blue"
+    period: "Jan 2016 - Mar 2025"
+    period_mondrian: "Jan 2016 -> Mar 2025"
+    title: "PhD Researcher"
+    organization: "University of Porto / Karolinska Institutet / KTH / SciLifeLab"
+    summary: "<strong>Thesis:</strong> A workflow for developing biochemical pathway models using ordinary differential equations."
+    bullets:
+      - "Built Subcellular Workflow, a modular FAIR-compliant MATLAB framework for ODE-based pathway modeling with simulation, analysis, and parameterization capabilities."
+      - "Implemented parameter estimation, local/global sensitivity analysis, and profile likelihood analysis."
+      - "Validated on LIRMO, LIREM, TM-M, and G-PIPK models spanning ligand-receptor interactions, effector responses, CaMKII autophosphorylation dynamics, and basal ganglia signaling."
+      - "Published in <a href=\"https://doi.org/10.1007/s12021-021-09546-3\" target=\"_blank\" rel=\"noopener noreferrer\">Neuroinformatics</a>."
+
+  - id: "research-scholar"
+    accent: "ink"
+    period: "Apr 2015 - Dec 2015"
+    period_mondrian: "Apr 2015 -> Dec 2015"
+    title: "Research Scholar"
+    organization: "UCIBIO @ REQUIMTE, University of Porto"
+    summary: "Conducted research on porphyrin nanomaterials via ionic self-assembly."
+    bullets:
+      - "Performed synthesis, purification, and characterization of materials."
+      - "Analyzed IR spectrograms for species concentrations."
+      - "Supervised two undergraduate students."
+      - "Published in <a href=\"https://doi.org/10.1016/j.tet.2016.09.030\" target=\"_blank\" rel=\"noopener noreferrer\">Tetrahedron</a>."
+
+education:
+  - id: "phd"
+    accent: "yellow"
+    period: "Jan 2016 - Mar 2025"
+    period_mondrian: "Jan 2016 -> Mar 2025"
+    title: "PhD, Computational Neuroscience"
+    organization: "University of Porto (FCUP/ICBAS/FMUP/GABBA)"
+    paragraphs:
+      - "Completed doctoral coursework with a strong quantitative and computational focus through the GABBA doctoral program, including biostatistics, systems and synthetic bioinformatics, neurosciences, cellular and developmental biology, molecular microbiology and parasitology, and new therapies and technologies."
+      - "<strong>Thesis:</strong> A workflow for developing biochemical pathway models using ordinary differential equations."
+    bullets:
+      - "Designed an integrated ODE modeling workflow for model initialization, simulation, parameter estimation, sensitivity analysis, and profile likelihood analysis."
+      - "Validated the framework across models of increasing complexity, from simple ligand-receptor systems to G-PIPK, a striatal signaling model integrating glutamatergic and cholinergic inputs."
+      - "Coordinated collaborative development across three institutions using Git/GitHub and delivered end-user documentation."
+      - "Published in Neuroinformatics and funded by Fundação para a Ciência e Tecnologia (FCT)."
+
+  - id: "msc"
+    accent: "blue"
+    period: "2013 - 2015"
+    period_mondrian: "2013 -> 2015"
+    title: "MSc, Biochemistry"
+    organization: "University of Porto (FCUP, ICBAS)"
+    meta: "Grade 16/20"
+    paragraphs:
+      - "<strong>Grade:</strong> 16/20. Specialized in computational and analytical approaches to biochemistry, with coursework in computational biochemistry, bioinformatics, instrumental analysis, and bioanalytical chemistry."
+      - "<strong>Thesis:</strong> Exploring the Boundaries of Porphyrin Materials Synthesis by Ionic Self-Assembly."
+    bullets:
+      - "Performed synthesis, purification, and spectroscopic characterization of porphyrin nanostructures."
+      - "Quantified spectroscopic data to determine species concentrations."
+      - "Supervised two undergraduate students during extracurricular research internships."
+      - "Research contributed to a publication in Tetrahedron."
+
+  - id: "bsc"
+    accent: "red"
+    period: "2010 - 2013"
+    period_mondrian: "2010 -> 2013"
+    title: "BSc, Biochemistry"
+    organization: "University of Porto (FCUP, ICBAS)"
+    meta: "Grade 16/20"
+    paragraphs:
+      - "<strong>Grade:</strong> 16/20. Completed a three-year program combining biological sciences with quantitative and analytical methods, including coursework in mathematics, statistical methods, and mathematical models."
+      - "Completed a research internship at the Institute for Molecular and Cell Biology (i3S) on protein depletion and cell cycle regulation in <em>Drosophila melanogaster</em> wing disc development."
+    bullets: []

@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:net';
 import { spawn } from 'node:child_process';
 import { join, resolve } from 'node:path';
@@ -9,15 +9,51 @@ const pageFilter = getArg('--path');
 const styleFilter = getArg('--style');
 const themeFilter = getArg('--theme');
 const widthFilter = Number(getArg('--width'));
+const designRegistry = readDesignRegistry();
 const pages = pageFilter ? [pageFilter] : ['/', '/projects/', '/cv/', '/projects/octidy-android-app/', '/projects/subcellular-workflow/'];
 const widths = Number.isFinite(widthFilter) && widthFilter > 0 ? [widthFilter] : [390, 540, 768, 1024, 1366];
-const styles = styleFilter ? [styleFilter] : ['default', 'mondrian'];
+const styles = styleFilter ? [styleFilter] : designRegistry.map((design) => design.value);
 const themes = themeFilter ? [themeFilter] : ['light', 'dark'];
 const height = 900;
 
 function getArg(name) {
   const match = process.argv.find((arg) => arg.startsWith(`${name}=`));
   return match ? match.slice(name.length + 1) : undefined;
+}
+
+function readDesignRegistry() {
+  const source = readFileSync('_data/designs.yml', 'utf8');
+  const entries = source
+    .split(/\n(?=-\s+value:)/)
+    .map((block) => {
+      const read = (key) => {
+        const match = block.match(new RegExp(`\\b${key}:\\s*"?([^"\\n]+)"?`));
+        return match ? match[1].trim() : undefined;
+      };
+      const value = read('value');
+      if (!value) return null;
+      return {
+        value,
+        stylesheet: read('stylesheet'),
+        cssBudgetKb: Number(read('css_budget_kb')) || null
+      };
+    })
+    .filter(Boolean);
+
+  return entries.length > 0 ? entries : [{ value: 'default' }, { value: 'mondrian' }];
+}
+
+function assertCssBudgets(registry) {
+  return registry.flatMap((design) => {
+    if (!design.stylesheet || !design.cssBudgetKb) return [];
+    const builtPath = resolve('_site', design.stylesheet.replace(/^\/+/, ''));
+    if (!existsSync(builtPath)) return [`${design.value} CSS output missing at ${builtPath}`];
+    const sizeKb = statSync(builtPath).size / 1024;
+    if (sizeKb > design.cssBudgetKb) {
+      return [`${design.value} CSS is ${sizeKb.toFixed(1)}KB, above ${design.cssBudgetKb}KB budget`];
+    }
+    return [];
+  });
 }
 
 function normalizeUrl(path) {
@@ -218,6 +254,10 @@ function auditExpression(expectedStyle, path) {
       const supports = (root, style) => (root.dataset.designRoot || '').split(/\\s+/).includes(style);
       const activeRoots = roots.filter((item) => supports(item, '${expectedStyle}'));
       const inactiveLeaks = roots.filter((item) => !supports(item, '${expectedStyle}') && getComputedStyle(item).display !== 'none' && item.getAttribute('aria-hidden') !== 'true');
+      const inactiveEagerImages = roots
+        .filter((item) => !supports(item, '${expectedStyle}'))
+        .flatMap((item) => Array.from(item.querySelectorAll('img[loading="eager"], img[fetchpriority="high"]')))
+        .length;
       const activeScoped = (selector) => activeRoots.flatMap((item) => Array.from(item.querySelectorAll(selector)));
       const defaultRoot = document.querySelector('[data-design-root="default"]');
       const mondrianRoot = document.querySelector('[data-design-root="mondrian"]');
@@ -225,6 +265,25 @@ function auditExpression(expectedStyle, path) {
       const mondrianH1 = normalize(mondrianRoot?.querySelector('h1')?.textContent);
       const defaultHeroButtons = Array.from(defaultRoot?.querySelectorAll('.hero__actions a') || []).map((item) => normalize(item.textContent));
       const mondrianHeroButtons = Array.from(mondrianRoot?.querySelectorAll('.mond-tile--actions a') || []).map((item) => normalize(item.textContent));
+      const textList = (root, selector) => Array.from(root?.querySelectorAll(selector) || [])
+        .map((item) => normalize(item.textContent))
+        .filter(Boolean);
+      const uniqueList = (items) => Array.from(new Set(items));
+      const hrefList = (root) => uniqueList(Array.from(root?.querySelectorAll('a[href]') || [])
+        .map((item) => item.getAttribute('href'))
+        .filter((href) => href && (/^(mailto:|tel:)/.test(href) || href.includes('github.com') || href.includes('linkedin.com')))
+        .sort());
+      const sameList = (left, right) => left.length === 0 || right.length === 0 || left.join('|') === right.join('|');
+      const defaultProjectTitles = textList(defaultRoot, '.project-feature h2');
+      const mondrianProjectTitles = textList(mondrianRoot, '.proj-tile--head h2');
+      const defaultCvExperience = uniqueList(textList(defaultRoot, '[data-cv-entry^="experience:"] h3'));
+      const mondrianCvExperience = uniqueList(textList(mondrianRoot, 'header[data-cv-entry^="experience:"] h3'));
+      const defaultCvEducation = uniqueList(textList(defaultRoot, '[data-cv-entry^="education:"] h3'));
+      const mondrianCvEducation = uniqueList(textList(mondrianRoot, 'header[data-cv-entry^="education:"] h3'));
+      const defaultCvPublications = textList(defaultRoot, '.publication-card h3');
+      const mondrianCvPublications = textList(mondrianRoot, '.cv-pub-card h3');
+      const defaultContactLinks = hrefList(defaultRoot);
+      const mondrianContactLinks = hrefList(mondrianRoot);
       const carousel = activeScoped('[data-carousel]')[0];
       const visibleImages = activeScoped('img').filter((img) => img.offsetParent !== null);
       const imagesMissingDimensions = visibleImages.filter((img) => !img.getAttribute('width') || !img.getAttribute('height')).length;
@@ -271,6 +330,7 @@ function auditExpression(expectedStyle, path) {
         themeChoice: html.getAttribute('data-theme-choice'),
         activeRootCount: activeRoots.length,
         inactiveLeakCount: inactiveLeaks.length,
+        inactiveEagerImages,
         overflow: Math.max(0, docWidth - window.innerWidth),
         imagesMissingDimensions,
         responsiveImagesMissingSizes,
@@ -280,8 +340,23 @@ function auditExpression(expectedStyle, path) {
         parity: {
           h1Matches: !defaultH1 || !mondrianH1 || defaultH1 === mondrianH1,
           heroButtonsMatch: defaultHeroButtons.length === 0 || mondrianHeroButtons.length === 0 || defaultHeroButtons.join('|') === mondrianHeroButtons.join('|'),
+          projectTitlesMatch: sameList(defaultProjectTitles, mondrianProjectTitles),
+          cvExperienceMatch: sameList(defaultCvExperience, mondrianCvExperience),
+          cvEducationMatch: sameList(defaultCvEducation, mondrianCvEducation),
+          cvPublicationsMatch: sameList(defaultCvPublications, mondrianCvPublications),
+          contactLinksMatch: sameList(defaultContactLinks, mondrianContactLinks),
           defaultH1,
-          mondrianH1
+          mondrianH1,
+          defaultProjectTitles,
+          mondrianProjectTitles,
+          defaultCvExperience,
+          mondrianCvExperience,
+          defaultCvEducation,
+          mondrianCvEducation,
+          defaultCvPublications,
+          mondrianCvPublications,
+          defaultContactLinks,
+          mondrianContactLinks
         },
         contact: location.hash !== '#contact' || !target ? null : (() => {
           const top = target.getBoundingClientRect().top;
@@ -365,6 +440,7 @@ function assertResult(result) {
   if (result.themeChoice !== result.theme) failures.push(`theme mismatch ${result.themeChoice}`);
   if (result.activeRootCount < 1) failures.push('missing active design root');
   if (result.inactiveLeakCount > 0) failures.push('inactive design roots visible/accessibility-leaking');
+  if (result.inactiveEagerImages > 0) failures.push(`${result.inactiveEagerImages} inactive design image(s) are eager/high priority`);
   if (result.overflow > 2) failures.push(`horizontal overflow ${result.overflow}px`);
   if (result.imagesMissingDimensions > 0) failures.push(`${result.imagesMissingDimensions} visible image(s) missing dimensions`);
   if (result.responsiveImagesMissingSizes > 0) failures.push(`${result.responsiveImagesMissingSizes} responsive image candidate(s) missing sizes`);
@@ -373,6 +449,11 @@ function assertResult(result) {
   if (result.cvPhotoImageMismatch) failures.push('Mondrian CV tablet photo image does not fill tile');
   if (!result.parity.h1Matches) failures.push(`H1 parity mismatch: "${result.parity.defaultH1}" vs "${result.parity.mondrianH1}"`);
   if (!result.parity.heroButtonsMatch) failures.push('home hero button parity mismatch');
+  if (!result.parity.projectTitlesMatch) failures.push('project title parity mismatch');
+  if (!result.parity.cvExperienceMatch) failures.push('CV experience parity mismatch');
+  if (!result.parity.cvEducationMatch) failures.push('CV education parity mismatch');
+  if (!result.parity.cvPublicationsMatch) failures.push('CV publication parity mismatch');
+  if (!result.parity.contactLinksMatch) failures.push('contact link parity mismatch');
   if (result.contact && !result.contact.ok) failures.push(`contact hash landed at ${result.contact.top}px`);
   if (result.carousel) {
     if (result.carousel.beforeIndex !== '1') failures.push('carousel did not start on slide 1');
@@ -459,9 +540,15 @@ async function main() {
     }
     process.stdout.write('\n');
 
+    const cssBudgetFailures = assertCssBudgets(designRegistry);
+    if (cssBudgetFailures.length > 0) {
+      failures.push({ testCase: { path: 'assets/css', style: 'all', theme: 'all', width: 0 }, failures: cssBudgetFailures });
+    }
+
     const report = {
       baseUrl,
       generatedAt: new Date().toISOString(),
+      designs: designRegistry,
       results,
       failures
     };
