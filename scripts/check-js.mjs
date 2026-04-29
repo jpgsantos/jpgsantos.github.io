@@ -20,3 +20,12 @@ for (const file of ['scripts/audit-site.mjs']) {
   }
   console.log(`syntax ok: ${file}`);
 }
+
+for (const file of ['assets/css/main.scss', 'assets/css/mondrian.scss']) {
+  const source = readFileSync(file, 'utf8');
+  if (/@use\s+["']/.test(source)) {
+    console.error(`GitHub Pages Sass does not compile @use in ${file}; use @import for asset entrypoints.`);
+    process.exit(1);
+  }
+  console.log(`sass entrypoint ok: ${file}`);
+}
