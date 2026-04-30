@@ -29,6 +29,9 @@
 
   let contactScrollFrame = 0;
   let resizeFrame = 0;
+  let headerHeight = 76;
+  let hasScrolled = false;
+  let scrollButtonVisible = false;
 
   function readPreference(key, fallback) {
     try {
@@ -138,15 +141,39 @@
     return designRootSupports(designRoot, root.getAttribute('data-style') || 'default');
   }
 
-  function setHeaderOffset() {
-    if (!header) return;
-    root.style.setProperty('--header-height', `${header.offsetHeight}px`);
+  function setHeaderHeight(height) {
+    const nextHeight = Math.ceil(height);
+    if (!nextHeight || nextHeight === headerHeight) return;
+    headerHeight = nextHeight;
+    root.style.setProperty('--header-height', `${headerHeight}px`);
   }
 
-  function scheduleHeaderOffset() {
+  function measureHeaderOffset() {
+    if (!header) return;
+    setHeaderHeight(header.getBoundingClientRect().height);
+  }
+
+  function initHeaderOffset() {
+    if (!header) return;
+
+    if ('ResizeObserver' in window) {
+      const observer = new ResizeObserver((entries) => {
+        const entry = entries[0];
+        const borderBox = entry && entry.borderBoxSize;
+        const size = Array.isArray(borderBox) ? borderBox[0] : borderBox;
+        const observedHeight = size && size.blockSize ? size.blockSize : entry.contentRect.height;
+        setHeaderHeight(observedHeight);
+      });
+      observer.observe(header);
+      return;
+    }
+
+    window.addEventListener('load', measureHeaderOffset, { once: true });
+  }
+
+  function scheduleContactScroll() {
     if (resizeFrame) return;
     resizeFrame = window.requestAnimationFrame(() => {
-      setHeaderOffset();
       scrollToContactHash('auto');
       resizeFrame = 0;
     });
@@ -166,8 +193,7 @@
     window.cancelAnimationFrame(contactScrollFrame);
     contactScrollFrame = window.requestAnimationFrame(() => {
       contactScrollFrame = window.requestAnimationFrame(() => {
-        const headerOffset = header ? header.offsetHeight : 0;
-        const targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset - 16;
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
         window.scrollTo({
           top: Math.max(0, targetTop),
           behavior: reduceMotion ? 'auto' : (behavior || 'auto')
@@ -230,10 +256,19 @@
   }
 
   function handleScroll() {
-    body.classList.toggle('has-scrolled', window.scrollY > 18);
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+    const nextHasScrolled = scrollTop > 18;
+    if (nextHasScrolled !== hasScrolled) {
+      body.classList.toggle('has-scrolled', nextHasScrolled);
+      hasScrolled = nextHasScrolled;
+    }
 
     if (scrollButton) {
-      scrollButton.classList.toggle('is-visible', window.scrollY > 500);
+      const nextScrollButtonVisible = scrollTop > 500;
+      if (nextScrollButtonVisible !== scrollButtonVisible) {
+        scrollButton.classList.toggle('is-visible', nextScrollButtonVisible);
+        scrollButtonVisible = nextScrollButtonVisible;
+      }
     }
   }
 
@@ -445,7 +480,7 @@
     ticking = true;
   }, { passive: true });
 
-  window.addEventListener('resize', scheduleHeaderOffset);
+  window.addEventListener('resize', scheduleContactScroll);
   window.addEventListener('hashchange', () => scrollToContactHash(reduceMotion ? 'auto' : 'smooth'));
   window.addEventListener('load', () => scrollToContactHash('auto'));
   if (document.fonts && document.fonts.ready) {
@@ -456,7 +491,7 @@
   initScrollToTop();
   initCarousels();
   initReveals();
-  setHeaderOffset();
+  initHeaderOffset();
   handleScroll();
   scrollToContactHash('auto');
 })();
