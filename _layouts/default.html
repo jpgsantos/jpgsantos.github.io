@@ -3,16 +3,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    {% if jekyll.environment == "production" %}
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2G376VMXHB"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-2G376VMXHB');
-    </script>
-    {% endif %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
@@ -36,9 +26,11 @@
         } catch (e) {}
       })();
     </script>
+    {% capture font_stylesheet %}https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=optional{% endcapture %}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="{{ font_stylesheet }}" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ font_stylesheet }}"></noscript>
     {% if site.github.build_revision %}
       {% assign asset_version = site.github.build_revision %}
     {% else %}
@@ -247,7 +239,84 @@
     </script>
     <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ asset_version }}" defer></script>
     {% if page.url == "/" %}
-    <script src="{{ '/assets/js/neural-network.js' | relative_url }}?v={{ asset_version }}" defer></script>
+    <script>
+      (function() {
+        var loaded = false;
+        function loadNeuralCanvas() {
+          if (loaded) return;
+          loaded = true;
+          var script = document.createElement('script');
+          script.src = "{{ '/assets/js/neural-network.js' | relative_url }}?v={{ asset_version }}";
+          script.defer = true;
+          document.body.appendChild(script);
+        }
+        function scheduleNeuralCanvas() {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadNeuralCanvas, { timeout: 1800 });
+          } else {
+            window.setTimeout(loadNeuralCanvas, 700);
+          }
+        }
+        if (document.readyState === 'complete') {
+          scheduleNeuralCanvas();
+        } else {
+          window.addEventListener('load', scheduleNeuralCanvas, { once: true });
+        }
+      })();
+    </script>
+    {% endif %}
+    {% if jekyll.environment == "production" %}
+    <script>
+      (function() {
+        var loaded = false;
+        var analyticsId = 'G-2G376VMXHB';
+        var interactionEvents = ['pointerdown', 'keydown', 'touchstart'];
+
+        function removeInteractionListeners() {
+          interactionEvents.forEach(function(eventName) {
+            window.removeEventListener(eventName, loadAnalytics);
+          });
+        }
+
+        function loadAnalytics() {
+          if (loaded) return;
+          loaded = true;
+          removeInteractionListeners();
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = window.gtag || function() {
+            window.dataLayer.push(arguments);
+          };
+          window.gtag('js', new Date());
+          window.gtag('config', analyticsId, { transport_type: 'beacon' });
+
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=' + analyticsId;
+          document.head.appendChild(script);
+        }
+
+        function scheduleAnalytics() {
+          var startDelay = function() {
+            window.setTimeout(loadAnalytics, 3200);
+          };
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(startDelay, { timeout: 5000 });
+          } else {
+            startDelay();
+          }
+        }
+
+        interactionEvents.forEach(function(eventName) {
+          window.addEventListener(eventName, loadAnalytics, { once: true, passive: true });
+        });
+
+        if (document.readyState === 'complete') {
+          scheduleAnalytics();
+        } else {
+          window.addEventListener('load', scheduleAnalytics, { once: true });
+        }
+      })();
+    </script>
     {% endif %}
   </body>
 </html>

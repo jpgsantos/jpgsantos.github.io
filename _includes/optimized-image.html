@@ -1,16 +1,18 @@
 {% assign optimized_sizes = include.sizes | default: '100vw' %}
+{% assign optimized_webp_srcset = include.webp_srcset | default: '' | strip %}
+{% assign optimized_fallback_srcset = include.fallback_srcset | default: '' | strip %}
 <picture class="{{ include.picture_class | default: 'optimized-picture' }}">
-  {% if include.webp_srcset %}
+  {% if optimized_webp_srcset != '' %}
   <source
-    srcset="{{ include.webp_srcset }}"
+    srcset="{{ optimized_webp_srcset }}"
     sizes="{{ optimized_sizes }}"
     type="image/webp"
   >
   {% endif %}
   <img
     src="{{ include.src | relative_url }}"
-    {% if include.fallback_srcset %}srcset="{{ include.fallback_srcset }}"{% endif %}
-    {% if include.fallback_srcset or include.sizes %}sizes="{{ optimized_sizes }}"{% endif %}
+    {% if optimized_fallback_srcset != '' %}srcset="{{ optimized_fallback_srcset }}"{% endif %}
+    {% if optimized_fallback_srcset != '' or include.sizes %}sizes="{{ optimized_sizes }}"{% endif %}
     alt="{{ include.alt | escape }}"
     {% if include.img_class %}class="{{ include.img_class }}"{% endif %}
     loading="{{ include.loading | default: 'lazy' }}"

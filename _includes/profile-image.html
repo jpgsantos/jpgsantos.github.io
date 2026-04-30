@@ -1,11 +1,18 @@
 {% assign profile = site.data.profile %}
 {% assign profile_alt = include.alt | default: profile.name %}
 {% assign profile_sizes = include.sizes | default: '220px' %}
+{% if include.variant == 'avatar' %}
+  {% assign profile_src = '/assets/images/Profile-thumb.jpg' %}
+  {% assign profile_webp_srcset = '' %}
+  {% assign profile_fallback_srcset = '' %}
+{% else %}
 {% capture profile_webp_srcset %}{{ '/assets/images/profile-320.webp' | relative_url }} 320w, {{ '/assets/images/profile-640.webp' | relative_url }} 640w{% endcapture %}
 {% capture profile_fallback_srcset %}{{ '/assets/images/profile-320.jpg' | relative_url }} 320w, {{ '/assets/images/profile-640.jpg' | relative_url }} 640w{% endcapture %}
+  {% assign profile_src = '/assets/images/profile-320.jpg' %}
+{% endif %}
 {% include optimized-image.html
   picture_class="profile-picture"
-  src="/assets/images/profile-320.jpg"
+  src=profile_src
   webp_srcset=profile_webp_srcset
   fallback_srcset=profile_fallback_srcset
   sizes=profile_sizes
