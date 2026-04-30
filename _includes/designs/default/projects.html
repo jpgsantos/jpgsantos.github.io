@@ -30,8 +30,8 @@
       <p class="eyebrow">{{ item.eyebrow }}</p>
       <h2 data-content-list="project-titles" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">{{ item.title }}</h2>
       <p data-content-list="project-descriptions" data-content-key="{{ item.slug }}" data-content-value="{{ item.description | strip_html | normalize_whitespace }}">{{ item.description }}</p>
-      {% include project-summary-grid.html item=item %}
-      {% include project-highlights.html item=item limit=item.highlights.size %}
+      {% include designs/default/partials/project-summary-grid.html item=item %}
+      {% include designs/default/partials/project-highlights.html item=item limit=item.highlights.size %}
       {% include chip-list.html class="tag-list" items=item.stack %}
       {% include action-links.html links=item.links parity_list="project-actions" %}
     </div>
@@ -87,24 +87,7 @@
     </div>
     {% else %}
     <div class="project-feature__media project-feature__media--research">
-      <div class="research-visual" role="img" aria-label="Porphyrin synthesis and spectroscopy analysis workflow">
-        <div class="research-visual__molecule" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <div class="research-visual__panel">
-          <p class="eyebrow">Materials workflow</p>
-          <strong>Ionic self-assembly</strong>
-          <span>Synthesis, purification, spectroscopy, and quantitative signal analysis.</span>
-        </div>
-        <div class="spectrum-mini" aria-hidden="true">
-          <span style="height: 28%"></span>
-          <span style="height: 72%"></span>
-          <span style="height: 46%"></span>
-          <span style="height: 88%"></span>
-          <span style="height: 36%"></span>
-          <span style="height: 58%"></span>
-        </div>
-      </div>
+      {% include porphyrin-paper-visual.html variant="default" %}
     </div>
     {% endif %}
   </article>

@@ -1,6 +1,6 @@
 /* ==========================================================================
    Mondrian style legacy layer
-   Mondrian style — alternative visual system
+   Mondrian style - alternative visual system
    Activated by <html data-style="mondrian">.
    Default style is unaffected when data-style="default" (or absent).
    ========================================================================== */
@@ -24,7 +24,7 @@
 [data-style="mondrian"] .default-only { display: none; }
 
 /* ==========================================================================
-   MONDRIAN STYLE — site-wide
+   MONDRIAN STYLE - site-wide
    ========================================================================== */
 
 [data-style="mondrian"] {
@@ -41,9 +41,6 @@
   --mond-text-soft: #4a4540;
   --mond-shadow: 0 0 0 4px var(--mond-ink);
 
-  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
-  --font-display: "Playfair Display", Georgia, serif;
 }
 
 [data-style="mondrian"][data-theme="dark"] {
@@ -134,7 +131,7 @@
   background: var(--mond-paper);
   color: var(--mond-text);
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -159,7 +156,7 @@
 [data-style="mondrian"] .style-button {
   color: var(--mond-text);
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -191,7 +188,7 @@
 }
 
 /* ==========================================================================
-   HOME PAGE — Mondrian mosaic
+   HOME PAGE - Mondrian mosaic
    ========================================================================== */
 
 [data-style="mondrian"] .home-mondrian {
@@ -262,7 +259,7 @@
 /* Eyebrow / labels */
 .mond-eyebrow {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--mond-text-soft);
@@ -298,7 +295,7 @@
 .mond-tile--swatch-blue { grid-column: 10 / span 3; grid-row: 5 / span 1; }
 .mond-tile--proofs      { grid-column: 10 / span 3; grid-row: 5 / span 1; }
 
-/* Strip section (row 6) — three colour strips spanning the full 12-col row */
+/* Strip section (row 6) - three colour strips spanning the full 12-col row */
 .mond-tile--strip-r     { grid-column: 1 / span 4;  grid-row: 6 / span 1; }
 .mond-tile--strip-b     { grid-column: 5 / span 4;  grid-row: 6 / span 1; }
 .mond-tile--strip-y     { grid-column: 9 / span 4;  grid-row: 6 / span 1; }
@@ -310,7 +307,7 @@
 .mond-tile--about-p2     { grid-column: 10 / span 3; grid-row: 8 / span 1; border-top: 6px solid var(--mond-blue); }
 .mond-tile--about-p3     { grid-column: 7 / span 6;  grid-row: 9 / span 1; border-top: 6px solid var(--mond-yellow); }
 
-/* Expertise flatten — head + body + chips per item */
+/* Expertise flatten - head + body + chips per item */
 .mond-tile--exp-head    { grid-column: 1 / span 12; grid-row: 10 / span 1; }
 .mond-tile--exp-1-head  { grid-column: 1 / span 4;  grid-row: 11 / span 1; border-top: 6px solid var(--mond-red); }
 .mond-tile--exp-2-head  { grid-column: 5 / span 4;  grid-row: 11 / span 1; border-top: 6px solid var(--mond-blue); }
@@ -340,7 +337,7 @@
 .mond-hero__title {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-size: var(--t-xl);
   line-height: 0.98;
   margin: 0.4rem 0 1.2rem;
   letter-spacing: -0.02em;
@@ -350,14 +347,14 @@
 
 .home-mondrian .mond-tile--title .mond-hero__title {
   max-width: none;
-  font-size: clamp(2.75rem, 5.1vw, 4.55rem);
+  font-size: var(--t-xl);
 }
 
 .mond-hero__lede {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 500;
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-size: var(--t-md);
   line-height: 1.45;
   color: var(--mond-text-soft);
   margin: auto 0 0;
@@ -376,7 +373,7 @@
 
 /* --- Intro tile --- */
 .mond-intro__body {
-  font-size: 0.92rem;
+  font-size: var(--t-sm);
   line-height: 1.55;
   color: var(--mond-text);
   margin: 0;
@@ -409,7 +406,7 @@
 
 .mond-profile__name {
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+  font-size: var(--t-lg);
   margin: 0;
   line-height: 1.05;
   letter-spacing: -0.01em;
@@ -419,7 +416,7 @@
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  font-size: 0.72rem;
+  font-size: var(--t-xs);
   color: var(--mond-text-soft);
   margin: 0.45rem 0 0.65rem;
 }
@@ -443,7 +440,7 @@
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  font-size: 0.82rem;
+  font-size: var(--t-sm);
   color: var(--mond-text);
 }
 
@@ -491,7 +488,7 @@
 .mond-metrics__title {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.3rem, 2vw, 1.65rem);
+  font-size: var(--t-lg);
   line-height: 1.15;
   margin: 0.3rem 0 1rem;
 }
@@ -514,7 +511,7 @@
 
 .mond-metrics__grid strong {
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: var(--t-lg);
   line-height: 1;
   color: var(--mond-blue);
 }
@@ -524,7 +521,7 @@
 
 .mond-metrics__grid span {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--mond-text-soft);
@@ -540,7 +537,7 @@
 
 .mond-metrics__chips span {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--t-xs);
   padding: 3px 7px;
   border: 1.5px solid var(--mond-ink);
   background: var(--mond-paper);
@@ -601,7 +598,7 @@
 .mond-quote {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+  font-size: var(--t-md);
   margin: 0;
   color: var(--mond-text);
   line-height: 1.4;
@@ -617,7 +614,7 @@
 .mond-section-head h2 {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  font-size: var(--t-lg);
   margin: 0.3rem 0 0;
   line-height: 1.05;
   letter-spacing: -0.01em;
@@ -625,21 +622,21 @@
 .mond-section-head p {
   margin: 0;
   color: var(--mond-text-soft);
-  font-size: 0.95rem;
+  font-size: var(--t-sm);
   max-width: 50ch;
 }
 
 .mond-section-title {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: clamp(1.55rem, 2.3vw, 2.05rem);
+  font-size: var(--t-lg);
   line-height: 1.08;
   margin: 0.25rem 0 0;
 }
 
 .mond-section-lede {
   color: var(--mond-text-soft);
-  font-size: 0.95rem;
+  font-size: var(--t-sm);
   line-height: 1.5;
   margin: 0.75rem 0 0;
   max-width: 64ch;
@@ -654,7 +651,7 @@
 .mond-about-card p,
 .mond-work-card p {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: var(--t-sm);
   line-height: 1.55;
 }
 
@@ -667,7 +664,7 @@
 .mond-work-card h3,
 .mond-contact-card h3 {
   font-family: var(--font-display);
-  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  font-size: var(--t-md);
   line-height: 1.1;
   margin: 0;
 }
@@ -724,7 +721,7 @@
   grid-area: value;
   color: var(--mond-ink);
   font-family: var(--font-mono);
-  font-size: 0.92rem;
+  font-size: var(--t-sm);
   overflow-wrap: anywhere;
 }
 
@@ -754,7 +751,7 @@
 
 .mond-contact-card--compact strong {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--t-md);
   line-height: 1.1;
   color: var(--mond-text);
 }
@@ -780,19 +777,19 @@
 }
 .mond-exp__num {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.18em;
   color: var(--mond-text-soft);
 }
 .mond-exp h3 {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: var(--t-lg);
   margin: 0.4rem 0 0.2rem;
   line-height: 1.1;
 }
 .mond-exp p {
   margin: 0 0 0.6rem;
-  font-size: 0.9rem;
+  font-size: var(--t-sm);
   line-height: 1.55;
   color: var(--mond-text);
 }
@@ -804,7 +801,7 @@
 }
 .mond-exp__chips span {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--t-xs);
   padding: 2px 7px;
   border: 1.5px solid var(--mond-ink);
   letter-spacing: 0.04em;
@@ -823,7 +820,7 @@
 }
 .mond-feat h3 {
   font-family: var(--font-display);
-  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  font-size: var(--t-lg);
   margin: 0;
 }
 .mond-feat__list {
@@ -836,7 +833,7 @@
 .mond-feat__list li {
   display: flex;
   gap: 0.6rem;
-  font-size: 0.88rem;
+  font-size: var(--t-sm);
   line-height: 1.5;
 }
 .mond-feat__list .icon {
@@ -870,13 +867,13 @@
 }
 .mond-card h3 {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: var(--t-lg);
   margin: 0.3rem 0 0;
   line-height: 1.1;
 }
 .mond-card p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: var(--t-sm);
   line-height: 1.55;
 }
 .mond-card__head {
@@ -889,7 +886,7 @@
 .mond-card__head .icon { width: 22px; height: 22px; }
 .mond-card__num {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.18em;
   color: var(--mond-text-soft);
 }
@@ -900,7 +897,7 @@
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  font-size: 0.72rem;
+  font-size: var(--t-xs);
   color: var(--mond-ink);
   text-decoration: none;
   border-bottom: 2px solid var(--mond-yellow);
@@ -930,7 +927,7 @@
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  font-size: 0.78rem;
+  font-size: var(--t-xs);
   padding: 0.7rem 1rem;
   border: 2px solid var(--mond-ink);
   background: var(--mond-paper);
@@ -987,7 +984,7 @@
 [data-style="mondrian"][data-theme="dark"] .mond-button--yellow { background: var(--mond-yellow); color: var(--mond-on-yellow); }
 
 /* ==========================================================================
-   ABOUT PAGE — Mondrian mosaic
+   ABOUT PAGE - Mondrian mosaic
    ========================================================================== */
 
 [data-style="mondrian"] .about-mondrian {
@@ -1022,7 +1019,7 @@
 .about-tile--stat-3 { grid-column: 7 / span 3; grid-row: 5 / span 1; }
 .about-tile--stat-4 { grid-column: 10 / span 3; grid-row: 5 / span 1; }
 
-/* Row 6+: principles — flattened head + body per principle, varied widths */
+/* Row 6+: principles - flattened head + body per principle, varied widths */
 .about-tile--principles-head { grid-column: 1 / span 12; grid-row: 6 / span 1; }
 
 .about-tile--p1-head { grid-column: 1  / span 3; grid-row: 7 / span 1; border-top: 6px solid var(--mond-red); }
@@ -1042,10 +1039,10 @@
 .about-tile--tools-head { grid-column: 1 / span 12; grid-row: 10 / span 1; }
 .about-tile--tools      { grid-column: 1 / span 12; grid-row: 11 / span 1; padding: 0; }
 
-/* Roles grid — flattened: head + 5 item tiles per role, varied widths */
+/* Roles grid - flattened: head + 5 item tiles per role, varied widths */
 .about-tile--roles-head { grid-column: 1 / span 12; grid-row: 12 / span 1; }
 
-/* Role 1 — rows 13-14, anchor head + 5 items */
+/* Role 1 - rows 13-14, anchor head + 5 items */
 .about-tile--r1-head { grid-column: 1  / span 3; grid-row: 13 / span 2; border-top: 6px solid var(--mond-red); }
 .about-tile--r1-i1   { grid-column: 4  / span 5; grid-row: 13 / span 1; }
 .about-tile--r1-i2   { grid-column: 9  / span 4; grid-row: 13 / span 1; }
@@ -1053,7 +1050,7 @@
 .about-tile--r1-i4   { grid-column: 7  / span 3; grid-row: 14 / span 1; }
 .about-tile--r1-i5   { grid-column: 10 / span 3; grid-row: 14 / span 1; }
 
-/* Role 2 — rows 15-16 */
+/* Role 2 - rows 15-16 */
 .about-tile--r2-head { grid-column: 1  / span 3; grid-row: 15 / span 2; border-top: 6px solid var(--mond-yellow); }
 .about-tile--r2-i1   { grid-column: 4  / span 4; grid-row: 15 / span 1; }
 .about-tile--r2-i2   { grid-column: 8  / span 5; grid-row: 15 / span 1; }
@@ -1061,7 +1058,7 @@
 .about-tile--r2-i4   { grid-column: 8  / span 2; grid-row: 16 / span 1; }
 .about-tile--r2-i5   { grid-column: 10 / span 3; grid-row: 16 / span 1; }
 
-/* Role 3 — rows 17-18 */
+/* Role 3 - rows 17-18 */
 .about-tile--r3-head { grid-column: 1  / span 3; grid-row: 17 / span 2; border-top: 6px solid var(--mond-blue); }
 .about-tile--r3-i1   { grid-column: 4  / span 6; grid-row: 17 / span 1; }
 .about-tile--r3-i2   { grid-column: 10 / span 3; grid-row: 17 / span 1; }
@@ -1069,7 +1066,7 @@
 .about-tile--r3-i4   { grid-column: 7  / span 3; grid-row: 18 / span 1; }
 .about-tile--r3-i5   { grid-column: 10 / span 3; grid-row: 18 / span 1; }
 
-/* Role 4 — rows 19-20, only 4 items */
+/* Role 4 - rows 19-20, only 4 items */
 .about-tile--r4-head { grid-column: 1  / span 3; grid-row: 19 / span 2; border-top: 6px solid var(--mond-ink); }
 .about-tile--r4-i1   { grid-column: 4  / span 5; grid-row: 19 / span 1; }
 .about-tile--r4-i2   { grid-column: 9  / span 4; grid-row: 19 / span 1; }
@@ -1094,7 +1091,7 @@
 .about-stat__num {
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(2.6rem, 4.4vw, 3.6rem);
+  font-size: var(--t-xl);
   margin: 0;
   line-height: 1;
   color: inherit;
@@ -1110,7 +1107,7 @@
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  font-size: 0.74rem;
+  font-size: var(--t-xs);
   margin: 0.5rem 0 0;
   font-weight: 500;
 }
@@ -1128,7 +1125,7 @@
 }
 .about-tags span {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: var(--t-sm);
   font-weight: 500;
   padding: 0.95rem 0.8rem;
   display: flex;
@@ -1163,7 +1160,7 @@
 .about-list li {
   position: relative;
   padding-left: 1.1rem;
-  font-size: 0.9rem;
+  font-size: var(--t-sm);
   line-height: 1.5;
 }
 .about-list li::before {
@@ -1181,7 +1178,7 @@
 .about-tile--role-3 .about-list li::before { background: var(--mond-blue); }
 .about-tile--role-4 .about-list li::before { background: var(--mond-paper); }
 
-/* Flattened role tiles — each item is a direct grid child */
+/* Flattened role tiles - each item is a direct grid child */
 .about-role-head {
   display: flex;
   flex-direction: column;
@@ -1203,13 +1200,13 @@
 [data-style="mondrian"][data-theme="dark"] .about-role-head__icon { background: var(--mond-paper); }
 .about-role-head .mond-card__num {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 .about-role-head h3 {
   font-family: var(--font-display);
-  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  font-size: var(--t-md);
   margin: 0;
   line-height: 1.1;
 }
@@ -1218,7 +1215,7 @@
   display: flex;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: var(--t-sm);
   letter-spacing: 0.02em;
   line-height: 1.35;
   padding: 0.85rem 1rem;
@@ -1227,7 +1224,7 @@
 .about-role-item.mond-tile--red,
 .about-role-item.mond-tile--blue { font-weight: 600; }
 
-/* Flattened principle tiles — head (icon+num+title) + body (description) */
+/* Flattened principle tiles - head (icon+num+title) + body (description) */
 .about-prin-head {
   display: grid;
   grid-template-columns: 38px 1fr;
@@ -1252,7 +1249,7 @@
 .about-prin-head__icon svg { width: 20px; height: 20px; }
 .about-prin-head__num {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--mond-ink-muted, var(--mond-ink));
@@ -1261,7 +1258,7 @@
 .about-prin-head h3 {
   grid-column: 2;
   font-family: var(--font-display);
-  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  font-size: var(--t-md);
   margin: 0;
   line-height: 1.1;
 }
@@ -1272,7 +1269,7 @@
 }
 .about-prin-body p {
   margin: 0;
-  font-size: 0.88rem;
+  font-size: var(--t-sm);
   line-height: 1.5;
 }
 
@@ -1299,7 +1296,7 @@
 }
 .mond-name {
   font-family: var(--font-display);
-  font-size: clamp(1.2rem, 1.9vw, 1.55rem);
+  font-size: var(--t-lg);
   margin: 0;
   line-height: 1.05;
   letter-spacing: -0.01em;
@@ -1308,7 +1305,7 @@
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  font-size: 0.7rem;
+  font-size: var(--t-xs);
   color: var(--mond-text-soft);
   margin: 0.5rem 0 0;
 }
@@ -1325,13 +1322,13 @@
 .mond-tile--m1 strong, .mond-tile--m2 strong,
 .mond-tile--m3 strong, .mond-tile--m4 strong {
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 2.8vw, 2.3rem);
+  font-size: var(--t-lg);
   line-height: 1;
 }
 .mond-tile--m1 span, .mond-tile--m2 span,
 .mond-tile--m3 span, .mond-tile--m4 span {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.13em;
   text-transform: uppercase;
   line-height: 1.3;
@@ -1353,7 +1350,7 @@
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  font-size: 0.78rem;
+  font-size: var(--t-xs);
   color: var(--mond-text);
   line-height: 1.3;
 }
@@ -1389,7 +1386,7 @@
   color: var(--mond-paper);
 }
 
-/* Chips strip — internal Mondrian sub-grid filling the tile edge to edge */
+/* Chips strip - internal Mondrian sub-grid filling the tile edge to edge */
 .mond-tile--chips {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1400,7 +1397,7 @@
 }
 .mond-tile--chips span {
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: var(--t-sm);
   font-weight: 500;
   padding: 0.7rem 0.6rem;
   display: flex;
@@ -1436,7 +1433,7 @@
   align-content: center;
   min-height: 0;
   padding: clamp(0.55rem, 1.1vw, 0.8rem) clamp(0.65rem, 1.2vw, 0.95rem);
-  font-size: 0.78rem;
+  font-size: var(--t-xs);
   line-height: 1.35;
   color: var(--mond-text);
 }
@@ -1453,7 +1450,7 @@
 .mond-tile--proofs strong {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   margin-bottom: 0.15rem;
@@ -1487,7 +1484,7 @@
 .mond-exp-head__icon svg { width: 20px; height: 20px; }
 .mond-exp-head__num {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.65;
@@ -1495,7 +1492,7 @@
 .mond-exp-head h3 {
   grid-column: 2;
   font-family: var(--font-display);
-  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-size: var(--t-md);
   margin: 0;
   line-height: 1.1;
 }
@@ -1506,7 +1503,7 @@
 }
 .mond-exp-body p {
   margin: 0;
-  font-size: 0.88rem;
+  font-size: var(--t-sm);
   line-height: 1.5;
 }
 .mond-exp-chips {
@@ -1519,7 +1516,7 @@
 }
 .mond-exp-chips span {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: var(--t-xs);
   font-weight: 500;
   padding: 0.6rem 0.5rem;
   display: flex;
@@ -1549,7 +1546,7 @@
 }
 .mond-tile--feat-intro p {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: var(--t-sm);
   line-height: 1.55;
 }
 .mond-feat-item {
@@ -1557,7 +1554,7 @@
   align-items: center;
   gap: 0.6rem;
   padding: 0.85rem 1rem;
-  font-size: 0.85rem;
+  font-size: var(--t-sm);
   line-height: 1.4;
 }
 .mond-feat-item .icon {
@@ -1596,7 +1593,7 @@
 .mond-dir-head__icon svg { width: 20px; height: 20px; }
 .mond-dir-head__num {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   opacity: 0.65;
@@ -1604,7 +1601,7 @@
 .mond-dir-head h3 {
   grid-column: 2;
   font-family: var(--font-display);
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  font-size: var(--t-md);
   margin: 0;
   line-height: 1.1;
 }
@@ -1615,7 +1612,7 @@
 }
 .mond-dir-body p {
   margin: 0;
-  font-size: 0.88rem;
+  font-size: var(--t-sm);
   line-height: 1.5;
 }
 .mond-dir-link {
@@ -1625,7 +1622,7 @@
 }
 .mond-dir-link .mond-card__link {
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--mond-ink);
@@ -1654,7 +1651,7 @@
   grid-column: 6 / span 7;
   grid-row: var(--tl-row);
   padding: 1rem 1.1rem;
-  font-size: 0.88rem;
+  font-size: var(--t-sm);
   line-height: 1.55;
 }
 .about-timeline-body.tl-right {
@@ -1682,7 +1679,7 @@
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  font-size: 0.72rem;
+  font-size: var(--t-xs);
   font-weight: 600;
   color: var(--mond-ink);
   list-style: none;
@@ -1700,13 +1697,13 @@
   width: 16px;
   height: 16px;
   border: 1.5px solid var(--mond-ink);
-  font-size: 0.9rem;
+  font-size: var(--t-sm);
   line-height: 1;
   font-weight: 700;
   flex: 0 0 16px;
 }
 [data-style="mondrian"] .about-timeline-body .coursework-details[open] summary::before {
-  content: "−";
+  content: "-";
   background: var(--mond-yellow);
 }
 [data-style="mondrian"] .about-timeline-body .coursework-terms {
@@ -1715,7 +1712,7 @@
 }
 [data-style="mondrian"] .about-timeline-body .coursework-terms h4 {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: var(--t-sm);
   margin: 0 0 0.35rem;
   padding-bottom: 0.25rem;
   border-bottom: 1px solid var(--mond-ink);
@@ -1743,13 +1740,13 @@
 }
 .about-timeline-head__meta h3 {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--t-md);
   margin: 0.15rem 0;
   line-height: 1.15;
 }
 .about-timeline-head__meta .about-timeline__inst {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.06em;
   color: var(--mond-text-soft);
   margin: 0;
@@ -1758,7 +1755,7 @@
 /* Story prose */
 .about-tile--story-1 p,
 .about-tile--story-2 p {
-  font-size: 0.92rem;
+  font-size: var(--t-sm);
   line-height: 1.65;
   margin: 0 0 0.7rem;
 }
@@ -1788,14 +1785,14 @@
 }
 .about-timeline__inst {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: var(--t-sm);
   letter-spacing: 0.05em;
   color: var(--mond-text-soft);
   margin: 0;
 }
 .about-timeline__num {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.18em;
   color: var(--mond-text-soft);
   align-self: center;
@@ -2104,7 +2101,7 @@
   border: 2px solid var(--mond-ink);
   background: var(--mond-ink);
   color: var(--mond-paper);
-  font-size: 0.78rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.04em;
 }
 
@@ -2181,7 +2178,7 @@
 [data-style="mondrian"] .case-hero h1 {
   max-width: 17ch;
   color: var(--mond-text);
-  font-size: clamp(2.9rem, 4.3vw, 4.35rem);
+  font-size: var(--t-xl);
   line-height: 1;
 }
 
@@ -2264,7 +2261,7 @@
 }
 
 [data-style="mondrian"] .profile-console h2 {
-  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  font-size: var(--t-lg);
 }
 
 [data-style="mondrian"] .metric-grid div,
@@ -2313,7 +2310,7 @@
 [data-style="mondrian"] .stat-band strong {
   color: var(--mond-text);
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  font-size: var(--t-lg);
 }
 
 [data-style="mondrian"] .signal-list {
@@ -2377,7 +2374,7 @@
 
 [data-style="mondrian"] .section-intro h2 {
   margin: 0;
-  font-size: clamp(2rem, 3.8vw, 3.1rem);
+  font-size: var(--t-xl);
   line-height: 1;
 }
 
@@ -2565,7 +2562,7 @@
   [data-style="mondrian"] .page-hero h1,
   [data-style="mondrian"] .cv-hero h1,
   [data-style="mondrian"] .case-hero h1 {
-    font-size: clamp(2.4rem, 12vw, 3.4rem);
+    font-size: var(--t-xl);
   }
 }
 
@@ -2630,7 +2627,7 @@
   max-width: 22ch;
   margin: 0;
   padding: 0 clamp(1.4rem, 4vw, 3rem) clamp(1.6rem, 4vw, 3rem);
-  font-size: clamp(2.75rem, 4.2vw, 4rem);
+  font-size: var(--t-xl);
 }
 
 [data-style="mondrian"] body[data-page="work"] .page-hero > p:not(.eyebrow) {
@@ -2691,7 +2688,7 @@
 
 [data-style="mondrian"] body[data-page="work"] .project-feature h2 {
   max-width: 12ch;
-  font-size: clamp(2.4rem, 4vw, 4rem);
+  font-size: var(--t-xl);
   line-height: 0.98;
 }
 
@@ -2893,7 +2890,7 @@
 
 [data-style="mondrian"] body[data-page="cv"] .section-intro--left h2 {
   max-width: 14ch;
-  font-size: clamp(2.35rem, 4vw, 3.45rem);
+  font-size: var(--t-xl);
   overflow-wrap: normal;
   word-break: normal;
 }
@@ -3017,7 +3014,7 @@
 
   [data-style="mondrian"] body[data-page="work"] .page-hero h1 {
     max-width: 11ch;
-    font-size: clamp(2.45rem, 12vw, 3.6rem);
+    font-size: var(--t-xl);
   }
 
   [data-style="mondrian"] body[data-page="work"] .work-summary-grid,
@@ -3036,7 +3033,7 @@
 }
 
 /* ==========================================================================
-   Mondrian rhythm — home selected work, toolkit, contact, CV body
+   Mondrian rhythm - home selected work, toolkit, contact, CV body
    ========================================================================== */
 
 /* Drop the section padding so internal grids can run edge-to-edge */
@@ -3138,7 +3135,7 @@
   background: transparent;
   font-family: var(--font-mono);
   font-weight: 500;
-  font-size: 0.8rem;
+  font-size: var(--t-sm);
   letter-spacing: 0.04em;
   border: 0;
   box-shadow:
@@ -3284,7 +3281,7 @@
   border-bottom: 0;
 }
 
-/* CV publication entries — keep the year tile coloured */
+/* CV publication entries - keep the year tile coloured */
 [data-style="mondrian"] body[data-page="cv"] .publication-card .publication-card__year {
   background: var(--mond-red);
   color: #fff;
@@ -3314,7 +3311,7 @@
 }
 
 /* ==========================================================================
-   PROJECTS / WORK PAGE — Mondrian mosaic
+   PROJECTS / WORK PAGE - Mondrian mosaic
    ========================================================================== */
 
 .projects-mondrian,
@@ -3347,7 +3344,7 @@
   padding: 0;
   display: grid;
   gap: 0.3rem;
-  font-size: 0.84rem;
+  font-size: var(--t-sm);
   font-family: var(--font-mono);
 }
 .proj-index li { display: flex; gap: 0.6rem; }
@@ -3379,14 +3376,14 @@
 
 .proj-index a small {
   color: var(--mond-text-soft);
-  font-size: 0.68rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
 /* --- Per-project block (each occupies ~6 rows, total 5 rows of CSS) ----- */
 
-/* Project 1 — rows 3-8 */
+/* Project 1 - rows 3-8 */
 .proj-tile--head-1      { grid-column: 1 / span 12; grid-row: 3 / span 1; border-top: 8px solid var(--mond-red); }
 .proj-pco-1-p           { grid-column: 1 / span 4;  grid-row: 4 / span 1; }
 .proj-pco-1-c           { grid-column: 5 / span 4;  grid-row: 4 / span 1; }
@@ -3399,7 +3396,7 @@
 .proj-stack-1           { grid-column: 1 / span 8;  grid-row: 7 / span 1; }
 .proj-actions-1         { grid-column: 9 / span 4;  grid-row: 7 / span 1; }
 
-/* Project 2 — rows 8-13 (alternate side: visual on left) */
+/* Project 2 - rows 8-13 (alternate side: visual on left) */
 .proj-tile--head-2      { grid-column: 1 / span 12; grid-row: 8 / span 1; border-top: 8px solid var(--mond-blue); }
 .proj-tile--visual-2    { grid-column: 1 / span 4;  grid-row: 9 / span 4; padding: 0.6rem; overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--mond-paper-soft); }
 .proj-pco-2-p           { grid-column: 5 / span 3;  grid-row: 9 / span 1; }
@@ -3412,7 +3409,7 @@
 .proj-stack-2           { grid-column: 1 / span 7;  grid-row: 13 / span 1; }
 .proj-actions-2         { grid-column: 8 / span 5;  grid-row: 13 / span 1; }
 
-/* Project 3 — rows 14-19 */
+/* Project 3 - rows 14-19 */
 .proj-tile--head-3      { grid-column: 1 / span 12; grid-row: 14 / span 1; border-top: 8px solid var(--mond-yellow); }
 .proj-pco-3-p           { grid-column: 1 / span 4;  grid-row: 15 / span 1; }
 .proj-pco-3-c           { grid-column: 5 / span 4;  grid-row: 15 / span 1; }
@@ -3431,11 +3428,11 @@
 .proj-tile--cta-actions { grid-column: 1 / span 12; grid-row: 20 / span 1; }
 
 /* Project tile content styles */
-.proj-tile--hero h1 { font-size: clamp(2.6rem, 5vw, 4.2rem); margin: 0.6rem 0 1rem; }
+.proj-tile--hero h1 { font-size: var(--t-xl); margin: 0.6rem 0 1rem; }
 .proj-tile--hero p { color: var(--mond-text-soft); font-family: var(--font-display); font-style: italic; max-width: 50ch; }
 
 .proj-tile--head h2,
-.proj-tile--head .mond-section-title { font-size: clamp(1.8rem, 3vw, 2.6rem); margin: 0; line-height: 1.05; }
+.proj-tile--head .mond-section-title { font-size: var(--t-lg); margin: 0; line-height: 1.05; }
 
 /* Two-column layout for project header: large title on the left, date/eyebrow
    and short description on the right. */
@@ -3447,14 +3444,14 @@
 }
 .proj-head__meta { display: flex; flex-direction: column; gap: 0.4rem; }
 .proj-head__meta .mond-eyebrow { margin: 0; }
-.proj-head__meta .mond-section-lede { margin: 0; font-size: 0.95rem; line-height: 1.45; color: var(--mond-text-soft); }
+.proj-head__meta .mond-section-lede { margin: 0; font-size: var(--t-sm); line-height: 1.45; color: var(--mond-text-soft); }
 
 .proj-tile--problem,
 .proj-tile--contribution,
 .proj-tile--outcome { padding: var(--tile-pad); }
 .proj-tile--problem p,
 .proj-tile--contribution p,
-.proj-tile--outcome p { margin: 0.4rem 0 0; line-height: 1.45; font-size: 0.92rem; }
+.proj-tile--outcome p { margin: 0.4rem 0 0; line-height: 1.45; font-size: var(--t-sm); }
 
 .proj-tile--highlight {
   display: grid;
@@ -3464,10 +3461,11 @@
   padding: var(--tile-pad);
 }
 .proj-tile--highlight .icon { width: 22px; height: 22px; color: var(--mond-blue); }
-.proj-tile--highlight p { margin: 0; font-size: 0.88rem; line-height: 1.4; }
+.proj-tile--highlight p { margin: 0; font-size: var(--t-sm); line-height: 1.4; }
 
 .proj-tile--visual { display: flex; align-items: center; justify-content: center; background: var(--mond-paper-soft); }
 .proj-tile--visual svg { max-width: 100%; height: auto; }
+.proj-tile--visual-molecule { padding: 0; overflow: hidden; background: var(--mond-paper); }
 .proj-tile--visual-phone { background: var(--mond-paper-soft); }
 .proj-tile--visual-phone .phone-frame {
   border: 3px solid var(--mond-ink);
@@ -3484,24 +3482,15 @@
   border-radius: 12px;
 }
 
-.proj-molecule {
+[data-style="mondrian"] .porphyrin-paper-visual {
+  display: block;
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 8px;
-  padding: 1rem;
+  object-fit: contain;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
 }
-.proj-molecule span {
-  background: var(--mond-paper);
-  border: 2px solid var(--mond-ink);
-  border-radius: 50%;
-  aspect-ratio: 1;
-}
-.proj-molecule span:nth-child(1) { background: var(--mond-red); }
-.proj-molecule span:nth-child(3) { background: var(--mond-yellow); }
-.proj-molecule span:nth-child(5) { background: var(--mond-blue); }
 
 .proj-tile--stack { padding: var(--tile-pad); }
 .proj-chips {
@@ -3512,7 +3501,7 @@
 }
 .proj-chips span {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--t-xs);
   padding: 0.5rem 0.4rem;
   text-align: center;
   background: transparent;
@@ -3525,11 +3514,11 @@
 
 .proj-tile--actions { padding: var(--tile-pad); display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; flex-direction: row; }
 
-.proj-tile--cta-head h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); margin: 0.3rem 0 0.4rem; }
+.proj-tile--cta-head h2 { font-size: var(--t-lg); margin: 0.3rem 0 0.4rem; }
 .proj-tile--cta-actions { padding: var(--tile-pad); display: flex; flex-wrap: wrap; gap: 0.7rem; flex-direction: row; }
 
 /* ==========================================================================
-   CV PAGE — Mondrian mosaic
+   CV PAGE - Mondrian mosaic
    ========================================================================== */
 
 /* --- CV hero rows 1-3 --- */
@@ -3541,12 +3530,12 @@
 .cv-tile--swatch-r       { grid-column: 10 / span 1; grid-row: 2 / span 1; min-height: 60px; }
 .cv-tile--swatch-b       { grid-column: 11 / span 2; grid-row: 2 / span 1; min-height: 60px; }
 
-.cv-tile--name h1 { font-size: clamp(2.6rem, 4.8vw, 4rem); margin: 0.5rem 0 0.6rem; line-height: 1.05; }
+.cv-tile--name h1 { font-size: var(--t-xl); margin: 0.5rem 0 0.6rem; line-height: 1.05; }
 .cv-tile--name p.mond-hero__lede {
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  font-size: 0.78rem;
+  font-size: var(--t-xs);
   color: var(--mond-text-soft);
   border-top: 1px solid var(--mond-ink);
   padding-top: 0.8rem;
@@ -3554,7 +3543,7 @@
   font-style: normal;
 }
 
-/* Contact tiles row 3 — 4 cols × 2 rows */
+/* Contact tiles row 3 - 4 cols x 2 rows */
 .cv-tile--contact-email     { grid-column: 1 / span 3; grid-row: 3 / span 1; }
 .cv-tile--contact-phone     { grid-column: 4 / span 3; grid-row: 3 / span 1; }
 .cv-tile--contact-location  { grid-column: 7 / span 3; grid-row: 3 / span 1; }
@@ -3577,7 +3566,7 @@
 .cv-tile--contact span span,
 .cv-tile--contact > span {
   display: block;
-  font-size: 0.84rem;
+  font-size: var(--t-sm);
   line-height: 1.3;
 }
 .cv-tile--contact strong {
@@ -3585,13 +3574,13 @@
   font-family: var(--font-mono);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: 0.66rem;
+  font-size: var(--t-xs);
   color: var(--mond-text-soft);
   font-weight: 500;
   margin-bottom: 0.15rem;
 }
 
-/* --- Summary section — rows 5-6 --- */
+/* --- Summary section - rows 5-6 --- */
 .cv-tile--summary-head   { grid-column: 1 / span 12; grid-row: 5 / span 1; border-top: 8px solid var(--mond-red); }
 .cv-tile--summary-1      { grid-column: 1 / span 7;  grid-row: 6 / span 1; }
 .cv-tile--summary-2      { grid-column: 8 / span 5;  grid-row: 6 / span 1; background: var(--mond-paper-soft); }
@@ -3599,12 +3588,12 @@
 .cv-tile--summary-1 p,
 .cv-tile--summary-2 p {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: var(--t-sm);
   line-height: 1.55;
   color: var(--mond-text);
 }
 
-/* --- Experience: 4 entries — rows 7-15 --- */
+/* --- Experience: 4 entries - rows 7-15 --- */
 .cv-tile--xp-head        { grid-column: 1 / span 12; grid-row: 7 / span 1; }
 
 .cv-tile--xp1-head       { grid-column: 1 / span 4; grid-row: 8 / span 1; }
@@ -3622,9 +3611,9 @@
   flex-direction: column;
   justify-content: center;
 }
-.cv-xp-head .mond-eyebrow { font-size: 0.7rem; letter-spacing: 0.18em; color: var(--mond-text-soft); margin: 0 0 0.6rem; }
-.cv-xp-head h3 { margin: 0; font-family: var(--font-display); font-size: 1.25rem; line-height: 1.1; letter-spacing: -0.005em; }
-.cv-xp-head .cv-xp-inst { margin: 0.35rem 0 0; font-family: var(--font-mono); font-size: 0.78rem; color: var(--mond-text-soft); }
+.cv-xp-head .mond-eyebrow { font-size: var(--t-xs); letter-spacing: 0.18em; color: var(--mond-text-soft); margin: 0 0 0.6rem; }
+.cv-xp-head h3 { margin: 0; font-family: var(--font-display); font-size: var(--t-lg); line-height: 1.1; letter-spacing: -0.005em; }
+.cv-xp-head .cv-xp-inst { margin: 0.35rem 0 0; font-family: var(--font-mono); font-size: var(--t-xs); color: var(--mond-text-soft); }
 
 .cv-xp-head--red    { background: var(--mond-red); color: #fff; }
 .cv-xp-head--blue   { background: var(--mond-blue); color: #fff; }
@@ -3654,14 +3643,14 @@
 }
 
 .cv-xp-body { padding: var(--tile-pad); }
-.cv-xp-body p { margin: 0 0 0.55rem; font-size: 0.88rem; line-height: 1.5; }
+.cv-xp-body p { margin: 0 0 0.55rem; font-size: var(--t-sm); line-height: 1.5; }
 .cv-xp-body p:last-child { margin-bottom: 0; }
 .cv-xp-body ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }
-.cv-xp-body li { margin: 0.25rem 0; font-size: 0.86rem; line-height: 1.45; }
+.cv-xp-body li { margin: 0.25rem 0; font-size: var(--t-sm); line-height: 1.45; }
 .cv-xp-body strong { color: var(--mond-text); }
 .cv-xp-body a { color: var(--mond-red); }
 
-/* --- Skills section — rows 12-18 --- */
+/* --- Skills section - rows 12-18 --- */
 .cv-tile--work-head      { grid-column: 1 / span 12; grid-row: 12 / span 1; border-top: 8px solid var(--mond-red); }
 .cv-tile--work-1         { grid-column: 1 / span 4;  grid-row: 13 / span 1; }
 .cv-tile--work-2         { grid-column: 5 / span 4;  grid-row: 13 / span 1; }
@@ -3675,13 +3664,13 @@
 
 .cv-work-card h3 {
   margin: 0;
-  font-size: clamp(1.12rem, 1.7vw, 1.45rem);
+  font-size: var(--t-lg);
 }
 
 .cv-work-card p:not(.mond-eyebrow) {
   margin: 0;
   color: var(--mond-text-soft);
-  font-size: 0.86rem;
+  font-size: var(--t-sm);
   line-height: 1.45;
 }
 
@@ -3695,7 +3684,7 @@
   padding: 0.24rem 0.42rem;
   border: 1px solid var(--mond-ink);
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.04em;
 }
 
@@ -3737,7 +3726,7 @@
 .cv-skill-head .mond-card__num {
   grid-column: 2;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--mond-text-soft);
@@ -3746,7 +3735,7 @@
   grid-column: 2;
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--t-md);
   line-height: 1.1;
 }
 
@@ -3759,7 +3748,7 @@
 }
 .cv-skill-chips span {
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: var(--t-xs);
   padding: 0.7rem 0.6rem;
   display: flex;
   align-items: center;
@@ -3773,7 +3762,7 @@
     0 -1px 0 var(--mond-ink);
 }
 
-/* --- Education section — rows 19-22 --- */
+/* --- Education section - rows 19-22 --- */
 .cv-tile--edu-head       { grid-column: 1 / span 12; grid-row: 21 / span 1; border-top: 8px solid var(--mond-yellow); }
 .cv-tile--edu1-head      { grid-column: 1 / span 4; grid-row: 22 / span 1; }
 .cv-tile--edu1-body      { grid-column: 5 / span 8; grid-row: 22 / span 1; }
@@ -3782,7 +3771,7 @@
 .cv-tile--edu3-head      { grid-column: 1 / span 4; grid-row: 24 / span 1; }
 .cv-tile--edu3-body      { grid-column: 5 / span 8; grid-row: 24 / span 1; }
 
-/* --- Publications — rows 23+ --- */
+/* --- Publications - rows 23+ --- */
 .cv-tile--pub-head       { grid-column: 1 / span 12; grid-row: 25 / span 1; border-top: 8px solid var(--mond-red); }
 .cv-tile--pub-1          { grid-column: 1 / span 12; grid-row: 26 / span 1; }
 .cv-tile--pub-2          { grid-column: 1 / span 12; grid-row: 27 / span 1; }
@@ -3799,7 +3788,7 @@
   justify-content: center;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  font-size: var(--t-lg);
   border-right: 2px solid var(--mond-ink);
 }
 .cv-pub-year--red    { background: var(--mond-red);    color: #fff; }
@@ -3811,7 +3800,7 @@
 }
 .cv-pub-body h3 {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--t-md);
   margin: 0 0 0.45rem;
   line-height: 1.25;
   color: var(--mond-text);
@@ -3819,7 +3808,7 @@
 .cv-pub-authors,
 .cv-pub-journal {
   margin: 0 0 0.3rem;
-  font-size: 0.84rem;
+  font-size: var(--t-sm);
   color: var(--mond-text-soft);
   line-height: 1.45;
 }
@@ -3827,7 +3816,7 @@
   display: inline-block;
   margin-top: 0.35rem;
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: var(--t-xs);
   color: var(--mond-red);
   letter-spacing: 0.04em;
 }
@@ -3868,7 +3857,7 @@
 /* ==========================================================================
    Mondrian: page chrome
    Body keeps the base palette color (paper in light, dark in dark theme) so
-   the ink frame stays tight around the grid only — never bleeds outside.
+   the ink frame stays tight around the grid only - never bleeds outside.
    ========================================================================== */
 [data-style="mondrian"] .home-mondrian,
 [data-style="mondrian"] .about-mondrian,
@@ -4043,7 +4032,7 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  font-size: 0.74rem;
+  font-size: var(--t-xs);
   border-bottom: 2px solid var(--mond-ink);
 }
 
@@ -4072,7 +4061,7 @@
   color: #fff;
 }
 
-/* The vertical "path" between nodes — render as a hard ink rule, not a thin
+/* The vertical "path" between nodes - render as a hard ink rule, not a thin
    gray hairline. Collapses out of the way since gap is already 0 and the
    node already has a bottom border. */
 [data-style="mondrian"] .workflow-map__path {
@@ -4141,12 +4130,12 @@
   border-bottom: 2px solid var(--mond-ink);
   box-shadow: none;
   padding: 0.6rem 0.5rem;
-  font-size: 0.72rem;
+  font-size: var(--t-xs);
 }
 
 /* Chips at the chip-group's outer right / outer bottom drop their right /
    bottom borders so the page-grid 4px gap is the only line at the outer
-   edge — no doubled inner border. */
+   edge - no doubled inner border. */
 [data-style="mondrian"] .proj-chips span.no-br { border-right: 0; }
 [data-style="mondrian"] .proj-chips span.no-bb { border-bottom: 0; }
 
@@ -4167,7 +4156,7 @@
   color: #fff;
 }
 
-/* CV skill chips — chips carry inner divider borders; chips at the group's
+/* CV skill chips - chips carry inner divider borders; chips at the group's
    outer right / outer bottom drop those borders so the page-grid 4px gap is
    the only outer line. */
 [data-style="mondrian"] .cv-skill-chips {
@@ -4194,7 +4183,7 @@
 }
 
 /* ---- Highlight check marks: replace circular outline with a Mondrian
-        accent block. The ::before square is purely decorative — the icon
+        accent block. The ::before square is purely decorative - the icon
         itself stays (covered) for accessibility. ---- */
 [data-style="mondrian"] .proj-tile--highlight {
   position: relative;
@@ -4253,12 +4242,12 @@
    tile and the only spacing is the grid gap itself.
    ========================================================================== */
 
-/* Workflow visual tile — let the workflow map fill the tile completely */
+/* Workflow visual tile - let the workflow map fill the tile completely */
 [data-style="mondrian"] .proj-tile--visual-workflow {
   padding: 0;
 }
 
-/* Stack chip tile — chips fill edge-to-edge; only the eyebrow keeps padding.
+/* Stack chip tile - chips fill edge-to-edge; only the eyebrow keeps padding.
    The tile stretches to the row height (so the page-grid ink doesn't show
    behind a too-short tile); the chip grid sits at content height with
    paper bg filling any leftover space below. */
@@ -4283,7 +4272,7 @@
   align-content: stretch;
 }
 
-/* CV skill chip tile — same treatment */
+/* CV skill chip tile - same treatment */
 [data-style="mondrian"] .cv-tile--skills,
 [data-style="mondrian"] .cv-skills-wrap {
   padding: 0;
@@ -4293,7 +4282,7 @@
   margin: 0 0 0.4rem;
 }
 
-/* Quote strip — let the quote sit flush against the tile edges (small inline
+/* Quote strip - let the quote sit flush against the tile edges (small inline
    padding so the text doesn't touch the ink rules). Zero the default
    <blockquote> margin so the tile fills its grid cell instead of leaving
    ink-coloured page-grid gap above and below. */
@@ -4307,12 +4296,12 @@
    no filler cells needed. */
 
 /* ==========================================================================
-   Case study pages — Mondrian-ize all the soft default components so they
+   Case study pages - Mondrian-ize all the soft default components so they
    match the rest of the site (hard ink borders, sharp corners, no shadows).
    ========================================================================== */
 
 /* ==========================================================================
-   Case study Mondrian grid — flat tiles, no nested boxes.
+   Case study Mondrian grid - flat tiles, no nested boxes.
    ========================================================================== */
 
 [data-style="mondrian"] .case-mondrian {
@@ -4356,12 +4345,12 @@
   border-top: 8px solid var(--mond-red);
 }
 [data-style="mondrian"] .case-mondrian .case-tile--hero h1 {
-  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-size: var(--t-xl);
   line-height: 1.05;
   margin: 0.4rem 0 0.6rem;
 }
 [data-style="mondrian"] .case-mondrian .case-tile--hero .mond-section-lede {
-  font-size: 0.98rem;
+  font-size: var(--t-sm);
   line-height: 1.5;
   color: var(--mond-text-soft);
   margin: 0;
@@ -4374,7 +4363,7 @@
 [data-style="mondrian"] .case-mondrian .case-tile--meta .case-meta__value {
   margin: 0.3rem 0 0;
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--t-md);
   line-height: 1.2;
   color: var(--mond-ink);
 }
@@ -4383,8 +4372,8 @@
 [data-style="mondrian"] .case-mondrian .case-tile--meta-3 { grid-column: 41 / span 10; grid-row: 2 / span 1; border-top: 6px solid var(--mond-yellow); }
 [data-style="mondrian"] .case-mondrian .case-tile--meta-4 { grid-column: 51 / span 10; grid-row: 2 / span 1; border-top: 6px solid var(--mond-ink); }
 
-/* Phone screenshots — 5 tiles in row 3-4 */
-/* Single screenshots tile holding the whole gallery — paper bg surround,
+/* Phone screenshots - 5 tiles in row 3-4 */
+/* Single screenshots tile holding the whole gallery - paper bg surround,
    no ink between phones. */
 [data-style="mondrian"] .case-mondrian .case-tile--screenshots {
   grid-column: 1 / span 60;
@@ -4407,7 +4396,7 @@
   align-items: stretch;
 }
 /* Double-border phone frame: outer thick ink + 6px paper gap + inner thin
-   ink, with offset shadow — matches the Work-page .phone-frame look. */
+   ink, with offset shadow - matches the Work-page .phone-frame look. */
 [data-style="mondrian"] .case-mondrian .case-shot__frame {
   display: block;
   aspect-ratio: 9 / 19.4;
@@ -4429,13 +4418,13 @@
 [data-style="mondrian"] .case-mondrian .case-shot figcaption {
   margin: 0.6rem 0 0;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: var(--t-xs);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--mond-text-soft);
   text-align: center;
 }
-/* Subcellular Workflow visual — full-width tile with the workflow diagram.
+/* Subcellular Workflow visual - full-width tile with the workflow diagram.
    Workflow fills the tile edge-to-edge with no padding and no gaps. */
 [data-style="mondrian"] .case-mondrian .case-tile--workflow-visual {
   grid-column: 1 / span 60;
@@ -4460,7 +4449,7 @@
   gap: 0;
 }
 
-/* 5 phone screenshots — each spans 12 of the 60 sub-cols = 1/5 width.
+/* 5 phone screenshots - each spans 12 of the 60 sub-cols = 1/5 width.
    Equal widths -> equal natural heights, no empty paper around shorter phones. */
 [data-style="mondrian"] .case-mondrian .case-tile--shot {
   grid-row: auto;
@@ -4471,12 +4460,12 @@
 [data-style="mondrian"] .case-mondrian .case-tile--shot-4 { grid-column: 37 / span 12; }
 [data-style="mondrian"] .case-mondrian .case-tile--shot-5 { grid-column: 49 / span 12; border-top: 4px solid var(--mond-yellow); }
 
-/* Architecture tiles — 6 in row 5 */
+/* Architecture tiles - 6 in row 5 */
 [data-style="mondrian"] .case-mondrian .case-tile--arch { justify-content: center; }
 [data-style="mondrian"] .case-mondrian .case-tile--arch .case-arch__value {
   margin: 0.3rem 0 0;
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: var(--t-md);
   color: var(--mond-ink);
 }
 [data-style="mondrian"] .case-mondrian .case-tile--arch-1 { grid-column: 1  / span 10; grid-row: auto; border-top: 4px solid var(--mond-red); }
@@ -4488,7 +4477,7 @@
 [data-style="mondrian"] .case-mondrian .case-tile--arch-5 .mond-eyebrow { color: #fff; }
 [data-style="mondrian"] .case-mondrian .case-tile--arch-6 { grid-column: 51 / span 10; grid-row: auto; border-top: 4px solid var(--mond-ink); }
 
-/* Problem + Ownership — coloured tiles in row 6-7 */
+/* Problem + Ownership - coloured tiles in row 6-7 */
 [data-style="mondrian"] .case-mondrian .case-tile--problem,
 [data-style="mondrian"] .case-mondrian .case-tile--ownership {
   grid-row: auto;
@@ -4498,7 +4487,7 @@
 [data-style="mondrian"] .case-mondrian .case-tile--ownership { grid-column: 31 / span 30; background: var(--mond-blue); }
 [data-style="mondrian"] .case-mondrian .case-tile--problem h2,
 [data-style="mondrian"] .case-mondrian .case-tile--ownership h2 {
-  font-size: 1.3rem;
+  font-size: var(--t-lg);
   line-height: 1.2;
   margin: 0.4rem 0 0.6rem;
   color: #fff;
@@ -4520,28 +4509,28 @@
   border-top: 6px solid var(--mond-ink);
 }
 [data-style="mondrian"] .case-mondrian .case-tile--section-head h2 {
-  font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+  font-size: var(--t-lg);
   margin: 0.3rem 0 0;
   line-height: 1.1;
 }
 [data-style="mondrian"] .case-mondrian .case-tile--behavior-head { grid-row: auto; }
 [data-style="mondrian"] .case-mondrian .case-tile--eng-head { grid-row: auto; }
 
-/* Behavior + Engineering — 3 tiles each, accents on first card */
+/* Behavior + Engineering - 3 tiles each, accents on first card */
 [data-style="mondrian"] .case-mondrian .case-tile--behavior,
 [data-style="mondrian"] .case-mondrian .case-tile--eng {
   padding: var(--tile-pad);
 }
 [data-style="mondrian"] .case-mondrian .case-tile--behavior h3,
 [data-style="mondrian"] .case-mondrian .case-tile--eng h3 {
-  font-size: 1.1rem;
+  font-size: var(--t-md);
   line-height: 1.2;
   margin: 0.5rem 0 0.4rem;
 }
 [data-style="mondrian"] .case-mondrian .case-tile--behavior p,
 [data-style="mondrian"] .case-mondrian .case-tile--eng p {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: var(--t-sm);
   line-height: 1.5;
   color: var(--mond-text-soft);
 }
@@ -4565,14 +4554,14 @@
 [data-style="mondrian"] .case-mondrian .case-tile--eng-2 { grid-column: 21 / span 20; grid-row: auto; border-top: 4px solid var(--mond-blue); }
 [data-style="mondrian"] .case-mondrian .case-tile--eng-3 { grid-column: 41 / span 20; grid-row: auto; border-top: 4px solid var(--mond-yellow); }
 
-/* Workflow + Stack — row 12 */
+/* Workflow + Stack - row 12 */
 [data-style="mondrian"] .case-mondrian .case-tile--workflow {
   grid-column: 1 / span 30;
   grid-row: span 2;
   border-top: 6px solid var(--mond-blue);
 }
 [data-style="mondrian"] .case-mondrian .case-tile--workflow h2 {
-  font-size: 1.25rem;
+  font-size: var(--t-lg);
   margin: 0.4rem 0 0.6rem;
   line-height: 1.2;
 }
@@ -4589,7 +4578,7 @@
   padding: 0.7rem 0.9rem;
 }
 [data-style="mondrian"] .case-mondrian .case-tile--stack-head h3 {
-  font-size: 1.1rem;
+  font-size: var(--t-md);
   margin: 0.2rem 0 0;
 }
 
@@ -4601,14 +4590,14 @@
   gap: 0;
 }
 
-/* CTA — full-width row */
+/* CTA - full-width row */
 [data-style="mondrian"] .case-mondrian .case-tile--cta-head {
   grid-column: 1 / span 40;
   grid-row: auto;
   border-top: 8px solid var(--mond-ink);
 }
 [data-style="mondrian"] .case-mondrian .case-tile--cta-head h2 {
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: var(--t-lg);
   margin: 0.3rem 0 0.4rem;
 }
 [data-style="mondrian"] .case-mondrian .case-tile--cta-head p {
@@ -4670,14 +4659,14 @@
 }
 [data-style="mondrian"] .case-hero__meta span {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--t-xs);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--mond-text-soft);
 }
 [data-style="mondrian"] .case-hero__meta strong {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: var(--t-md);
   color: var(--mond-ink);
   font-weight: 600;
 }
@@ -4688,7 +4677,7 @@
 [data-style="mondrian"] .case-hero__meta div:nth-child(3) { border-left-width: 6px; border-left-color: var(--mond-yellow); }
 [data-style="mondrian"] .case-hero__meta div:nth-child(4) { border-left-width: 6px; border-left-color: var(--mond-ink); }
 
-/* Phone-like screenshot frames — hard borders, no rounded corners */
+/* Phone-like screenshot frames - hard borders, no rounded corners */
 [data-style="mondrian"] .screenshot-frame {
   border: 3px solid var(--mond-ink);
   border-radius: 0;
@@ -4702,7 +4691,7 @@
 }
 [data-style="mondrian"] .screenshot-frame figcaption {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: var(--t-xs);
   text-transform: uppercase;
   letter-spacing: 0.12em;
   text-align: center;
@@ -4728,18 +4717,18 @@
 [data-style="mondrian"] .app-architecture div:nth-child(5) { background: var(--mond-blue); color: #fff; }
 [data-style="mondrian"] .app-architecture strong {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--t-md);
   font-weight: 600;
 }
 [data-style="mondrian"] .app-architecture div:nth-child(5) strong { color: #fff; }
 [data-style="mondrian"] .app-architecture span {
   font-family: var(--font-mono);
-  font-size: 0.8rem;
+  font-size: var(--t-sm);
   color: var(--mond-text-soft);
 }
 [data-style="mondrian"] .app-architecture div:nth-child(5) span { color: rgba(255,255,255,0.85); }
 
-/* Stat band / metric grid — Mondrian-ize too */
+/* Stat band / metric grid - Mondrian-ize too */
 [data-style="mondrian"] .stat-band div,
 [data-style="mondrian"] .metric-grid div {
   border: 2px solid var(--mond-ink);
@@ -4754,7 +4743,7 @@
   background: var(--mond-paper);
   padding: 0.35rem 0.65rem;
   font-family: var(--font-mono);
-  font-size: 0.78rem;
+  font-size: var(--t-xs);
 }
 
 /* Final Mondrian color safety pass.
@@ -4972,7 +4961,7 @@
   padding: 0.82rem 0.72rem;
   color: var(--mond-text);
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: var(--t-xs);
   letter-spacing: 0.22em;
   line-height: 1.2;
   text-transform: uppercase;
@@ -5381,14 +5370,14 @@
 [data-style="mondrian"] .mond-shot-carousel__caption strong {
   color: var(--mond-text);
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: var(--t-md);
   line-height: 1.08;
 }
 
 [data-style="mondrian"] .mond-shot-carousel__caption span {
   color: var(--mond-text-soft);
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: var(--t-sm);
   line-height: 1.28;
 }
 
@@ -5598,7 +5587,7 @@
   [data-style="mondrian"] .case-mondrian .case-tile--stack-chips.proj-chips span,
   [data-style="mondrian"] .cv-skill-chips span {
     padding-inline: 0.45rem;
-    font-size: 0.68rem;
+    font-size: var(--t-xs);
   }
 }
 
@@ -5668,7 +5657,7 @@
     background: var(--mond-paper);
     color: var(--mond-ink);
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: var(--t-sm);
     font-weight: 700;
     letter-spacing: 0.06em;
   }
@@ -5984,5 +5973,61 @@
   [data-style="mondrian"] .cv-mondrian .cv-tile--swatch-b {
     grid-column: span 2 !important;
     min-height: 44px;
+  }
+}
+
+/* Mondrian phone polish: preserve small De Stijl pairings only where the
+   paired tiles are compact and comparable. Projects, CV, and text-heavy
+   sections stay single-column so unlike left/right tiles do not create empty
+   or cramped columns. */
+@media (max-width: 540px) {
+  [data-style="mondrian"] .home-mondrian,
+  [data-style="mondrian"] .case-mondrian {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian > .mond-tile,
+  [data-style="mondrian"] .case-mondrian > .mond-tile {
+    grid-column: 1 / -1 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian > :is(
+    .mond-tile--m1,
+    .mond-tile--m2,
+    .mond-tile--m3,
+    .mond-tile--m4
+  ),
+  [data-style="mondrian"] .case-mondrian > :is(
+    .case-tile--meta,
+    .case-tile--arch
+  ) {
+    grid-column: auto / span 1 !important;
+  }
+
+  [data-style="mondrian"] .home-mondrian > :is(
+    .mond-tile--m1,
+    .mond-tile--m2,
+    .mond-tile--m3,
+    .mond-tile--m4
+  ) {
+    min-height: 6.25rem;
+  }
+
+  [data-style="mondrian"] .case-mondrian > :is(
+    .case-tile--meta,
+    .case-tile--arch
+  ) {
+    min-height: 6rem;
+    overflow-wrap: anywhere;
+  }
+
+  [data-style="mondrian"] .mond-tile--swatch-y,
+  [data-style="mondrian"] .mond-tile--swatch-r,
+  [data-style="mondrian"] .mond-tile--swatch-b,
+  [data-style="mondrian"] .mond-tile--swatch-blue,
+  [data-style="mondrian"] .cv-tile--swatch-y,
+  [data-style="mondrian"] .cv-tile--swatch-r,
+  [data-style="mondrian"] .cv-tile--swatch-b {
+    min-height: 3.25rem;
   }
 }

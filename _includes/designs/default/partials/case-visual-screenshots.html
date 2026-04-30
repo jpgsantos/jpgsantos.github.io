@@ -1,0 +1,11 @@
+{% assign case_visual = include.visual %}
+<section class="case-study__visual case-study__visual--screens" id="screens" aria-label="{{ case_visual.aria_label }}">
+  <div class="case-screen-strip">
+    {% for shot in include.screenshots %}
+    <figure class="case-screen" data-content-list="case-screenshots" data-content-key="{{ shot.caption | slugify }}" data-content-value="{{ shot.src }}">
+      <span class="case-screen__frame">{% include project-screenshot.html src=shot.src alt=shot.alt loading="lazy" sizes="(max-width: 360px) 78vw, (max-width: 860px) 42vw, 220px" width="1080" height="2400" %}</span>
+      <figcaption>{{ shot.caption }}</figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+</section>

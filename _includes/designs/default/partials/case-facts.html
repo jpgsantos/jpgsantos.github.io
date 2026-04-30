@@ -1,0 +1,8 @@
+<dl class="case-study__facts" aria-label="Project facts">
+  {% for fact in include.facts %}
+  <div data-content-list="case-facts" data-content-key="{{ fact.label | slugify }}" data-content-value="{{ fact.value | strip_html | normalize_whitespace }}">
+    <dt>{{ fact.label }}</dt>
+    <dd>{{ fact.value }}</dd>
+  </div>
+  {% endfor %}
+</dl>

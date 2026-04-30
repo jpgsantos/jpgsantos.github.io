@@ -1,0 +1,6 @@
+{% assign item = include.item %}
+<ul class="check-list">
+  {% for highlight in item.highlights %}
+  <li data-content-list="project-highlights" data-content-key="{{ item.slug }}:{{ forloop.index }}" data-content-value="{{ highlight | strip_html | normalize_whitespace }}">{% include icon.html name="check" %}<span>{{ highlight }}</span></li>
+  {% endfor %}
+</ul>

@@ -3,7 +3,7 @@
   "scripts": {
     "test": "npm run test:js && npm run validate:content && npm run test:build",
     "test:build": "bundle exec jekyll build",
-    "test:js": "node scripts/check-js.mjs",
+    "test:js": "node scripts/check-js.mjs && node scripts/check-typography.mjs",
     "validate:content": "ruby scripts/validate-content.rb",
     "audit:site": "node scripts/audit-site.mjs",
     "design:create": "node scripts/create-design.mjs"

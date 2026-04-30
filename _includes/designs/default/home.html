@@ -115,11 +115,11 @@
   <div class="contact-grid">
     {% assign email_href = profile.contact.email | prepend: 'mailto:' %}
     {% assign phone_href = profile.contact.phone_uri | prepend: 'tel:' %}
-    {% include contact-card.html href=email_href icon="email" label="Email" value=profile.contact.email class="contact-card--email" %}
-    {% include contact-card.html href=phone_href icon="phone" label="Phone" value=profile.contact.phone %}
+    {% include designs/default/partials/contact-card.html href=email_href icon="email" label="Email" value=profile.contact.email class="contact-card--email" %}
+    {% include designs/default/partials/contact-card.html href=phone_href icon="phone" label="Phone" value=profile.contact.phone %}
     {% for social in profile.socials %}
     {% assign item = social[1] %}
-    {% include contact-card.html href=item.url icon=item.icon label=item.label value=item.username external=true %}
+    {% include designs/default/partials/contact-card.html href=item.url icon=item.icon label=item.label value=item.username external=true %}
     {% endfor %}
   </div>
 </section>

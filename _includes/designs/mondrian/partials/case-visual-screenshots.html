@@ -1,0 +1,8 @@
+<div class="mond-tile case-tile--screenshots">
+  {% for shot in include.screenshots %}
+  <figure class="case-shot" data-content-list="case-screenshots" data-content-key="{{ shot.caption | slugify }}" data-content-value="{{ shot.src }}">
+    <span class="case-shot__frame">{% include project-screenshot.html src=shot.src alt=shot.alt loading="lazy" width="1080" height="2400" %}</span>
+    <figcaption>{{ shot.caption }}</figcaption>
+  </figure>
+  {% endfor %}
+</div>

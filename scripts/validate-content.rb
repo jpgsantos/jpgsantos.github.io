@@ -7,14 +7,23 @@ require "set"
 ROOT = File.expand_path("..", __dir__)
 ERRORS = []
 
-def git_tracked_files
-  stdout, _stderr, status = Open3.capture3("git", "-C", ROOT, "ls-files", "-z")
+def git_source_files
+  stdout, _stderr, status = Open3.capture3(
+    "git",
+    "-C",
+    ROOT,
+    "ls-files",
+    "-z",
+    "--cached",
+    "--others",
+    "--exclude-standard"
+  )
   return nil unless status.success?
 
-  stdout.split("\0").reject(&:empty?).to_set
+  stdout.split("\0").reject(&:empty?).select { |path| File.file?(File.join(ROOT, path)) }.to_set
 end
 
-TRACKED_FILES = git_tracked_files
+SOURCE_FILES = git_source_files
 
 def data_file(name)
   File.join(ROOT, "_data", "#{name}.yml")
@@ -81,14 +90,14 @@ def require_file(path, context)
     return
   end
 
-  return unless TRACKED_FILES && !TRACKED_FILES.include?(normalized)
+  return unless SOURCE_FILES && !SOURCE_FILES.include?(normalized)
 
-  ERRORS << "#{context} points to untracked file #{path}"
+  ERRORS << "#{context} points to ignored or untracked-by-git-source file #{path}"
 end
 
 def source_templates
-  if TRACKED_FILES
-    TRACKED_FILES.select do |path|
+  if SOURCE_FILES
+    SOURCE_FILES.select do |path|
       path.end_with?(".html", ".md") && !path.start_with?("_site/", "_site_preview/")
     end
   else
@@ -110,7 +119,7 @@ def validate_static_includes
       end
     end
   rescue Errno::ENOENT
-    ERRORS << "tracked source template is missing #{relative}"
+    ERRORS << "source template is missing #{relative}"
   end
 end
 
@@ -124,6 +133,7 @@ publications = load_yaml("publications") || []
 page_copy = load_yaml("page_copy") || {}
 
 required_design_keys = %w[home projects cv case]
+required_case_visual_types = work.filter_map { |item| item.dig("case", "visual", "type") }.uniq.sort
 seen_designs = {}
 designs.each do |design|
   context = "design #{design["value"] || "(missing value)"}"
@@ -139,6 +149,14 @@ designs.each do |design|
       require_file(File.join("_includes", include_path), "#{context}.includes.#{key}")
     else
       ERRORS << "#{context} is missing includes.#{key}"
+    end
+  end
+  required_case_visual_types.each do |type|
+    include_path = design.dig("case_visuals", type)
+    if include_path
+      require_file(File.join("_includes", include_path), "#{context}.case_visuals.#{type}")
+    else
+      ERRORS << "#{context} is missing case_visuals.#{type}"
     end
   end
 end

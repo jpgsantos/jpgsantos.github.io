@@ -1,0 +1,65 @@
+{% assign visual = include.visual %}
+{% assign visual_type = visual.type | default: "porphyrin" %}
+{% assign visual_label = visual.label | default: "Ionic self-assembly" %}
+{% assign visual_title = visual.title | default: "Oppositely charged porphyrins forming material families." %}
+{% assign visual_body = visual.body | default: "NiTBTAP8+ and TPPS-based anions assemble into ionic solids whose composition follows the reacting porphyrin ions." %}
+<div class="mond-tile case-tile--workflow-visual" style="grid-column:1/span 12;padding:var(--tile-pad);align-items:center;text-align:center;border-top:6px solid var(--mond-red)">
+  <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false" style="width:min(100%,8.5rem);height:auto">
+    <g fill="none" stroke="currentColor" stroke-width="5">
+      <circle cx="60" cy="60" r="40"/><path d="M60 20 100 60 60 100 20 60Z"/>
+    </g>
+    <g fill="var(--mond-red)" stroke="currentColor" stroke-width="4">
+      <circle cx="60" cy="60" r="14"/><circle cx="60" cy="12" r="8"/><circle cx="108" cy="60" r="8"/><circle cx="60" cy="108" r="8"/><circle cx="12" cy="60" r="8"/>
+    </g>
+  </svg>
+  <strong style="font-family:var(--font-display);font-size:var(--t-md);line-height:1.1">NiTBTAP8+</strong>
+  <span class="mond-eyebrow">Cation</span>
+</div>
+
+<div class="mond-tile case-tile--workflow-visual" style="grid-column:13/span 30;grid-row:span 2;justify-content:center;padding:.75rem"{% if include.parity %} data-content-key="case-visual" data-content-value="{{ visual_type }}"{% endif %}>
+  <p class="mond-eyebrow">ISA</p>
+  <svg viewBox="0 0 520 300" aria-hidden="true" focusable="false" style="width:100%;max-width:34rem;height:auto">
+    <defs>
+      <clipPath id="case-tube-a"><rect x="78" y="36" width="390" height="28" rx="14"/></clipPath>
+      <clipPath id="case-tube-b"><rect x="56" y="92" width="428" height="28" rx="14"/></clipPath>
+      <clipPath id="case-tube-c"><rect x="86" y="176" width="370" height="28" rx="14"/></clipPath>
+      <clipPath id="case-tube-d"><rect x="105" y="232" width="342" height="28" rx="14"/></clipPath>
+    </defs>
+    <g transform="rotate(-8 273 50)" clip-path="url(#case-tube-a)"><rect x="78" y="36" width="430" height="28" fill="var(--mond-red)"/><rect x="118" y="36" width="40" height="28" fill="var(--mond-blue)"/><rect x="198" y="36" width="40" height="28" fill="var(--mond-blue)"/><rect x="278" y="36" width="40" height="28" fill="var(--mond-blue)"/><rect x="358" y="36" width="40" height="28" fill="var(--mond-blue)"/><rect x="438" y="36" width="40" height="28" fill="var(--mond-blue)"/></g>
+    <g transform="rotate(7 270 106)" clip-path="url(#case-tube-b)"><rect x="56" y="92" width="468" height="28" fill="var(--mond-blue)"/><rect x="98" y="92" width="42" height="28" fill="var(--mond-red)"/><rect x="182" y="92" width="42" height="28" fill="var(--mond-red)"/><rect x="266" y="92" width="42" height="28" fill="var(--mond-red)"/><rect x="350" y="92" width="42" height="28" fill="var(--mond-red)"/><rect x="434" y="92" width="42" height="28" fill="var(--mond-red)"/></g>
+    <g transform="rotate(-4 271 190)" clip-path="url(#case-tube-c)"><rect x="86" y="176" width="410" height="28" fill="var(--mond-red)"/><rect x="126" y="176" width="40" height="28" fill="var(--mond-blue)"/><rect x="206" y="176" width="40" height="28" fill="var(--mond-blue)"/><rect x="286" y="176" width="40" height="28" fill="var(--mond-blue)"/><rect x="366" y="176" width="40" height="28" fill="var(--mond-blue)"/></g>
+    <g transform="rotate(11 276 246)" clip-path="url(#case-tube-d)"><rect x="105" y="232" width="382" height="28" fill="var(--mond-blue)"/><rect x="145" y="232" width="40" height="28" fill="var(--mond-red)"/><rect x="225" y="232" width="40" height="28" fill="var(--mond-red)"/><rect x="305" y="232" width="40" height="28" fill="var(--mond-red)"/><rect x="385" y="232" width="40" height="28" fill="var(--mond-red)"/></g>
+  </svg>
+</div>
+
+<article class="mond-tile case-tile--workflow" style="grid-column:43/span 18;grid-row:span 2;border-top:6px solid var(--mond-yellow)"{% if include.parity %} data-content-key="case-visual-copy" data-content-value="{{ visual_title | strip_html | normalize_whitespace }}"{% endif %}>
+  <p class="mond-eyebrow">{{ visual_label }}</p>
+  <h2>{{ visual_title }}</h2>
+  <p>{{ visual_body }}</p>
+</article>
+
+<div class="mond-tile case-tile--workflow-visual" style="grid-column:1/span 12;padding:var(--tile-pad);align-items:center;text-align:center;background:var(--mond-blue);color:white">
+  <svg viewBox="0 0 120 120" aria-hidden="true" focusable="false" style="width:min(100%,8.5rem);height:auto">
+    <g fill="none" stroke="currentColor" stroke-width="5">
+      <circle cx="60" cy="60" r="40"/><path d="M60 20 100 60 60 100 20 60Z"/>
+    </g>
+    <g fill="var(--mond-blue)" stroke="currentColor" stroke-width="4">
+      <circle cx="60" cy="60" r="14"/><circle cx="60" cy="12" r="8"/><circle cx="108" cy="60" r="8"/><circle cx="60" cy="108" r="8"/><circle cx="12" cy="60" r="8"/>
+    </g>
+  </svg>
+  <strong style="font-family:var(--font-display);font-size:var(--t-md);line-height:1.1">MTPPS4-</strong>
+  <span class="mond-eyebrow" style="color:rgba(255,255,255,.78)">Anion</span>
+</div>
+
+<div class="mond-tile case-tile--workflow-visual" style="grid-column:1/span 42;padding:var(--tile-pad);align-items:center">
+  <p class="mond-eyebrow">Spectroscopy</p>
+  <svg viewBox="0 0 420 140" aria-hidden="true" focusable="false" style="width:100%;max-width:32rem;height:auto">
+    <rect x="28" y="72" width="34" height="52" fill="var(--mond-blue)"/><rect x="90" y="34" width="34" height="90" fill="var(--mond-red)"/><rect x="152" y="58" width="34" height="66" fill="var(--mond-blue)"/><rect x="214" y="18" width="34" height="106" fill="var(--mond-red)"/><rect x="276" y="70" width="34" height="54" fill="var(--mond-blue)"/><rect x="338" y="46" width="34" height="78" fill="var(--mond-red)"/>
+  </svg>
+</div>
+
+<div class="mond-tile case-tile--workflow-visual" style="grid-column:43/span 18;padding:var(--tile-pad);background:var(--mond-yellow);color:var(--mond-on-yellow)">
+  <p class="mond-eyebrow" style="color:var(--mond-on-yellow)">Porphyrin assembly</p>
+  <h2 style="font-size:var(--t-lg);line-height:1.1;margin:.35rem 0">cation + anion</h2>
+  <p style="margin:0;font-weight:800">striped ionic tubes</p>
+</div>

@@ -1,0 +1,6 @@
+{% for fact in include.facts %}
+<div class="mond-tile case-tile--meta case-tile--meta-{{ forloop.index }}" data-content-list="case-facts" data-content-key="{{ fact.label | slugify }}" data-content-value="{{ fact.value | strip_html | normalize_whitespace }}">
+  <p class="mond-eyebrow">{{ fact.label }}</p>
+  <p class="case-meta__value">{{ fact.mondrian_value | default: fact.value }}</p>
+</div>
+{% endfor %}

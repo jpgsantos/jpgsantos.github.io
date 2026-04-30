@@ -1,0 +1,50 @@
+/* ==========================================================================
+   Shared design contract
+   --------------------------------------------------------------------------
+   A naming convention, not a styling layer. Every design (default, mondrian,
+   and any future design) is expected to assign values for the slots below.
+   Designs own their values; this file declares no values and is empty by
+   design. It exists as the canonical reference for tooling (audit script,
+   typography linter) and human readers.
+
+   Required slots
+   --------------------------------------------------------------------------
+   Surface and ink:
+     --color-surface          base background
+     --color-surface-raised   raised surface (cards, tiles)
+     --color-ink              primary text / foreground accent
+     --color-muted            secondary text
+     --color-border           divider / hairline color
+
+   Rule and shape:
+     --rule-thickness         hairline / rule width
+     --radius-sm              tight radius
+     --radius-md              default radius
+     --radius-lg              soft radius
+
+   Spacing scale (7 steps):
+     --space-0 .. --space-6
+
+   Density:
+     --density-row            line-height baseline for body copy
+     --density-gap            cluster gap between related elements
+     --section-pad            vertical section padding
+     --gutter                 horizontal page gutter
+
+   Shadow:
+     --shadow-soft            low-elevation
+     --shadow-strong          high-elevation
+
+   Typography (canonical home for type tokens):
+     --t-xs --t-sm --t-md --t-lg --t-xl
+     --font-sans --font-display --font-mono
+
+   Optional / not in contract
+   --------------------------------------------------------------------------
+   Each design declares its own:
+     - Accent palette (mondrian needs three primary blocks; default needs
+       none; a future design may want any number).
+     - Background gradients, paper textures, grid overlays.
+     - Light/dark token sets (each design owns its [data-theme="dark"] block).
+     - Whether to consume the opt-in primitives in shared/primitives.
+   ========================================================================== */

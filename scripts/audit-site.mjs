@@ -12,9 +12,10 @@ const widthFilter = Number(getArg('--width'));
 const designRegistry = readDesignRegistry();
 const requiredDesignIncludeKeys = ['home', 'projects', 'cv', 'case'];
 const requiredDesignFields = ['value', 'name', 'icon', 'stylesheet'];
+const requiredCaseVisualTypes = readCaseVisualTypes();
 const captureSnapshots = process.argv.includes('--snapshots');
 const snapshotDir = join(outputDir, 'snapshots');
-const pages = pageFilter ? [pageFilter] : ['/', '/projects/', '/cv/', '/projects/octidy-android-app/', '/projects/subcellular-workflow/'];
+const pages = pageFilter ? [pageFilter] : readAuditedPages();
 const widths = Number.isFinite(widthFilter) && widthFilter > 0 ? [widthFilter] : [390, 540, 768, 1024, 1366];
 const styles = styleFilter ? [styleFilter] : designRegistry.map((design) => design.value);
 const themes = themeFilter ? [themeFilter] : ['light', 'dark'];
@@ -23,6 +24,13 @@ const height = 900;
 function getArg(name) {
   const match = process.argv.find((arg) => arg.startsWith(`${name}=`));
   return match ? match.slice(name.length + 1) : undefined;
+}
+
+function readAuditedPages() {
+  const source = readFileSync('_data/work.yml', 'utf8');
+  const projectPages = Array.from(source.matchAll(/^\s+url:\s+"(\/projects\/[^"]+\/)"/gm))
+    .map((match) => match[1]);
+  return Array.from(new Set(['/', '/projects/', '/cv/', ...projectPages]));
 }
 
 function readDesignRegistry() {
@@ -36,21 +44,8 @@ function readDesignRegistry() {
       };
       const value = read('value');
       if (!value) return null;
-      const includes = {};
-      let inIncludes = false;
-      for (const line of block.split('\n')) {
-        if (/^\s+includes:\s*$/.test(line)) {
-          inIncludes = true;
-          continue;
-        }
-        if (!inIncludes) continue;
-        const includeMatch = line.match(/^\s{4}([A-Za-z0-9_-]+):\s*"?([^"\n]+)"?\s*$/);
-        if (includeMatch) {
-          includes[includeMatch[1]] = includeMatch[2].trim();
-          continue;
-        }
-        if (/^\s{2}\S/.test(line)) inIncludes = false;
-      }
+      const includes = readNestedMap(block, 'includes');
+      const caseVisuals = readNestedMap(block, 'case_visuals');
       return {
         value,
         name: read('name'),
@@ -58,12 +53,40 @@ function readDesignRegistry() {
         icon: read('icon'),
         stylesheet: read('stylesheet'),
         cssBudgetKb: Number(read('css_budget_kb')) || null,
-        includes
+        includes,
+        caseVisuals
       };
     })
     .filter(Boolean);
 
   return entries.length > 0 ? entries : [{ value: 'default' }, { value: 'mondrian' }];
+}
+
+function readNestedMap(block, mapName) {
+  const values = {};
+  let inMap = false;
+  for (const line of block.split('\n')) {
+    if (new RegExp(`^\\s+${mapName}:\\s*$`).test(line)) {
+      inMap = true;
+      continue;
+    }
+    if (!inMap) continue;
+    const mapMatch = line.match(/^\s{4}([A-Za-z0-9_-]+):\s*"?([^"\n]+)"?\s*$/);
+    if (mapMatch) {
+      values[mapMatch[1]] = mapMatch[2].trim();
+      continue;
+    }
+    if (/^\s{2}\S/.test(line)) inMap = false;
+  }
+  return values;
+}
+
+function readCaseVisualTypes() {
+  const source = readFileSync('_data/work.yml', 'utf8');
+  return Array.from(new Set(
+    Array.from(source.matchAll(/^\s+type:\s+"?([A-Za-z0-9_-]+)"?\s*$/gm))
+      .map((match) => match[1])
+  )).sort();
 }
 
 function assertDesignRegistry(registry) {
@@ -106,6 +129,28 @@ function assertDesignIncludes(registry) {
       const resolved = resolve('_includes', includePath);
       if (!existsSync(resolved)) {
         failures.push(`${design.value} includes.${key} points to missing file ${resolved}`);
+      }
+    }
+    return failures;
+  });
+}
+
+function assertCaseVisualIncludes(registry) {
+  return registry.flatMap((design) => {
+    const failures = [];
+    if (!design.caseVisuals || Object.keys(design.caseVisuals).length === 0) {
+      failures.push(`${design.value} design is missing a case_visuals map`);
+      return failures;
+    }
+    for (const type of requiredCaseVisualTypes) {
+      const includePath = design.caseVisuals[type];
+      if (!includePath) {
+        failures.push(`${design.value} design is missing case_visuals.${type}`);
+        continue;
+      }
+      const resolved = resolve('_includes', includePath);
+      if (!existsSync(resolved)) {
+        failures.push(`${design.value} case_visuals.${type} points to missing file ${resolved}`);
       }
     }
     return failures;
@@ -700,6 +745,10 @@ async function main() {
     const includeFailures = assertDesignIncludes(designRegistry);
     if (includeFailures.length > 0) {
       failures.push({ testCase: { path: '_data/designs.yml', style: 'all', theme: 'all', width: 0 }, failures: includeFailures });
+    }
+    const caseVisualFailures = assertCaseVisualIncludes(designRegistry);
+    if (caseVisualFailures.length > 0) {
+      failures.push({ testCase: { path: '_data/designs.yml', style: 'all', theme: 'all', width: 0 }, failures: caseVisualFailures });
     }
 
     const report = {

@@ -1,0 +1,7 @@
+{% for item in include.items limit: include.limit %}
+<article class="mond-tile {% if forloop.first %}mond-tile--red case-tile--problem{% else %}mond-tile--blue case-tile--ownership{% endif %}" data-content-list="case-overview" data-content-key="{{ item.label | slugify }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
+  <p class="mond-eyebrow">{{ item.label }}</p>
+  <h2>{{ item.title }}</h2>
+  <p>{{ item.body }}</p>
+</article>
+{% endfor %}

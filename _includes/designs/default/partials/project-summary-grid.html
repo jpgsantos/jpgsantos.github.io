@@ -1,0 +1,6 @@
+{% assign item = include.item %}
+<div class="work-summary-grid">
+  <div data-content-list="project-summary" data-content-key="{{ item.slug }}:problem" data-content-value="{{ item.problem | strip_html | normalize_whitespace }}"><strong>Problem</strong><span>{{ item.problem }}</span></div>
+  <div data-content-list="project-summary" data-content-key="{{ item.slug }}:contribution" data-content-value="{{ item.contribution | strip_html | normalize_whitespace }}"><strong>Contribution</strong><span>{{ item.contribution }}</span></div>
+  <div data-content-list="project-summary" data-content-key="{{ item.slug }}:outcome" data-content-value="{{ item.outcome | strip_html | normalize_whitespace }}"><strong>Outcome</strong><span>{{ item.outcome }}</span></div>
+</div>

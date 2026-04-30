@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="560" viewBox="0 0 720 560" role="img" aria-labelledby="title desc">
+  <title id="title">Porphyrin octacation ionic self-assembly visual</title>
+  <desc id="desc">Original site-owned visual showing porphyrin cation and anion reactants forming long ionic self-assembled tubes. The tube bodies alternate only the cation and anion colors.</desc>
+  <defs>
+    <clipPath id="tube-a"><rect x="310" y="86" width="350" height="30" rx="15"/></clipPath>
+    <clipPath id="tube-b"><rect x="300" y="166" width="370" height="30" rx="15"/></clipPath>
+    <clipPath id="tube-c"><rect x="326" y="246" width="324" height="30" rx="15"/></clipPath>
+    <clipPath id="tube-d"><rect x="344" y="326" width="292" height="30" rx="15"/></clipPath>
+  </defs>
+
+  <g opacity=".42" stroke="#d7e0dc" stroke-width="1">
+    <path d="M56 70h210M48 190h214M52 310h204M54 430h608"/>
+    <path d="M92 44v420M260 52v380M500 54v406M650 88v330"/>
+  </g>
+
+  <g transform="translate(62 78)">
+    <g fill="#fff7ed" stroke="#c55f16" stroke-width="4">
+      <circle cx="70" cy="70" r="54"/>
+      <path d="M70 20 120 70 70 120 20 70Z"/>
+      <circle cx="70" cy="70" r="17" fill="#ffffff"/>
+    </g>
+    <g fill="#c55f16">
+      <circle cx="70" cy="8" r="8"/>
+      <circle cx="132" cy="70" r="8"/>
+      <circle cx="70" cy="132" r="8"/>
+      <circle cx="8" cy="70" r="8"/>
+    </g>
+    <text x="0" y="164" fill="#c55f16" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">NiTBTAP8+</text>
+    <text x="0" y="190" fill="#7f948f" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16">porphyrin octacation</text>
+  </g>
+
+  <g transform="translate(66 290)">
+    <g fill="#eff6ff" stroke="#315f8f" stroke-width="4">
+      <circle cx="66" cy="66" r="50"/>
+      <path d="M66 20 112 66 66 112 20 66Z"/>
+      <circle cx="66" cy="66" r="16" fill="#ffffff"/>
+    </g>
+    <g fill="#315f8f">
+      <circle cx="66" cy="8" r="8"/>
+      <circle cx="124" cy="66" r="8"/>
+      <circle cx="66" cy="124" r="8"/>
+      <circle cx="8" cy="66" r="8"/>
+    </g>
+    <text x="0" y="158" fill="#315f8f" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="700">MTPPS4-</text>
+    <text x="0" y="184" fill="#7f948f" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16">anion series</text>
+  </g>
+
+  <g transform="translate(252 252)">
+    <circle cx="0" cy="0" r="30" fill="#f8fbfa" stroke="#abc0b9" stroke-width="2"/>
+    <text x="0" y="6" text-anchor="middle" fill="#07564f" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="16" font-weight="700">ISA</text>
+    <path d="M36 0h56" stroke="#07564f" stroke-width="3" stroke-linecap="round"/>
+    <path d="m86-10 12 10-12 10" fill="none" stroke="#07564f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <g transform="rotate(-12 485 101)" clip-path="url(#tube-a)">
+    <rect x="310" y="86" width="364" height="30" fill="#c55f16"/>
+    <rect x="338" y="86" width="28" height="30" fill="#315f8f"/>
+    <rect x="394" y="86" width="28" height="30" fill="#315f8f"/>
+    <rect x="450" y="86" width="28" height="30" fill="#315f8f"/>
+    <rect x="506" y="86" width="28" height="30" fill="#315f8f"/>
+    <rect x="562" y="86" width="28" height="30" fill="#315f8f"/>
+    <rect x="618" y="86" width="28" height="30" fill="#315f8f"/>
+  </g>
+  <g transform="rotate(7 485 181)" clip-path="url(#tube-b)">
+    <rect x="300" y="166" width="390" height="30" fill="#315f8f"/>
+    <rect x="330" y="166" width="30" height="30" fill="#c55f16"/>
+    <rect x="390" y="166" width="30" height="30" fill="#c55f16"/>
+    <rect x="450" y="166" width="30" height="30" fill="#c55f16"/>
+    <rect x="510" y="166" width="30" height="30" fill="#c55f16"/>
+    <rect x="570" y="166" width="30" height="30" fill="#c55f16"/>
+    <rect x="630" y="166" width="30" height="30" fill="#c55f16"/>
+  </g>
+  <g transform="rotate(-3 488 261)" clip-path="url(#tube-c)">
+    <rect x="326" y="246" width="338" height="30" fill="#c55f16"/>
+    <rect x="352" y="246" width="26" height="30" fill="#315f8f"/>
+    <rect x="404" y="246" width="26" height="30" fill="#315f8f"/>
+    <rect x="456" y="246" width="26" height="30" fill="#315f8f"/>
+    <rect x="508" y="246" width="26" height="30" fill="#315f8f"/>
+    <rect x="560" y="246" width="26" height="30" fill="#315f8f"/>
+    <rect x="612" y="246" width="26" height="30" fill="#315f8f"/>
+  </g>
+  <g transform="rotate(13 490 341)" clip-path="url(#tube-d)">
+    <rect x="344" y="326" width="308" height="30" fill="#315f8f"/>
+    <rect x="372" y="326" width="28" height="30" fill="#c55f16"/>
+    <rect x="428" y="326" width="28" height="30" fill="#c55f16"/>
+    <rect x="484" y="326" width="28" height="30" fill="#c55f16"/>
+    <rect x="540" y="326" width="28" height="30" fill="#c55f16"/>
+    <rect x="596" y="326" width="28" height="30" fill="#c55f16"/>
+  </g>
+
+  <g stroke="#07564f" stroke-width="2" fill="none" opacity=".58">
+    <path d="M306 126c78 34 158 38 246 12"/>
+    <path d="M304 308c84-24 178-14 278 28"/>
+  </g>
+
+  <g transform="translate(314 420)">
+    <text x="0" y="0" fill="#7a8783" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="2">SPECTROSCOPY</text>
+    <g transform="translate(0 24)">
+      <rect x="0" y="52" width="30" height="42" rx="15" fill="#c55f16"/>
+      <rect x="48" y="18" width="30" height="76" rx="15" fill="#315f8f"/>
+      <rect x="96" y="42" width="30" height="52" rx="15" fill="#c55f16"/>
+      <rect x="144" y="0" width="30" height="94" rx="15" fill="#315f8f"/>
+      <rect x="192" y="50" width="30" height="44" rx="15" fill="#c55f16"/>
+      <rect x="240" y="30" width="30" height="64" rx="15" fill="#315f8f"/>
+    </g>
+  </g>
+
+</svg>

@@ -7,27 +7,27 @@
     <h1 class="mond-section-title" data-content-key="page-title" data-content-value="{{ case_data.title | strip_html | normalize_whitespace }}">{{ case_data.title }}</h1>
     <p class="mond-section-lede" data-content-key="case-lede" data-content-value="{{ case_data.lede | strip_html | normalize_whitespace }}">{{ case_data.lede }}</p>
     <div class="mond-actions">
-      {% include case-actions.html links=case_data.hero_actions variant="mondrian" inline=true parity_list="case-hero-actions" %}
+      {% include designs/mondrian/partials/case-actions.html links=case_data.hero_actions inline=true parity_list="case-hero-actions" %}
     </div>
   </header>
 
-  {% include case-facts.html variant="mondrian" facts=case_data.facts %}
+  {% include designs/mondrian/partials/case-facts.html facts=case_data.facts %}
 
-  {% include case-visual.html variant="mondrian" visual=case_data.visual screenshots=case_data.case_screenshots %}
+  {% include case-visual.html design="mondrian" visual=case_data.visual screenshots=case_data.case_screenshots %}
 
-  {% include case-architecture.html variant="mondrian" items=case_data.architecture %}
+  {% include designs/mondrian/partials/case-architecture.html items=case_data.architecture %}
 
-  {% include case-overview.html variant="mondrian" items=case_data.overview limit=2 %}
+  {% include designs/mondrian/partials/case-overview.html items=case_data.overview limit=2 %}
 
-  {% include case-sections.html variant="mondrian" sections=case_data.sections limit=2 %}
+  {% include designs/mondrian/partials/case-sections.html sections=case_data.sections limit=2 %}
 
-  {% include case-workflow.html variant="mondrian" workflow=case_data.workflow %}
+  {% include designs/mondrian/partials/case-workflow.html workflow=case_data.workflow %}
   <div class="mond-tile case-tile--stack-head">
     <p class="mond-eyebrow">Stack</p>
     <h3 class="mond-section-title">{{ case_data.stack_heading }}</h3>
   </div>
-  {% include mondrian-chip-grid.html class="mond-tile case-tile--stack-chips proj-chips" items=case_data.case_stack parity_list="case-stack" %}
+  {% include designs/mondrian/partials/chip-grid.html class="mond-tile case-tile--stack-chips proj-chips" items=case_data.case_stack parity_list="case-stack" %}
 
-  {% include case-cta.html variant="mondrian" cta=case_data.cta %}
+  {% include designs/mondrian/partials/case-cta.html cta=case_data.cta %}
 </section>
 {% endif %}

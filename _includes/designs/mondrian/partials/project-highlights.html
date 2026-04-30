@@ -1,0 +1,7 @@
+{% assign item = include.item %}
+{% for highlight in item.highlights limit: include.limit %}
+<article class="mond-tile proj-tile--highlight proj-h-{{ include.index }}-{{ forloop.index }}" data-content-list="project-highlights" data-content-key="{{ item.slug }}:{{ forloop.index }}" data-content-value="{{ highlight | strip_html | normalize_whitespace }}">
+  {% include icon.html name="check" %}
+  <p>{{ highlight }}</p>
+</article>
+{% endfor %}

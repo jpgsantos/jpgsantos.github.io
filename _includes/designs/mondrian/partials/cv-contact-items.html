@@ -1,0 +1,33 @@
+{% assign profile = site.data.profile %}
+<a href="mailto:{{ profile.contact.email }}" class="mond-tile cv-tile--contact cv-tile--contact-email" data-content-list="cv-contact" data-content-key="email" data-content-value="{{ profile.contact.email }}">
+  {% include icon.html name="email" %}
+  <span><strong>Email</strong>{{ profile.contact.email }}</span>
+</a>
+<a href="tel:{{ profile.contact.phone_uri }}" class="mond-tile cv-tile--contact cv-tile--contact-phone" data-content-list="cv-contact" data-content-key="phone" data-content-value="{{ profile.contact.phone }}">
+  {% include icon.html name="phone" %}
+  <span><strong>Phone</strong>{{ profile.contact.phone }}</span>
+</a>
+<span class="mond-tile cv-tile--contact cv-tile--contact-location" data-content-list="cv-contact" data-content-key="location" data-content-value="{{ profile.location }}">
+  {% include icon.html name="location" %}
+  <span><strong>Location</strong>{{ profile.location }}</span>
+</span>
+<span class="mond-tile cv-tile--contact cv-tile--contact-flag" data-content-list="cv-contact" data-content-key="citizenship" data-content-value="{{ profile.citizenship }}">
+  {% include icon.html name="flag" %}
+  <span><strong>Citizenship</strong>{{ profile.citizenship }}</span>
+</span>
+<a href="{{ profile.socials.linkedin.url }}" target="_blank" rel="noopener noreferrer" class="mond-tile cv-tile--contact cv-tile--contact-linkedin" data-content-list="cv-contact" data-content-key="linkedin" data-content-value="{{ profile.socials.linkedin.username }}">
+  {% include icon.html name="linkedin" %}
+  <span><strong>LinkedIn</strong>{{ profile.socials.linkedin.username }}</span>
+</a>
+<a href="{{ profile.socials.github.url }}" target="_blank" rel="noopener noreferrer" class="mond-tile cv-tile--contact cv-tile--contact-github" data-content-list="cv-contact" data-content-key="github" data-content-value="{{ profile.socials.github.username }}">
+  {% include icon.html name="github" %}
+  <span><strong>GitHub</strong>{{ profile.socials.github.username }}</span>
+</a>
+<span class="mond-tile cv-tile--contact cv-tile--contact-language" data-content-list="cv-contact" data-content-key="languages" data-content-value="{{ profile.languages }}">
+  {% include icon.html name="language" %}
+  <span><strong>Languages</strong>{{ profile.languages }}</span>
+</span>
+<span class="mond-tile cv-tile--contact cv-tile--contact-current" data-content-list="cv-contact" data-content-key="current-work" data-content-value="{{ profile.current_work }}">
+  {% include icon.html name="briefcase" %}
+  <span><strong>Current</strong>{{ profile.current_work }}</span>
+</span>

@@ -7,28 +7,28 @@
       <p class="eyebrow">{{ case_data.eyebrow }}</p>
       <h1 data-content-key="page-title" data-content-value="{{ case_data.title | strip_html | normalize_whitespace }}">{{ case_data.title }}</h1>
       <p class="case-study__lede" data-content-key="case-lede" data-content-value="{{ case_data.lede | strip_html | normalize_whitespace }}">{{ case_data.lede }}</p>
-      {% include case-actions.html links=case_data.hero_actions wrapper_class="button-row case-study__actions" parity_list="case-hero-actions" %}
+      {% include designs/default/partials/case-actions.html links=case_data.hero_actions wrapper_class="button-row case-study__actions" parity_list="case-hero-actions" %}
     </div>
-    {% include case-facts.html facts=case_data.facts %}
+    {% include designs/default/partials/case-facts.html facts=case_data.facts %}
   </header>
 
   <section class="case-study__overview" aria-label="Project overview">
-    {% include case-overview.html items=case_data.overview limit=case_data.overview.size %}
+    {% include designs/default/partials/case-overview.html items=case_data.overview limit=case_data.overview.size %}
   </section>
 
-  {% include case-visual.html visual=case_data.visual screenshots=case_data.case_screenshots %}
+  {% include case-visual.html design="default" visual=case_data.visual screenshots=case_data.case_screenshots %}
 
   <div class="case-study__body">
     <div class="case-study__main" aria-label="Case study details">
-      {% include case-sections.html sections=case_data.sections limit=case_data.sections.size %}
+      {% include designs/default/partials/case-sections.html sections=case_data.sections limit=case_data.sections.size %}
 
-      {% include case-workflow.html workflow=case_data.workflow %}
+      {% include designs/default/partials/case-workflow.html workflow=case_data.workflow %}
     </div>
 
     <aside class="case-study__aside" aria-label="Architecture and stack">
       <section class="case-aside-block">
         <h2>{{ case_data.architecture_heading }}</h2>
-        {% include case-architecture.html items=case_data.architecture %}
+        {% include designs/default/partials/case-architecture.html items=case_data.architecture %}
       </section>
       <section class="case-aside-block">
         <h2>{{ case_data.stack_heading }}</h2>
@@ -37,6 +37,6 @@
     </aside>
   </div>
 
-  {% include case-cta.html cta=case_data.cta %}
+  {% include designs/default/partials/case-cta.html cta=case_data.cta %}
 </section>
 {% endif %}

@@ -1,0 +1,11 @@
+{% assign case_visual = include.visual %}
+<section class="case-study__visual case-study__visual--workflow" aria-label="{{ case_visual.aria_label }}" data-content-key="case-visual" data-content-value="{{ case_visual.type }}">
+  <div class="case-workflow-visual">
+    {% include workflow-diagram.html %}
+  </div>
+  <div class="case-workflow-copy">
+    <p class="eyebrow">{{ case_visual.label }}</p>
+    <h2>{{ case_visual.title }}</h2>
+    <p>{{ case_visual.body }}</p>
+  </div>
+</section>

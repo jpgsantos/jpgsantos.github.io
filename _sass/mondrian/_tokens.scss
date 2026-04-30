@@ -1,3 +1,51 @@
 /* Mondrian design tokens layered after the legacy import.
    Preserve the black rule grid, primary color blocks, and paper/ink contrast here
    when extracting more of the legacy stylesheet into smaller modules. */
+
+[data-style="mondrian"] {
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-mono: var(--font-sans);
+
+  --t-xs: 0.72rem;
+  --t-sm: 0.9rem;
+  --t-md: 1rem;
+  --t-lg: clamp(1.45rem, 1.08rem + 1.5vw, 2.05rem);
+  --t-xl: clamp(2.55rem, 1.65rem + 4vw, 4.35rem);
+
+  /* Shared contract slots - see _sass/shared/_contract.scss.
+     Aliases reference design-private tokens declared in mondrian/_legacy.scss
+     so light/dark variants resolve naturally through the cascade. */
+  --color-surface: var(--mond-paper);
+  --color-surface-raised: var(--mond-paper-soft);
+  --color-ink: var(--mond-text);
+  --color-muted: var(--mond-text-soft);
+  --color-border: var(--mond-ink);
+
+  --rule-thickness: var(--mond-rule);
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+
+  --shadow-soft: var(--mond-shadow);
+  --shadow-strong: var(--mond-shadow);
+
+  --density-row: 1.6;
+  --density-gap: 1rem;
+  --section-pad: clamp(2.75rem, 6vw, 5rem);
+  --gutter: clamp(0.75rem, 2.4vw, 1.5rem);
+
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+}
+
+@media (max-width: 540px) {
+  [data-style="mondrian"] {
+    --t-xl: clamp(2rem, 1.4rem + 3.2vw, 4.35rem);
+  }
+}

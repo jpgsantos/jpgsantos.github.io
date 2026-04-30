@@ -11,6 +11,7 @@ if (!value || !/^[a-z][a-z0-9-]*$/.test(value)) {
 }
 
 const designDir = join('_includes', 'designs', value);
+const partialsDir = join(designDir, 'partials');
 const sassDir = join('_sass', value);
 const assetEntry = join('assets', 'css', `${value}.scss`);
 const bundleEntry = join('_sass', `_site-${value}.scss`);
@@ -22,8 +23,7 @@ const plannedFiles = [
   join(designDir, 'cv.html'),
   join(designDir, 'case.html'),
   join(sassDir, '_tokens.scss'),
-  join(sassDir, '_layout.scss'),
-  join(sassDir, '_responsive.scss'),
+  join(sassDir, '_overrides.scss'),
   assetEntry,
   bundleEntry
 ];
@@ -35,11 +35,12 @@ if (existing.length > 0) {
 }
 
 mkdirSync(designDir, { recursive: true });
+mkdirSync(partialsDir, { recursive: true });
 mkdirSync(sassDir, { recursive: true });
 
 writeFileSync(join(designDir, 'home.html'), `{% assign profile = site.data.profile %}
 <section class="${value}-design ${value}-home" data-design-root="${value}" aria-label="Home - ${displayName} view">
-  <header class="${value}-hero">
+  <header class="${value}-page-head">
     <p class="eyebrow">{{ profile.role }}</p>
     <h1 data-content-key="page-title" data-content-value="{{ profile.headline | strip_html | normalize_whitespace }}">{{ profile.headline }}</h1>
     <p data-content-key="home-summary" data-content-value="{{ profile.summary | strip_html | normalize_whitespace }}">{{ profile.summary }}</p>
@@ -59,12 +60,21 @@ writeFileSync(join(designDir, 'projects.html'), `{% assign work_copy = site.data
     <p>{{ work_copy.intro }}</p>
   </header>
   {% for item in site.data.work %}
-  <article class="${value}-project" data-content-list="project-titles" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
+  <article class="${value}-project" id="${value}-work-{{ item.slug }}">
     <p class="eyebrow">{{ item.category }}</p>
-    <h2>{{ item.title }}</h2>
+    <h2 data-content-list="project-titles" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">{{ item.title }}</h2>
     <p data-content-list="project-descriptions" data-content-key="{{ item.slug }}" data-content-value="{{ item.description | strip_html | normalize_whitespace }}">{{ item.description }}</p>
-    {% include project-summary-grid.html item=item %}
-    {% include project-highlights.html item=item limit=item.highlights.size %}
+    <div class="${value}-summary">
+      <p data-content-list="project-summary" data-content-key="{{ item.slug }}:problem" data-content-value="{{ item.problem | strip_html | normalize_whitespace }}"><strong>Problem</strong> {{ item.problem }}</p>
+      <p data-content-list="project-summary" data-content-key="{{ item.slug }}:contribution" data-content-value="{{ item.contribution | strip_html | normalize_whitespace }}"><strong>Contribution</strong> {{ item.contribution }}</p>
+      <p data-content-list="project-summary" data-content-key="{{ item.slug }}:outcome" data-content-value="{{ item.outcome | strip_html | normalize_whitespace }}"><strong>Outcome</strong> {{ item.outcome }}</p>
+    </div>
+    <ul>
+      {% for highlight in item.highlights %}
+      <li data-content-list="project-highlights" data-content-key="{{ item.slug }}:{{ forloop.index }}" data-content-value="{{ highlight | strip_html | normalize_whitespace }}">{{ highlight }}</li>
+      {% endfor %}
+    </ul>
+    {% include chip-list.html class="tag-list" items=item.stack %}
     {% include action-links.html links=item.links parity_list="project-actions" %}
   </article>
   {% endfor %}
@@ -96,7 +106,38 @@ writeFileSync(join(designDir, 'cv.html'), `{% assign profile = site.data.profile
 </section>
 `);
 
-writeFileSync(join(designDir, 'case.html'), `{% include designs/default/case-study.html project_slug=include.project_slug %}
+writeFileSync(join(designDir, 'case.html'), `{% assign case_project = site.data.work | where: "slug", include.project_slug | first %}
+{% assign case_data = case_project.case %}
+{% if case_data %}
+<section class="${value}-design ${value}-case" data-design-root="${value}" aria-label="{{ case_data.title }} case study - ${displayName} view">
+  <header class="${value}-page-head">
+    <p class="eyebrow">{{ case_data.eyebrow }}</p>
+    <h1 data-content-key="page-title" data-content-value="{{ case_data.title | strip_html | normalize_whitespace }}">{{ case_data.title }}</h1>
+    <p data-content-key="case-lede" data-content-value="{{ case_data.lede | strip_html | normalize_whitespace }}">{{ case_data.lede }}</p>
+    {% include action-links.html links=case_data.hero_actions parity_list="case-hero-actions" %}
+  </header>
+  {% include case-visual.html design="${value}" visual=case_data.visual screenshots=case_data.case_screenshots %}
+  {% for item in case_data.overview %}
+  <article data-content-list="case-overview" data-content-key="{{ item.label | slugify }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
+    <p class="eyebrow">{{ item.label }}</p>
+    <h2>{{ item.title }}</h2>
+    <p>{{ item.body }}</p>
+  </article>
+  {% endfor %}
+  {% for section in case_data.sections %}
+  <section data-content-list="case-sections" data-content-key="{{ section.label | slugify }}" data-content-value="{{ section.title | strip_html | normalize_whitespace }}">
+    <p class="eyebrow">{{ section.label }}</p>
+    <h2>{{ section.title }}</h2>
+    {% for feature in section.features %}
+    <article data-content-list="case-features" data-content-key="{{ section.label | slugify }}:{{ feature.title | slugify }}" data-content-value="{{ feature.title | strip_html | normalize_whitespace }}">
+      <h3>{{ feature.title }}</h3>
+      <p>{{ feature.body }}</p>
+    </article>
+    {% endfor %}
+  </section>
+  {% endfor %}
+</section>
+{% endif %}
 `);
 
 writeFileSync(assetEntry, `---
@@ -111,33 +152,81 @@ writeFileSync(bundleEntry, `/* =================================================
 
 @import "shared/design-contract";
 @import "${value}/tokens";
-@import "${value}/layout";
-@import "${value}/responsive";
+@import "${value}/overrides";
 `);
 
-writeFileSync(join(sassDir, '_tokens.scss'), `[data-style="${value}"] {
-  --${value}-surface: var(--surface-solid);
-  --${value}-text: var(--text);
+writeFileSync(join(sassDir, '_tokens.scss'), `/* ${displayName} contract slots. Keep values design-owned. */
+[data-style="${value}"] {
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono: var(--font-sans);
+
+  --t-xs: 0.74rem;
+  --t-sm: 0.9rem;
+  --t-md: 1rem;
+  --t-lg: clamp(1.35rem, 1.1rem + 1vw, 1.8rem);
+  --t-xl: clamp(2.25rem, 1.6rem + 3.2vw, 3.6rem);
+
+  --color-surface: #f8fbfa;
+  --color-surface-raised: #ffffff;
+  --color-ink: #16201d;
+  --color-muted: #5c6965;
+  --color-border: #d7e0dc;
+
+  --rule-thickness: 1px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+
+  --density-row: 1.7;
+  --density-gap: clamp(1rem, 2vw, 1.35rem);
+  --section-pad: clamp(3rem, 6vw, 5rem);
+  --gutter: clamp(1rem, 3vw, 2rem);
+
+  --shadow-soft: 0 10px 24px rgba(21, 38, 35, 0.08);
+  --shadow-strong: 0 22px 46px rgba(21, 38, 35, 0.12);
+}
+
+[data-style="${value}"][data-theme="dark"] {
+  --color-surface: #101513;
+  --color-surface-raised: #18201d;
+  --color-ink: #eef6f2;
+  --color-muted: #adbbb6;
+  --color-border: #2b3934;
+  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.22);
+  --shadow-strong: 0 22px 55px rgba(0, 0, 0, 0.3);
 }
 `);
 
-writeFileSync(join(sassDir, '_layout.scss'), `.${value}-design {
+writeFileSync(join(sassDir, '_overrides.scss'), `[data-style="${value}"] body {
+  font-family: var(--font-sans);
+  line-height: var(--density-row);
+  color: var(--color-ink);
+  background: var(--color-surface);
+}
+
+.${value}-design {
   display: none;
-  max-width: var(--content);
+  max-width: 1180px;
   margin: 0 auto;
   padding: var(--section-pad) var(--gutter);
 }
 
 [data-style="${value}"] .${value}-design {
   display: grid;
-  gap: var(--cluster-gap);
+  gap: var(--density-gap);
 }
-`);
 
-writeFileSync(join(sassDir, '_responsive.scss'), `@media (max-width: 760px) {
-  [data-style="${value}"] .${value}-design {
-    padding-inline: var(--gutter);
-  }
+[data-style="${value}"] .${value}-design :where(article, section, header) {
+  min-width: 0;
 }
 `);
 
@@ -159,6 +248,10 @@ if (shouldRegister) {
     projects: "designs/${value}/projects.html"
     cv: "designs/${value}/cv.html"
     case: "designs/${value}/case.html"
+  case_visuals:
+    screenshots: "designs/default/partials/case-visual-screenshots.html"
+    workflow: "designs/default/partials/case-visual-workflow.html"
+    porphyrin: "designs/default/partials/case-visual-porphyrin.html"
 `);
   }
 }

@@ -9,15 +9,23 @@
     projects: "designs/default/projects.html"
     cv: "designs/default/cv.html"
     case: "designs/default/case.html"
+  case_visuals:
+    screenshots: "designs/default/partials/case-visual-screenshots.html"
+    workflow: "designs/default/partials/case-visual-workflow.html"
+    porphyrin: "designs/default/partials/case-visual-porphyrin.html"
 
 - value: "mondrian"
   name: "Mondrian"
   description: "Geometric editorial grid"
   icon: "swatch"
   stylesheet: "/assets/css/mondrian.css"
-  css_budget_kb: 144
+  css_budget_kb: 148
   includes:
     home: "designs/mondrian/home.html"
     projects: "designs/mondrian/projects.html"
     cv: "designs/mondrian/cv.html"
     case: "designs/mondrian/case.html"
+  case_visuals:
+    screenshots: "designs/mondrian/partials/case-visual-screenshots.html"
+    workflow: "designs/mondrian/partials/case-visual-workflow.html"
+    porphyrin: "designs/mondrian/partials/case-visual-porphyrin.html"

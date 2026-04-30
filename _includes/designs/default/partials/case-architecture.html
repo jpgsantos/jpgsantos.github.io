@@ -1,0 +1,5 @@
+<dl class="case-architecture-list">
+  {% for item in include.items %}
+  <div data-content-list="case-architecture" data-content-key="{{ item.label | slugify }}" data-content-value="{{ item.value | strip_html | normalize_whitespace }}"><dt>{{ item.label }}</dt><dd>{{ item.value }}</dd></div>
+  {% endfor %}
+</dl>

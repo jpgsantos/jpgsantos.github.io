@@ -1,0 +1,6 @@
+{% assign content_key = include.content_key | default: include.href %}
+<a href="{{ include.href }}" {% if include.external %}target="_blank" rel="noopener noreferrer"{% endif %} class="mond-tile mond-contact-card mond-contact-card--compact{% if include.class %} {{ include.class }}{% endif %}" data-content-list="contact-links" data-content-key="{{ content_key }}" data-content-value="{{ include.value | strip_html | normalize_whitespace }}">
+  {% include icon.html name=include.icon %}
+  <span><strong>{{ include.label }}</strong>{{ include.value }}</span>
+  {% include icon.html name="arrow-right" %}
+</a>

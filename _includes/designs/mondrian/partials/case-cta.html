@@ -1,0 +1,9 @@
+{% assign cta = include.cta %}
+<div class="mond-tile case-tile--cta-head" data-content-key="case-cta" data-content-value="{{ cta.title | strip_html | normalize_whitespace }}">
+  <p class="mond-eyebrow">{{ cta.label }}</p>
+  <h2 class="mond-section-title">{{ cta.title }}</h2>
+  <p>{{ cta.body }}</p>
+</div>
+<div class="mond-tile case-tile--cta-actions">
+  {% include designs/mondrian/partials/case-actions.html links=cta.actions inline=true parity_list="case-cta-actions" %}
+</div>

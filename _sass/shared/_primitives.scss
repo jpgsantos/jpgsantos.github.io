@@ -1,0 +1,18 @@
+/* ==========================================================================
+   Shared primitives (opt-in)
+   --------------------------------------------------------------------------
+   Component-level conveniences a design MAY consume. Designs that prefer
+   bespoke components ignore this file entirely. Primitives consume only
+   tokens declared in shared/contract - never design-private tokens.
+
+   Primitives populate as they earn their place in real includes. Keep this
+   layer small: a primitive only belongs here when at least two designs
+   would benefit from sharing the same implementation.
+
+   Currently empty. Phases that adopt primitives in design includes will
+   populate this file with the concrete rules.
+
+   Naming:
+     .x-section, .x-stack, .x-cluster, .x-grid, .x-prose,
+     .x-card, .x-tile, .x-chip, .x-rule
+   ========================================================================== */

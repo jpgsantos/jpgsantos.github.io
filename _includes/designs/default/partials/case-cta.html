@@ -1,0 +1,9 @@
+{% assign cta = include.cta %}
+<section class="case-study__cta" aria-label="Related work" data-content-key="case-cta" data-content-value="{{ cta.title | strip_html | normalize_whitespace }}">
+  <div>
+    <p class="eyebrow">{{ cta.label }}</p>
+    <h2>{{ cta.title }}</h2>
+    <p>{{ cta.body }}</p>
+  </div>
+  {% include designs/default/partials/case-actions.html links=cta.actions wrapper_class="button-row" parity_list="case-cta-actions" %}
+</section>

@@ -41,13 +41,13 @@
   </header>
 
   {%- comment -%} Problem / Contribution / Outcome 3-up — coloured tiles {%- endcomment -%}
-  {% include project-summary-grid.html variant="mondrian" item=item index=idx %}
+  {% include designs/mondrian/partials/project-summary-grid.html item=item index=idx %}
 
   {%- comment -%} Highlights — 4 tiles with varied widths + a Mondrian visual block {%- endcomment -%}
-  {% include project-highlights.html variant="mondrian" item=item index=idx limit=4 %}
+  {% include designs/mondrian/partials/project-highlights.html item=item index=idx limit=4 %}
 
   {%- comment -%} Visual: workflow / phone / molecule depending on slug {%- endcomment -%}
-  <div class="mond-tile proj-tile--visual proj-tile--visual-{{ idx }}{% if item.slug == 'subcellular-workflow' %} proj-tile--visual-workflow{% elsif item.slug == 'octidy-android-app' %} proj-tile--visual-phone{% else %} proj-tile--visual-molecule{% endif %}"{% if item.slug == 'octidy-android-app' %} aria-label="Octidy Android app screenshots"{% else %} aria-hidden="true"{% endif %}>
+  <div class="mond-tile proj-tile--visual proj-tile--visual-{{ idx }}{% if item.slug == 'subcellular-workflow' %} proj-tile--visual-workflow{% elsif item.slug == 'octidy-android-app' %} proj-tile--visual-phone{% else %} proj-tile--visual-molecule{% endif %}"{% if item.slug == 'octidy-android-app' %} aria-label="Octidy Android app screenshots"{% elsif item.slug != 'porphyrin-materials-research' %} aria-hidden="true"{% endif %}>
     {% if item.slug == 'subcellular-workflow' %}
       {% include workflow-diagram.html %}
     {% elsif item.slug == 'octidy-android-app' %}
@@ -77,15 +77,13 @@
         </div>
       </div>
     {% else %}
-      <div class="proj-molecule" role="img" aria-label="Porphyrin molecule abstract">
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
+      {% include porphyrin-paper-visual.html variant="mondrian" %}
     {% endif %}
   </div>
 
   <div class="mond-tile proj-tile--stack proj-stack-{{ idx }}">
     <p class="mond-eyebrow">Stack</p>
-    {% include mondrian-chip-grid.html items=item.stack %}
+    {% include designs/mondrian/partials/chip-grid.html items=item.stack %}
   </div>
 
   {%- comment -%} Actions row {%- endcomment -%}

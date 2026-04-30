@@ -1,0 +1,6 @@
+/* Shared layer entry point.
+   Bundles the design contract documentation and the opt-in primitives so a
+   design's site bundle can pull both in with a single import. */
+
+@import "contract";
+@import "primitives";

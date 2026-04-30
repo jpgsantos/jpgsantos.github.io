@@ -1,6 +1,0 @@
-{% assign case_links = include.links %}
-{% if include.variant == "mondrian" %}
-  {% include action-links.html links=case_links inline=include.inline wrapper_class=include.wrapper_class link_class="mond-button" primary_class="mond-button--primary" secondary_class="" parity_list=include.parity_list %}
-{% else %}
-  {% include action-links.html links=case_links inline=include.inline wrapper_class=include.wrapper_class link_class="button" primary_class="button--primary" secondary_class="button--secondary" parity_list=include.parity_list %}
-{% endif %}

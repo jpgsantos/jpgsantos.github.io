@@ -1,0 +1,9 @@
+{% assign profile = site.data.profile %}
+<a href="mailto:{{ profile.contact.email }}" data-content-list="cv-contact" data-content-key="email" data-content-value="{{ profile.contact.email }}">{% include icon.html name="email" %}<span>{{ profile.contact.email }}</span></a>
+<a href="tel:{{ profile.contact.phone_uri }}" data-content-list="cv-contact" data-content-key="phone" data-content-value="{{ profile.contact.phone }}">{% include icon.html name="phone" %}<span>{{ profile.contact.phone }}</span></a>
+<span data-content-list="cv-contact" data-content-key="location" data-content-value="{{ profile.location }}">{% include icon.html name="location" %}<span>{{ profile.location }}</span></span>
+<span data-content-list="cv-contact" data-content-key="citizenship" data-content-value="{{ profile.citizenship }}">{% include icon.html name="flag" %}<span>{{ profile.citizenship }}</span></span>
+<a href="{{ profile.socials.linkedin.url }}" target="_blank" rel="noopener noreferrer" data-content-list="cv-contact" data-content-key="linkedin" data-content-value="{{ profile.socials.linkedin.username }}">{% include icon.html name="linkedin" %}<span>{{ profile.socials.linkedin.username }}</span></a>
+<a href="{{ profile.socials.github.url }}" target="_blank" rel="noopener noreferrer" data-content-list="cv-contact" data-content-key="github" data-content-value="{{ profile.socials.github.username }}">{% include icon.html name="github" %}<span>{{ profile.socials.github.username }}</span></a>
+<span data-content-list="cv-contact" data-content-key="languages" data-content-value="{{ profile.languages }}">{% include icon.html name="language" %}<span>{{ profile.languages }}</span></span>
+<span data-content-list="cv-contact" data-content-key="current-work" data-content-value="{{ profile.current_work }}">{% include icon.html name="briefcase" %}<span>Current: {{ profile.current_work }}</span></span>

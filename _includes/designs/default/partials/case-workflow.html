@@ -1,0 +1,6 @@
+{% assign workflow = include.workflow %}
+<section class="case-section" data-content-key="case-workflow" data-content-value="{{ workflow.title | strip_html | normalize_whitespace }}">
+  <p class="eyebrow">{{ workflow.label }}</p>
+  <h2>{{ workflow.title }}</h2>
+  <p>{{ workflow.body }}</p>
+</section>

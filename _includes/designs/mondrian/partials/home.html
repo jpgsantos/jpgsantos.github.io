@@ -142,13 +142,13 @@
 
   {% assign email_href = profile.contact.email | prepend: 'mailto:' %}
   {% assign phone_href = profile.contact.phone_uri | prepend: 'tel:' %}
-  {% include contact-card.html variant="mondrian" href=email_href icon="email" label="Email" value=profile.contact.email class="mond-tile--contact-email" %}
-  {% include contact-card.html variant="mondrian" href=phone_href icon="phone" label="Phone" value=profile.contact.phone class="mond-tile--contact-phone" %}
+  {% include designs/mondrian/partials/contact-card.html href=email_href icon="email" label="Email" value=profile.contact.email class="mond-tile--contact-email" %}
+  {% include designs/mondrian/partials/contact-card.html href=phone_href icon="phone" label="Phone" value=profile.contact.phone class="mond-tile--contact-phone" %}
 
   {% for social in profile.socials %}
   {% assign item = social[1] %}
   {% assign contact_class = 'mond-tile--contact-' | append: social[0] %}
-  {% include contact-card.html variant="mondrian" href=item.url icon=item.icon label=item.label value=item.username external=true class=contact_class %}
+  {% include designs/mondrian/partials/contact-card.html href=item.url icon=item.icon label=item.label value=item.username external=true class=contact_class %}
   {% endfor %}
 
   <div class="mond-tile mond-tile--actions">

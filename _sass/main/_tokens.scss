@@ -1,3 +1,42 @@
 /* Default design tokens layered after the legacy import.
    Keep new density and component knobs here so future designs can copy the contract
    without inheriting the large historical stylesheet. */
+
+:root,
+[data-style="default"] {
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono: var(--font-sans);
+
+  --t-xs: 0.74rem;
+  --t-sm: 0.9rem;
+  --t-md: 1rem;
+  --t-lg: clamp(1.35rem, 1.1rem + 1vw, 1.8rem);
+  --t-xl: clamp(2.25rem, 1.6rem + 3.2vw, 3.6rem);
+
+  /* Shared contract slots - see _sass/shared/_contract.scss.
+     Aliases reference design-private tokens declared in main/_legacy.scss
+     so light/dark variants resolve naturally through the cascade. */
+  --color-surface: var(--bg);
+  --color-surface-raised: var(--surface-solid);
+  --color-ink: var(--text);
+  --color-muted: var(--text-muted);
+  --color-border: var(--border);
+
+  --rule-thickness: 1px;
+  --radius-md: var(--radius);
+  --radius-lg: 14px;
+
+  --shadow-strong: var(--shadow);
+
+  --density-row: 1.7;
+  --density-gap: var(--cluster-gap);
+
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+}
