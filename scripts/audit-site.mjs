@@ -10,6 +10,7 @@ const styleFilter = getArg('--style');
 const themeFilter = getArg('--theme');
 const widthFilter = Number(getArg('--width'));
 const designRegistry = readDesignRegistry();
+const requiredDesignIncludeKeys = ['home', 'projects', 'cv', 'case_octidy', 'case_subcellular'];
 const pages = pageFilter ? [pageFilter] : ['/', '/projects/', '/cv/', '/projects/octidy-android-app/', '/projects/subcellular-workflow/'];
 const widths = Number.isFinite(widthFilter) && widthFilter > 0 ? [widthFilter] : [390, 540, 768, 1024, 1366];
 const styles = styleFilter ? [styleFilter] : designRegistry.map((design) => design.value);
@@ -32,15 +33,49 @@ function readDesignRegistry() {
       };
       const value = read('value');
       if (!value) return null;
+      const includes = {};
+      let inIncludes = false;
+      for (const line of block.split('\n')) {
+        if (/^\s+includes:\s*$/.test(line)) {
+          inIncludes = true;
+          continue;
+        }
+        if (!inIncludes) continue;
+        const includeMatch = line.match(/^\s{4}([A-Za-z0-9_-]+):\s*"?([^"\n]+)"?\s*$/);
+        if (includeMatch) {
+          includes[includeMatch[1]] = includeMatch[2].trim();
+          continue;
+        }
+        if (/^\s{2}\S/.test(line)) inIncludes = false;
+      }
       return {
         value,
         stylesheet: read('stylesheet'),
-        cssBudgetKb: Number(read('css_budget_kb')) || null
+        cssBudgetKb: Number(read('css_budget_kb')) || null,
+        includes
       };
     })
     .filter(Boolean);
 
   return entries.length > 0 ? entries : [{ value: 'default' }, { value: 'mondrian' }];
+}
+
+function assertDesignIncludes(registry) {
+  return registry.flatMap((design) => {
+    const failures = [];
+    for (const key of requiredDesignIncludeKeys) {
+      const includePath = design.includes?.[key];
+      if (!includePath) {
+        failures.push(`${design.value} design is missing includes.${key}`);
+        continue;
+      }
+      const resolved = resolve('_includes', includePath);
+      if (!existsSync(resolved)) {
+        failures.push(`${design.value} includes.${key} points to missing file ${resolved}`);
+      }
+    }
+    return failures;
+  });
 }
 
 function assertCssBudgets(registry) {
@@ -438,7 +473,7 @@ function assertResult(result) {
   const failures = [];
   if (result.actualStyle !== result.expectedStyle) failures.push(`style mismatch ${result.actualStyle}`);
   if (result.themeChoice !== result.theme) failures.push(`theme mismatch ${result.themeChoice}`);
-  if (result.activeRootCount < 1) failures.push('missing active design root');
+  if (result.activeRootCount !== 1) failures.push(`expected exactly one active design root, got ${result.activeRootCount}`);
   if (result.inactiveLeakCount > 0) failures.push('inactive design roots visible/accessibility-leaking');
   if (result.inactiveEagerImages > 0) failures.push(`${result.inactiveEagerImages} inactive design image(s) are eager/high priority`);
   if (result.overflow > 2) failures.push(`horizontal overflow ${result.overflow}px`);
@@ -543,6 +578,10 @@ async function main() {
     const cssBudgetFailures = assertCssBudgets(designRegistry);
     if (cssBudgetFailures.length > 0) {
       failures.push({ testCase: { path: 'assets/css', style: 'all', theme: 'all', width: 0 }, failures: cssBudgetFailures });
+    }
+    const includeFailures = assertDesignIncludes(designRegistry);
+    if (includeFailures.length > 0) {
+      failures.push({ testCase: { path: '_data/designs.yml', style: 'all', theme: 'all', width: 0 }, failures: includeFailures });
     }
 
     const report = {

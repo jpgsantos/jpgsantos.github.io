@@ -99,51 +99,9 @@
     {% endif %}
   </div>
 
-  {%- comment -%} Stack chips — column count adapts to chip count.
-       For partial last rows, expand grid track count to LCM(cols, partial)=cols*partial so row-1 chips
-       span `partial` tracks each and partial-row chips span `cols` tracks each, filling the row width
-       evenly with no empty cells and no fillers. {%- endcomment -%}
-  {%- assign stack_count = item.stack | size -%}
-  {%- if stack_count <= 4 -%}
-    {%- assign stack_cols = stack_count -%}
-  {%- else -%}
-    {%- assign stack_cols = stack_count | divided_by: 2.0 | ceil -%}
-  {%- endif -%}
-  {%- assign s_partial = stack_count | modulo: stack_cols -%}
-  {%- assign s_full_rows = stack_count | divided_by: stack_cols -%}
-  {%- if s_partial > 0 -%}
-    {%- assign s_grid_cols = stack_cols | times: s_partial -%}
-    {%- assign s_normal_span = s_partial -%}
-    {%- assign s_partial_span = stack_cols -%}
-  {%- else -%}
-    {%- assign s_grid_cols = stack_cols -%}
-    {%- assign s_normal_span = 1 -%}
-    {%- assign s_partial_span = 1 -%}
-  {%- endif -%}
   <div class="mond-tile proj-tile--stack proj-stack-{{ idx }}">
     <p class="mond-eyebrow">Stack</p>
-    <div class="proj-chips" style="grid-template-columns: repeat({{ s_grid_cols }}, 1fr);">
-      {%- for s in item.stack -%}
-        {%- assign idx0 = forloop.index0 -%}
-        {%- assign row0 = idx0 | divided_by: stack_cols -%}
-        {%- assign in_partial = false -%}
-        {%- if s_partial > 0 and row0 == s_full_rows -%}{%- assign in_partial = true -%}{%- endif -%}
-        {%- if in_partial -%}{%- assign span = s_partial_span -%}{%- else -%}{%- assign span = s_normal_span -%}{%- endif -%}
-        {%- assign extra = "" -%}
-        {%- comment -%} rightmost chip in its row -> no-br {%- endcomment -%}
-        {%- assign next_idx = idx0 | plus: 1 -%}
-        {%- assign next_row0 = next_idx | divided_by: stack_cols -%}
-        {%- if forloop.last or next_row0 != row0 -%}{%- assign extra = extra | append: " no-br" -%}{%- endif -%}
-        {%- comment -%} chip in the bottom row of the chip group -> no-bb {%- endcomment -%}
-        {%- if s_partial > 0 -%}
-          {%- if row0 == s_full_rows -%}{%- assign extra = extra | append: " no-bb" -%}{%- endif -%}
-        {%- else -%}
-          {%- assign last_row0 = s_full_rows | minus: 1 -%}
-          {%- if row0 == last_row0 -%}{%- assign extra = extra | append: " no-bb" -%}{%- endif -%}
-        {%- endif -%}
-        <span style="grid-column: span {{ span }};"{% if extra != "" %} class="{{ extra | strip }}"{% endif %}>{{ s }}</span>
-      {%- endfor -%}
-    </div>
+    {% include mondrian-chip-grid.html items=item.stack %}
   </div>
 
   {%- comment -%} Actions row {%- endcomment -%}

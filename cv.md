@@ -5,5 +5,4 @@ description: "Curriculum Vitae of João Pedro Santos - current work, education, 
 permalink: /cv/
 ---
 
-{% include designs/mondrian/cv.html %}
-{% include designs/default/cv.html %}
+{% include render-designs.html page_key="cv" %}

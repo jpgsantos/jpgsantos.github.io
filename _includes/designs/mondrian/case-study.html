@@ -1,0 +1,87 @@
+{% assign case_project = site.data.work | where: "slug", include.project_slug | first %}
+{% assign case_data = case_project.case %}
+{% if case_data %}
+<section class="case-mondrian" data-design-root="mondrian" aria-label="{{ case_data.title }} - Mondrian case study">
+  <header class="mond-tile case-tile--hero">
+    <p class="mond-eyebrow">{{ case_data.mondrian_eyebrow | default: case_data.eyebrow }}</p>
+    <h1 class="mond-section-title">{{ case_data.title }}</h1>
+    <p class="mond-section-lede">{{ case_data.lede }}</p>
+  </header>
+
+  {% for fact in case_data.facts %}
+  <div class="mond-tile case-tile--meta case-tile--meta-{{ forloop.index }}">
+    <p class="mond-eyebrow">{{ fact.label }}</p>
+    <p class="case-meta__value">{{ fact.mondrian_value | default: fact.value }}</p>
+  </div>
+  {% endfor %}
+
+  {% if case_data.visual.type == "screenshots" %}
+  <div class="mond-tile case-tile--screenshots">
+    {% for shot in case_data.case_screenshots %}
+    <figure class="case-shot">
+      <span class="case-shot__frame">{% include project-screenshot.html src=shot.src alt=shot.alt loading="lazy" width="1080" height="2400" %}</span>
+      <figcaption>{{ shot.caption }}</figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+  {% elsif case_data.visual.type == "workflow" %}
+  <div class="mond-tile case-tile--workflow-visual">
+    {% include workflow-diagram.html %}
+  </div>
+  {% endif %}
+
+  {% for item in case_data.architecture %}
+  <div class="mond-tile case-tile--arch case-tile--arch-{{ forloop.index }}">
+    <p class="mond-eyebrow">{{ item.label }}</p>
+    <p class="case-arch__value">{{ item.value }}</p>
+  </div>
+  {% endfor %}
+
+  {% for item in case_data.overview limit:2 %}
+  <article class="mond-tile {% if forloop.first %}mond-tile--red case-tile--problem{% else %}mond-tile--blue case-tile--ownership{% endif %}">
+    <p class="mond-eyebrow">{{ item.label }}</p>
+    <h2>{{ item.title }}</h2>
+    <p>{{ item.body }}</p>
+  </article>
+  {% endfor %}
+
+  {% for section in case_data.sections limit:2 %}
+  {% if forloop.first %}
+    {% assign section_slot = "behavior" %}
+  {% else %}
+    {% assign section_slot = "eng" %}
+  {% endif %}
+  <header class="mond-tile case-tile--section-head case-tile--{{ section_slot }}-head">
+    <p class="mond-eyebrow">{{ section.label }}</p>
+    <h2 class="mond-section-title">{{ section.title }}</h2>
+  </header>
+  {% for feature in section.features %}
+  <article class="mond-tile case-tile--{{ section_slot }} case-tile--{{ section_slot }}-{{ forloop.index }}">
+    <div class="case-feat__icon">{% include icon.html name=feature.icon %}</div>
+    <h3>{{ feature.title }}</h3>
+    <p>{{ feature.body }}</p>
+  </article>
+  {% endfor %}
+  {% endfor %}
+
+  <article class="mond-tile case-tile--workflow">
+    <p class="mond-eyebrow">{{ case_data.workflow.label }}</p>
+    <h2>{{ case_data.workflow.title }}</h2>
+    <p>{{ case_data.workflow.body }}</p>
+  </article>
+  <div class="mond-tile case-tile--stack-head">
+    <p class="mond-eyebrow">Stack</p>
+    <h3 class="mond-section-title">{{ case_data.stack_heading }}</h3>
+  </div>
+  {% include mondrian-chip-grid.html class="mond-tile case-tile--stack-chips proj-chips" items=case_data.case_stack %}
+
+  <div class="mond-tile case-tile--cta-head">
+    <p class="mond-eyebrow">{{ case_data.cta.label }}</p>
+    <h2 class="mond-section-title">{{ case_data.cta.title }}</h2>
+    <p>{{ case_data.cta.body }}</p>
+  </div>
+  <div class="mond-tile case-tile--cta-actions">
+    {% include case-actions.html links=case_data.cta.actions variant="mondrian" inline=true %}
+  </div>
+</section>
+{% endif %}

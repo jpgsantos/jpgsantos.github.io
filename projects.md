@@ -5,5 +5,4 @@ description: "Selected work by João Pedro Santos across scientific software, An
 permalink: /projects/
 ---
 
-{% include designs/mondrian/projects.html %}
-{% include designs/default/projects.html %}
+{% include render-designs.html page_key="projects" %}

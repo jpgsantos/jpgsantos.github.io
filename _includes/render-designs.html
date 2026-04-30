@@ -1,0 +1,7 @@
+{%- assign design_page_key = include.page_key -%}
+{%- for design in site.data.designs -%}
+{%- assign design_include = design.includes[design_page_key] -%}
+{%- if design_include -%}
+{% include {{ design_include }} %}
+{%- endif -%}
+{%- endfor -%}

@@ -1,0 +1,40 @@
+{% assign chip_items = include.items %}
+{% assign chip_count = chip_items | size %}
+{% if chip_count <= 0 %}
+  {% assign chip_cols = 1 %}
+{% elsif chip_count <= 4 %}
+  {% assign chip_cols = chip_count %}
+{% else %}
+  {% assign chip_cols = chip_count | divided_by: 2.0 | ceil %}
+{% endif %}
+{% assign chip_partial = chip_count | modulo: chip_cols %}
+{% assign chip_full_rows = chip_count | divided_by: chip_cols %}
+{% if chip_partial > 0 %}
+  {% assign chip_grid_cols = chip_cols | times: chip_partial %}
+  {% assign chip_normal_span = chip_partial %}
+  {% assign chip_partial_span = chip_cols %}
+{% else %}
+  {% assign chip_grid_cols = chip_cols %}
+  {% assign chip_normal_span = 1 %}
+  {% assign chip_partial_span = 1 %}
+{% endif %}
+<div class="{{ include.class | default: 'proj-chips' }}" style="grid-template-columns: repeat({{ chip_grid_cols }}, 1fr);">
+  {%- for chip in chip_items -%}
+    {%- assign chip_index0 = forloop.index0 -%}
+    {%- assign chip_row0 = chip_index0 | divided_by: chip_cols -%}
+    {%- assign chip_in_partial = false -%}
+    {%- if chip_partial > 0 and chip_row0 == chip_full_rows -%}{%- assign chip_in_partial = true -%}{%- endif -%}
+    {%- if chip_in_partial -%}{%- assign chip_span = chip_partial_span -%}{%- else -%}{%- assign chip_span = chip_normal_span -%}{%- endif -%}
+    {%- assign chip_extra = "" -%}
+    {%- assign chip_next_index = chip_index0 | plus: 1 -%}
+    {%- assign chip_next_row0 = chip_next_index | divided_by: chip_cols -%}
+    {%- if forloop.last or chip_next_row0 != chip_row0 -%}{%- assign chip_extra = chip_extra | append: " no-br" -%}{%- endif -%}
+    {%- if chip_partial > 0 -%}
+      {%- if chip_row0 == chip_full_rows -%}{%- assign chip_extra = chip_extra | append: " no-bb" -%}{%- endif -%}
+    {%- else -%}
+      {%- assign chip_last_row0 = chip_full_rows | minus: 1 -%}
+      {%- if chip_row0 == chip_last_row0 -%}{%- assign chip_extra = chip_extra | append: " no-bb" -%}{%- endif -%}
+    {%- endif -%}
+    <span style="grid-column: span {{ chip_span }};"{% if chip_extra != "" %} class="{{ chip_extra | strip }}"{% endif %}>{{ chip }}</span>
+  {%- endfor -%}
+</div>

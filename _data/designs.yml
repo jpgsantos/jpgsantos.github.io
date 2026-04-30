@@ -3,11 +3,23 @@
   description: "Professional portfolio"
   icon: "text"
   stylesheet: "/assets/css/main.css"
-  css_budget_kb: 120
+  css_budget_kb: 105.5
+  includes:
+    home: "designs/default/home.html"
+    projects: "designs/default/projects.html"
+    cv: "designs/default/cv.html"
+    case_octidy: "designs/default/case-octidy.html"
+    case_subcellular: "designs/default/case-subcellular.html"
 
 - value: "mondrian"
   name: "Mondrian"
   description: "Geometric editorial grid"
   icon: "swatch"
   stylesheet: "/assets/css/mondrian.css"
-  css_budget_kb: 175
+  css_budget_kb: 144
+  includes:
+    home: "designs/mondrian/home.html"
+    projects: "designs/mondrian/projects.html"
+    cv: "designs/mondrian/cv.html"
+    case_octidy: "designs/mondrian/case-octidy.html"
+    case_subcellular: "designs/mondrian/case-subcellular.html"
