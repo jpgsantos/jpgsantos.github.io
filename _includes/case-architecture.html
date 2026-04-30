@@ -1,0 +1,14 @@
+{% if include.variant == "mondrian" %}
+  {% for item in include.items %}
+  <div class="mond-tile case-tile--arch case-tile--arch-{{ forloop.index }}" data-content-list="case-architecture" data-content-key="{{ item.label | slugify }}" data-content-value="{{ item.value | strip_html | normalize_whitespace }}">
+    <p class="mond-eyebrow">{{ item.label }}</p>
+    <p class="case-arch__value">{{ item.value }}</p>
+  </div>
+  {% endfor %}
+{% else %}
+  <dl class="case-architecture-list">
+    {% for item in include.items %}
+    <div data-content-list="case-architecture" data-content-key="{{ item.label | slugify }}" data-content-value="{{ item.value | strip_html | normalize_whitespace }}"><dt>{{ item.label }}</dt><dd>{{ item.value }}</dd></div>
+    {% endfor %}
+  </dl>
+{% endif %}

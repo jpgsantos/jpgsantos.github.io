@@ -46,9 +46,26 @@
     {% endif %}
     {% for design in designs %}
       {% if design.stylesheet %}
+        {% if forloop.first %}
     <link rel="stylesheet" href="{{ design.stylesheet | relative_url }}?v={{ asset_version }}" data-design-stylesheet="{{ design.value }}">
+        {% else %}
+    <link rel="stylesheet" data-design-stylesheet="{{ design.value }}" data-design-href="{{ design.stylesheet | relative_url }}?v={{ asset_version }}" disabled>
+        {% endif %}
       {% endif %}
     {% endfor %}
+    <script>
+      (function() {
+        try {
+          var style = document.documentElement.getAttribute('data-style') || 'default';
+          document.querySelectorAll('[data-design-href]').forEach(function(link) {
+            if (link.getAttribute('data-design-stylesheet') === style) {
+              link.href = link.getAttribute('data-design-href');
+              link.disabled = false;
+            }
+          });
+        } catch (e) {}
+      })();
+    </script>
     <link rel="icon" type="image/png" href="{{ '/assets/images/favicon.png' | relative_url }}">
     {% seo %}
 

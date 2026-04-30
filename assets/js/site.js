@@ -10,6 +10,7 @@
   const darkQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const designRoots = Array.from(document.querySelectorAll('[data-design-root]'));
+  const designStylesheets = Array.from(document.querySelectorAll('[data-design-stylesheet]'));
   const styleSelect = document.querySelector('[data-style-select]');
   const styleButtons = Array.from(document.querySelectorAll('[data-style-value]'));
   const themeButtons = Array.from(document.querySelectorAll('[data-theme-value]'));
@@ -121,6 +122,16 @@
     });
   }
 
+  function syncDesignStylesheets(style) {
+    designStylesheets.forEach((stylesheet) => {
+      const design = stylesheet.dataset.designStylesheet;
+      if ((design === 'default' || design === style) && !stylesheet.href && stylesheet.dataset.designHref) {
+        stylesheet.href = stylesheet.dataset.designHref;
+      }
+      stylesheet.disabled = design !== 'default' && design !== style;
+    });
+  }
+
   function isInActiveDesignTree(element) {
     const designRoot = element.closest('[data-design-root]');
     if (!designRoot) return true;
@@ -183,6 +194,7 @@
     const fallbackStyle = supportedStyles.includes('default') ? 'default' : supportedStyles[0];
     const style = supportedStyles.includes(requestedStyle) ? requestedStyle : fallbackStyle;
 
+    syncDesignStylesheets(style);
     root.setAttribute('data-style', style);
     syncDesignTrees(style);
 

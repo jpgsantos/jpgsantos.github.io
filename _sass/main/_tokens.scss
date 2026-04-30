@@ -1,1 +1,3 @@
-/* Reserved for default design tokens that should apply after the legacy layer. */
+/* Default design tokens layered after the legacy import.
+   Keep new density and component knobs here so future designs can copy the contract
+   without inheriting the large historical stylesheet. */

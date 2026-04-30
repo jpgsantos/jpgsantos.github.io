@@ -5,4 +5,4 @@ description: "Technical case study for Octidy, a Kotlin Android application buil
 permalink: /projects/octidy-android-app/
 ---
 
-{% include render-designs.html page_key="case_octidy" %}
+{% include render-designs.html page_key="case" project_slug="octidy-android-app" %}

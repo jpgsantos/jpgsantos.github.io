@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 
 const files = [
@@ -12,7 +12,11 @@ for (const file of files) {
   console.log(`syntax ok: ${file}`);
 }
 
-for (const file of ['scripts/audit-site.mjs']) {
+const scripts = readdirSync('scripts')
+  .filter((file) => file.endsWith('.mjs'))
+  .map((file) => `scripts/${file}`);
+
+for (const file of scripts) {
   const result = spawnSync(process.execPath, ['--check', file], { encoding: 'utf8' });
   if (result.status !== 0) {
     process.stderr.write(result.stderr || result.stdout);

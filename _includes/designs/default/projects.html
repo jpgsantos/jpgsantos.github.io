@@ -4,11 +4,11 @@
 
 <section class="page-hero">
   <p class="eyebrow">{{ work_copy.eyebrow }}</p>
-  <h1>{{ work_copy.headline }}</h1>
+  <h1 data-content-key="page-title" data-content-value="{{ work_copy.headline | strip_html | normalize_whitespace }}">{{ work_copy.headline }}</h1>
   <p>{{ work_copy.intro }}</p>
   <aside class="work-hero-index" aria-label="Project index">
     {% for item in site.data.work %}
-    <a href="#default-work-{{ item.slug }}">
+    <a href="#default-work-{{ item.slug }}" data-content-list="project-index" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
       <span>0{{ forloop.index }}</span>
       <strong>{{ item.title }}</strong>
       <small>{{ item.category }}</small>
@@ -28,20 +28,12 @@
   <article class="project-feature project-feature--{{ modifier }}" id="default-work-{{ item.slug }}" data-reveal>
     <div class="project-feature__content">
       <p class="eyebrow">{{ item.eyebrow }}</p>
-      <h2>{{ item.title }}</h2>
-      <p>{{ item.description }}</p>
-      <div class="work-summary-grid">
-        <div><strong>Problem</strong><span>{{ item.problem }}</span></div>
-        <div><strong>Contribution</strong><span>{{ item.contribution }}</span></div>
-        <div><strong>Outcome</strong><span>{{ item.outcome }}</span></div>
-      </div>
-      <ul class="check-list">
-        {% for highlight in item.highlights %}
-        <li>{% include icon.html name="check" %}<span>{{ highlight }}</span></li>
-        {% endfor %}
-      </ul>
+      <h2 data-content-list="project-titles" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">{{ item.title }}</h2>
+      <p data-content-list="project-descriptions" data-content-key="{{ item.slug }}" data-content-value="{{ item.description | strip_html | normalize_whitespace }}">{{ item.description }}</p>
+      {% include project-summary-grid.html item=item %}
+      {% include project-highlights.html item=item limit=item.highlights.size %}
       {% include chip-list.html class="tag-list" items=item.stack %}
-      {% include action-links.html links=item.links %}
+      {% include action-links.html links=item.links parity_list="project-actions" %}
     </div>
 
     {% if item.slug == "subcellular-workflow" %}
@@ -120,7 +112,7 @@
 </section>
 
 <section class="section-block section-block--cta">
-  <h2>{{ work_copy.cta_heading }}</h2>
+  <h2 data-content-key="work-cta" data-content-value="{{ work_copy.cta_heading | strip_html | normalize_whitespace }}">{{ work_copy.cta_heading }}</h2>
   <p>{{ work_copy.cta_text }}</p>
   <div class="button-row">
     <a href="{{ '/cv/' | relative_url }}" class="button button--primary">

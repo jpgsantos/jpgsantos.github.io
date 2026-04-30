@@ -6,7 +6,7 @@
   {%- comment -%} Row 1-2: hero block + colour swatches {%- endcomment -%}
   <header class="mond-tile proj-tile--hero">
     <p class="mond-eyebrow">{{ work_copy.eyebrow }}</p>
-    <h1 class="mond-hero__title">{{ work_copy.headline }}</h1>
+    <h1 class="mond-hero__title" data-content-key="page-title" data-content-value="{{ work_copy.headline | strip_html | normalize_whitespace }}">{{ work_copy.headline }}</h1>
     <p class="mond-hero__lede">{{ work_copy.intro }}</p>
   </header>
 
@@ -15,7 +15,7 @@
     <nav class="proj-index" aria-label="Project index">
       <span class="proj-index__label">Index</span>
       {% for p in projects %}
-      <a href="#mondrian-work-{{ p.slug }}">
+      <a href="#mondrian-work-{{ p.slug }}" data-content-list="project-index" data-content-key="{{ p.slug }}" data-content-value="{{ p.title | strip_html | normalize_whitespace }}">
         <span>0{{ forloop.index }}</span>
         <strong>{{ p.title }}</strong>
         <small>{{ p.category }}</small>
@@ -33,34 +33,18 @@
 
   {%- comment -%} Project header strip — title left, date+description right {%- endcomment -%}
   <header class="mond-tile proj-tile--head proj-tile--head-{{ idx }}" id="mondrian-work-{{ item.slug }}">
-    <h2 class="mond-section-title">{{ item.title }}</h2>
+    <h2 class="mond-section-title" data-content-list="project-titles" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">{{ item.title }}</h2>
     <div class="proj-head__meta">
       <p class="mond-eyebrow">{{ item.eyebrow }}</p>
-      <p class="mond-section-lede">{{ item.description }}</p>
+      <p class="mond-section-lede" data-content-list="project-descriptions" data-content-key="{{ item.slug }}" data-content-value="{{ item.description | strip_html | normalize_whitespace }}">{{ item.description }}</p>
     </div>
   </header>
 
   {%- comment -%} Problem / Contribution / Outcome 3-up — coloured tiles {%- endcomment -%}
-  <article class="mond-tile mond-tile--red proj-tile--problem proj-pco-{{ idx }}-p">
-    <p class="mond-eyebrow">Problem</p>
-    <p>{{ item.problem }}</p>
-  </article>
-  <article class="mond-tile mond-tile--blue proj-tile--contribution proj-pco-{{ idx }}-c">
-    <p class="mond-eyebrow">Contribution</p>
-    <p>{{ item.contribution }}</p>
-  </article>
-  <article class="mond-tile mond-tile--yellow proj-tile--outcome proj-pco-{{ idx }}-o">
-    <p class="mond-eyebrow">Outcome</p>
-    <p>{{ item.outcome }}</p>
-  </article>
+  {% include project-summary-grid.html variant="mondrian" item=item index=idx %}
 
   {%- comment -%} Highlights — 4 tiles with varied widths + a Mondrian visual block {%- endcomment -%}
-  {% for highlight in item.highlights limit:4 %}
-  <article class="mond-tile proj-tile--highlight proj-h-{{ idx }}-{{ forloop.index }}">
-    {% include icon.html name="check" %}
-    <p>{{ highlight }}</p>
-  </article>
-  {% endfor %}
+  {% include project-highlights.html variant="mondrian" item=item index=idx limit=4 %}
 
   {%- comment -%} Visual: workflow / phone / molecule depending on slug {%- endcomment -%}
   <div class="mond-tile proj-tile--visual proj-tile--visual-{{ idx }}{% if item.slug == 'subcellular-workflow' %} proj-tile--visual-workflow{% elsif item.slug == 'octidy-android-app' %} proj-tile--visual-phone{% else %} proj-tile--visual-molecule{% endif %}"{% if item.slug == 'octidy-android-app' %} aria-label="Octidy Android app screenshots"{% else %} aria-hidden="true"{% endif %}>
@@ -106,7 +90,7 @@
 
   {%- comment -%} Actions row {%- endcomment -%}
   <div class="mond-tile proj-tile--actions proj-actions-{{ idx }}">
-    {% include action-links.html links=item.links inline=true link_class="mond-button" primary_class="mond-button--primary" secondary_class="" %}
+    {% include action-links.html links=item.links inline=true link_class="mond-button" primary_class="mond-button--primary" secondary_class="" parity_list="project-actions" %}
   </div>
 
   {% endfor %}
@@ -114,7 +98,7 @@
   {%- comment -%} CTA strip {%- endcomment -%}
   <header class="mond-tile proj-tile--cta-head">
     <p class="mond-eyebrow">{{ work_copy.cta_eyebrow }}</p>
-    <h2 class="mond-section-title">{{ work_copy.cta_heading }}</h2>
+    <h2 class="mond-section-title" data-content-key="work-cta" data-content-value="{{ work_copy.cta_heading | strip_html | normalize_whitespace }}">{{ work_copy.cta_heading }}</h2>
     <p class="mond-section-lede">{{ work_copy.cta_text }}</p>
   </header>
   <div class="mond-tile mond-tile--yellow proj-tile--cta-swatch" aria-hidden="true"></div>

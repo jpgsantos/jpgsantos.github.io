@@ -1,0 +1,41 @@
+{% assign case_visual = include.visual %}
+{% if case_visual.type == "screenshots" %}
+  {% if include.variant == "mondrian" %}
+  <div class="mond-tile case-tile--screenshots">
+    {% for shot in include.screenshots %}
+    <figure class="case-shot" data-content-list="case-screenshots" data-content-key="{{ shot.caption | slugify }}" data-content-value="{{ shot.src }}">
+      <span class="case-shot__frame">{% include project-screenshot.html src=shot.src alt=shot.alt loading="lazy" width="1080" height="2400" %}</span>
+      <figcaption>{{ shot.caption }}</figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+  {% else %}
+  <section class="case-study__visual case-study__visual--screens" id="screens" aria-label="{{ case_visual.aria_label }}">
+    <div class="case-screen-strip">
+      {% for shot in include.screenshots %}
+      <figure class="case-screen" data-content-list="case-screenshots" data-content-key="{{ shot.caption | slugify }}" data-content-value="{{ shot.src }}">
+        <span class="case-screen__frame">{% include project-screenshot.html src=shot.src alt=shot.alt loading="lazy" sizes="(max-width: 360px) 78vw, (max-width: 860px) 42vw, 220px" width="1080" height="2400" %}</span>
+        <figcaption>{{ shot.caption }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+{% elsif case_visual.type == "workflow" %}
+  {% if include.variant == "mondrian" %}
+  <div class="mond-tile case-tile--workflow-visual" data-content-key="case-visual" data-content-value="{{ case_visual.type }}">
+    {% include workflow-diagram.html %}
+  </div>
+  {% else %}
+  <section class="case-study__visual case-study__visual--workflow" aria-label="{{ case_visual.aria_label }}" data-content-key="case-visual" data-content-value="{{ case_visual.type }}">
+    <div class="case-workflow-visual">
+      {% include workflow-diagram.html %}
+    </div>
+    <div class="case-workflow-copy">
+      <p class="eyebrow">{{ case_visual.label }}</p>
+      <h2>{{ case_visual.title }}</h2>
+      <p>{{ case_visual.body }}</p>
+    </div>
+  </section>
+  {% endif %}
+{% endif %}

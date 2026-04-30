@@ -1,0 +1,21 @@
+{% assign item = include.item %}
+{% if include.variant == "mondrian" %}
+  <article class="mond-tile mond-tile--red proj-tile--problem proj-pco-{{ include.index }}-p" data-content-list="project-summary" data-content-key="{{ item.slug }}:problem" data-content-value="{{ item.problem | strip_html | normalize_whitespace }}">
+    <p class="mond-eyebrow">Problem</p>
+    <p>{{ item.problem }}</p>
+  </article>
+  <article class="mond-tile mond-tile--blue proj-tile--contribution proj-pco-{{ include.index }}-c" data-content-list="project-summary" data-content-key="{{ item.slug }}:contribution" data-content-value="{{ item.contribution | strip_html | normalize_whitespace }}">
+    <p class="mond-eyebrow">Contribution</p>
+    <p>{{ item.contribution }}</p>
+  </article>
+  <article class="mond-tile mond-tile--yellow proj-tile--outcome proj-pco-{{ include.index }}-o" data-content-list="project-summary" data-content-key="{{ item.slug }}:outcome" data-content-value="{{ item.outcome | strip_html | normalize_whitespace }}">
+    <p class="mond-eyebrow">Outcome</p>
+    <p>{{ item.outcome }}</p>
+  </article>
+{% else %}
+  <div class="work-summary-grid">
+    <div data-content-list="project-summary" data-content-key="{{ item.slug }}:problem" data-content-value="{{ item.problem | strip_html | normalize_whitespace }}"><strong>Problem</strong><span>{{ item.problem }}</span></div>
+    <div data-content-list="project-summary" data-content-key="{{ item.slug }}:contribution" data-content-value="{{ item.contribution | strip_html | normalize_whitespace }}"><strong>Contribution</strong><span>{{ item.contribution }}</span></div>
+    <div data-content-list="project-summary" data-content-key="{{ item.slug }}:outcome" data-content-value="{{ item.outcome | strip_html | normalize_whitespace }}"><strong>Outcome</strong><span>{{ item.outcome }}</span></div>
+  </div>
+{% endif %}

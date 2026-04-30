@@ -1,5 +1,6 @@
 {% assign link_class = include.link_class | default: 'button' %}
 {% assign primary_class = include.primary_class | default: 'button--primary' %}
+{% assign parity_list = include.parity_list | default: 'action-links' %}
 {% if include.secondary_class == nil %}
   {% assign secondary_class = 'button--secondary' %}
 {% else %}
@@ -13,6 +14,9 @@
     href="{% if link.external %}{{ link.url }}{% else %}{{ link.url | relative_url }}{% endif %}"
     {% if link.external %}target="_blank" rel="noopener noreferrer"{% endif %}
     class="{{ link_class }}{% if link.primary and primary_class %} {{ primary_class }}{% elsif secondary_class %} {{ secondary_class }}{% endif %}"
+    data-content-list="{{ parity_list }}"
+    data-content-key="{{ link.url }}"
+    data-content-value="{{ link.text | strip_html | normalize_whitespace }}"
   >
     {% include icon.html name=link.icon %} {{ link.text }}
   </a>

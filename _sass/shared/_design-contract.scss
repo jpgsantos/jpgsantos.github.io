@@ -1,0 +1,13 @@
+/* Shared multi-design behavior used by every visual theme. */
+[data-design-root][aria-hidden="true"] {
+  display: none !important;
+}
+
+[data-design-root][inert] {
+  pointer-events: none;
+}
+
+[data-content-key],
+[data-content-list] {
+  scroll-margin-top: calc(var(--header-height, 76px) + 1rem);
+}

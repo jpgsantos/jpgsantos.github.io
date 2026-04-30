@@ -5,13 +5,13 @@
 <section class="hero technical-hero">
   <div class="hero__content">
     <p class="eyebrow">{{ profile.role }}</p>
-    <h1>{{ profile.headline }}</h1>
-    <p class="hero__summary">{{ profile.summary }}</p>
+    <h1 data-content-key="page-title" data-content-value="{{ profile.headline | strip_html | normalize_whitespace }}">{{ profile.headline }}</h1>
+    <p class="hero__summary" data-content-key="home-summary" data-content-value="{{ profile.summary | strip_html | normalize_whitespace }}">{{ profile.summary }}</p>
     <div class="hero__actions button-row">
-      <a href="{{ '/projects/' | relative_url }}" class="button button--primary">
+      <a href="{{ '/projects/' | relative_url }}" class="button button--primary" data-content-list="home-hero-actions" data-content-key="/projects/" data-content-value="View work">
         View work {% include icon.html name="arrow-right" %}
       </a>
-      <a href="{{ profile.cv_pdf | relative_url }}" class="button button--secondary" target="_blank" rel="noopener noreferrer">
+      <a href="{{ profile.cv_pdf | relative_url }}" class="button button--secondary" target="_blank" rel="noopener noreferrer" data-content-list="home-hero-actions" data-content-key="{{ profile.cv_pdf }}" data-content-value="Download CV">
         {% include icon.html name="download" %} Download CV
       </a>
     </div>
@@ -76,7 +76,7 @@
   </div>
   <div class="two-column">
     {% for item in site.data.work limit:2 %}
-    <article class="surface-card" data-reveal>
+    <article class="surface-card" data-reveal data-content-list="home-selected-work" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
       <div class="surface-card__icon">{% include icon.html name=item.icon %}</div>
       <p class="eyebrow">{{ item.category }}</p>
       <h3>{{ item.title }}</h3>

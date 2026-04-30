@@ -10,7 +10,10 @@ const styleFilter = getArg('--style');
 const themeFilter = getArg('--theme');
 const widthFilter = Number(getArg('--width'));
 const designRegistry = readDesignRegistry();
-const requiredDesignIncludeKeys = ['home', 'projects', 'cv', 'case_octidy', 'case_subcellular'];
+const requiredDesignIncludeKeys = ['home', 'projects', 'cv', 'case'];
+const requiredDesignFields = ['value', 'name', 'icon', 'stylesheet'];
+const captureSnapshots = process.argv.includes('--snapshots');
+const snapshotDir = join(outputDir, 'snapshots');
 const pages = pageFilter ? [pageFilter] : ['/', '/projects/', '/cv/', '/projects/octidy-android-app/', '/projects/subcellular-workflow/'];
 const widths = Number.isFinite(widthFilter) && widthFilter > 0 ? [widthFilter] : [390, 540, 768, 1024, 1366];
 const styles = styleFilter ? [styleFilter] : designRegistry.map((design) => design.value);
@@ -50,6 +53,9 @@ function readDesignRegistry() {
       }
       return {
         value,
+        name: read('name'),
+        description: read('description'),
+        icon: read('icon'),
         stylesheet: read('stylesheet'),
         cssBudgetKb: Number(read('css_budget_kb')) || null,
         includes
@@ -58,6 +64,34 @@ function readDesignRegistry() {
     .filter(Boolean);
 
   return entries.length > 0 ? entries : [{ value: 'default' }, { value: 'mondrian' }];
+}
+
+function assertDesignRegistry(registry) {
+  const failures = [];
+  const seenValues = new Set();
+  for (const design of registry) {
+    for (const field of requiredDesignFields) {
+      if (!design[field]) failures.push(`${design.value || '(missing value)'} design is missing ${field}`);
+    }
+    if (design.value && !/^[a-z][a-z0-9-]*$/.test(design.value)) {
+      failures.push(`${design.value} design value should be lowercase kebab-case`);
+    }
+    if (design.value && seenValues.has(design.value)) {
+      failures.push(`${design.value} design value is duplicated`);
+    }
+    seenValues.add(design.value);
+    if (!design.cssBudgetKb) {
+      failures.push(`${design.value} design is missing css_budget_kb`);
+    }
+    if (!design.includes || Object.keys(design.includes).length === 0) {
+      failures.push(`${design.value} design is missing an includes map`);
+    }
+    if (design.stylesheet) {
+      const sourcePath = resolve(design.stylesheet.replace(/^\/+/, '').replace(/\.css$/, '.scss'));
+      if (!existsSync(sourcePath)) failures.push(`${design.value} stylesheet source missing at ${sourcePath}`);
+    }
+  }
+  return failures;
 }
 
 function assertDesignIncludes(registry) {
@@ -99,6 +133,31 @@ function normalizeCaseUrl(testCase) {
   const url = new URL(testCase.path, baseUrl);
   url.searchParams.set('audit', `${testCase.style}-${testCase.theme}-${testCase.width}`);
   return url.href;
+}
+
+function snapshotName(testCase) {
+  const pathName = testCase.path
+    .replace(/^\/$/, 'home')
+    .replace(/^\/|\/$/g, '')
+    .replace(/[^a-z0-9]+/gi, '-')
+    .replace(/^-|-$/g, '') || 'home';
+  return `${pathName}-${testCase.style}-${testCase.theme}-${testCase.width}.png`;
+}
+
+function shouldCaptureSnapshot(testCase) {
+  return captureSnapshots &&
+    !testCase.path.includes('#') &&
+    testCase.theme === 'light' &&
+    [390, 1024, 1366].includes(testCase.width);
+}
+
+async function writeSnapshot(page, testCase) {
+  mkdirSync(snapshotDir, { recursive: true });
+  const result = await page.send('Page.captureScreenshot', {
+    captureBeyondViewport: false,
+    format: 'png'
+  });
+  writeFileSync(join(snapshotDir, snapshotName(testCase)), Buffer.from(result.data, 'base64'));
 }
 
 function findBrowser() {
@@ -309,6 +368,52 @@ function auditExpression(expectedStyle, path) {
         .filter((href) => href && (/^(mailto:|tel:)/.test(href) || href.includes('github.com') || href.includes('linkedin.com')))
         .sort());
       const sameList = (left, right) => left.length === 0 || right.length === 0 || left.join('|') === right.join('|');
+      const contentSnapshot = (root) => {
+        const singletons = {};
+        const lists = {};
+        Array.from(root?.querySelectorAll('[data-content-key]:not([data-content-list])') || []).forEach((node) => {
+          const key = node.dataset.contentKey;
+          if (!key) return;
+          singletons[key] = normalize(node.dataset.contentValue || node.getAttribute('href') || node.textContent);
+        });
+        Array.from(root?.querySelectorAll('[data-content-list]') || []).forEach((node) => {
+          const list = node.dataset.contentList;
+          if (!list) return;
+          const key = node.dataset.contentKey || node.getAttribute('href') || normalize(node.textContent);
+          const value = normalize(node.dataset.contentValue || node.getAttribute('href') || node.textContent);
+          if (!lists[list]) lists[list] = [];
+          lists[list].push(key + '=' + value);
+        });
+        Object.keys(lists).forEach((name) => { lists[name] = uniqueList(lists[name]).sort(); });
+        return { singletons, lists };
+      };
+      const contentByDesign = Object.fromEntries(
+        roots
+          .map((root) => [(root.dataset.designRoot || '').split(/\\s+/)[0], contentSnapshot(root)])
+          .filter(([designValue]) => Boolean(designValue))
+      );
+      const contentDesigns = Object.keys(contentByDesign).sort();
+      const canonicalDesign = contentByDesign.default ? 'default' : contentDesigns[0];
+      const contentParityFailures = [];
+      const unionKeys = (left, right) => Array.from(new Set([...(Object.keys(left || {})), ...(Object.keys(right || {}))])).sort();
+      const serializeValue = (value) => Array.isArray(value) ? value.join('|') : (value || '');
+      if (canonicalDesign) {
+        const canonicalContent = contentByDesign[canonicalDesign];
+        for (const designValue of contentDesigns) {
+          if (designValue === canonicalDesign) continue;
+          const designContent = contentByDesign[designValue];
+          for (const key of unionKeys(canonicalContent.singletons, designContent.singletons)) {
+            if (serializeValue(canonicalContent.singletons[key]) !== serializeValue(designContent.singletons[key])) {
+              contentParityFailures.push(designValue + ' singleton mismatch: ' + key);
+            }
+          }
+          for (const list of unionKeys(canonicalContent.lists, designContent.lists)) {
+            if (serializeValue(canonicalContent.lists[list]) !== serializeValue(designContent.lists[list])) {
+              contentParityFailures.push(designValue + ' list mismatch: ' + list);
+            }
+          }
+        }
+      }
       const defaultProjectTitles = textList(defaultRoot, '.project-feature h2');
       const mondrianProjectTitles = textList(mondrianRoot, '.proj-tile--head h2');
       const defaultCvExperience = uniqueList(textList(defaultRoot, '[data-cv-entry^="experience:"] h3'));
@@ -380,6 +485,8 @@ function auditExpression(expectedStyle, path) {
           cvEducationMatch: sameList(defaultCvEducation, mondrianCvEducation),
           cvPublicationsMatch: sameList(defaultCvPublications, mondrianCvPublications),
           contactLinksMatch: sameList(defaultContactLinks, mondrianContactLinks),
+          contentParityFailures,
+          contentByDesign,
           defaultH1,
           mondrianH1,
           defaultProjectTitles,
@@ -456,6 +563,9 @@ async function runCase(page, testCase) {
   await delay(testCase.path.includes('#contact') ? 700 : 260);
 
   const result = await page.evaluate(auditExpression(testCase.style, testCase.path));
+  if (shouldCaptureSnapshot(testCase)) {
+    await writeSnapshot(page, testCase);
+  }
   let carouselAfter = null;
   if (result.carousel) {
     carouselAfter = await pressArrowRight(page);
@@ -489,6 +599,9 @@ function assertResult(result) {
   if (!result.parity.cvEducationMatch) failures.push('CV education parity mismatch');
   if (!result.parity.cvPublicationsMatch) failures.push('CV publication parity mismatch');
   if (!result.parity.contactLinksMatch) failures.push('contact link parity mismatch');
+  if (result.parity.contentParityFailures?.length > 0) {
+    failures.push(`content contract parity mismatch: ${result.parity.contentParityFailures.slice(0, 5).join('; ')}`);
+  }
   if (result.contact && !result.contact.ok) failures.push(`contact hash landed at ${result.contact.top}px`);
   if (result.carousel) {
     if (result.carousel.beforeIndex !== '1') failures.push('carousel did not start on slide 1');
@@ -507,6 +620,7 @@ async function main() {
   }
 
   mkdirSync(outputDir, { recursive: true });
+  if (captureSnapshots) mkdirSync(snapshotDir, { recursive: true });
   const profileDir = join(outputDir, `chrome-profile-${Date.now()}`);
   rmSync(profileDir, { recursive: true, force: true });
 
@@ -579,6 +693,10 @@ async function main() {
     if (cssBudgetFailures.length > 0) {
       failures.push({ testCase: { path: 'assets/css', style: 'all', theme: 'all', width: 0 }, failures: cssBudgetFailures });
     }
+    const registryFailures = assertDesignRegistry(designRegistry);
+    if (registryFailures.length > 0) {
+      failures.push({ testCase: { path: '_data/designs.yml', style: 'all', theme: 'all', width: 0 }, failures: registryFailures });
+    }
     const includeFailures = assertDesignIncludes(designRegistry);
     if (includeFailures.length > 0) {
       failures.push({ testCase: { path: '_data/designs.yml', style: 'all', theme: 'all', width: 0 }, failures: includeFailures });
@@ -588,6 +706,7 @@ async function main() {
       baseUrl,
       generatedAt: new Date().toISOString(),
       designs: designRegistry,
+      snapshots: captureSnapshots ? snapshotDir : null,
       results,
       failures
     };

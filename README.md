@@ -57,14 +57,28 @@ Run the browser audit against a local server:
 node scripts/audit-site.mjs --base-url=http://127.0.0.1:4000
 ```
 
+Capture representative audit screenshots for visual review:
+
+```bash
+node scripts/audit-site.mjs --base-url=http://127.0.0.1:4000 --snapshots
+```
+
 ## Adding A Design
 
 1. Add the design to `_data/designs.yml` with `value`, `name`, `description`, `icon`, `stylesheet`, `css_budget_kb`, and an `includes` map.
-2. Add renderers under `_includes/designs/<design>/` for each required page key: `home`, `projects`, `cv`, `case_octidy`, and `case_subcellular`.
+2. Add renderers under `_includes/designs/<design>/` for each required page key: `home`, `projects`, `cv`, and `case`. Case pages pass `project_slug` to the shared renderer.
 3. Keep each design root marked with `data-design-root="<design>"` so switching, accessibility hiding, and audits work.
 4. Reuse canonical content from `_data/profile.yml`, `_data/work.yml`, `_data/cv.yml`, `_data/skills.yml`, and `_data/publications.yml`.
-5. Add a Sass entrypoint in `assets/css/<design>.scss` and put the implementation in `_sass/<design>/`, using `_sass/_site-<design>.scss` as the design bundle.
-6. Run `npm test` and `node scripts/audit-site.mjs --base-url=<local-url>`. The audit verifies registry include paths, content parity, inactive design hiding, image dimensions, responsive overflow, carousel behavior, and CSS budgets.
+5. Prefer shared includes for repeated content structures (`case-*`, `project-*`, contact cards, chip/action lists) and keep design-specific includes focused on layout/composition.
+6. Add `data-content-key` or `data-content-list` markers to any new design-specific content that should stay equivalent across designs; the audit compares these markers generically.
+7. Add a Sass entrypoint in `assets/css/<design>.scss` and put the implementation in `_sass/<design>/`, using `_sass/_site-<design>.scss` as the design bundle. Keep shared multi-design behavior in `_sass/shared/`.
+8. Run `npm test` and `node scripts/audit-site.mjs --base-url=<local-url>`. The audit verifies registry fields, include paths, content parity, inactive design hiding, image dimensions, responsive overflow, carousel behavior, and CSS budgets.
+
+To scaffold the required files for a new design:
+
+```bash
+npm run design:create -- my-design "My Design"
+```
 
 ## Assets
 

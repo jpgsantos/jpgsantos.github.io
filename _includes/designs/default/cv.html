@@ -9,7 +9,7 @@
     {% include profile-image.html loading="lazy" width="180" height="180" sizes="128px" %}
     <div>
       <p class="eyebrow">Curriculum vitae</p>
-      <h1>{{ profile.name }}</h1>
+      <h1 data-content-key="page-title" data-content-value="{{ profile.name | strip_html | normalize_whitespace }}">{{ profile.name }}</h1>
       <p>{{ profile.role }}</p>
       <div class="button-row">
         <a href="{{ profile.cv_pdf | relative_url }}" class="button button--primary" target="_blank" rel="noopener noreferrer">
@@ -22,14 +22,7 @@
     </div>
   </div>
   <div class="cv-contact-grid">
-    <a href="mailto:{{ profile.contact.email }}">{% include icon.html name="email" %}<span>{{ profile.contact.email }}</span></a>
-    <a href="tel:{{ profile.contact.phone_uri }}">{% include icon.html name="phone" %}<span>{{ profile.contact.phone }}</span></a>
-    <span>{% include icon.html name="location" %}<span>{{ profile.location }}</span></span>
-    <span>{% include icon.html name="flag" %}<span>{{ profile.citizenship }}</span></span>
-    <a href="{{ profile.socials.linkedin.url }}" target="_blank" rel="noopener noreferrer">{% include icon.html name="linkedin" %}<span>{{ profile.socials.linkedin.username }}</span></a>
-    <a href="{{ profile.socials.github.url }}" target="_blank" rel="noopener noreferrer">{% include icon.html name="github" %}<span>{{ profile.socials.github.username }}</span></a>
-    <span>{% include icon.html name="language" %}<span>{{ profile.languages }}</span></span>
-    <span>{% include icon.html name="briefcase" %}<span>Current: {{ profile.current_work }}</span></span>
+    {% include cv-contact-items.html %}
   </div>
 </section>
 
@@ -51,7 +44,7 @@
   </div>
   <div class="cv-list">
     {% for entry in cv_data.experience %}
-    <article class="cv-entry" data-cv-entry="experience:{{ entry.id }}" data-reveal>
+    <article class="cv-entry" data-cv-entry="experience:{{ entry.id }}" data-reveal data-content-list="cv-experience" data-content-key="{{ entry.id }}" data-content-value="{{ entry.title | strip_html | normalize_whitespace }}">
       <div class="cv-entry__header">
         <div>
           <h3>{{ entry.title }}</h3>
@@ -78,7 +71,7 @@
   </div>
   <div class="cv-project-grid">
     {% for item in site.data.work %}
-    <article class="cv-project-card" data-cv-project="{{ item.slug }}" data-reveal>
+    <article class="cv-project-card" data-cv-project="{{ item.slug }}" data-reveal data-content-list="cv-projects" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
       <p class="eyebrow">{{ item.category }}</p>
       <h3>{{ item.title }}</h3>
       <p>{{ item.description }}</p>
@@ -109,7 +102,7 @@
   </div>
   <div class="cv-list">
     {% for entry in cv_data.education %}
-    <article class="cv-entry" data-cv-entry="education:{{ entry.id }}" data-reveal>
+    <article class="cv-entry" data-cv-entry="education:{{ entry.id }}" data-reveal data-content-list="cv-education" data-content-key="{{ entry.id }}" data-content-value="{{ entry.title | strip_html | normalize_whitespace }}">
       <div class="cv-entry__header">
         <div>
           <h3>{{ entry.title }}</h3>

@@ -1,9 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "test": "npm run test:js && npm run test:build",
+    "test": "npm run test:js && npm run validate:content && npm run test:build",
     "test:build": "bundle exec jekyll build",
     "test:js": "node scripts/check-js.mjs",
-    "audit:site": "node scripts/audit-site.mjs"
+    "validate:content": "ruby scripts/validate-content.rb",
+    "audit:site": "node scripts/audit-site.mjs",
+    "design:create": "node scripts/create-design.mjs"
   }
 }

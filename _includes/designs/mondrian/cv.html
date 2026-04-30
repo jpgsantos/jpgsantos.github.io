@@ -6,7 +6,7 @@
 
   <header class="mond-tile cv-tile--name">
     <p class="mond-eyebrow">Curriculum vitae</p>
-    <h1 class="mond-hero__title">{{ profile.name }}</h1>
+    <h1 class="mond-hero__title" data-content-key="page-title" data-content-value="{{ profile.name | strip_html | normalize_whitespace }}">{{ profile.name }}</h1>
     <p class="mond-hero__lede">{{ profile.role | replace: " | ", " / " }}</p>
     <div class="mond-actions">
       <a href="{{ profile.cv_pdf | relative_url }}" target="_blank" rel="noopener noreferrer" class="mond-button mond-button--primary">{% include icon.html name="download" %} Download CV</a>
@@ -22,38 +22,7 @@
   <div class="mond-tile mond-tile--red    cv-tile--swatch-r" aria-hidden="true"></div>
   <div class="mond-tile mond-tile--blue   cv-tile--swatch-b" aria-hidden="true"></div>
 
-  <a href="mailto:{{ profile.contact.email }}" class="mond-tile cv-tile--contact cv-tile--contact-email">
-    {% include icon.html name="email" %}
-    <span><strong>Email</strong>{{ profile.contact.email }}</span>
-  </a>
-  <a href="tel:{{ profile.contact.phone_uri }}" class="mond-tile cv-tile--contact cv-tile--contact-phone">
-    {% include icon.html name="phone" %}
-    <span><strong>Phone</strong>{{ profile.contact.phone }}</span>
-  </a>
-  <span class="mond-tile cv-tile--contact cv-tile--contact-location">
-    {% include icon.html name="location" %}
-    <span><strong>Location</strong>{{ profile.location }}</span>
-  </span>
-  <span class="mond-tile cv-tile--contact cv-tile--contact-flag">
-    {% include icon.html name="flag" %}
-    <span><strong>Citizenship</strong>{{ profile.citizenship }}</span>
-  </span>
-  <a href="{{ profile.socials.linkedin.url }}" target="_blank" rel="noopener noreferrer" class="mond-tile cv-tile--contact cv-tile--contact-linkedin">
-    {% include icon.html name="linkedin" %}
-    <span><strong>LinkedIn</strong>{{ profile.socials.linkedin.username }}</span>
-  </a>
-  <a href="{{ profile.socials.github.url }}" target="_blank" rel="noopener noreferrer" class="mond-tile cv-tile--contact cv-tile--contact-github">
-    {% include icon.html name="github" %}
-    <span><strong>GitHub</strong>{{ profile.socials.github.username }}</span>
-  </a>
-  <span class="mond-tile cv-tile--contact cv-tile--contact-language">
-    {% include icon.html name="language" %}
-    <span><strong>Languages</strong>{{ profile.languages }}</span>
-  </span>
-  <span class="mond-tile cv-tile--contact cv-tile--contact-current">
-    {% include icon.html name="briefcase" %}
-    <span><strong>Current</strong>{{ profile.current_work }}</span>
-  </span>
+  {% include cv-contact-items.html variant="mondrian" %}
 
   <header class="mond-tile cv-tile--summary-head">
     <p class="mond-eyebrow">{{ cv_copy.summary_eyebrow }}</p>
@@ -72,7 +41,7 @@
   </header>
 
   {% for entry in cv_data.experience %}
-  <header class="mond-tile cv-xp-head cv-xp-head--{{ entry.accent }} cv-tile--xp{{ forloop.index }}-head" data-cv-entry="experience:{{ entry.id }}">
+  <header class="mond-tile cv-xp-head cv-xp-head--{{ entry.accent }} cv-tile--xp{{ forloop.index }}-head" data-cv-entry="experience:{{ entry.id }}" data-content-list="cv-experience" data-content-key="{{ entry.id }}" data-content-value="{{ entry.title | strip_html | normalize_whitespace }}">
     <p class="mond-eyebrow">{{ entry.period_mondrian | default: entry.period }}</p>
     <h3>{{ entry.title }}</h3>
     <p class="cv-xp-inst">{{ entry.organization }}</p>
@@ -93,7 +62,7 @@
     <h2 class="mond-section-title">{{ cv_copy.work_reference_heading }}</h2>
   </header>
   {% for item in site.data.work %}
-  <article class="mond-tile cv-work-card cv-tile--work-{{ forloop.index }}" data-cv-project="{{ item.slug }}">
+  <article class="mond-tile cv-work-card cv-tile--work-{{ forloop.index }}" data-cv-project="{{ item.slug }}" data-content-list="cv-projects" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
     <p class="mond-eyebrow">0{{ forloop.index }} / {{ item.category }}</p>
     <h3>{{ item.title }}</h3>
     <p>{{ item.description }}</p>
@@ -164,7 +133,7 @@
   </header>
 
   {% for entry in cv_data.education %}
-  <header class="mond-tile cv-xp-head cv-xp-head--{{ entry.accent }} cv-tile--edu{{ forloop.index }}-head" data-cv-entry="education:{{ entry.id }}">
+  <header class="mond-tile cv-xp-head cv-xp-head--{{ entry.accent }} cv-tile--edu{{ forloop.index }}-head" data-cv-entry="education:{{ entry.id }}" data-content-list="cv-education" data-content-key="{{ entry.id }}" data-content-value="{{ entry.title | strip_html | normalize_whitespace }}">
     <p class="mond-eyebrow">{{ entry.period_mondrian | default: entry.period }}</p>
     <h3>{{ entry.title }}</h3>
     <p class="cv-xp-inst">{{ entry.organization }}{% if entry.meta %} / {{ entry.meta }}{% endif %}</p>
@@ -190,7 +159,7 @@
 
   {% for pub in site.data.publications %}
   {% assign pidx = forloop.index %}
-  <article class="mond-tile cv-pub-card cv-tile--pub-{{ pidx }}">
+  <article class="mond-tile cv-pub-card cv-tile--pub-{{ pidx }}" data-content-list="publications" data-content-key="{{ pub.doi }}" data-content-value="{{ pub.title | strip_html | normalize_whitespace }}">
     <div class="cv-pub-year cv-pub-year--{% cycle 'red','blue','yellow' %}">{{ pub.year }}</div>
     <div class="cv-pub-body">
       <h3>{{ pub.title }}</h3>

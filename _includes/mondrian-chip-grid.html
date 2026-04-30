@@ -1,5 +1,6 @@
 {% assign chip_items = include.items %}
 {% assign chip_count = chip_items | size %}
+{% assign chip_parity = include.parity_list %}
 {% if chip_count <= 0 %}
   {% assign chip_cols = 1 %}
 {% elsif chip_count <= 4 %}
@@ -35,6 +36,6 @@
       {%- assign chip_last_row0 = chip_full_rows | minus: 1 -%}
       {%- if chip_row0 == chip_last_row0 -%}{%- assign chip_extra = chip_extra | append: " no-bb" -%}{%- endif -%}
     {%- endif -%}
-    <span style="grid-column: span {{ chip_span }};"{% if chip_extra != "" %} class="{{ chip_extra | strip }}"{% endif %}>{{ chip }}</span>
+    <span style="grid-column: span {{ chip_span }};"{% if chip_extra != "" %} class="{{ chip_extra | strip }}"{% endif %}{% if chip_parity %} data-content-list="{{ chip_parity }}" data-content-key="{{ chip | slugify }}" data-content-value="{{ chip | strip_html | normalize_whitespace }}"{% endif %}>{{ chip }}</span>
   {%- endfor -%}
 </div>

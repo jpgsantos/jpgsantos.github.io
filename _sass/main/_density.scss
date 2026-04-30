@@ -1,1 +1,38 @@
-/* Reserved for default density polish layered after the legacy styles. */
+[data-style="default"] {
+  --section-pad: clamp(2.6rem, 4.8vw, 4.6rem);
+  --card-pad: clamp(1rem, 1.8vw, 1.35rem);
+  --cluster-gap: clamp(0.8rem, 1.8vw, 1.1rem);
+}
+
+[data-style="default"] .section-intro {
+  max-width: 760px;
+  margin-bottom: clamp(1.25rem, 2.4vw, 1.8rem);
+}
+
+[data-style="default"] .work-summary-grid {
+  gap: 0;
+  overflow: hidden;
+}
+
+[data-style="default"] .work-summary-grid > div {
+  padding: 0.85rem 0.95rem;
+}
+
+@media (min-width: 981px) {
+  [data-style="default"] .project-feature {
+    grid-template-columns: minmax(0, 1.28fr) minmax(260px, 0.58fr);
+    gap: clamp(0.95rem, 2vw, 1.55rem);
+  }
+
+  [data-style="default"] .project-feature--app {
+    grid-template-columns: minmax(0, 1fr) minmax(17rem, 19.5rem);
+  }
+
+  [data-style="default"] .project-feature--app .project-feature__media {
+    width: min(100%, 19.5rem);
+  }
+
+  [data-style="default"] .cv-list {
+    gap: 0.85rem;
+  }
+}

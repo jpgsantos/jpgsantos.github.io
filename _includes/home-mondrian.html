@@ -4,8 +4,8 @@
 
   <header class="mond-tile mond-tile--title">
     <p class="mond-eyebrow">{{ profile.role }}</p>
-    <h1 class="mond-hero__title">{{ profile.headline }}</h1>
-    <p class="mond-hero__lede">{{ profile.summary }}</p>
+    <h1 class="mond-hero__title" data-content-key="page-title" data-content-value="{{ profile.headline | strip_html | normalize_whitespace }}">{{ profile.headline }}</h1>
+    <p class="mond-hero__lede" data-content-key="home-summary" data-content-value="{{ profile.summary | strip_html | normalize_whitespace }}">{{ profile.summary }}</p>
   </header>
 
   <div class="mond-tile mond-tile--neural" aria-hidden="true">
@@ -119,7 +119,7 @@
   </header>
 
   {% for item in site.data.work limit:2 %}
-  <article class="mond-tile mond-work-card mond-tile--work-{{ forloop.index }}">
+  <article class="mond-tile mond-work-card mond-tile--work-{{ forloop.index }}" data-content-list="home-selected-work" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
     <div class="mond-work-card__head">
       <div class="mond-exp-head__icon">{% include icon.html name=item.icon %}</div>
       <div>
@@ -152,10 +152,10 @@
   {% endfor %}
 
   <div class="mond-tile mond-tile--actions">
-    <a href="{{ '/projects/' | relative_url }}" class="mond-button mond-button--primary">
+    <a href="{{ '/projects/' | relative_url }}" class="mond-button mond-button--primary" data-content-list="home-hero-actions" data-content-key="/projects/" data-content-value="View work">
       View work {% include icon.html name="arrow-right" %}
     </a>
-    <a href="{{ profile.cv_pdf | relative_url }}" class="mond-button" target="_blank" rel="noopener noreferrer">
+    <a href="{{ profile.cv_pdf | relative_url }}" class="mond-button" target="_blank" rel="noopener noreferrer" data-content-list="home-hero-actions" data-content-key="{{ profile.cv_pdf }}" data-content-value="Download CV">
       {% include icon.html name="download" %} Download CV
     </a>
   </div>

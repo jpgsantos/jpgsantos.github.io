@@ -5,4 +5,4 @@ description: "Technical case study for Subcellular Workflow, a FAIR-compliant MA
 permalink: /projects/subcellular-workflow/
 ---
 
-{% include render-designs.html page_key="case_subcellular" %}
+{% include render-designs.html page_key="case" project_slug="subcellular-workflow" %}

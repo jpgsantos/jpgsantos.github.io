@@ -1,6 +1,6 @@
 <div class="publications-list">
   {% for pub in site.data.publications %}
-  <article class="publication-card" data-reveal>
+  <article class="publication-card" data-reveal data-content-list="publications" data-content-key="{{ pub.doi }}" data-content-value="{{ pub.title | strip_html | normalize_whitespace }}">
     <div class="publication-card__year">{{ pub.year }}</div>
     <div class="publication-card__body">
       <h3>{{ pub.title }}</h3>

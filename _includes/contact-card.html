@@ -5,15 +5,16 @@
 {% assign icon = include.icon %}
 {% assign external = include.external %}
 {% assign extra_class = include.class %}
+{% assign content_key = include.content_key | default: href %}
 
 {% if variant == 'mondrian' %}
-<a href="{{ href }}" {% if external %}target="_blank" rel="noopener noreferrer"{% endif %} class="mond-tile mond-contact-card mond-contact-card--compact{% if extra_class %} {{ extra_class }}{% endif %}">
+<a href="{{ href }}" {% if external %}target="_blank" rel="noopener noreferrer"{% endif %} class="mond-tile mond-contact-card mond-contact-card--compact{% if extra_class %} {{ extra_class }}{% endif %}" data-content-list="contact-links" data-content-key="{{ content_key }}" data-content-value="{{ value | strip_html | normalize_whitespace }}">
   {% include icon.html name=icon %}
   <span><strong>{{ label }}</strong>{{ value }}</span>
   {% include icon.html name="arrow-right" %}
 </a>
 {% else %}
-<a href="{{ href }}" {% if external %}target="_blank" rel="noopener noreferrer"{% endif %} class="contact-card contact-card--compact{% if extra_class %} {{ extra_class }}{% endif %}">
+<a href="{{ href }}" {% if external %}target="_blank" rel="noopener noreferrer"{% endif %} class="contact-card contact-card--compact{% if extra_class %} {{ extra_class }}{% endif %}" data-content-list="contact-links" data-content-key="{{ content_key }}" data-content-value="{{ value | strip_html | normalize_whitespace }}">
   {% include icon.html name=icon %}
   <span><strong>{{ label }}</strong>{{ value }}</span>
   {% include icon.html name="arrow-right" %}
