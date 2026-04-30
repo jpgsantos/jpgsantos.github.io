@@ -1,9 +1,20 @@
 # frozen_string_literal: true
 
 require "yaml"
+require "open3"
+require "set"
 
 ROOT = File.expand_path("..", __dir__)
 ERRORS = []
+
+def git_tracked_files
+  stdout, _stderr, status = Open3.capture3("git", "-C", ROOT, "ls-files", "-z")
+  return nil unless status.success?
+
+  stdout.split("\0").reject(&:empty?).to_set
+end
+
+TRACKED_FILES = git_tracked_files
 
 def data_file(name)
   File.join(ROOT, "_data", "#{name}.yml")
@@ -14,6 +25,13 @@ def load_yaml(name)
 rescue Psych::Exception => e
   ERRORS << "_data/#{name}.yml is invalid YAML: #{e.message}"
   nil
+end
+
+def load_config
+  YAML.load_file(File.join(ROOT, "_config.yml"))
+rescue Psych::Exception => e
+  ERRORS << "_config.yml is invalid YAML: #{e.message}"
+  {}
 end
 
 def present?(value)
@@ -35,12 +53,69 @@ def require_array(record, key, context)
   ERRORS << "#{context}.#{key} must be a non-empty list" unless value.is_a?(Array) && value.any?
 end
 
+def normalize_site_path(path)
+  path.to_s.tr("\\", "/").sub(%r{\A/+}, "")
+end
+
+def exact_file?(path)
+  parts = normalize_site_path(path).split("/")
+  return false if parts.empty? || parts.any? { |part| part.empty? || part == ".." || part == "." }
+
+  current = ROOT
+  parts.each do |part|
+    entries = Dir.children(current)
+    return false unless entries.include?(part)
+
+    current = File.join(current, part)
+  rescue Errno::ENOENT, Errno::ENOTDIR
+    return false
+  end
+
+  File.file?(current)
+end
+
 def require_file(path, context)
-  normalized = path.to_s.sub(%r{\A/+}, "")
-  ERRORS << "#{context} points to missing file #{path}" unless File.exist?(File.join(ROOT, normalized))
+  normalized = normalize_site_path(path)
+  unless exact_file?(normalized)
+    ERRORS << "#{context} points to missing file #{path}"
+    return
+  end
+
+  return unless TRACKED_FILES && !TRACKED_FILES.include?(normalized)
+
+  ERRORS << "#{context} points to untracked file #{path}"
+end
+
+def source_templates
+  if TRACKED_FILES
+    TRACKED_FILES.select do |path|
+      path.end_with?(".html", ".md") && !path.start_with?("_site/", "_site_preview/")
+    end
+  else
+    Dir.glob(File.join(ROOT, "**", "*.{html,md}")).filter_map do |path|
+      relative = path.delete_prefix("#{ROOT}#{File::SEPARATOR}").tr("\\", "/")
+      relative unless relative.start_with?("_site/", "_site_preview/", ".jekyll-cache/")
+    end
+  end
+end
+
+def validate_static_includes
+  source_templates.each do |relative|
+    File.foreach(File.join(ROOT, relative)).with_index(1) do |line, index|
+      line.scan(/{%\s*include\s+([^\s%]+)[^%]*%}/) do |matches|
+        include_path = matches.first
+        next if include_path.include?("{") || include_path.include?("}")
+
+        require_file(File.join("_includes", include_path), "#{relative}:#{index} include #{include_path}")
+      end
+    end
+  rescue Errno::ENOENT
+    ERRORS << "tracked source template is missing #{relative}"
+  end
 end
 
 designs = load_yaml("designs") || []
+config = load_config
 profile = load_yaml("profile") || {}
 work = load_yaml("work") || []
 cv = load_yaml("cv") || {}
@@ -67,6 +142,9 @@ designs.each do |design|
     end
   end
 end
+
+require_file(config["og_image"], "config.og_image") if config["og_image"]
+validate_static_includes
 
 require_keys(profile, %w[name short_name initials role headline summary about current_work location image cv_pdf contact socials metrics skill_chips principles focus_areas], "profile")
 require_file(profile["image"], "profile.image") if profile["image"]
