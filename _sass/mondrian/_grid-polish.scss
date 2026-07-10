@@ -1,1 +1,102 @@
-/* Reserved for shared Mondrian grid polish layered after the legacy styles. */
+/* Final Mondrian component grammar: one rule system, one type hierarchy, and
+   predictable interaction feedback across every page composition. */
+
+[data-style="mondrian"] :where(
+  .home-mondrian,
+  .projects-mondrian,
+  .cv-mondrian,
+  .case-mondrian
+) {
+  --tile-rule: var(--rule-grid);
+}
+
+[data-style="mondrian"][data-theme="dark"] .home-mondrian .mond-tile--neural {
+  background:
+    linear-gradient(180deg, transparent 0 62%, var(--mond-blue) 62% 100%),
+    linear-gradient(90deg, transparent 0 62%, var(--mond-red) 62% 100%),
+    var(--mond-paper-soft);
+}
+
+[data-style="mondrian"] :where(
+  .mond-about-card,
+  .mond-work-card,
+  .mond-exp-head,
+  .mond-contact-card,
+  .proj-tile--highlight,
+  .cv-mondrian article
+) h3 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+[data-style="mondrian"] :where(
+  .mond-tile--m1,
+  .mond-tile--m2,
+  .mond-tile--m3,
+  .mond-tile--m4,
+  .mond-exp-head__num,
+  .proj-index,
+  .cv-mondrian time
+) {
+  font-variant-numeric: tabular-nums;
+}
+
+[data-style="mondrian"] .skip-link {
+  color: var(--mond-paper);
+  background: var(--mond-ink);
+}
+
+[data-style="mondrian"] :where(
+  .mond-button,
+  .mond-card__link,
+  .mond-contact-card,
+  .mond-tile--socials a,
+  .proj-index a,
+  .mond-shot-carousel__button
+) {
+  min-height: 2.75rem;
+}
+
+[data-style="mondrian"] .mond-tile--socials a {
+  min-width: 2.75rem;
+}
+
+[data-style="mondrian"] :where(
+  .mond-button,
+  .mond-card__link,
+  .mond-contact-card,
+  .mond-tile--socials a,
+  .proj-index a
+) {
+  transition: color 140ms ease, background-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
+}
+
+@media (hover: hover) {
+  [data-style="mondrian"] :where(.mond-button, .mond-card__link):hover {
+    color: var(--mond-on-yellow);
+    background: var(--mond-yellow);
+    box-shadow: 3px 3px 0 var(--mond-ink);
+    transform: translate(-1px, -1px);
+  }
+
+  [data-style="mondrian"] :where(.mond-contact-card, .mond-tile--socials a, .proj-index a):hover {
+    box-shadow: inset 0 -4px 0 var(--mond-yellow);
+  }
+}
+
+[data-style="mondrian"] :where(.mond-button, .mond-card__link):active {
+  box-shadow: none;
+  transform: translate(1px, 1px);
+}
+
+[data-style="mondrian"] .proj-index a:is(:hover, :active),
+[data-style="mondrian"] .proj-index a:is(:hover, :active) :where(span, strong, small) {
+  color: var(--mond-on-yellow);
+}
+
+[data-style="mondrian"] :where(a, button, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--mond-yellow);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 2px var(--mond-ink);
+}

@@ -9,15 +9,6 @@
   margin-bottom: clamp(1.25rem, 2.4vw, 1.8rem);
 }
 
-[data-style="default"] .work-summary-grid {
-  gap: 0;
-  overflow: hidden;
-}
-
-[data-style="default"] .work-summary-grid > div {
-  padding: 0.85rem 0.95rem;
-}
-
 @media (min-width: 981px) {
   [data-style="default"] .project-feature {
     grid-template-columns: minmax(0, 1.28fr) minmax(260px, 0.58fr);

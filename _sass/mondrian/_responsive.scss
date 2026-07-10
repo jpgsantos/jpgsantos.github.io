@@ -1,1 +1,62 @@
-/* Reserved for Mondrian responsive polish layered after the legacy styles. */
+/* Responsive polish that keeps the editorial identity without making narrow
+   layouts read like a long stack of unrelated cards. */
+
+@media (max-width: 760px) {
+  [data-style="mondrian"] .case-mondrian .case-tile--screenshots {
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline mandatory;
+    scrollbar-color: var(--mond-red-text) var(--mond-paper-soft);
+  }
+
+  [data-style="mondrian"] .case-mondrian .case-shot {
+    flex: 0 0 min(72vw, 210px);
+    scroll-snap-align: center;
+  }
+}
+
+@media (max-width: 540px) {
+  [data-style="mondrian"] .mond-hero__lede {
+    font-family: var(--font-sans);
+    font-style: normal;
+    line-height: 1.65;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--neural {
+    min-height: 5.5rem;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--neural canvas {
+    display: none;
+  }
+
+  [data-style="mondrian"] :where(
+    .mond-tile--about-head,
+    .mond-tile--exp-head,
+    .mond-tile--feat-head,
+    .mond-tile--contact-head
+  ) {
+    padding-top: calc(var(--tile-pad) + 0.75rem);
+  }
+
+  [data-style="mondrian"] :where(
+    .mond-tile--about-head,
+    .mond-tile--exp-head,
+    .mond-tile--feat-head,
+    .mond-tile--contact-head
+  )::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 0.55rem;
+    border-bottom: var(--rule-grid) solid var(--mond-ink);
+    background: linear-gradient(
+      90deg,
+      var(--mond-red) 0 33.333%,
+      var(--mond-yellow) 33.333% 66.666%,
+      var(--mond-blue) 66.666% 100%
+    );
+  }
+}

@@ -13,8 +13,8 @@
   </div>
 
   <article class="mond-tile mond-tile--intro">
-    <p class="mond-eyebrow">About</p>
-    <p class="mond-intro__body">{{ profile.about }}</p>
+    <p class="mond-eyebrow">Current</p>
+    <p class="mond-intro__body"><strong>{{ profile.current_work }}</strong><br>{{ profile.location }}</p>
     <span class="mond-intro__rule" aria-hidden="true"></span>
   </article>
 
@@ -38,8 +38,6 @@
     <strong>{{ profile.metrics[1].value }}</strong>
     <span>{{ profile.metrics[1].label }}</span>
   </div>
-
-  <div class="mond-tile mond-tile--blue mond-tile--hero-field" aria-hidden="true"></div>
 
   <ul class="mond-tile mond-tile--creds">
     <li>{% include icon.html name="graduation" %} {{ profile.role | split: " | " | last }}</li>

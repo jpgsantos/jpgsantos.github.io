@@ -6,6 +6,7 @@
   const header = document.querySelector('.site-header');
   const nav = document.getElementById('main-nav');
   const navToggle = document.querySelector('.nav-toggle');
+  const mainContent = document.getElementById('main-content');
   const scrollButton = document.getElementById('scrollToTop');
   const darkQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -64,6 +65,18 @@
       trigger.setAttribute('aria-expanded', String(isOpen));
     }
 
+    function closeAndRestoreFocus() {
+      setOpen(false);
+      if (trigger) trigger.focus();
+    }
+
+    function openAndFocus(fallbackIndex) {
+      if (buttons.length === 0) return;
+      const selected = buttons.find((button) => button.getAttribute('aria-checked') === 'true');
+      setOpen(true);
+      (selected || buttons[fallbackIndex]).focus();
+    }
+
     function render(value) {
       if (currentLabel) {
         currentLabel.textContent = labelFor(value);
@@ -88,13 +101,59 @@
       button.addEventListener('click', () => {
         const value = button.dataset[config.buttonDataset];
         config.onChoose(value);
-        setOpen(false);
+        closeAndRestoreFocus();
+      });
+
+      button.addEventListener('keydown', (event) => {
+        if (event.key === 'Tab') {
+          setOpen(false);
+          return;
+        }
+
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeAndRestoreFocus();
+          return;
+        }
+
+        if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+
+        const currentIndex = buttons.indexOf(button);
+        const keyTargets = {
+          ArrowDown: (currentIndex + 1) % buttons.length,
+          ArrowUp: (currentIndex - 1 + buttons.length) % buttons.length,
+          Home: 0,
+          End: buttons.length - 1
+        };
+
+        if (!(event.key in keyTargets)) return;
+        event.preventDefault();
+        buttons[keyTargets[event.key]].focus();
       });
     });
 
     if (trigger) {
       trigger.addEventListener('click', () => {
         setOpen(!(menu && menu.classList.contains('is-open')));
+      });
+
+      trigger.addEventListener('keydown', (event) => {
+        if (event.key === 'Tab') {
+          setOpen(false);
+          return;
+        }
+
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeAndRestoreFocus();
+          return;
+        }
+
+        if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+        if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp') return;
+
+        event.preventDefault();
+        openAndFocus(event.key === 'ArrowDown' ? 0 : buttons.length - 1);
       });
     }
 
@@ -276,6 +335,7 @@
     if (!scrollButton) return;
     scrollButton.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      if (mainContent) mainContent.focus({ preventScroll: true });
     });
   }
 

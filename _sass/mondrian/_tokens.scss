@@ -5,9 +5,9 @@
 [data-style="mondrian"] {
   --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
   --font-display: "Playfair Display", Georgia, serif;
-  --font-mono: var(--font-sans);
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
-  --t-xs: 0.72rem;
+  --t-xs: 0.78rem;
   --t-sm: 0.9rem;
   --t-md: 1rem;
   --t-lg: clamp(1.45rem, 1.08rem + 1.5vw, 2.05rem);
@@ -21,6 +21,14 @@
   --color-ink: var(--mond-text);
   --color-muted: var(--mond-text-soft);
   --color-border: var(--mond-ink);
+
+  --mond-red-text: #a4122d;
+  --mond-on-red: #ffffff;
+
+  --rule-hairline: 1px;
+  --rule-control: 2px;
+  --rule-grid: 3px;
+  --rule-accent: 6px;
 
   --rule-thickness: var(--mond-rule);
   --radius-sm: 0;
@@ -42,6 +50,10 @@
   --space-4: 1rem;
   --space-5: 1.5rem;
   --space-6: 2rem;
+}
+
+[data-style="mondrian"][data-theme="dark"] {
+  --mond-red-text: #ff7482;
 }
 
 @media (max-width: 540px) {

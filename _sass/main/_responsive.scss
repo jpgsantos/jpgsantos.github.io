@@ -1,1 +1,51 @@
-/* Reserved for default responsive polish layered after the legacy styles. */
+/* Final, intentionally small responsive and interaction layer. */
+
+[data-style="default"] :where(a, button, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--secondary);
+  outline-offset: 3px;
+}
+
+[data-style="default"] .skip-link {
+  color: var(--surface-solid);
+  background: var(--ink);
+}
+
+[data-style="default"] .carousel-button {
+  width: 2.75rem;
+  min-height: 2.75rem;
+}
+
+[data-style="default"] .app-carousel__dots {
+  gap: 0;
+}
+
+[data-style="default"] .app-carousel__dots button {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0;
+  background: radial-gradient(circle, var(--text-soft) 0 0.3rem, transparent 0.33rem);
+}
+
+[data-style="default"] .app-carousel__dots button[aria-current="true"] {
+  background: radial-gradient(circle, var(--primary-strong) 0 0.34rem, transparent 0.37rem);
+}
+
+[data-style="default"] .section-block--cta h2 {
+  font-size: var(--t-lg);
+}
+
+@media (max-width: 1100px) {
+  [data-style="default"] body[data-page="home"] #about .prose {
+    max-width: 68ch;
+  }
+
+  [data-style="default"] .cv-project-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  [data-style="default"] .cv-project-grid {
+    grid-template-columns: 1fr;
+  }
+}

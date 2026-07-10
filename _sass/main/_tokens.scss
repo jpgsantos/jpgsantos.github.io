@@ -6,9 +6,9 @@
 [data-style="default"] {
   --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
   --font-display: var(--font-sans);
-  --font-mono: var(--font-sans);
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
-  --t-xs: 0.74rem;
+  --t-xs: 0.78rem;
   --t-sm: 0.9rem;
   --t-md: 1rem;
   --t-lg: clamp(1.35rem, 1.1rem + 1vw, 1.8rem);
