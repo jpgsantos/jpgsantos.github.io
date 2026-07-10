@@ -29,3 +29,19 @@
     screenshots: "designs/mondrian/partials/case-visual-screenshots.html"
     workflow: "designs/mondrian/partials/case-visual-workflow.html"
     porphyrin: "designs/mondrian/partials/case-visual-porphyrin.html"
+
+- value: "editorial"
+  name: "Editorial Modernism"
+  description: "1960s scientific editorial"
+  icon: "text"
+  stylesheet: "/assets/css/editorial.css"
+  css_budget_kb: 66
+  includes:
+    home: "designs/editorial/home.html"
+    projects: "designs/editorial/projects.html"
+    cv: "designs/editorial/cv.html"
+    case: "designs/editorial/case.html"
+  case_visuals:
+    screenshots: "designs/default/partials/case-visual-screenshots.html"
+    workflow: "designs/default/partials/case-visual-workflow.html"
+    porphyrin: "designs/editorial/partials/case-visual-porphyrin.html"

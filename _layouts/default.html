@@ -9,21 +9,26 @@
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <script>
+      {% include style-rotation.js %}
+
       (function() {
+        var theme = 'auto';
         try {
-          var theme = localStorage.getItem('theme') || 'auto';
-          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (theme === 'dark' || (theme === 'auto' && prefersDark)) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-          }
-          document.documentElement.setAttribute('data-theme-choice', theme);
-          var supportedStyles = {{ designs | map: "value" | jsonify }};
-          var style = localStorage.getItem('style') || 'default';
-          if (supportedStyles.indexOf(style) === -1) {
-            style = 'default';
-          }
-          document.documentElement.setAttribute('data-style', style);
+          theme = localStorage.getItem('theme') || 'auto';
         } catch (e) {}
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (theme === 'dark' || (theme === 'auto' && prefersDark)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+        document.documentElement.setAttribute('data-theme-choice', theme);
+
+        var supportedStyles = {{ designs | map: "value" | jsonify }};
+        var fallbackStyle = supportedStyles.indexOf('default') !== -1 ? 'default' : supportedStyles[0];
+        var style = fallbackStyle;
+        try {
+          style = window.__siteStyleRotation.resolve(supportedStyles, fallbackStyle);
+        } catch (e) {}
+        document.documentElement.setAttribute('data-style', style);
       })();
     </script>
     {% capture font_stylesheet %}https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=optional{% endcapture %}
@@ -158,7 +163,7 @@
               {% if design.icon == "swatch" %}
               <span class="style-icon__swatch" aria-hidden="true"></span>
               {% else %}
-              <span class="style-icon__text" aria-hidden="true">Aa</span>
+              <span class="style-icon__text" aria-hidden="true">{% if design.value == "editorial" %}Ed{% else %}Aa{% endif %}</span>
               {% endif %}
             </span>
             {% endfor %}
@@ -171,7 +176,7 @@
                 {% if design.icon == "swatch" %}
                 <span class="style-icon__swatch" aria-hidden="true"></span>
                 {% else %}
-                <span class="style-icon__text" aria-hidden="true">Aa</span>
+                <span class="style-icon__text" aria-hidden="true">{% if design.value == "editorial" %}Ed{% else %}Aa{% endif %}</span>
                 {% endif %}
               </span>
               <span>{{ design.name }}</span>
@@ -204,10 +209,6 @@
     <main id="main-content" tabindex="-1">
       {{ content }}
     </main>
-
-    <button class="scroll-to-top" id="scrollToTop" type="button" aria-label="Scroll to top">
-      {% include icon.html name="chevron-up" %}
-    </button>
 
     <footer class="site-footer" role="contentinfo">
       <div class="site-footer__inner">

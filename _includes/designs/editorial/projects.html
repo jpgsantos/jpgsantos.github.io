@@ -1,0 +1,137 @@
+{% assign work_copy = site.data.page_copy.work %}
+
+<section class="editorial-design editorial-projects" data-design-root="editorial" aria-label="Selected work - Editorial Modernism view">
+  <header class="ed-page-hero">
+    <div class="ed-masthead">
+      <span>Portfolio index / technical work</span>
+      <span>File 02 &middot; {{ site.data.work.size }} studies</span>
+    </div>
+    <div class="ed-page-hero__copy">
+      <p class="ed-kicker">{{ work_copy.eyebrow }} / Research archive</p>
+      <h1 data-content-key="page-title" data-content-value="{{ work_copy.headline | strip_html | normalize_whitespace }}">
+        <span class="ed-display-title" aria-hidden="true">
+          <span>Selected technical work.</span>
+          <span class="ed-display-title__accent">Evidence, methods, outcomes.</span>
+        </span>
+        <span class="ed-sr-only">{{ work_copy.headline }}</span>
+      </h1>
+      <p>{{ work_copy.intro }}</p>
+    </div>
+    <nav class="ed-index" aria-label="Project index">
+      <span class="ed-index__label">Contents</span>
+      {% for item in site.data.work %}
+      <a href="#editorial-work-{{ item.slug }}" data-content-list="project-index" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
+        <span>0{{ forloop.index }}</span>
+        <strong>{{ item.title }}</strong>
+        <small>{{ item.category }}</small>
+      </a>
+      {% endfor %}
+    </nav>
+  </header>
+
+  <div class="ed-project-list">
+    {% for item in site.data.work %}
+    <article class="ed-project ed-project--{{ forloop.index }}" id="editorial-work-{{ item.slug }}" data-reveal>
+      <header class="ed-project__head">
+        <div class="ed-project__folio">
+          <span>Case 0{{ forloop.index }}</span>
+          <span>{{ item.eyebrow }}</span>
+        </div>
+        <div>
+          <p class="ed-kicker">{{ item.category }}</p>
+          <h2 data-content-list="project-titles" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">{{ item.title }}</h2>
+        </div>
+        <p class="ed-project__description" data-content-list="project-descriptions" data-content-key="{{ item.slug }}" data-content-value="{{ item.description | strip_html | normalize_whitespace }}">{{ item.description }}</p>
+      </header>
+
+      <div class="ed-project__summary" tabindex="0" aria-label="Scrollable project summary">
+        <article data-content-list="project-summary" data-content-key="{{ item.slug }}:problem" data-content-value="{{ item.problem | strip_html | normalize_whitespace }}">
+          <span>01 / Problem</span>
+          <p>{{ item.problem }}</p>
+        </article>
+        <article data-content-list="project-summary" data-content-key="{{ item.slug }}:contribution" data-content-value="{{ item.contribution | strip_html | normalize_whitespace }}">
+          <span>02 / Contribution</span>
+          <p>{{ item.contribution }}</p>
+        </article>
+        <article data-content-list="project-summary" data-content-key="{{ item.slug }}:outcome" data-content-value="{{ item.outcome | strip_html | normalize_whitespace }}">
+          <span>03 / Outcome</span>
+          <p>{{ item.outcome }}</p>
+        </article>
+      </div>
+
+      <div class="ed-project__body">
+        <div class="ed-project__notes">
+          <p class="ed-kicker">Observed results</p>
+          <ol>
+            {% for highlight in item.highlights %}
+            <li data-content-list="project-highlights" data-content-key="{{ item.slug }}:{{ forloop.index }}" data-content-value="{{ highlight | strip_html | normalize_whitespace }}"><span>0{{ forloop.index }}</span>{{ highlight }}</li>
+            {% endfor %}
+          </ol>
+        </div>
+
+        <div class="ed-project__visual{% if item.slug == 'octidy-android-app' %} ed-project__visual--app{% elsif item.slug == 'subcellular-workflow' %} ed-project__visual--workflow{% else %} ed-project__visual--research{% endif %}">
+          <div class="ed-figure-label">
+            <span>Fig. 0{{ forloop.index }}</span>
+            <span>{% if item.slug == 'octidy-android-app' %}Product interface{% elsif item.slug == 'subcellular-workflow' %}Modeling pipeline{% else %}Research system{% endif %}</span>
+          </div>
+          {% if item.slug == "subcellular-workflow" %}
+            <div class="ed-workflow-figure">
+              {% include workflow-diagram.html %}
+            </div>
+          {% elsif item.slug == "octidy-android-app" %}
+            <div class="ed-carousel" data-carousel aria-label="Octidy Android app screenshots">
+              <div class="app-carousel__viewport ed-carousel__viewport" tabindex="0">
+                {% for shot in item.screenshots %}
+                <figure class="app-slide ed-carousel__slide">
+                  <div class="phone-frame">
+                    {% include project-screenshot.html src=shot.src alt=shot.alt loading="lazy" width="1080" height="2400" %}
+                  </div>
+                </figure>
+                {% endfor %}
+              </div>
+              <div class="ed-carousel__controls">
+                <button class="ed-carousel__button" type="button" data-carousel-prev aria-label="Previous screenshot">{% include icon.html name="arrow-right" %}</button>
+                <div class="ed-carousel__captions" aria-live="polite">
+                  {% for shot in item.screenshots %}
+                  <p data-carousel-caption {% unless forloop.first %}hidden{% endunless %}>
+                    <strong>{{ shot.caption }}</strong><span>{{ shot.alt | remove: 'Octidy ' | capitalize }}.</span>
+                  </p>
+                  {% endfor %}
+                  <div class="ed-carousel__dots">
+                    {% for shot in item.screenshots %}
+                    <button type="button" data-carousel-dot {% if forloop.first %}aria-current="true"{% endif %} aria-label="Show {{ shot.caption }} screenshot"><span>{{ forloop.index }}</span></button>
+                    {% endfor %}
+                  </div>
+                </div>
+                <button class="ed-carousel__button ed-carousel__button--next" type="button" data-carousel-next aria-label="Next screenshot">{% include icon.html name="arrow-right" %}</button>
+              </div>
+            </div>
+          {% else %}
+            {% include porphyrin-paper-visual.html variant="editorial" %}
+          {% endif %}
+        </div>
+      </div>
+
+      <footer class="ed-project__footer">
+        <div>
+          <p class="ed-kicker">Methods / Stack</p>
+          {% include chip-list.html class="ed-chip-list" items=item.stack %}
+        </div>
+        {% include action-links.html links=item.links wrapper_class="ed-actions" link_class="ed-button" primary_class="ed-button--primary" secondary_class="" parity_list="project-actions" %}
+      </footer>
+    </article>
+    {% endfor %}
+  </div>
+
+  <section class="ed-cta">
+    <div>
+      <p class="ed-kicker">{{ work_copy.cta_eyebrow }} / Next file</p>
+      <h2 data-content-key="work-cta" data-content-value="{{ work_copy.cta_heading | strip_html | normalize_whitespace }}">{{ work_copy.cta_heading }}</h2>
+      <p>{{ work_copy.cta_text }}</p>
+    </div>
+    <div class="ed-actions">
+      <a href="{{ '/cv/' | relative_url }}" class="ed-button ed-button--primary">{% include icon.html name="file" %} View CV</a>
+      <a href="{{ '/#contact' | relative_url }}" class="ed-button">{% include icon.html name="email" %} Contact</a>
+    </div>
+  </section>
+</section>

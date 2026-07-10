@@ -1,0 +1,16 @@
+{% assign evidence_stem = include.stem %}
+{% assign evidence_src = evidence_stem | append: ".jpg" %}
+{% assign evidence_webp = evidence_stem | append: ".webp" %}
+{% assign evidence_sizes = include.sizes | default: "50vw" %}
+{% capture evidence_webp_srcset %}{{ evidence_webp | relative_url }} {{ include.width }}w{% endcapture %}
+{% include optimized-image.html
+  picture_class="porphyrin-evidence__picture"
+  src=evidence_src
+  webp_srcset=evidence_webp_srcset
+  sizes=evidence_sizes
+  alt=include.alt
+  img_class="porphyrin-evidence__img"
+  loading="lazy"
+  width=include.width
+  height=include.height
+%}

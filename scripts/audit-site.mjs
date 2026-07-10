@@ -280,6 +280,48 @@ async function navigateAndWait(page, url) {
   throw new Error(`Timed out waiting for ${url}`);
 }
 
+async function waitForDesignStylesheet(page, style) {
+  const started = Date.now();
+  while (Date.now() - started < 8000) {
+    try {
+      const ready = await page.evaluate(`(() => {
+        const link = document.querySelector('[data-design-stylesheet="${style}"]');
+        if (!link || link.disabled || !link.href || !link.sheet) return false;
+        try { return link.sheet.cssRules.length > 0; } catch (error) { return false; }
+      })()`);
+      if (ready) return;
+    } catch (error) {}
+    await delay(80);
+  }
+  throw new Error(`Timed out waiting for ${style} design stylesheet.`);
+}
+
+async function waitForDesignRuntime(page, style) {
+  const started = Date.now();
+  while (Date.now() - started < 8000) {
+    try {
+      const ready = await page.evaluate(`(() => {
+        if (document.documentElement.getAttribute('data-style') !== '${style}') return false;
+        const supports = (root) => (root.dataset.designRoot || '').split(/\\s+/).includes('${style}');
+        const roots = Array.from(document.querySelectorAll('[data-design-root]'));
+        const activeRoots = roots.filter(supports);
+        const inactiveReady = roots
+          .filter((root) => !supports(root))
+          .every((root) => getComputedStyle(root).display === 'none' || root.getAttribute('aria-hidden') === 'true');
+        const carousel = activeRoots.flatMap((root) => Array.from(root.querySelectorAll('[data-carousel]')))[0];
+        const carouselReady = !carousel || (
+          carousel.querySelector('.app-carousel__viewport')?.dataset.carouselIndex === '1' &&
+          carousel.querySelector('[data-carousel-prev]')?.disabled === true
+        );
+        return activeRoots.length === 1 && inactiveReady && carouselReady;
+      })()`);
+      if (ready) return;
+    } catch (error) {}
+    await delay(80);
+  }
+  throw new Error(`Timed out waiting for ${style} design runtime.`);
+}
+
 function delay(ms) {
   return new Promise((resolveDelay) => setTimeout(resolveDelay, ms));
 }
@@ -473,6 +515,47 @@ function auditExpression(expectedStyle, path) {
       const visibleImages = activeScoped('img').filter((img) => img.offsetParent !== null);
       const imagesMissingDimensions = visibleImages.filter((img) => !img.getAttribute('width') || !img.getAttribute('height')).length;
       const responsiveImagesMissingSizes = activeScoped('img[srcset], source[srcset]').filter((media) => !media.getAttribute('sizes')).length;
+      const activeThemeMode = html.getAttribute('data-theme') === 'dark' ? 'Dark' : 'Light';
+      const themePictureMismatches = activeScoped('[data-theme-picture]')
+        .map((picture) => {
+          const image = picture.querySelector('img');
+          const source = picture.querySelector('source[type="image/webp"]');
+          const expectedSrc = picture.dataset['theme' + activeThemeMode + 'Src'];
+          const expectedFallbackSrcset = picture.dataset['theme' + activeThemeMode + 'FallbackSrcset'];
+          const expectedWebpSrcset = picture.dataset['theme' + activeThemeMode + 'WebpSrcset'];
+          const matches = image &&
+            image.getAttribute('src') === expectedSrc &&
+            image.getAttribute('srcset') === expectedFallbackSrcset &&
+            (!source || source.getAttribute('srcset') === expectedWebpSrcset);
+          return matches ? null : { mode: activeThemeMode.toLowerCase(), src: image?.getAttribute('src') || '' };
+        })
+        .filter(Boolean);
+      const parseColor = (value) => {
+        const channels = String(value || '').match(/[\\d.]+/g)?.map(Number) || [];
+        return channels.length >= 3 ? { r: channels[0], g: channels[1], b: channels[2], a: channels[3] ?? 1 } : null;
+      };
+      const luminance = (color) => {
+        const channel = (value) => {
+          const normalized = value / 255;
+          return normalized <= 0.04045 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+        };
+        return 0.2126 * channel(color.r) + 0.7152 * channel(color.g) + 0.0722 * channel(color.b);
+      };
+      const imageOverlayContrastFailures = activeScoped('[data-image-overlay]')
+        .filter((node) => node.offsetParent !== null)
+        .map((node) => {
+          const style = getComputedStyle(node);
+          const foreground = parseColor(style.color);
+          const background = parseColor(style.backgroundColor);
+          if (!foreground || !background) return { text: normalize(node.textContent), reason: 'unresolved color' };
+          const lighter = Math.max(luminance(foreground), luminance(background));
+          const darker = Math.min(luminance(foreground), luminance(background));
+          const ratio = (lighter + 0.05) / (darker + 0.05);
+          if (background.a < 0.98) return { text: normalize(node.textContent), reason: 'translucent background', ratio };
+          if (ratio < 4.5) return { text: normalize(node.textContent), reason: 'contrast below 4.5:1', ratio };
+          return null;
+        })
+        .filter(Boolean);
       const cvPhoto = activeScoped('.cv-tile--photo')[0];
       const cvPhotoRect = cvPhoto?.getBoundingClientRect();
       const cvPhotoPictureRect = cvPhoto?.querySelector('.profile-picture')?.getBoundingClientRect();
@@ -519,6 +602,8 @@ function auditExpression(expectedStyle, path) {
         overflow: Math.max(0, docWidth - window.innerWidth),
         imagesMissingDimensions,
         responsiveImagesMissingSizes,
+        themePictureMismatches,
+        imageOverlayContrastFailures,
         cvPhotoTooLarge,
         cvPhotoBadCrop,
         cvPhotoImageMismatch,
@@ -605,6 +690,8 @@ async function runCase(page, testCase) {
     localStorage.setItem('theme', '${testCase.theme}');
   })()`);
   await navigateAndWait(page, normalizeCaseUrl(testCase));
+  await waitForDesignStylesheet(page, testCase.style);
+  await waitForDesignRuntime(page, testCase.style);
   await delay(testCase.path.includes('#contact') ? 700 : 260);
 
   const result = await page.evaluate(auditExpression(testCase.style, testCase.path));
@@ -634,6 +721,12 @@ function assertResult(result) {
   if (result.overflow > 2) failures.push(`horizontal overflow ${result.overflow}px`);
   if (result.imagesMissingDimensions > 0) failures.push(`${result.imagesMissingDimensions} visible image(s) missing dimensions`);
   if (result.responsiveImagesMissingSizes > 0) failures.push(`${result.responsiveImagesMissingSizes} responsive image candidate(s) missing sizes`);
+  if (result.themePictureMismatches?.length > 0) {
+    failures.push(`theme-aware picture mismatch: ${result.themePictureMismatches.map((item) => `${item.mode} -> ${item.src || 'missing src'}`).join('; ')}`);
+  }
+  if (result.imageOverlayContrastFailures?.length > 0) {
+    failures.push(`image overlay contrast: ${result.imageOverlayContrastFailures.map((item) => `${item.text} (${item.reason}${item.ratio ? `, ${item.ratio.toFixed(2)}:1` : ''})`).join('; ')}`);
+  }
   if (result.cvPhotoTooLarge) failures.push('Mondrian CV tablet photo is oversized');
   if (result.cvPhotoBadCrop) failures.push('Mondrian CV tablet photo aspect is unstable');
   if (result.cvPhotoImageMismatch) failures.push('Mondrian CV tablet photo image does not fill tile');

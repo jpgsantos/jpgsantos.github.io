@@ -23,7 +23,8 @@ Personal portfolio for João Pedro Gomes dos Santos, built with Jekyll and hoste
 |   |-- render-designs.html # Shared include that renders registered designs per page key
 |   |-- designs/
 |   |   |-- default/      # Default design renderers
-|   |   `-- mondrian/     # Mondrian design renderers
+|   |   |-- mondrian/     # Mondrian design renderers
+|   |   `-- editorial/    # 1960s Editorial Modernism renderers
 |   `-- *.html            # Shared components and Liquid helpers
 |-- _sass/                # Sass bundles and partials compiled from assets/css/*.scss
 `-- assets/
@@ -73,6 +74,8 @@ node scripts/audit-site.mjs --base-url=http://127.0.0.1:4000 --snapshots
 6. Add `data-content-key` or `data-content-list` markers to any new design-specific content that should stay equivalent across designs; the audit compares these markers generically.
 7. Add a Sass entrypoint in `assets/css/<design>.scss` and put the implementation in `_sass/<design>/`, using `_sass/_site-<design>.scss` as the design bundle. Keep shared multi-design behavior in `_sass/shared/`.
 8. Run `npm test` and `node scripts/audit-site.mjs --base-url=<local-url>`. The audit verifies registry fields, include paths, content parity, inactive design hiding, image dimensions, responsive overflow, carousel behavior, and CSS budgets.
+
+On a visitor's first load, `_includes/style-rotation.js` assigns one registered design at random. It stores the current and next distinct design plus a randomized 3–6 hour rotation deadline in local storage, mirrors the active value to the legacy `style` key, and safely falls back to session storage. A manual design choice applies immediately and starts a fresh 3–6 hour window.
 
 To scaffold the required files for a new design:
 

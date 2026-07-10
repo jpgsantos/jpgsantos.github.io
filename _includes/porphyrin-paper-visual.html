@@ -1,6 +1,8 @@
 {% assign visual_variant = include.variant | default: 'default' %}
 {% if visual_variant == 'mondrian' %}
 {% include designs/mondrian/partials/porphyrin-compact.html %}
+{% elsif visual_variant == 'editorial' %}
+{% include designs/editorial/partials/porphyrin-paper-visual.html %}
 {% else %}
 {% include designs/default/partials/porphyrin-paper-visual.html %}
 {% endif %}

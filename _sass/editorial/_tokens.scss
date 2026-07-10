@@ -1,0 +1,112 @@
+/* Editorial Modernism contract slots and design-private palette. */
+[data-style="editorial"] {
+  color-scheme: light;
+
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-mono: "Inter", "Segoe UI", system-ui, sans-serif;
+
+  --t-xs: 0.74rem;
+  --t-sm: 0.9rem;
+  --t-md: 1rem;
+  --t-lg: clamp(1.4rem, 1.12rem + 1.25vw, 2.1rem);
+  --t-xl: clamp(2.65rem, 1.7rem + 3.6vw, 5.2rem);
+
+  --ed-paper: #f4f1e8;
+  --ed-paper-bright: #fbf8ef;
+  --ed-paper-deep: #e9e4d8;
+  --ed-ink: #111310;
+  --ed-muted: #5f625a;
+  --ed-rule: #98988d;
+  --ed-teal: #176b69;
+  --ed-teal-deep: #0d4f4e;
+  --ed-mustard: #d5a91f;
+  --ed-red: #b93627;
+  --ed-navy: #173c68;
+  --ed-olive: #6d743d;
+  --ed-on-color: #fffdf6;
+
+  /* Legacy aliases keep shared navigation, media, and utility components coherent. */
+  --bg: var(--ed-paper);
+  --bg-strong: var(--ed-paper-deep);
+  --bg-warm: var(--ed-paper-bright);
+  --surface: rgba(251, 248, 239, 0.96);
+  --surface-solid: var(--ed-paper-bright);
+  --surface-muted: var(--ed-paper-deep);
+  --text: var(--ed-ink);
+  --text-muted: var(--ed-muted);
+  --text-soft: var(--ed-muted);
+  --border: color-mix(in srgb, var(--ed-rule) 55%, var(--ed-paper));
+  --border-strong: var(--ed-rule);
+  --primary: var(--ed-teal);
+  --primary-strong: var(--ed-teal-deep);
+  --primary-soft: color-mix(in srgb, var(--ed-teal) 14%, var(--ed-paper-bright));
+  --secondary: var(--ed-navy);
+  --secondary-soft: color-mix(in srgb, var(--ed-navy) 12%, var(--ed-paper-bright));
+  --accent: var(--ed-red);
+  --accent-soft: color-mix(in srgb, var(--ed-red) 11%, var(--ed-paper-bright));
+  --ink: var(--ed-ink);
+  --screenshot-shell: #161915;
+  --screenshot-shell-highlight: #3d443c;
+  --screenshot-shell-end: #0d0f0d;
+
+  --color-surface: var(--ed-paper);
+  --color-surface-raised: var(--ed-paper-bright);
+  --color-ink: var(--ed-ink);
+  --color-muted: var(--ed-muted);
+  --color-border: var(--ed-rule);
+
+  --rule-thickness: 1px;
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+
+  --density-row: 1.68;
+  --density-gap: clamp(1rem, 2vw, 1.5rem);
+  --section-pad: clamp(3.5rem, 7vw, 7rem);
+  --gutter: clamp(1rem, 3.2vw, 2.5rem);
+  --card-pad: clamp(1.1rem, 2.4vw, 1.8rem);
+  --cluster-gap: clamp(1rem, 2.2vw, 1.5rem);
+  --content: 1280px;
+
+  --shadow: 0 18px 45px rgba(40, 37, 29, 0.1);
+  --shadow-soft: 0 8px 24px rgba(40, 37, 29, 0.08);
+  --shadow-strong: var(--shadow);
+}
+
+[data-style="editorial"][data-theme="dark"] {
+  color-scheme: dark;
+
+  --ed-paper: #111613;
+  --ed-paper-bright: #18201c;
+  --ed-paper-deep: #0d110f;
+  --ed-ink: #f2eee2;
+  --ed-muted: #bab8ad;
+  --ed-rule: #74766d;
+  --ed-teal: #68b7ad;
+  --ed-teal-deep: #91d3ca;
+  --ed-mustard: #e2bd45;
+  --ed-red: #ef715d;
+  --ed-navy: #80aadd;
+  --ed-olive: #aeb86d;
+  --ed-on-color: #0d1210;
+
+  --surface: rgba(24, 32, 28, 0.96);
+  --border: color-mix(in srgb, var(--ed-rule) 50%, var(--ed-paper));
+  --primary-soft: color-mix(in srgb, var(--ed-teal) 16%, var(--ed-paper-bright));
+  --secondary-soft: color-mix(in srgb, var(--ed-navy) 14%, var(--ed-paper-bright));
+  --accent-soft: color-mix(in srgb, var(--ed-red) 14%, var(--ed-paper-bright));
+  --screenshot-shell: #e7e2d7;
+  --screenshot-shell-highlight: #fffdf5;
+  --screenshot-shell-end: #cbc7bc;
+  --shadow: 0 20px 55px rgba(0, 0, 0, 0.34);
+  --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.24);
+}

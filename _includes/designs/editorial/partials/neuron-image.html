@@ -1,0 +1,16 @@
+{% capture neuron_webp_srcset %}{{ '/assets/images/editorial/neuron-scientific-plate-768.webp' | relative_url }} 768w, {{ '/assets/images/editorial/neuron-scientific-plate-1536.webp' | relative_url }} 1536w{% endcapture %}
+{% capture neuron_jpg_srcset %}{{ '/assets/images/editorial/neuron-scientific-plate-768.jpg' | relative_url }} 768w, {{ '/assets/images/editorial/neuron-scientific-plate-1536.jpg' | relative_url }} 1536w{% endcapture %}
+{% include optimized-image.html
+  picture_class="ed-hero__picture"
+  src="/assets/images/editorial/neuron-scientific-plate-1536.jpg"
+  webp_srcset=neuron_webp_srcset
+  fallback_srcset=neuron_jpg_srcset
+  sizes="(max-width: 900px) 100vw, 67vw"
+  alt="Screen-printed scientific plate of a branching neuron with a vermilion soma on a petrol-teal field"
+  img_class="ed-hero__image"
+  loading="lazy"
+  decoding="async"
+  priority_candidate=true
+  width="1536"
+  height="864"
+%}

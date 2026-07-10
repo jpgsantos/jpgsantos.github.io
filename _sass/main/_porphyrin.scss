@@ -1,0 +1,131 @@
+/* Published microscopy presented as an evidence-led project plate. */
+[data-style="default"] .porphyrin-paper-visual--default-grid {
+  display: grid;
+  grid-template: minmax(0, 1fr) auto auto / minmax(0, 1.15fr) minmax(14rem, .55fr);
+  gap: 1px;
+  min-height: 28rem;
+  margin: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--border);
+  overflow: hidden;
+}
+
+[data-style="default"] .porphyrin-paper-visual__image {
+  position: relative;
+  grid-area: 1 / 1 / 3 / 2;
+  min-height: 20rem;
+  overflow: hidden;
+  background: var(--surface-muted);
+}
+
+[data-style="default"] .porphyrin-evidence-mosaic {
+  display: grid;
+  grid-template: 1fr 1fr / minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 1px;
+  width: 100%;
+  height: 100%;
+  background: var(--border);
+}
+
+[data-style="default"] .porphyrin-evidence__item { position: relative; min-width: 0; min-height: 0; overflow: hidden; background: #ececec; }
+[data-style="default"] .porphyrin-evidence__item--nano { grid-row: 1 / span 2; }
+[data-style="default"] .porphyrin-evidence__picture,
+[data-style="default"] .porphyrin-evidence__img { display: block; width: 100%; height: 100%; }
+[data-style="default"] .porphyrin-evidence__img { object-fit: contain; }
+
+[data-style="default"] .porphyrin-evidence__item > span {
+  position: absolute;
+  right: .5rem;
+  bottom: .5rem;
+  display: flex;
+  gap: .4rem;
+  padding: .32rem .45rem;
+  color: #fff;
+  background: #10181b;
+  font: 700 var(--t-xs)/1 var(--font-mono);
+}
+
+[data-style="default"] .porphyrin-paper-visual__image-label {
+  position: absolute;
+  top: .75rem;
+  left: .75rem;
+  z-index: 1;
+  padding: .38rem .55rem;
+  color: #fff;
+  background: #10181b;
+  font: 800 var(--t-xs)/1 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+[data-style="default"] .porphyrin-paper-visual__caption,
+[data-style="default"] .porphyrin-paper-visual__reactants,
+[data-style="default"] .porphyrin-paper-visual__families { color: var(--text); background: var(--surface-solid); }
+
+[data-style="default"] .porphyrin-paper-visual__caption {
+  display: grid;
+  align-content: end;
+  gap: .7rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+[data-style="default"] .porphyrin-paper-visual__caption span,
+[data-style="default"] .porphyrin-paper-visual__reactants span,
+[data-style="default"] .porphyrin-paper-visual__families span {
+  color: var(--text-muted);
+  font: 800 var(--t-xs)/1.25 var(--font-mono);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+[data-style="default"] .porphyrin-paper-visual__caption strong { font-size: var(--t-md); line-height: 1.18; }
+[data-style="default"] .porphyrin-paper-visual__caption a,
+[data-style="default"] .porphyrin-paper-visual__caption a:visited {
+  width: fit-content;
+  color: var(--primary-strong);
+  font-size: var(--t-xs);
+  font-weight: 750;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent);
+  text-underline-offset: .2em;
+}
+[data-style="default"] .porphyrin-paper-visual__caption a:hover { text-decoration-color: currentColor; }
+
+[data-style="default"] .porphyrin-paper-visual__reactants {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: .65rem;
+  align-items: center;
+  padding: 1rem clamp(1rem, 2.5vw, 1.5rem);
+}
+[data-style="default"] .porphyrin-paper-visual__reactants div { display: grid; gap: .25rem; }
+[data-style="default"] .porphyrin-paper-visual__reactants strong { font-size: var(--t-sm); line-height: 1.15; }
+[data-style="default"] .porphyrin-paper-visual__operator { color: var(--primary) !important; font-size: var(--t-lg); }
+
+[data-style="default"] .porphyrin-paper-visual__families {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--surface-muted);
+}
+[data-style="default"] .porphyrin-paper-visual__families div {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .65rem;
+  align-items: center;
+  min-width: 0;
+  padding: .85rem 1rem;
+  border-right: 1px solid var(--border);
+}
+[data-style="default"] .porphyrin-paper-visual__families div:last-child { border-right: 0; }
+[data-style="default"] .porphyrin-paper-visual__families span { color: var(--primary); }
+[data-style="default"] .porphyrin-paper-visual__families strong { font-size: var(--t-sm); line-height: 1.15; }
+
+[data-style="default"][data-theme="dark"] .porphyrin-evidence__img { filter: grayscale(1) brightness(.82) contrast(1.12); }
+
+@media (max-width: 640px) {
+  [data-style="default"] .porphyrin-paper-visual--default-grid { grid-template: auto auto auto auto / 1fr; min-height: 0; }
+  [data-style="default"] .porphyrin-paper-visual__image { grid-area: auto; min-height: 0; aspect-ratio: 4 / 3; }
+  [data-style="default"] .porphyrin-paper-visual__families { grid-column: auto; }
+  [data-style="default"] .porphyrin-paper-visual__families div { grid-template-columns: 1fr; gap: .25rem; padding: .75rem .65rem; }
+}

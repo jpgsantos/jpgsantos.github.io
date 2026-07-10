@@ -1,0 +1,161 @@
+{% assign profile = site.data.profile %}
+{% assign cv_copy = site.data.page_copy.cv %}
+{% assign cv_data = site.data.cv %}
+
+<section class="editorial-design editorial-cv" data-design-root="editorial" aria-label="Curriculum Vitae - Editorial Modernism view">
+  <header class="ed-cv-hero">
+    <div class="ed-masthead">
+      <span>Curriculum vitae / professional record</span>
+      <span>Updated {{ site.time | date: '%B %Y' }}</span>
+    </div>
+
+    <div class="ed-cv-hero__identity">
+      <p class="ed-kicker">Researcher / engineer / founder</p>
+      <h1 data-content-key="page-title" data-content-value="{{ profile.name | strip_html | normalize_whitespace }}">{{ profile.name }}</h1>
+      <p>{{ profile.role }}</p>
+      <div class="ed-actions">
+        <a href="{{ profile.cv_pdf | relative_url }}" class="ed-button ed-button--primary" target="_blank" rel="noopener noreferrer">{% include icon.html name="download" %} Download CV</a>
+        <a href="{{ '/#contact' | relative_url }}" class="ed-button">{% include icon.html name="email" %} Contact</a>
+      </div>
+    </div>
+
+    <figure class="ed-cv-hero__photo">
+      {% include profile-image.html loading="lazy" width="640" height="640" sizes="(max-width: 760px) 42vw, 300px" %}
+      <figcaption>{{ profile.short_name }} / {{ profile.location }}</figcaption>
+    </figure>
+
+    <div class="ed-cv-contact" aria-label="Contact and profile information">
+      {% include designs/default/partials/cv-contact-items.html %}
+    </div>
+  </header>
+
+  <section class="ed-section ed-cv-summary">
+    <header class="ed-section__head">
+      <span class="ed-section__number">01</span>
+      <div>
+        <p class="ed-kicker">{{ cv_copy.summary_eyebrow }}</p>
+        <h2>{{ cv_copy.summary_heading }}</h2>
+      </div>
+    </header>
+    <div class="ed-cv-summary__body">
+      <p class="ed-dropcap">{{ profile.about }}</p>
+      <p>{{ profile.summary }}</p>
+    </div>
+  </section>
+
+  <section class="ed-section ed-cv-experience">
+    <header class="ed-section__head">
+      <span class="ed-section__number">02</span>
+      <div>
+        <p class="ed-kicker">{{ cv_copy.experience_eyebrow }}</p>
+        <h2>{{ cv_copy.experience_heading }}</h2>
+      </div>
+    </header>
+
+    <div class="ed-timeline">
+      {% for entry in cv_data.experience %}
+      <article class="ed-timeline__entry ed-timeline__entry--{{ entry.accent }}" data-cv-entry="experience:{{ entry.id }}" data-reveal data-content-list="cv-experience" data-content-key="{{ entry.id }}" data-content-value="{{ entry.title | strip_html | normalize_whitespace }}">
+        <div class="ed-timeline__date"><span>0{{ forloop.index }}</span>{{ entry.period }}</div>
+        <div class="ed-timeline__copy">
+          <header>
+            <h3>{{ entry.title }}</h3>
+            <p>{{ entry.organization }}</p>
+          </header>
+          <p>{{ entry.summary }}</p>
+          {% if entry.bullets.size > 0 %}
+          <ul>
+            {% for bullet in entry.bullets %}
+            <li>{{ bullet }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="ed-section ed-cv-work">
+    <header class="ed-section__head">
+      <span class="ed-section__number">03</span>
+      <div>
+        <p class="ed-kicker">Project register</p>
+        <h2>{{ cv_copy.work_reference_heading }}</h2>
+      </div>
+    </header>
+
+    <div class="ed-cv-work__grid">
+      {% for item in site.data.work %}
+      <article class="ed-cv-project" data-cv-project="{{ item.slug }}" data-reveal data-content-list="cv-projects" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
+        <span class="ed-card__number">0{{ forloop.index }}</span>
+        <p class="ed-kicker">{{ item.category }}</p>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+        {% include chip-list.html class="ed-chip-list" items=item.stack limit=4 %}
+        {% assign primary_link = item.links | first %}
+        {% if primary_link %}
+        <a href="{% if primary_link.external %}{{ primary_link.url }}{% else %}{{ primary_link.url | relative_url }}{% endif %}" {% if primary_link.external %}target="_blank" rel="noopener noreferrer"{% endif %} class="ed-text-link">
+          {{ primary_link.text }} {% include icon.html name=primary_link.icon %}
+        </a>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="ed-section ed-cv-skills">
+    <header class="ed-section__head">
+      <span class="ed-section__number">04</span>
+      <div>
+        <p class="ed-kicker">{{ cv_copy.skills_eyebrow }}</p>
+        <h2>{{ cv_copy.skills_heading }}</h2>
+      </div>
+    </header>
+    {% include skills-grid.html %}
+  </section>
+
+  <section class="ed-section ed-cv-education">
+    <header class="ed-section__head">
+      <span class="ed-section__number">05</span>
+      <div>
+        <p class="ed-kicker">{{ cv_copy.education_eyebrow }}</p>
+        <h2>{{ cv_copy.education_heading }}</h2>
+      </div>
+    </header>
+
+    <div class="ed-timeline ed-timeline--education">
+      {% for entry in cv_data.education %}
+      <article class="ed-timeline__entry ed-timeline__entry--{{ entry.accent }}" data-cv-entry="education:{{ entry.id }}" data-reveal data-content-list="cv-education" data-content-key="{{ entry.id }}" data-content-value="{{ entry.title | strip_html | normalize_whitespace }}">
+        <div class="ed-timeline__date"><span>0{{ forloop.index }}</span>{{ entry.period }}</div>
+        <div class="ed-timeline__copy">
+          <header>
+            <h3>{{ entry.title }}</h3>
+            <p>{{ entry.organization }}{% if entry.meta %} / {{ entry.meta }}{% endif %}</p>
+          </header>
+          {% for paragraph in entry.paragraphs %}
+          <p>{{ paragraph }}</p>
+          {% endfor %}
+          {% if entry.bullets.size > 0 %}
+          <ul>
+            {% for bullet in entry.bullets %}
+            <li>{{ bullet }}</li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="ed-section ed-cv-publications">
+    <header class="ed-section__head">
+      <span class="ed-section__number">06</span>
+      <div>
+        <p class="ed-kicker">{{ cv_copy.publications_eyebrow }}</p>
+        <h2>{{ cv_copy.publications_heading }}</h2>
+      </div>
+    </header>
+    {% include publications.html %}
+  </section>
+</section>

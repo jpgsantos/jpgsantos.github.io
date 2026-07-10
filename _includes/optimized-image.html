@@ -1,7 +1,21 @@
 {% assign optimized_sizes = include.sizes | default: '100vw' %}
 {% assign optimized_webp_srcset = include.webp_srcset | default: '' | strip %}
 {% assign optimized_fallback_srcset = include.fallback_srcset | default: '' | strip %}
-<picture class="{{ include.picture_class | default: 'optimized-picture' }}">
+{% assign optimized_dark_src = include.dark_src | default: '' | strip %}
+{% assign optimized_dark_webp_srcset = include.dark_webp_srcset | default: '' | strip %}
+{% assign optimized_dark_fallback_srcset = include.dark_fallback_srcset | default: '' | strip %}
+<picture
+  class="{{ include.picture_class | default: 'optimized-picture' }}"
+  {% if optimized_dark_src != '' %}
+  data-theme-picture
+  data-theme-light-src="{{ include.src | relative_url }}"
+  data-theme-dark-src="{{ include.dark_src | relative_url }}"
+  data-theme-light-webp-srcset="{{ optimized_webp_srcset | escape }}"
+  data-theme-dark-webp-srcset="{{ optimized_dark_webp_srcset | escape }}"
+  data-theme-light-fallback-srcset="{{ optimized_fallback_srcset | escape }}"
+  data-theme-dark-fallback-srcset="{{ optimized_dark_fallback_srcset | escape }}"
+  {% endif %}
+>
   {% if optimized_webp_srcset != '' %}
   <source
     srcset="{{ optimized_webp_srcset }}"
@@ -17,6 +31,7 @@
     {% if include.img_class %}class="{{ include.img_class }}"{% endif %}
     loading="{{ include.loading | default: 'lazy' }}"
     decoding="{{ include.decoding | default: 'async' }}"
+    {% if include.priority_candidate %}data-style-priority-image{% endif %}
     {% if include.width %}width="{{ include.width }}"{% endif %}
     {% if include.height %}height="{{ include.height }}"{% endif %}
     {% if include.fetchpriority %}fetchpriority="{{ include.fetchpriority }}"{% endif %}

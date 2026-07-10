@@ -2025,8 +2025,7 @@
   border-top: var(--mond-rule) solid var(--mond-ink);
 }
 
-[data-style="mondrian"] .site-footer__links a,
-[data-style="mondrian"] .scroll-to-top {
+[data-style="mondrian"] .site-footer__links a {
   border: 2px solid var(--mond-ink);
   border-radius: 0;
   color: var(--mond-ink);

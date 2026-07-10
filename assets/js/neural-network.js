@@ -27,7 +27,16 @@
     return document.documentElement.getAttribute('data-style') === 'mondrian';
   }
 
+  function isEditorial() {
+    return document.documentElement.getAttribute('data-style') === 'editorial';
+  }
+
   function colors() {
+    if (isEditorial()) {
+      return isDark()
+        ? { node: 'rgba(13, 18, 16, .76)', line: 'rgba(13, 18, 16, .25)', hot: 'rgba(239, 113, 93, .95)' }
+        : { node: 'rgba(255, 253, 246, .82)', line: 'rgba(255, 253, 246, .26)', hot: 'rgba(213, 169, 31, .96)' };
+    }
     if (isMondrian()) {
       return isDark()
         ? { node: 'rgba(241, 236, 225, .85)', line: 'rgba(241, 236, 225, .25)', hot: 'rgba(230, 57, 70, .9)' }

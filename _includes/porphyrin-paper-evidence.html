@@ -1,0 +1,77 @@
+{% assign evidence_variant = include.variant | default: "default" %}
+{% if evidence_variant == "mondrian" or evidence_variant == "editorial" %}
+  {% capture generated_stem %}/assets/images/projects/porphyrin-{{ evidence_variant }}-generated-v1{% endcapture %}
+  {% assign generated_src = generated_stem | append: '-1536.jpg' %}
+  {% capture generated_webp_srcset %}{{ generated_stem | append: '-768.webp' | relative_url }} 768w, {{ generated_stem | append: '-1536.webp' | relative_url }} 1536w{% endcapture %}
+  {% capture generated_jpg_srcset %}{{ generated_stem | append: '-768.jpg' | relative_url }} 768w, {{ generated_stem | append: '-1536.jpg' | relative_url }} 1536w{% endcapture %}
+  {% assign generated_dark_src = '' %}
+  {% assign generated_dark_webp_srcset = '' %}
+  {% assign generated_dark_jpg_srcset = '' %}
+  {% assign generated_sizes = '(max-width: 760px) 100vw, 760px' %}
+  {% if evidence_variant == "editorial" %}
+    {% capture generated_dark_stem %}/assets/images/projects/porphyrin-editorial-dark-generated-v1{% endcapture %}
+    {% assign generated_dark_src = generated_dark_stem | append: '-1536.jpg' %}
+    {% capture generated_dark_webp_srcset %}{{ generated_dark_stem | append: '-768.webp' | relative_url }} 768w, {{ generated_dark_stem | append: '-1536.webp' | relative_url }} 1536w{% endcapture %}
+    {% capture generated_dark_jpg_srcset %}{{ generated_dark_stem | append: '-768.jpg' | relative_url }} 768w, {{ generated_dark_stem | append: '-1536.jpg' | relative_url }} 1536w{% endcapture %}
+    {% assign generated_sizes = '(max-width: 760px) 100vw, (max-width: 1400px) 64vw, 900px' %}
+  {% endif %}
+<div class="porphyrin-evidence-mosaic porphyrin-evidence-mosaic--{{ evidence_variant }} porphyrin-evidence-mosaic--generated" aria-label="AI-stylized porphyrin microscopy plate based on the published TEM and SEM reference images">
+  {% include optimized-image.html
+    picture_class="porphyrin-generated__picture"
+    src=generated_src
+    webp_srcset=generated_webp_srcset
+    fallback_srcset=generated_jpg_srcset
+    dark_src=generated_dark_src
+    dark_webp_srcset=generated_dark_webp_srcset
+    dark_fallback_srcset=generated_dark_jpg_srcset
+    sizes=generated_sizes
+    alt="AI-stylized three-panel porphyrin microscopy plate adapted to the design language"
+    img_class="porphyrin-generated__img"
+    loading="lazy"
+    width="1536"
+    height="1024"
+  %}
+  <div class="porphyrin-evidence__item porphyrin-evidence__item--nano">
+    <span data-image-overlay><strong>TEM</strong>Clusters</span>
+  </div>
+  <div class="porphyrin-evidence__item porphyrin-evidence__item--micro">
+    <span data-image-overlay><strong>TEM</strong>Facets</span>
+  </div>
+  <div class="porphyrin-evidence__item porphyrin-evidence__item--sem">
+    <span data-image-overlay><strong>SEM</strong>Surface</span>
+  </div>
+</div>
+{% else %}
+<div class="porphyrin-evidence-mosaic porphyrin-evidence-mosaic--{{ evidence_variant }}" aria-label="Experimental electron microscopy crops from the published porphyrin ionic self-assembly study">
+  <div class="porphyrin-evidence__item porphyrin-evidence__item--nano">
+    {% include porphyrin-evidence-image.html
+      stem="/assets/images/projects/porphyrin-paper-tem-nanoscale"
+      alt="TEM crop showing nanoscale porphyrin ionic-solid aggregates with a retained 100 nanometre scale bar"
+      sizes="(max-width: 760px) 68vw, 520px"
+      width="960"
+      height="666"
+    %}
+    <span data-image-overlay><strong>TEM</strong>100 nm</span>
+  </div>
+  <div class="porphyrin-evidence__item porphyrin-evidence__item--micro">
+    {% include porphyrin-evidence-image.html
+      stem="/assets/images/projects/porphyrin-paper-tem-microscale"
+      alt="TEM crop showing faceted porphyrin ionic solids with a retained 2 micrometre scale bar"
+      sizes="(max-width: 760px) 48vw, 340px"
+      width="960"
+      height="697"
+    %}
+    <span data-image-overlay><strong>TEM</strong>2 &micro;m</span>
+  </div>
+  <div class="porphyrin-evidence__item porphyrin-evidence__item--sem">
+    {% include porphyrin-evidence-image.html
+      stem="/assets/images/projects/porphyrin-paper-sem-microscale"
+      alt="SEM crop showing layered and rod-like porphyrin material morphology with a retained 1 micrometre scale bar"
+      sizes="(max-width: 760px) 48vw, 340px"
+      width="720"
+      height="735"
+    %}
+    <span data-image-overlay><strong>SEM</strong>1 &micro;m</span>
+  </div>
+</div>
+{% endif %}

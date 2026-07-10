@@ -1,0 +1,174 @@
+{% assign profile = site.data.profile %}
+
+<section class="editorial-design editorial-home" data-design-root="editorial" aria-label="Home - Editorial Modernism view">
+  <header class="ed-hero">
+    <div class="ed-masthead">
+      <span>Independent portfolio / scientific systems</span>
+      <span>Edition 03 &middot; {{ site.time | date: '%Y' }}</span>
+    </div>
+
+    <div class="ed-hero__copy">
+      <p class="ed-kicker">{{ profile.role }}</p>
+      <h1 data-content-key="page-title" data-content-value="{{ profile.headline | strip_html | normalize_whitespace }}">
+        <span class="ed-display-title" aria-hidden="true">
+          <span>Engineering systems.</span>
+          <span class="ed-display-title__accent">Understanding complexity.</span>
+        </span>
+        <span class="ed-sr-only">{{ profile.headline }}</span>
+      </h1>
+      <p class="ed-hero__summary" aria-label="{{ profile.summary | strip_html | normalize_whitespace }}" data-content-key="home-summary" data-content-value="{{ profile.summary | strip_html | normalize_whitespace }}">{{ profile.short_summary }}</p>
+      <div class="ed-actions">
+        <a href="{{ '/projects/' | relative_url }}" class="ed-button ed-button--primary" data-content-list="home-hero-actions" data-content-key="/projects/" data-content-value="View work">
+          View work {% include icon.html name="arrow-right" %}
+        </a>
+        <a href="{{ profile.cv_pdf | relative_url }}" class="ed-button" target="_blank" rel="noopener noreferrer" data-content-list="home-hero-actions" data-content-key="{{ profile.cv_pdf }}" data-content-value="Download CV">
+          {% include icon.html name="download" %} Download CV
+        </a>
+      </div>
+    </div>
+
+    <figure class="ed-hero__visual">
+      <div class="ed-hero__visual-index">
+        <span>Fig. 00 / Neural systems plate</span>
+        <span>Generated study / 2026</span>
+      </div>
+      <div class="ed-hero__image-frame">
+        {% include designs/editorial/partials/neuron-image.html %}
+        <p class="ed-hero__visual-note" data-image-overlay>Observe patterns. Model systems. Build useful tools.</p>
+      </div>
+      <figcaption class="ed-hero__legend">
+        <span><i class="ed-dot ed-dot--red"></i> Research</span>
+        <span><i class="ed-dot ed-dot--yellow"></i> Engineering</span>
+        <span><i class="ed-dot ed-dot--paper"></i> Product</span>
+      </figcaption>
+    </figure>
+
+    {% include designs/editorial/partials/science-plates.html %}
+
+    <dl class="ed-metrics" aria-label="Professional metrics">
+      {% for metric in profile.metrics %}
+      <div>
+        <dt>{{ metric.label }}</dt>
+        <dd>{{ metric.value }}</dd>
+      </div>
+      {% endfor %}
+    </dl>
+  </header>
+
+  <section class="ed-section ed-about" id="about" data-about-anchor="editorial">
+    <header class="ed-section__head">
+      <span class="ed-section__number">01</span>
+      <div>
+        <p class="ed-kicker">Field notes / About</p>
+        <h2>{{ profile.about_heading }}</h2>
+      </div>
+    </header>
+
+    <div class="ed-about__grid">
+      <figure class="ed-profile-plate" data-reveal>
+        {% include profile-image.html loading="lazy" width="640" height="640" sizes="(max-width: 760px) 100vw, 320px" %}
+        <figcaption>
+          <span>{{ profile.short_name }}</span>
+          <span>{{ profile.location }}</span>
+        </figcaption>
+      </figure>
+
+      <div class="ed-about__prose">
+        <p class="ed-dropcap">{{ profile.about }}</p>
+        <p>{{ profile.about_background }}</p>
+        <p class="ed-current"><span>Current</span> {{ profile.current_work }}</p>
+      </div>
+
+      <div class="ed-principles" tabindex="0" aria-label="Scrollable working principles">
+        {% for principle in profile.principles %}
+        <article data-reveal>
+          <span class="ed-card__number">0{{ forloop.index }}</span>
+          <div class="ed-icon">{% include icon.html name=principle.icon %}</div>
+          <h3>{{ principle.title }}</h3>
+          <p>{{ principle.description }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="ed-section ed-work">
+    <header class="ed-section__head ed-section__head--split">
+      <span class="ed-section__number">02</span>
+      <div>
+        <p class="ed-kicker">Selected work / Evidence</p>
+        <h2>{{ profile.selected_work_heading }}</h2>
+      </div>
+      <p>{{ profile.selected_work_intro }}</p>
+    </header>
+
+    <div class="ed-work__grid">
+      {% for item in site.data.work limit:2 %}
+      <article class="ed-work-card ed-work-card--{{ forloop.index }}" data-reveal data-content-list="home-selected-work" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
+        <div class="ed-work-card__topline">
+          <span>0{{ forloop.index }}</span>
+          <span>{{ item.category }}</span>
+          <span>{% include icon.html name=item.icon %}</span>
+        </div>
+        <div class="ed-work-card__figure" aria-hidden="true">
+          <span class="ed-work-card__figure-icon">{% include icon.html name=item.icon %}</span>
+          <span class="ed-work-card__figure-grid"></span>
+          <span class="ed-work-card__figure-orbit"></span>
+        </div>
+        <h3>{{ item.title }}</h3>
+        <p>{{ item.description }}</p>
+        <a href="{{ item.url | relative_url }}" class="ed-text-link">
+          Read case study {% include icon.html name="arrow-right" %}
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="ed-section ed-toolkit">
+    <header class="ed-section__head">
+      <span class="ed-section__number">03</span>
+      <div>
+        <p class="ed-kicker">Methods / Technical toolkit</p>
+        <h2>{{ profile.toolkit_heading }}</h2>
+      </div>
+    </header>
+
+    <div class="ed-toolkit__grid">
+      {% for area in profile.focus_areas %}
+      <article class="ed-discipline ed-discipline--{{ forloop.index }}" data-reveal>
+        <header>
+          <span>Discipline 0{{ forloop.index }}</span>
+          <span class="ed-icon">{% include icon.html name=area.icon %}</span>
+        </header>
+        <h3>{{ area.title }}</h3>
+        <p>{{ area.description }}</p>
+        <div class="ed-signal" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+      </article>
+      {% endfor %}
+    </div>
+    {% include chip-list.html class="ed-chip-list" items=profile.skill_chips aria_label="Core stack" %}
+  </section>
+
+  <section class="ed-section ed-contact" id="contact" data-contact-anchor="editorial">
+    <header class="ed-section__head ed-section__head--split">
+      <span class="ed-section__number">04</span>
+      <div>
+        <p class="ed-kicker">Contact / Correspondence</p>
+        <h2>{{ profile.contact_heading }}</h2>
+      </div>
+      <p>{{ profile.contact_intro }}</p>
+    </header>
+
+    <div class="ed-contact__grid">
+      {% assign email_href = profile.contact.email | prepend: 'mailto:' %}
+      {% assign phone_href = profile.contact.phone_uri | prepend: 'tel:' %}
+      {% include designs/default/partials/contact-card.html href=email_href icon="email" label="Email" value=profile.contact.email class="contact-card--email" %}
+      {% include designs/default/partials/contact-card.html href=phone_href icon="phone" label="Phone" value=profile.contact.phone %}
+      {% for social in profile.socials %}
+      {% assign item = social[1] %}
+      {% include designs/default/partials/contact-card.html href=item.url icon=item.icon label=item.label value=item.username external=true %}
+      {% endfor %}
+    </div>
+  </section>
+</section>

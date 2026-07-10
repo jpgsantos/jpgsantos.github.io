@@ -1,6 +1,21 @@
 /* Responsive polish that keeps the editorial identity without making narrow
    layouts read like a long stack of unrelated cards. */
 
+@media (min-width: 541px) and (max-width: 960px) {
+  [data-style="mondrian"] .home-mondrian .mond-tile--neural {
+    min-height: 0;
+    block-size: clamp(11.5rem, 24vw, 13.75rem);
+    overflow: hidden;
+  }
+
+  [data-style="mondrian"] .home-mondrian .mond-tile--neural canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
 @media (max-width: 760px) {
   [data-style="mondrian"] .case-mondrian .case-tile--screenshots {
     flex-flow: row nowrap;
@@ -18,6 +33,15 @@
 }
 
 @media (max-width: 540px) {
+  [data-style="mondrian"] .projects-mondrian .proj-index {
+    grid-auto-rows: auto;
+  }
+
+  [data-style="mondrian"] .projects-mondrian .proj-index__label {
+    min-height: 3.5rem;
+    align-items: center;
+  }
+
   [data-style="mondrian"] .mond-hero__lede {
     font-family: var(--font-sans);
     font-style: normal;

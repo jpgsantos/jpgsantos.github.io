@@ -6,12 +6,12 @@
   const header = document.querySelector('.site-header');
   const nav = document.getElementById('main-nav');
   const navToggle = document.querySelector('.nav-toggle');
-  const mainContent = document.getElementById('main-content');
-  const scrollButton = document.getElementById('scrollToTop');
   const darkQuery = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const designRoots = Array.from(document.querySelectorAll('[data-design-root]'));
   const designStylesheets = Array.from(document.querySelectorAll('[data-design-stylesheet]'));
+  const stylePriorityImages = Array.from(document.querySelectorAll('[data-style-priority-image]'));
+  const themePictures = Array.from(document.querySelectorAll('[data-theme-picture]'));
   const styleSelect = document.querySelector('[data-style-select]');
   const styleButtons = Array.from(document.querySelectorAll('[data-style-value]'));
   const themeButtons = Array.from(document.querySelectorAll('[data-theme-value]'));
@@ -28,11 +28,10 @@
     auto: 'System'
   };
 
-  let contactScrollFrame = 0;
+  let anchorScrollFrame = 0;
   let resizeFrame = 0;
   let headerHeight = 76;
   let hasScrolled = false;
-  let scrollButtonVisible = false;
 
   function readPreference(key, fallback) {
     try {
@@ -46,6 +45,14 @@
     try {
       localStorage.setItem(key, value);
     } catch (error) {}
+  }
+
+  function rememberStyleChoice(style) {
+    if (window.__siteStyleRotation && typeof window.__siteStyleRotation.select === 'function') {
+      window.__siteStyleRotation.select(style, supportedStyles);
+      return;
+    }
+    writePreference('style', style);
   }
 
   function createChoiceMenu(config) {
@@ -230,28 +237,69 @@
     window.addEventListener('load', measureHeaderOffset, { once: true });
   }
 
-  function scheduleContactScroll() {
+  function scheduleAnchorScroll() {
     if (resizeFrame) return;
     resizeFrame = window.requestAnimationFrame(() => {
-      scrollToContactHash('auto');
+      scrollToActiveHash('auto');
       resizeFrame = 0;
     });
   }
 
-  function getContactTarget() {
-    const style = root.getAttribute('data-style') || 'default';
-    return document.querySelector(`[data-contact-anchor="${style}"]`)
-      || document.querySelector('[data-contact-anchor="default"]');
+  function syncStylePriorityImages(style) {
+    stylePriorityImages.forEach((image) => {
+      const designRoot = image.closest('[data-design-root]');
+      const isActive = !designRoot || designRootSupports(designRoot, style);
+      image.loading = isActive ? 'eager' : 'lazy';
+      if (isActive) {
+        image.setAttribute('fetchpriority', 'high');
+      } else {
+        image.removeAttribute('fetchpriority');
+      }
+    });
   }
 
-  function scrollToContactHash(behavior) {
-    if (window.location.hash !== '#contact') return;
-    const target = getContactTarget();
+  function syncThemePictures(useDark) {
+    const mode = useDark ? 'Dark' : 'Light';
+
+    themePictures.forEach((picture) => {
+      const image = picture.querySelector('img');
+      if (!image) return;
+
+      const webpSource = picture.querySelector('source[type="image/webp"]');
+      const webpSrcset = picture.dataset[`theme${mode}WebpSrcset`];
+      const fallbackSrcset = picture.dataset[`theme${mode}FallbackSrcset`];
+      const src = picture.dataset[`theme${mode}Src`];
+
+      if (webpSource && webpSrcset && webpSource.getAttribute('srcset') !== webpSrcset) {
+        webpSource.setAttribute('srcset', webpSrcset);
+      }
+      if (fallbackSrcset && image.getAttribute('srcset') !== fallbackSrcset) {
+        image.setAttribute('srcset', fallbackSrcset);
+      }
+      if (src && image.getAttribute('src') !== src) {
+        image.setAttribute('src', src);
+      }
+    });
+  }
+
+  function getActiveHashTarget() {
+    const anchor = window.location.hash === '#contact'
+      ? 'contact'
+      : (window.location.hash === '#about' ? 'about' : '');
+    if (!anchor) return null;
+
+    const style = root.getAttribute('data-style') || 'default';
+    return document.querySelector(`[data-${anchor}-anchor="${style}"]`)
+      || document.querySelector(`[data-${anchor}-anchor="default"]`);
+  }
+
+  function scrollToActiveHash(behavior) {
+    const target = getActiveHashTarget();
     if (!target) return;
 
-    window.cancelAnimationFrame(contactScrollFrame);
-    contactScrollFrame = window.requestAnimationFrame(() => {
-      contactScrollFrame = window.requestAnimationFrame(() => {
+    window.cancelAnimationFrame(anchorScrollFrame);
+    anchorScrollFrame = window.requestAnimationFrame(() => {
+      anchorScrollFrame = window.requestAnimationFrame(() => {
         const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
         window.scrollTo({
           top: Math.max(0, targetTop),
@@ -271,6 +319,7 @@
       root.removeAttribute('data-theme');
     }
     root.setAttribute('data-theme-choice', theme);
+    syncThemePictures(shouldUseDark);
     themeMenu.render(theme);
   }
 
@@ -282,13 +331,14 @@
     syncDesignStylesheets(style);
     root.setAttribute('data-style', style);
     syncDesignTrees(style);
+    syncStylePriorityImages(style);
 
     if (styleSelect && styleSelect.value !== style) {
       styleSelect.value = style;
     }
 
     styleMenu.render(style);
-    scrollToContactHash('auto');
+    scrollToActiveHash('auto');
   }
 
   function closeNav() {
@@ -349,21 +399,6 @@
       hasScrolled = nextHasScrolled;
     }
 
-    if (scrollButton) {
-      const nextScrollButtonVisible = scrollTop > 500;
-      if (nextScrollButtonVisible !== scrollButtonVisible) {
-        scrollButton.classList.toggle('is-visible', nextScrollButtonVisible);
-        scrollButtonVisible = nextScrollButtonVisible;
-      }
-    }
-  }
-
-  function initScrollToTop() {
-    if (!scrollButton) return;
-    scrollButton.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
-      if (mainContent) mainContent.focus({ preventScroll: true });
-    });
   }
 
   function initCarousels() {
@@ -515,18 +550,18 @@
     triggerLabel: 'Design',
     labels: styleLabels,
     onChoose: (style) => {
-      writePreference('style', style);
+      rememberStyleChoice(style);
       applyStyle(style);
     }
   });
 
   applyTheme(readPreference('theme', 'auto'));
-  applyStyle(readPreference('style', 'default'));
+  applyStyle(root.getAttribute('data-style') || readPreference('style', 'default'));
 
   if (styleSelect) {
     styleSelect.addEventListener('change', () => {
       const nextStyle = styleSelect.value;
-      writePreference('style', nextStyle);
+      rememberStyleChoice(nextStyle);
       applyStyle(nextStyle);
     });
   }
@@ -567,19 +602,18 @@
     ticking = true;
   }, { passive: true });
 
-  window.addEventListener('resize', scheduleContactScroll);
-  window.addEventListener('hashchange', () => scrollToContactHash(reduceMotion ? 'auto' : 'smooth'));
-  window.addEventListener('load', () => scrollToContactHash('auto'));
+  window.addEventListener('resize', scheduleAnchorScroll);
+  window.addEventListener('hashchange', () => scrollToActiveHash(reduceMotion ? 'auto' : 'smooth'));
+  window.addEventListener('load', () => scrollToActiveHash('auto'));
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => scrollToContactHash('auto')).catch(() => {});
+    document.fonts.ready.then(() => scrollToActiveHash('auto')).catch(() => {});
   }
 
   initNavigation();
   initProjectIndexState();
-  initScrollToTop();
   initCarousels();
   initReveals();
   initHeaderOffset();
   handleScroll();
-  scrollToContactHash('auto');
+  scrollToActiveHash('auto');
 })();
