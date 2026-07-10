@@ -5393,7 +5393,7 @@
 }
 
 [data-style="mondrian"] .projects-mondrian .mond-shot-slide .phone-frame {
-  height: min(calc(100% - 0.75rem), clamp(340px, 44vw, 560px));
+  height: clamp(340px, 44vw, 560px);
   max-width: calc(100% - 0.75rem);
   max-height: calc(100% - 0.75rem);
 }
