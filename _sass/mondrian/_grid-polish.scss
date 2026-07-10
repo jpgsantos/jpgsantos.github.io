@@ -48,6 +48,52 @@
 }
 
 [data-style="mondrian"] :where(
+  .theme-menu__trigger,
+  .style-menu__trigger
+)[aria-expanded="true"] {
+  color: var(--mond-on-yellow);
+  background: var(--mond-yellow);
+  box-shadow: inset 0 -4px 0 var(--mond-red);
+}
+
+[data-style="mondrian"] :where(
+  .theme-menu__trigger,
+  .style-menu__trigger
+)::after {
+  transition: transform 140ms ease;
+}
+
+[data-style="mondrian"] :where(
+  .theme-menu__trigger,
+  .style-menu__trigger
+)[aria-expanded="true"]::after {
+  color: var(--mond-on-yellow);
+  transform: rotate(180deg);
+}
+
+[data-style="mondrian"] .nav-toggle__line {
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+
+[data-style="mondrian"] .nav-toggle[aria-expanded="true"] {
+  color: var(--mond-on-yellow);
+  background: var(--mond-yellow);
+  box-shadow: inset 0 -4px 0 var(--mond-red);
+}
+
+[data-style="mondrian"] .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(1) {
+  transform: translateY(14px) rotate(45deg);
+}
+
+[data-style="mondrian"] .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(2) {
+  opacity: 0;
+}
+
+[data-style="mondrian"] .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(3) {
+  transform: translateY(-14px) rotate(-45deg);
+}
+
+[data-style="mondrian"] :where(
   .mond-button,
   .mond-card__link,
   .mond-contact-card,
@@ -72,6 +118,16 @@
   transition: color 140ms ease, background-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
 }
 
+[data-style="mondrian"] .proj-index a[aria-current="location"] {
+  color: #fff;
+  background: var(--mond-blue);
+  box-shadow: inset 0 -4px 0 var(--mond-yellow);
+}
+
+[data-style="mondrian"] .proj-index a[aria-current="location"] :where(span, strong, small) {
+  color: #fff;
+}
+
 @media (hover: hover) {
   [data-style="mondrian"] :where(.mond-button, .mond-card__link):hover {
     color: var(--mond-on-yellow);
@@ -92,6 +148,15 @@
 
 [data-style="mondrian"] .proj-index a:is(:hover, :active),
 [data-style="mondrian"] .proj-index a:is(:hover, :active) :where(span, strong, small) {
+  color: var(--mond-on-yellow);
+}
+
+[data-style="mondrian"] .proj-index a[aria-current="location"]:is(:hover, :active) {
+  color: var(--mond-on-yellow);
+  background: var(--mond-yellow);
+}
+
+[data-style="mondrian"] .proj-index a[aria-current="location"]:is(:hover, :active) :where(span, strong, small) {
   color: var(--mond-on-yellow);
 }
 

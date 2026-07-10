@@ -10,6 +10,51 @@
   background: var(--ink);
 }
 
+[data-style="default"] :where(
+  .theme-menu__trigger,
+  .style-menu__trigger
+)[aria-expanded="true"] {
+  border-color: var(--primary-strong);
+  background: color-mix(in srgb, var(--primary-soft) 82%, var(--surface-solid));
+  box-shadow: inset 0 -3px 0 var(--primary-strong);
+}
+
+[data-style="default"] :where(
+  .theme-menu__trigger,
+  .style-menu__trigger
+)::after {
+  transition: transform 140ms ease;
+}
+
+[data-style="default"] :where(
+  .theme-menu__trigger,
+  .style-menu__trigger
+)[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+[data-style="default"] .nav-toggle__line {
+  transition: opacity 140ms ease, transform 140ms ease;
+}
+
+[data-style="default"] .nav-toggle[aria-expanded="true"] {
+  border-color: var(--primary-strong);
+  color: var(--text);
+  background: var(--primary-soft);
+}
+
+[data-style="default"] .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(1) {
+  transform: translateY(13px) rotate(45deg);
+}
+
+[data-style="default"] .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(2) {
+  opacity: 0;
+}
+
+[data-style="default"] .nav-toggle[aria-expanded="true"] .nav-toggle__line:nth-child(3) {
+  transform: translateY(-13px) rotate(-45deg);
+}
+
 [data-style="default"] .carousel-button {
   width: 2.75rem;
   min-height: 2.75rem;
@@ -28,6 +73,20 @@
 
 [data-style="default"] .app-carousel__dots button[aria-current="true"] {
   background: radial-gradient(circle, var(--primary-strong) 0 0.34rem, transparent 0.37rem);
+}
+
+[data-style="default"] body[data-page="work"] .work-hero-index a[aria-current="location"] {
+  border-top-color: var(--primary-strong);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--primary-soft) 78%, transparent),
+    transparent 82%
+  );
+  box-shadow: inset 0 3px 0 var(--primary-strong);
+}
+
+[data-style="default"] body[data-page="work"] .work-hero-index a[aria-current="location"] span {
+  color: var(--primary-strong);
 }
 
 [data-style="default"] .section-block--cta h2 {
