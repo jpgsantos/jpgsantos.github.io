@@ -1,15 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" shape-rendering="geometricPrecision">
-  <path d="M50 3 97 50 50 97 3 50Z" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
-  <g fill="#fff">
-    <path d="m50 8 6 33-6 7-6-7Z"/>
-    <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(45 50 50)"/>
-    <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(90 50 50)"/>
-    <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(135 50 50)"/>
-    <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(180 50 50)"/>
-    <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(225 50 50)"/>
-    <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(270 50 50)"/>
-    <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(315 50 50)"/>
-  </g>
-  <circle cx="50" cy="50" r="10" fill="none" stroke="#fff" stroke-width="3"/>
-  <circle cx="50" cy="50" r="3.5" fill="#fff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" color="#fff" shape-rendering="geometricPrecision">
+  <defs>
+    <symbol id="az-rosette" viewBox="0 0 100 100">
+      <path d="M50 3 97 50 50 97 3 50Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+      <g fill="currentColor">
+        <path d="m50 8 6 33-6 7-6-7Z"/>
+        <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(45 50 50)"/>
+        <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(90 50 50)"/>
+        <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(135 50 50)"/>
+        <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(180 50 50)"/>
+        <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(225 50 50)"/>
+        <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(270 50 50)"/>
+        <path d="m50 8 6 33-6 7-6-7Z" transform="rotate(315 50 50)"/>
+      </g>
+      <circle cx="50" cy="50" r="10" fill="none" stroke="currentColor" stroke-width="2" vector-effect="non-scaling-stroke"/>
+      <circle cx="50" cy="50" r="3.5" fill="currentColor"/>
+    </symbol>
+  </defs>
+  <use href="#az-rosette"/>
 </svg>

@@ -28,12 +28,12 @@
   {% include designs/azulejo/partials/tile-ribbon.html class="az-tile-ribbon--hero" %}
 
   <section class="az-section az-cv-summary">
-    <header class="az-section__head"><span class="az-section__index">01</span><div><p class="az-kicker">{{ cv_copy.summary_eyebrow }}</p><h2>{{ cv_copy.summary_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    <header class="az-section__head"><span class="az-section__index">01</span><div><p class="az-kicker">{{ cv_copy.summary_eyebrow }}</p><h2>{{ cv_copy.summary_heading }}</h2></div>{% include designs/azulejo/partials/rosette.html %}</header>
     <div class="az-cv-summary__body"><p class="az-lede">{{ profile.about }}</p><p>{{ profile.summary }}</p></div>
   </section>
 
   <section class="az-section" id="azulejo-experience">
-    <header class="az-section__head"><span class="az-section__index">02</span><div><p class="az-kicker">{{ cv_copy.experience_eyebrow }}</p><h2>{{ cv_copy.experience_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    <header class="az-section__head"><span class="az-section__index">02</span><div><p class="az-kicker">{{ cv_copy.experience_eyebrow }}</p><h2>{{ cv_copy.experience_heading }}</h2></div>{% include designs/azulejo/partials/rosette.html %}</header>
     <div class="az-timeline">
       {% for entry in cv_data.experience %}
       <article class="az-timeline__entry" data-cv-entry="experience:{{ entry.id }}" data-reveal data-content-list="cv-experience" data-content-key="{{ entry.id }}" data-content-value="{{ entry.title | strip_html | normalize_whitespace }}">
@@ -45,7 +45,7 @@
   </section>
 
   <section class="az-section" id="azulejo-projects">
-    <header class="az-section__head"><span class="az-section__index">03</span><div><p class="az-kicker">Project index</p><h2>{{ cv_copy.work_reference_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    <header class="az-section__head"><span class="az-section__index">03</span><div><p class="az-kicker">Project index</p><h2>{{ cv_copy.work_reference_heading }}</h2></div>{% include designs/azulejo/partials/rosette.html %}</header>
     <div class="az-cv-projects">
       {% for item in site.data.work %}
       <article data-cv-project="{{ item.slug }}" data-reveal data-content-list="cv-projects" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
@@ -58,12 +58,12 @@
   </section>
 
   <section class="az-section az-cv-skills" id="azulejo-skills">
-    <header class="az-section__head"><span class="az-section__index">04</span><div><p class="az-kicker">{{ cv_copy.skills_eyebrow }}</p><h2>{{ cv_copy.skills_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    <header class="az-section__head"><span class="az-section__index">04</span><div><p class="az-kicker">{{ cv_copy.skills_eyebrow }}</p><h2>{{ cv_copy.skills_heading }}</h2></div>{% include designs/azulejo/partials/rosette.html %}</header>
     {% include skills-grid.html %}
   </section>
 
   <section class="az-section" id="azulejo-education">
-    <header class="az-section__head"><span class="az-section__index">05</span><div><p class="az-kicker">{{ cv_copy.education_eyebrow }}</p><h2>{{ cv_copy.education_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    <header class="az-section__head"><span class="az-section__index">05</span><div><p class="az-kicker">{{ cv_copy.education_eyebrow }}</p><h2>{{ cv_copy.education_heading }}</h2></div>{% include designs/azulejo/partials/rosette.html %}</header>
     <div class="az-timeline az-timeline--education">
       {% for entry in cv_data.education %}
       <article class="az-timeline__entry" data-cv-entry="education:{{ entry.id }}" data-reveal data-content-list="cv-education" data-content-key="{{ entry.id }}" data-content-value="{{ entry.title | strip_html | normalize_whitespace }}">
@@ -75,7 +75,7 @@
   </section>
 
   <section class="az-section az-publications" id="azulejo-publications">
-    <header class="az-section__head"><span class="az-section__index">06</span><div><p class="az-kicker">{{ cv_copy.publications_eyebrow }}</p><h2>{{ cv_copy.publications_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    <header class="az-section__head"><span class="az-section__index">06</span><div><p class="az-kicker">{{ cv_copy.publications_eyebrow }}</p><h2>{{ cv_copy.publications_heading }}</h2></div>{% include designs/azulejo/partials/rosette.html %}</header>
     {% include publications.html %}
   </section>
 

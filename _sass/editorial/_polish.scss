@@ -110,6 +110,12 @@
   }
 }
 
+@media (min-width: 901px) and (max-width: 980px) {
+  .ed-hero__copy h1 {
+    --t-xl: clamp(2.5rem, 4vw, 3.65rem);
+  }
+}
+
 @media (min-width: 761px) and (max-width: 900px) {
   .ed-hero__copy {
     min-height: 0;

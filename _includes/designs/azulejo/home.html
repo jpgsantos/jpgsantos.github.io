@@ -10,7 +10,7 @@
         <a href="{{ profile.cv_pdf | relative_url }}" class="az-button" target="_blank" rel="noopener noreferrer" data-content-list="home-hero-actions" data-content-key="{{ profile.cv_pdf }}" data-content-value="Download CV">{% include icon.html name="download" %} Download CV</a>
       </div>
       <div class="az-hero__status">
-        <span class="az-rosette az-rosette--small" aria-hidden="true"></span>
+        {% include designs/azulejo/partials/rosette.html small=true %}
         <p><b>Current field note</b>{{ profile.current_work }} &middot; {{ profile.location }}</p>
       </div>
     </div>
@@ -33,7 +33,7 @@
     <header class="az-section__head">
       <span class="az-section__index">01</span>
       <div><p class="az-kicker">Profile / About</p><h2>{{ profile.about_heading }}</h2></div>
-      <span class="az-rosette" aria-hidden="true"></span>
+      {% include designs/azulejo/partials/rosette.html %}
     </header>
     <div class="az-about__grid">
       <figure class="az-portrait" data-reveal>
@@ -75,7 +75,7 @@
     <header class="az-section__head">
       <span class="az-section__index">03</span>
       <div><p class="az-kicker">Methods / Toolkit</p><h2>{{ profile.toolkit_heading }}</h2></div>
-      <span class="az-rosette" aria-hidden="true"></span>
+      {% include designs/azulejo/partials/rosette.html %}
     </header>
     <div class="az-focus-grid">
       {% for area in profile.focus_areas %}

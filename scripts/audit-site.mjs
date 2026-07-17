@@ -17,7 +17,7 @@ const captureSnapshots = process.argv.includes('--snapshots');
 const emulateReducedMotion = process.argv.includes('--reduced-motion');
 const snapshotDir = join(outputDir, 'snapshots');
 const pages = pageFilter ? [pageFilter] : readAuditedPages();
-const widths = Number.isFinite(widthFilter) && widthFilter > 0 ? [widthFilter] : [390, 540, 768, 1024, 1366];
+const widths = Number.isFinite(widthFilter) && widthFilter > 0 ? [widthFilter] : [390, 540, 768, 920, 1024, 1366];
 const styles = styleFilter ? [styleFilter] : designRegistry.map((design) => design.value);
 const themes = themeFilter ? [themeFilter] : ['light', 'dark'];
 const height = 900;
@@ -578,7 +578,25 @@ function auditExpression(expectedStyle, path) {
       if (activeRoot) {
         const siteHeader = geometry(document.querySelector('.site-header'));
         const directChildren = Array.from(activeRoot.children)
-          .map((node) => ({ node, rect: geometry(node), style: getComputedStyle(node) }))
+          .map((node) => {
+            const rect = geometry(node);
+            const flowBottom = rect ? Array.from(node.querySelectorAll('*')).reduce((bottom, descendant) => {
+              const descendantStyle = getComputedStyle(descendant);
+              let ancestor = descendant;
+              let transformed = false;
+              while (ancestor && ancestor !== node) {
+                if (getComputedStyle(ancestor).transform !== 'none') {
+                  transformed = true;
+                  break;
+                }
+                ancestor = ancestor.parentElement;
+              }
+              if (descendantStyle.display === 'none' || descendantStyle.visibility === 'hidden' || transformed || ['absolute', 'fixed'].includes(descendantStyle.position)) return bottom;
+              const descendantRect = geometry(descendant);
+              return descendantRect ? Math.max(bottom, descendantRect.bottom) : bottom;
+            }, rect.bottom) : 0;
+            return { node, rect, flowBottom, style: getComputedStyle(node) };
+          })
           .filter((item) => item.rect && item.rect.width > 1 && item.rect.height > 1 && item.style.visibility !== 'hidden');
         if (!location.hash && scrollY < 2 && siteHeader && directChildren.length > 0) {
           const firstContentTop = Math.min(...directChildren.map((item) => item.rect.top));
@@ -592,9 +610,10 @@ function auditExpression(expectedStyle, path) {
             const right = directChildren[rightIndex];
             if (['absolute', 'fixed'].includes(left.style.position) || ['absolute', 'fixed'].includes(right.style.position)) continue;
             const intersectionWidth = Math.min(left.rect.right, right.rect.right) - Math.max(left.rect.left, right.rect.left);
-            const intersectionHeight = Math.min(left.rect.bottom, right.rect.bottom) - Math.max(left.rect.top, right.rect.top);
+            const intersectionHeight = Math.min(left.flowBottom, right.flowBottom) - Math.max(left.rect.top, right.rect.top);
             if (intersectionWidth > 2 && intersectionHeight > 2) {
-              overlapFailures.push(describeNode(left.node) + ' overlaps ' + describeNode(right.node) + ' by ' + intersectionWidth.toFixed(1) + 'x' + intersectionHeight.toFixed(1) + 'px');
+              const overflowDetail = left.flowBottom > left.rect.bottom + 2 ? ' (including overflowing flow content)' : '';
+              overlapFailures.push(describeNode(left.node) + ' overlaps ' + describeNode(right.node) + ' by ' + intersectionWidth.toFixed(1) + 'x' + intersectionHeight.toFixed(1) + 'px' + overflowDetail);
             }
           }
         }

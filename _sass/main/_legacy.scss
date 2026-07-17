@@ -4504,6 +4504,10 @@ main {
     grid-template-columns: 1fr;
   }
 
+  [data-style="default"] .case-study__hero-copy {
+    max-width: none;
+  }
+
   [data-style="default"] .case-study__facts,
   [data-style="default"] .case-workflow-copy,
   [data-style="default"] .case-porphyrin-copy,

@@ -1,7 +1,7 @@
 {% assign work_copy = site.data.page_copy.work %}
 <section class="azulejo-design az-projects" data-design-root="azulejo" aria-label="Selected work - Azulejo Scientific view">
   <header class="az-page-hero">
-    <div class="az-page-hero__mark"><span class="az-rosette" aria-hidden="true"></span><span>Portfolio / 04</span></div>
+    <div class="az-page-hero__mark">{% include designs/azulejo/partials/rosette.html %}<span>Portfolio / 04</span></div>
     <div class="az-page-hero__copy">
       <p class="az-kicker">{{ work_copy.eyebrow }} / Selected archive</p>
       <h1 data-content-key="page-title" data-content-value="{{ work_copy.headline | strip_html | normalize_whitespace }}">{{ work_copy.headline }}</h1>
@@ -74,7 +74,7 @@
   {% include designs/azulejo/partials/tile-ribbon.html class="az-tile-ribbon--reverse" %}
 
   <section class="az-cta" data-content-key="work-cta" data-content-value="{{ work_copy.cta_heading | strip_html | normalize_whitespace }}">
-    <span class="az-rosette" aria-hidden="true"></span>
+    {% include designs/azulejo/partials/rosette.html %}
     <div><p class="az-kicker">{{ work_copy.cta_eyebrow }}</p><h2>{{ work_copy.cta_heading }}</h2><p>{{ work_copy.cta_text }}</p></div>
     <div class="az-actions"><a href="{{ '/cv/' | relative_url }}" class="az-button az-button--primary">{% include icon.html name="file" %} View CV</a><a href="{{ '/#contact' | relative_url }}" class="az-button">{% include icon.html name="email" %} Contact</a></div>
   </section>

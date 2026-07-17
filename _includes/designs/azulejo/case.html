@@ -4,7 +4,7 @@
 <section class="azulejo-design az-case" data-design-root="azulejo" aria-label="{{ case_data.title }} case study - Azulejo Scientific view">
   <header class="az-case-hero">
     <div class="az-case-hero__masthead"><span>Technical case study / {{ case_project.category }}</span><span>Archive {{ case_project.slug }}</span></div>
-    <div class="az-case-hero__mark"><span class="az-rosette" aria-hidden="true"></span><span>Case study</span></div>
+    <div class="az-case-hero__mark">{% include designs/azulejo/partials/rosette.html %}<span>Case study</span></div>
     <div class="az-case-hero__copy">
       <p class="az-kicker">{{ case_data.eyebrow }}</p>
       <h1 data-content-key="page-title" data-content-value="{{ case_data.title | strip_html | normalize_whitespace }}">{{ case_data.title }}</h1>
@@ -56,7 +56,7 @@
   {% include designs/azulejo/partials/tile-ribbon.html class="az-tile-ribbon--reverse" %}
 
   <section class="az-cta az-case-cta" aria-label="Related work" data-content-key="case-cta" data-content-value="{{ case_data.cta.title | strip_html | normalize_whitespace }}">
-    <span class="az-rosette" aria-hidden="true"></span><div><p class="az-kicker">{{ case_data.cta.label }} / Continue reading</p><h2>{{ case_data.cta.title }}</h2><p>{{ case_data.cta.body }}</p></div>
+    {% include designs/azulejo/partials/rosette.html %}<div><p class="az-kicker">{{ case_data.cta.label }} / Continue reading</p><h2>{{ case_data.cta.title }}</h2><p>{{ case_data.cta.body }}</p></div>
     {% include action-links.html links=case_data.cta.actions wrapper_class="az-actions" link_class="az-button" primary_class="az-button--primary" secondary_class="" parity_list="case-cta-actions" %}
   </section>
 </section>

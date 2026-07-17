@@ -11,6 +11,19 @@
   --az-wall-deep: #082f68;
   --az-wall-ink: #fdfcf6;
   --az-grout: #eef0e9;
+  --az-field-motif: color-mix(in srgb, var(--az-cobalt) 3.5%, transparent);
+  --az-field-detail: color-mix(in srgb, var(--az-cobalt) 1.5%, transparent);
+  --az-field-seam: color-mix(in srgb, var(--az-rule) 4.5%, transparent);
+  --az-field-pattern:
+    radial-gradient(ellipse 7px 13px at 50% 34%, var(--az-field-motif) 0 88%, transparent 100%),
+    radial-gradient(ellipse 13px 7px at 66% 50%, var(--az-field-motif) 0 88%, transparent 100%),
+    radial-gradient(ellipse 7px 13px at 50% 66%, var(--az-field-motif) 0 88%, transparent 100%),
+    radial-gradient(ellipse 13px 7px at 34% 50%, var(--az-field-motif) 0 88%, transparent 100%),
+    radial-gradient(circle 8px at 50% 50%, transparent 52%, var(--az-field-motif) 56% 72%, transparent 76%),
+    linear-gradient(45deg, transparent 49%, var(--az-field-detail) 49.5% 50.5%, transparent 51%),
+    linear-gradient(-45deg, transparent 49%, var(--az-field-detail) 49.5% 50.5%, transparent 51%),
+    linear-gradient(90deg, var(--az-field-seam) 1px, transparent 1px),
+    linear-gradient(var(--az-field-seam) 1px, transparent 1px);
   --az-tile-gap: clamp(0.38rem, 0.7vw, 0.68rem);
   --az-mural-shadow: 0 28px 70px rgba(13, 55, 112, 0.17);
   --t-xl: clamp(3rem, 4.75vw, 5.65rem);
@@ -34,12 +47,9 @@
 }
 
 [data-style="azulejo"] body::before {
-  background-image:
-    linear-gradient(90deg, color-mix(in srgb, var(--az-rule) 32%, transparent) 1px, transparent 1px),
-    linear-gradient(color-mix(in srgb, var(--az-rule) 32%, transparent) 1px, transparent 1px),
-    linear-gradient(135deg, color-mix(in srgb, var(--az-porcelain-bright) 70%, transparent), transparent 46%);
-  background-size: 64px 64px;
-  opacity: 0.36;
+  background-image: var(--az-field-pattern);
+  background-size: 96px 96px;
+  opacity: 1;
 }
 
 [data-style="azulejo"] body::after {
@@ -408,11 +418,9 @@
   overflow: visible;
   border: 0;
   border-radius: 0;
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--az-rule) 15%, transparent) 1px, transparent 1px),
-    linear-gradient(color-mix(in srgb, var(--az-rule) 15%, transparent) 1px, transparent 1px),
-    var(--az-porcelain-bright);
-  background-size: 36px 36px;
+  background-color: var(--az-porcelain-bright);
+  background-image: var(--az-field-pattern);
+  background-size: 96px 96px;
   box-shadow: none;
 }
 
@@ -484,7 +492,7 @@
 }
 
 .az-metrics dd {
-  color: var(--az-wall);
+  color: var(--az-cobalt);
 }
 
 /* Home content becomes a mosaic of panels rather than one bordered report. */
@@ -619,11 +627,9 @@
   padding: 2rem;
   overflow: hidden;
   border: 1px solid var(--az-wall);
-  background:
-    linear-gradient(90deg, color-mix(in srgb, var(--az-rule) 18%, transparent) 1px, transparent 1px),
-    linear-gradient(color-mix(in srgb, var(--az-rule) 18%, transparent) 1px, transparent 1px),
-    var(--az-porcelain-bright);
-  background-size: 34px 34px;
+  background-color: var(--az-porcelain-bright);
+  background-image: var(--az-field-pattern);
+  background-size: 96px 96px;
 }
 
 .az-focus-grid article::after {
@@ -748,31 +754,44 @@
 }
 
 .az-page-hero__mark {
+  position: relative;
   grid-column: 2;
   grid-row: 1;
-  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
   align-content: stretch;
-  gap: 0.7rem;
+  gap: 0;
   min-height: 10rem;
   padding: 1rem;
   border: 0;
   color: var(--az-wall-ink);
   background:
     radial-gradient(circle at center, transparent 0 20%, rgba(255,255,255,0.22) 21% 23%, transparent 24%),
-    repeating-conic-gradient(from 22.5deg, rgba(255,255,255,0.2) 0 9deg, transparent 9deg 36deg),
+    repeating-conic-gradient(
+      from 22.5deg,
+      rgba(255,255,255,0.2) 0 8.55deg,
+      rgba(255,255,255,0.1) 8.85deg,
+      transparent 9.15deg 35.65deg,
+      rgba(255,255,255,0.1) 35.9deg,
+      rgba(255,255,255,0.2) 36deg
+    ),
     var(--az-wall-deep);
 }
 
 .az-page-hero__mark .az-rosette {
   --az-rosette-ink: #fff;
-  width: clamp(3.4rem, 5vw, 4.65rem);
-  align-self: center;
+  width: 4rem;
+  grid-area: 1 / 1;
   border: 0;
   background: none;
   box-shadow: none;
 }
 
 .az-page-hero__mark > span:last-child {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
   line-height: 1.2;
   text-align: center;
 }
@@ -1100,6 +1119,16 @@
   display: block;
 }
 
+.az-timeline--education {
+  align-items: start;
+}
+
+.az-timeline--education .az-timeline__entry:first-child > header {
+  min-height: 0;
+  border-right: 0;
+  border-bottom: 1px solid var(--az-rule);
+}
+
 .az-timeline__entry > header {
   min-height: 0;
   border: 0;
@@ -1184,23 +1213,44 @@
 }
 
 .az-case-hero__mark {
+  position: relative;
   grid-column: 1;
   grid-row: 2;
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
+  align-content: stretch;
+  gap: 0;
   min-height: 25rem;
   padding: 1rem;
   border: 0;
   color: var(--az-wall-ink);
   background:
     radial-gradient(circle at center, transparent 0 20%, rgba(255,255,255,0.2) 21% 23%, transparent 24%),
-    repeating-conic-gradient(from 22.5deg, rgba(255,255,255,0.18) 0 9deg, transparent 9deg 36deg),
+    repeating-conic-gradient(
+      from 22.5deg,
+      rgba(255,255,255,0.18) 0 8.55deg,
+      rgba(255,255,255,0.09) 8.85deg,
+      transparent 9.15deg 35.65deg,
+      rgba(255,255,255,0.09) 35.9deg,
+      rgba(255,255,255,0.18) 36deg
+    ),
     var(--az-wall);
 }
 
 .az-case-hero__mark .az-rosette {
   --az-rosette-ink: #fff;
+  grid-area: 1 / 1;
   border: 0;
   background: none;
   box-shadow: none;
+}
+
+.az-case-hero__mark > span:last-child {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  text-align: center;
 }
 
 .az-case-hero__copy {
@@ -1423,6 +1473,25 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     border: 0;
   }
+
+}
+
+@media (min-width: 901px) {
+  .az-timeline--education {
+    display: block;
+    columns: 2;
+    column-gap: var(--az-tile-gap);
+  }
+
+  .az-timeline--education .az-timeline__entry {
+    width: 100%;
+    margin-bottom: var(--az-tile-gap);
+    break-inside: avoid;
+  }
+
+  .az-timeline--education .az-timeline__entry:last-child {
+    margin-bottom: 0;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1507,6 +1576,10 @@
     min-height: 8rem;
   }
 
+  .az-page-hero__mark > span:last-child {
+    bottom: 0.5rem;
+  }
+
   .az-project-index {
     grid-column: 1;
     grid-row: 3;
@@ -1536,6 +1609,10 @@
   }
 
   .az-publications .publications-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .az-timeline--education {
     grid-template-columns: minmax(0, 1fr);
   }
 }
