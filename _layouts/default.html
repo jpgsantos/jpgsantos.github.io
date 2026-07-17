@@ -167,7 +167,7 @@
               {% if design.icon == "swatch" %}
               <span class="style-icon__swatch" aria-hidden="true"></span>
               {% else %}
-              <span class="style-icon__text" aria-hidden="true">{% if design.value == "editorial" %}Ed{% else %}Aa{% endif %}</span>
+              <span class="style-icon__text" aria-hidden="true">{% if design.value == "editorial" %}Ed{% elsif design.value == "azulejo" %}Az{% else %}Aa{% endif %}</span>
               {% endif %}
             </span>
             {% endfor %}
@@ -180,7 +180,7 @@
                 {% if design.icon == "swatch" %}
                 <span class="style-icon__swatch" aria-hidden="true"></span>
                 {% else %}
-                <span class="style-icon__text" aria-hidden="true">{% if design.value == "editorial" %}Ed{% else %}Aa{% endif %}</span>
+                <span class="style-icon__text" aria-hidden="true">{% if design.value == "editorial" %}Ed{% elsif design.value == "azulejo" %}Az{% else %}Aa{% endif %}</span>
                 {% endif %}
               </span>
               <span>{{ design.name }}</span>

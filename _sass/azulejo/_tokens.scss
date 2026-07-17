@@ -1,0 +1,103 @@
+/* Azulejo Scientific contract slots and porcelain/cobalt palette. */
+[data-style="azulejo"] {
+  color-scheme: light;
+
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-mono: "Inter", "Segoe UI", system-ui, sans-serif;
+
+  --t-xs: 0.74rem;
+  --t-sm: 0.9rem;
+  --t-md: 1rem;
+  --t-lg: clamp(1.45rem, 1.15rem + 1.3vw, 2.35rem);
+  --t-xl: clamp(2.65rem, 1.8rem + 2.6vw, 4.6rem);
+  --t-hero-title: clamp(2.9rem, 4vw, 4.8rem);
+  --t-hero-title-mobile: clamp(2.35rem, 9vw, 3.4rem);
+
+  --az-porcelain: #f8f6ee;
+  --az-porcelain-bright: #fffdf7;
+  --az-porcelain-deep: #e8edf0;
+  --az-ink: #102651;
+  --az-cobalt: #174fa3;
+  --az-ultramarine: #113a86;
+  --az-cyan: #2c9ac8;
+  --az-pale: #d8ebf3;
+  --az-muted: #52647b;
+  --az-rule: #9fb6c9;
+  --az-glaze: rgba(255, 255, 255, 0.76);
+  --az-on-cobalt: #fffdf7;
+
+  --bg: var(--az-porcelain);
+  --bg-strong: var(--az-porcelain-deep);
+  --bg-warm: var(--az-porcelain-bright);
+  --surface: color-mix(in srgb, var(--az-porcelain-bright) 94%, transparent);
+  --surface-solid: var(--az-porcelain-bright);
+  --surface-muted: var(--az-porcelain-deep);
+  --text: var(--az-ink);
+  --text-muted: var(--az-muted);
+  --text-soft: var(--az-muted);
+  --border: color-mix(in srgb, var(--az-rule) 72%, var(--az-porcelain));
+  --border-strong: var(--az-cobalt);
+  --primary: var(--az-cobalt);
+  --primary-strong: var(--az-ultramarine);
+  --primary-soft: color-mix(in srgb, var(--az-pale) 72%, var(--az-porcelain-bright));
+  --secondary: var(--az-cyan);
+  --secondary-soft: color-mix(in srgb, var(--az-cyan) 14%, var(--az-porcelain-bright));
+  --accent: var(--az-cyan);
+  --accent-soft: color-mix(in srgb, var(--az-cyan) 12%, var(--az-porcelain-bright));
+  --ink: var(--az-ink);
+  --screenshot-shell: #0d1f45;
+  --screenshot-shell-highlight: #1f4c92;
+  --screenshot-shell-end: #07152f;
+
+  --color-surface: var(--az-porcelain);
+  --color-surface-raised: var(--az-porcelain-bright);
+  --color-ink: var(--az-ink);
+  --color-muted: var(--az-muted);
+  --color-border: var(--az-rule);
+
+  --rule-thickness: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 10px;
+  --space-0: 0;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --density-row: 1.64;
+  --density-gap: clamp(1rem, 2vw, 1.5rem);
+  --section-pad: clamp(3.5rem, 7vw, 6.5rem);
+  --gutter: clamp(1rem, 3.1vw, 2.5rem);
+  --content: 1280px;
+  --shadow-soft: 0 12px 32px rgba(22, 55, 103, 0.09);
+  --shadow-strong: 0 24px 60px rgba(22, 55, 103, 0.16);
+}
+
+[data-style="azulejo"][data-theme="dark"] {
+  color-scheme: dark;
+  --az-porcelain: #07152d;
+  --az-porcelain-bright: #0d2142;
+  --az-porcelain-deep: #041022;
+  --az-ink: #e8f5ff;
+  --az-cobalt: #6eb7f0;
+  --az-ultramarine: #9bd6ff;
+  --az-cyan: #66d1ec;
+  --az-pale: #17375d;
+  --az-muted: #afc4d6;
+  --az-rule: #476b91;
+  --az-glaze: rgba(40, 86, 136, 0.2);
+  --az-on-cobalt: #06152d;
+  --surface: color-mix(in srgb, var(--az-porcelain-bright) 94%, transparent);
+  --border: color-mix(in srgb, var(--az-rule) 68%, var(--az-porcelain));
+  --primary-soft: color-mix(in srgb, var(--az-pale) 78%, var(--az-porcelain-bright));
+  --secondary-soft: color-mix(in srgb, var(--az-cyan) 14%, var(--az-porcelain-bright));
+  --accent-soft: color-mix(in srgb, var(--az-cyan) 14%, var(--az-porcelain-bright));
+  --screenshot-shell: #dcefff;
+  --screenshot-shell-highlight: #ffffff;
+  --screenshot-shell-end: #aac8e0;
+  --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.3);
+  --shadow-strong: 0 28px 65px rgba(0, 0, 0, 0.44);
+}

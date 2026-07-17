@@ -31,6 +31,7 @@
 
   let anchorScrollFrame = 0;
   let resizeFrame = 0;
+  let readingProgressFrame = 0;
   let headerHeight = 76;
   let hasScrolled = false;
   let activeViewTransition = null;
@@ -580,6 +581,26 @@
     root.style.setProperty('--reading-progress', progress.toFixed(4));
   }
 
+  function scheduleReadingProgressUpdate() {
+    if (!readingProgress || readingProgressFrame) return;
+    readingProgressFrame = window.requestAnimationFrame(() => {
+      updateReadingProgress();
+      readingProgressFrame = 0;
+    });
+  }
+
+  function initReadingProgressObserver() {
+    if (!readingProgress) return;
+
+    const main = document.querySelector('main');
+    if ('ResizeObserver' in window && main) {
+      const observer = new ResizeObserver(scheduleReadingProgressUpdate);
+      observer.observe(main);
+    }
+
+    document.addEventListener('load', scheduleReadingProgressUpdate, true);
+  }
+
   function handleScroll() {
     const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
     const nextHasScrolled = scrollTop > 18;
@@ -811,6 +832,7 @@
   initCarousels();
   initReveals();
   initHeaderOffset();
+  initReadingProgressObserver();
   handleScroll();
   scrollToActiveHash('auto');
 })();

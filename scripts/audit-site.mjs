@@ -14,6 +14,7 @@ const requiredDesignIncludeKeys = ['home', 'projects', 'cv', 'case'];
 const requiredDesignFields = ['value', 'name', 'icon', 'stylesheet'];
 const requiredCaseVisualTypes = readCaseVisualTypes();
 const captureSnapshots = process.argv.includes('--snapshots');
+const emulateReducedMotion = process.argv.includes('--reduced-motion');
 const snapshotDir = join(outputDir, 'snapshots');
 const pages = pageFilter ? [pageFilter] : readAuditedPages();
 const widths = Number.isFinite(widthFilter) && widthFilter > 0 ? [widthFilter] : [390, 540, 768, 1024, 1366];
@@ -190,8 +191,9 @@ function snapshotName(testCase) {
 }
 
 function shouldCaptureSnapshot(testCase) {
-  return captureSnapshots &&
-    !testCase.path.includes('#') &&
+  if (!captureSnapshots) return false;
+  if (themeFilter && widthFilter) return true;
+  return !testCase.path.includes('#') &&
     testCase.theme === 'light' &&
     [390, 1024, 1366].includes(testCase.width);
 }
@@ -520,6 +522,30 @@ function auditExpression(expectedStyle, path) {
           compareOuterEdges('editorial stacked case visual', Array.from(layout.children));
         }
       }
+      if (activeRoot && '${expectedStyle}' === 'azulejo') {
+        for (const mark of Array.from(activeRoot.querySelectorAll('.az-page-hero__mark, .az-case-hero__mark'))) {
+          const rosette = geometry(mark.querySelector('.az-rosette'));
+          const caption = geometry(mark.querySelector(':scope > span:last-child'));
+          const markRect = geometry(mark);
+          if (!rosette || !caption || !markRect) continue;
+          const markCenter = markRect.left + (markRect.width / 2);
+          const rosetteCenter = rosette.left + (rosette.width / 2);
+          const captionCenter = caption.left + (caption.width / 2);
+          if (Math.abs(rosetteCenter - markCenter) > 2 || Math.abs(captionCenter - markCenter) > 2) {
+            alignmentFailures.push('azulejo mark ornament and caption are not horizontally centered');
+          }
+          const markGap = caption.top - rosette.bottom;
+          if (markGap < 6) alignmentFailures.push('azulejo mark ornament and caption gap is ' + markGap.toFixed(1) + 'px');
+        }
+        for (const media of Array.from(activeRoot.querySelectorAll('.az-project__media'))) {
+          const mediaRect = geometry(media);
+          const children = Array.from(media.children).map(geometry).filter(Boolean);
+          if (!mediaRect || children.length === 0) continue;
+          const contentBottom = Math.max(...children.map((rect) => rect.bottom));
+          const unusedTail = mediaRect.bottom - contentBottom - (Number.parseFloat(getComputedStyle(media).paddingBottom) || 0);
+          if (unusedTail > 48) alignmentFailures.push('azulejo project media leaves ' + unusedTail.toFixed(1) + 'px of unused vertical space');
+        }
+      }
       if (activeRoot && '${expectedStyle}' === 'mondrian') {
         const rootRect = geometry(activeRoot);
         const rootStyle = getComputedStyle(activeRoot);
@@ -590,6 +616,18 @@ function auditExpression(expectedStyle, path) {
         }
         if (!insideHorizontalScroller && (rect.left < -2 || rect.right > innerWidth + 2)) {
           viewportContainmentFailures.push(describeNode(node) + ' extends outside the viewport (' + rect.left.toFixed(1) + 'px to ' + rect.right.toFixed(1) + 'px)');
+        }
+      }
+      for (const trigger of Array.from(document.querySelectorAll('[data-style-trigger], [data-theme-trigger]'))) {
+        const triggerRect = geometry(trigger);
+        const labelRect = geometry(trigger.querySelector('.style-menu__label, .theme-menu__label'));
+        const arrowStyle = getComputedStyle(trigger, '::after');
+        if (!triggerRect || !labelRect || arrowStyle.position !== 'absolute') continue;
+        const arrowRight = Number.parseFloat(arrowStyle.right) || 0;
+        const arrowWidth = Number.parseFloat(arrowStyle.width) || 0;
+        const arrowLeftEdge = triggerRect.right - arrowRight - arrowWidth;
+        if (labelRect.right > arrowLeftEdge - 4) {
+          clippedTextFailures.push(describeNode(trigger) + ' label overlaps its menu arrow by ' + (labelRect.right - arrowLeftEdge).toFixed(1) + 'px');
         }
       }
       const defaultRoot = document.querySelector('[data-design-root="default"]');
@@ -748,6 +786,9 @@ function auditExpression(expectedStyle, path) {
       const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
       const shouldShowReadingProgress = maxScroll > Math.max(560, window.innerHeight * 0.75);
       const activeProjectIndexLinks = activeScoped('a[data-content-list="project-index"][aria-current="location"]');
+      const revealTargets = activeScoped('[data-reveal]').filter((node) => node.offsetParent !== null);
+      const revealStyle = revealTargets[0] ? getComputedStyle(revealTargets[0]) : null;
+      const carouselViewport = carousel?.querySelector('.app-carousel__viewport');
       return {
         path: '${path}',
         expectedStyle: '${expectedStyle}',
@@ -757,6 +798,12 @@ function auditExpression(expectedStyle, path) {
         inactiveLeakCount: inactiveLeaks.length,
         inactiveEagerImages,
         overflow: Math.max(0, docWidth - window.innerWidth),
+        motion: {
+          reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
+          revealCount: revealTargets.length,
+          revealPreparedCount: revealTargets.filter((node) => node.classList.contains('reveal') || node.classList.contains('is-visible')).length,
+          revealTransitionDuration: revealStyle?.transitionDuration || ''
+        },
         readingProgress: {
           present: Boolean(readingRail),
           ariaHidden: readingRail?.getAttribute('aria-hidden') === 'true',
@@ -813,7 +860,8 @@ function auditExpression(expectedStyle, path) {
           };
         })(),
         carousel: !carousel ? null : {
-          beforeIndex: carousel.querySelector('.app-carousel__viewport')?.dataset.carouselIndex,
+          beforeIndex: carouselViewport?.dataset.carouselIndex,
+          scrollBehavior: carouselViewport ? getComputedStyle(carouselViewport).scrollBehavior : '',
           previousDisabled: Boolean(carousel.querySelector('[data-carousel-prev]')?.disabled),
           nextDisabled: Boolean(carousel.querySelector('[data-carousel-next]')?.disabled)
         }
@@ -869,6 +917,168 @@ async function inspectReadingProgressAfterScroll(page) {
   })()`);
 }
 
+async function inspectThemeTransition(page) {
+  return page.evaluate(`new Promise((resolve) => {
+    const root = document.documentElement;
+    const darkButton = document.querySelector('[data-theme-value="dark"]');
+    const lightButton = document.querySelector('[data-theme-value="light"]');
+    if (!darkButton || !lightButton || typeof document.startViewTransition !== 'function') {
+      resolve({ supported: false });
+      return;
+    }
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      darkButton.click();
+      window.setTimeout(() => {
+        resolve({
+          supported: true,
+          reducedMotion: true,
+          kind: root.dataset.transitionKind || '',
+          resolvedTheme: root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
+        });
+      }, 20);
+      return;
+    }
+    const capture = () => ({
+        kind: root.dataset.transitionKind || '',
+        from: root.dataset.transitionFrom || '',
+        to: root.dataset.transitionTo || '',
+        oldAnimationName: getComputedStyle(root, '::view-transition-old(root)').animationName,
+        newAnimationName: getComputedStyle(root, '::view-transition-new(root)').animationName,
+        animationNames: document.getAnimations().map((animation) => animation.animationName).filter(Boolean)
+    });
+    darkButton.click();
+    window.setTimeout(() => {
+      const forward = capture();
+      window.setTimeout(() => {
+        lightButton.click();
+        window.setTimeout(() => {
+          const reverse = capture();
+          window.setTimeout(() => resolve({ supported: true, forward, reverse }), 520);
+        }, 80);
+      }, 520);
+    }, 80);
+  })`);
+}
+
+async function inspectStyleTransitions(page) {
+  return page.evaluate(`(async () => {
+    const root = document.documentElement;
+    const targets = ['editorial', 'mondrian', 'azulejo', 'default'];
+    const buttons = new Map(Array.from(document.querySelectorAll('[data-style-value]')).map((button) => [button.dataset.styleValue, button]));
+    if (typeof document.startViewTransition !== 'function' || targets.some((target) => !buttons.has(target))) {
+      return { supported: false };
+    }
+    const wait = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
+    const choose = async (target, captureMotion) => {
+      const changed = new Promise((resolve) => {
+        const timeout = setTimeout(() => resolve(false), 2600);
+        const listener = (event) => {
+          if (event.detail?.style !== target) return;
+          clearTimeout(timeout);
+          window.removeEventListener('site:stylechange', listener);
+          resolve(true);
+        };
+        window.addEventListener('site:stylechange', listener);
+      });
+      buttons.get(target).click();
+      const changedInTime = await changed;
+      await wait(captureMotion ? 80 : 20);
+      const state = {
+        target,
+        changedInTime,
+        actualStyle: root.dataset.style || '',
+        kind: root.dataset.transitionKind || '',
+        from: root.dataset.transitionFrom || '',
+        to: root.dataset.transitionTo || '',
+        oldAnimationName: getComputedStyle(root, '::view-transition-old(root)').animationName,
+        newAnimationName: getComputedStyle(root, '::view-transition-new(root)').animationName,
+        animationNames: document.getAnimations().map((animation) => animation.animationName).filter(Boolean)
+      };
+      await wait(captureMotion ? 520 : 20);
+      return state;
+    };
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const state = await choose('editorial', false);
+      await choose('default', false);
+      return { supported: true, reducedMotion: true, states: [state] };
+    }
+    const states = [];
+    for (const target of targets) states.push(await choose(target, true));
+    return { supported: true, reducedMotion: false, states };
+  })()`);
+}
+
+async function inspectMobileNavigation(page) {
+  return page.evaluate(`(async () => {
+    const nav = document.querySelector('.site-nav');
+    const toggle = document.querySelector('.nav-toggle');
+    const lines = Array.from(toggle?.querySelectorAll('.nav-toggle__line') || []);
+    if (!nav || !toggle || getComputedStyle(toggle).display === 'none') return { supported: false };
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return { supported: true, reducedMotion: true };
+    const wait = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
+    const capture = () => {
+      const navStyle = getComputedStyle(nav);
+      return {
+        expanded: toggle.getAttribute('aria-expanded'),
+        isOpen: nav.classList.contains('is-open'),
+        display: navStyle.display,
+        opacity: Number.parseFloat(navStyle.opacity),
+        transform: navStyle.transform,
+        transitionProperty: navStyle.transitionProperty,
+        transitionDuration: navStyle.transitionDuration,
+        lineTransforms: lines.map((line) => getComputedStyle(line).transform),
+        lineOpacities: lines.map((line) => Number.parseFloat(getComputedStyle(line).opacity))
+      };
+    };
+    toggle.click();
+    await wait(40);
+    const opening = capture();
+    await wait(280);
+    toggle.click();
+    await wait(40);
+    const closing = capture();
+    await wait(280);
+    return { supported: true, opening, closing, settled: capture() };
+  })()`);
+}
+
+async function inspectChoiceMenuMotion(page) {
+  return page.evaluate(`(async () => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return { supported: true, reducedMotion: true, menus: [] };
+    const wait = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
+    const menus = [];
+    for (const kind of ['style', 'theme']) {
+      const menu = document.querySelector('[data-' + kind + '-menu]');
+      const trigger = document.querySelector('[data-' + kind + '-trigger]');
+      const panel = menu?.querySelector('.' + kind + '-menu__panel');
+      if (!menu || !trigger || !panel) continue;
+      const capture = () => {
+        const panelStyle = getComputedStyle(panel);
+        return {
+          expanded: trigger.getAttribute('aria-expanded'),
+          isOpen: menu.classList.contains('is-open'),
+          display: panelStyle.display,
+          opacity: Number.parseFloat(panelStyle.opacity),
+          transform: panelStyle.transform,
+          transitionProperty: panelStyle.transitionProperty,
+          transitionDuration: panelStyle.transitionDuration,
+          chevronTransform: getComputedStyle(trigger, '::after').transform
+        };
+      };
+      trigger.click();
+      await wait(40);
+      const opening = capture();
+      await wait(280);
+      trigger.click();
+      await wait(40);
+      const closing = capture();
+      await wait(280);
+      menus.push({ kind, opening, closing, settled: capture() });
+    }
+    return { supported: menus.length > 0, reducedMotion: false, menus };
+  })()`);
+}
+
 async function runCase(page, testCase) {
   page.errors = [];
   await page.send('Emulation.setDeviceMetricsOverride', {
@@ -878,7 +1088,7 @@ async function runCase(page, testCase) {
     mobile: testCase.width <= 540
   });
   await page.send('Emulation.setEmulatedMedia', {
-    features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }]
+    features: [{ name: 'prefers-reduced-motion', value: emulateReducedMotion ? 'reduce' : 'no-preference' }]
   });
 
   await navigateAndWait(page, normalizeUrl('/'));
@@ -896,12 +1106,34 @@ async function runCase(page, testCase) {
     await delay(600);
     result = await page.evaluate(auditExpression(testCase.style, testCase.path));
   }
+  const mediaOrLayoutStillSettling = result.themePictureMismatches?.length > 0
+    || result.readingProgress?.shouldShow !== result.readingProgress?.active;
+  if (mediaOrLayoutStillSettling) {
+    await delay(450);
+    result = await page.evaluate(auditExpression(testCase.style, testCase.path));
+  }
   if (shouldCaptureSnapshot(testCase)) {
     await writeSnapshot(page, testCase);
+  }
+  let mobileNavigation = null;
+  if (testCase.path === '/' && testCase.theme === 'light' && testCase.width === 390) {
+    mobileNavigation = await inspectMobileNavigation(page);
+  }
+  let choiceMenuMotion = null;
+  if (testCase.path === '/' && testCase.theme === 'light' && testCase.width === 1366) {
+    choiceMenuMotion = await inspectChoiceMenuMotion(page);
   }
   let readingProgressAfterScroll = null;
   if (testCase.path === '/' && testCase.theme === 'light' && testCase.width === 1366) {
     readingProgressAfterScroll = await inspectReadingProgressAfterScroll(page);
+  }
+  let themeTransition = null;
+  if (testCase.path === '/' && testCase.theme === 'light' && testCase.width === 1366) {
+    themeTransition = await inspectThemeTransition(page);
+  }
+  let styleTransitions = null;
+  if (testCase.path === '/' && testCase.style === 'default' && testCase.theme === 'light' && testCase.width === 1366) {
+    styleTransitions = await inspectStyleTransitions(page);
   }
   let carouselAfter = null;
   if (result.carousel) {
@@ -911,7 +1143,11 @@ async function runCase(page, testCase) {
   return {
     ...testCase,
     ...result,
+    mobileNavigation,
+    choiceMenuMotion,
     readingProgressAfterScroll,
+    themeTransition,
+    styleTransitions,
     carouselAfter,
     consoleErrors: page.errors.slice()
   };
@@ -925,6 +1161,15 @@ function assertResult(result) {
   if (result.inactiveLeakCount > 0) failures.push('inactive design roots visible/accessibility-leaking');
   if (result.inactiveEagerImages > 0) failures.push(`${result.inactiveEagerImages} inactive design image(s) are eager/high priority`);
   if (result.overflow > 2) failures.push(`horizontal overflow ${result.overflow}px`);
+  if (result.motion?.revealCount !== result.motion?.revealPreparedCount) {
+    failures.push(`reveal preparation mismatch (${result.motion?.revealPreparedCount || 0}/${result.motion?.revealCount || 0})`);
+  }
+  if (!result.motion?.reduced && result.motion?.revealCount > 0) {
+    const revealHasDuration = String(result.motion.revealTransitionDuration || '')
+      .split(',')
+      .some((duration) => Number.parseFloat(duration) > 0);
+    if (!revealHasDuration) failures.push('reveal elements have no transition duration');
+  }
   if (!result.readingProgress?.present) failures.push('reading progress rail is missing');
   if (!result.readingProgress?.ariaHidden) failures.push('reading progress rail should be hidden from assistive technology');
   if (result.readingProgress?.pointerEvents !== 'none') failures.push('reading progress rail should not intercept input');
@@ -937,6 +1182,101 @@ function assertResult(result) {
     const { customProgress, visualProgress } = result.readingProgressAfterScroll;
     if (Math.abs(customProgress - 0.5) > 0.12 || Math.abs(visualProgress - 0.5) > 0.12) {
       failures.push(`reading progress did not track midpoint (state ${customProgress}, visual ${visualProgress})`);
+    }
+  }
+  if (result.themeTransition?.supported) {
+    if (result.themeTransition.reducedMotion) {
+      if (result.themeTransition.kind || result.themeTransition.resolvedTheme !== 'dark') {
+        failures.push('reduced-motion theme switch should update instantly without a view transition');
+      }
+    } else {
+      const expectedAnimations = {
+        default: ['site-style-out', 'site-style-in'],
+        editorial: ['editorial-style-out', 'editorial-style-in'],
+        mondrian: ['mondrian-style-out', 'mondrian-style-in'],
+        azulejo: ['azulejo-glaze-out', 'azulejo-glaze-in']
+      }[result.expectedStyle] || [];
+      const directions = [
+        { label: 'light to dark', state: result.themeTransition.forward, from: 'light', to: 'dark' },
+        { label: 'dark to light', state: result.themeTransition.reverse, from: 'dark', to: 'light' }
+      ];
+      for (const direction of directions) {
+        if (direction.state.kind !== 'theme' || direction.state.from !== direction.from || direction.state.to !== direction.to) {
+          failures.push(`${direction.label} transition metadata mismatch (${direction.state.from || '?'} -> ${direction.state.to || '?'}, kind ${direction.state.kind || '?'})`);
+        }
+        const appliedAnimations = [
+          direction.state.oldAnimationName,
+          direction.state.newAnimationName,
+          ...direction.state.animationNames
+        ];
+        for (const animationName of expectedAnimations) {
+          if (!appliedAnimations.includes(animationName)) {
+            failures.push(`${direction.label} transition is missing ${animationName}`);
+          }
+        }
+      }
+    }
+  }
+  if (result.styleTransitions?.supported) {
+    const expectedAnimations = {
+      default: ['site-style-out', 'site-style-in'],
+      editorial: ['editorial-style-out', 'editorial-style-in'],
+      mondrian: ['mondrian-style-out', 'mondrian-style-in'],
+      azulejo: ['azulejo-glaze-out', 'azulejo-glaze-in']
+    };
+    for (const state of result.styleTransitions.states || []) {
+      if (!state.changedInTime || state.actualStyle !== state.target) {
+        failures.push(`style switch to ${state.target} did not complete`);
+        continue;
+      }
+      if (result.styleTransitions.reducedMotion) {
+        if (state.kind) failures.push('reduced-motion style switch should not start a view transition');
+        continue;
+      }
+      if (state.kind !== 'style' || state.to !== state.target) {
+        failures.push(`style transition metadata mismatch for ${state.target}`);
+      }
+      const appliedAnimations = [state.oldAnimationName, state.newAnimationName, ...state.animationNames];
+      for (const animationName of expectedAnimations[state.target] || []) {
+        if (!appliedAnimations.includes(animationName)) failures.push(`style switch to ${state.target} is missing ${animationName}`);
+      }
+    }
+  }
+  if (result.mobileNavigation?.supported && !result.mobileNavigation.reducedMotion) {
+    const { opening, closing, settled } = result.mobileNavigation;
+    const motionProperties = String(opening.transitionProperty || '');
+    for (const property of ['opacity', 'transform', 'display']) {
+      if (!motionProperties.includes(property)) failures.push(`mobile navigation transition is missing ${property}`);
+    }
+    if (opening.expanded !== 'true' || !opening.isOpen || opening.display === 'none') {
+      failures.push('mobile navigation did not enter its open state');
+    }
+    if (opening.transform === 'none') failures.push('mobile navigation has no opening transform');
+    if (opening.lineTransforms?.[0] === 'none' || opening.lineTransforms?.[2] === 'none' || opening.lineOpacities?.[1] >= 1) {
+      failures.push('mobile navigation icon did not morph into a close control');
+    }
+    if (closing.expanded !== 'false' || closing.isOpen || closing.display === 'none' || closing.transform === 'none') {
+      failures.push('mobile navigation closing animation was skipped');
+    }
+    if (settled.display !== 'none' || settled.lineTransforms?.[0] !== 'none' || settled.lineTransforms?.[2] !== 'none' || settled.lineOpacities?.[1] < 0.99) {
+      failures.push('mobile navigation did not settle back to its closed state');
+    }
+  }
+  if (result.choiceMenuMotion?.supported && !result.choiceMenuMotion.reducedMotion) {
+    if (result.choiceMenuMotion.menus?.length !== 2) failures.push('style and theme menu motion could not both be inspected');
+    for (const menu of result.choiceMenuMotion.menus || []) {
+      const { opening, closing, settled } = menu;
+      const motionProperties = String(opening.transitionProperty || '');
+      for (const property of ['opacity', 'transform', 'display']) {
+        if (!motionProperties.includes(property)) failures.push(`${menu.kind} menu transition is missing ${property}`);
+      }
+      if (opening.expanded !== 'true' || !opening.isOpen || opening.display === 'none' || opening.transform === 'none' || opening.chevronTransform === 'none') {
+        failures.push(`${menu.kind} menu did not animate into its open state`);
+      }
+      if (closing.expanded !== 'false' || closing.isOpen || closing.display === 'none' || closing.transform === 'none') {
+        failures.push(`${menu.kind} menu closing animation was skipped`);
+      }
+      if (settled.display !== 'none') failures.push(`${menu.kind} menu did not settle closed`);
     }
   }
   if (result.path === '/projects/' && (result.activeProjectIndexCount !== 1 || result.activeProjectIndexKeys?.length !== 1)) {
@@ -977,6 +1317,10 @@ function assertResult(result) {
   }
   if (result.contact && !result.contact.ok) failures.push(`contact hash landed at ${result.contact.top}px`);
   if (result.carousel) {
+    const expectedScrollBehavior = result.motion?.reduced ? 'auto' : 'smooth';
+    if (result.carousel.scrollBehavior !== expectedScrollBehavior) {
+      failures.push(`carousel scroll behavior is ${result.carousel.scrollBehavior}, expected ${expectedScrollBehavior}`);
+    }
     if (result.carousel.beforeIndex !== '1') failures.push('carousel did not start on slide 1');
     if (!result.carousel.previousDisabled) failures.push('carousel previous button should start disabled');
     if (result.carousel.nextDisabled) failures.push('carousel next button should start enabled');

@@ -1,0 +1,63 @@
+{% assign case_project = site.data.work | where: "slug", include.project_slug | first %}
+{% assign case_data = case_project.case %}
+{% if case_data %}
+<section class="azulejo-design az-case" data-design-root="azulejo" aria-label="{{ case_data.title }} case study - Azulejo Scientific view">
+  <header class="az-case-hero">
+    <div class="az-case-hero__masthead"><span>Technical case study / {{ case_project.category }}</span><span>Archive {{ case_project.slug }}</span></div>
+    <div class="az-case-hero__mark"><span class="az-rosette" aria-hidden="true"></span><span>Case study</span></div>
+    <div class="az-case-hero__copy">
+      <p class="az-kicker">{{ case_data.eyebrow }}</p>
+      <h1 data-content-key="page-title" data-content-value="{{ case_data.title | strip_html | normalize_whitespace }}">{{ case_data.title }}</h1>
+      <p class="az-case-hero__lede" data-content-key="case-lede" data-content-value="{{ case_data.lede | strip_html | normalize_whitespace }}">{{ case_data.lede }}</p>
+      {% include action-links.html links=case_data.hero_actions wrapper_class="az-actions" link_class="az-button" primary_class="az-button--primary" secondary_class="" parity_list="case-hero-actions" %}
+    </div>
+    <dl class="az-case-facts" aria-label="Project facts">
+      {% for fact in case_data.facts %}<div data-content-list="case-facts" data-content-key="{{ fact.label | slugify }}" data-content-value="{{ fact.value | strip_html | normalize_whitespace }}"><dt>{{ fact.label }}</dt><dd>{{ fact.value }}</dd></div>{% endfor %}
+    </dl>
+  </header>
+
+  {% include designs/azulejo/partials/tile-ribbon.html class="az-tile-ribbon--hero" %}
+
+  <section class="az-case-overview" aria-label="Project overview">
+    {% for item in case_data.overview %}
+    <article data-content-list="case-overview" data-content-key="{{ item.label | slugify }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
+      <span class="az-section__index">0{{ forloop.index }}</span><div><p class="az-kicker">{{ item.label }}</p><h2>{{ item.title }}</h2><p>{{ item.body }}</p></div>
+    </article>
+    {% endfor %}
+  </section>
+
+  <figure class="az-case-figure" id="azulejo-evidence">
+    <figcaption><span>Primary plate / System evidence</span><span>{{ case_data.visual.aria_label }}</span></figcaption>
+    {% include case-visual.html design="azulejo" visual=case_data.visual screenshots=case_data.case_screenshots %}
+  </figure>
+
+  <div class="az-case-layout">
+    <div class="az-case-main" aria-label="Case study details">
+      {% for section in case_data.sections %}
+      <section class="az-case-section" data-content-list="case-sections" data-content-key="{{ section.label | slugify }}" data-content-value="{{ section.title | strip_html | normalize_whitespace }}">
+        <header><span class="az-section__index">0{{ forloop.index }}</span><div><p class="az-kicker">{{ section.label }}</p><h2>{{ section.title }}</h2></div></header>
+        <div class="az-case-features">
+          {% for feature in section.features %}
+          <article data-content-list="case-features" data-content-key="{{ section.label | slugify }}:{{ feature.title | slugify }}" data-content-value="{{ feature.title | strip_html | normalize_whitespace }}"><span class="az-icon">{% include icon.html name=feature.icon %}</span><div><h3>{{ feature.title }}</h3><p>{{ feature.body }}</p></div></article>
+          {% endfor %}
+        </div>
+      </section>
+      {% endfor %}
+      <section class="az-case-section az-case-workflow" data-content-key="case-workflow" data-content-value="{{ case_data.workflow.title | strip_html | normalize_whitespace }}">
+        <header><span class="az-section__index">{{ case_data.sections.size | plus: 1 | prepend: '0' }}</span><div><p class="az-kicker">{{ case_data.workflow.label }}</p><h2>{{ case_data.workflow.title }}</h2></div></header><p>{{ case_data.workflow.body }}</p>
+      </section>
+    </div>
+    <aside class="az-case-aside" aria-label="Architecture and stack">
+      <section><p class="az-kicker">System map</p><h2>{{ case_data.architecture_heading }}</h2><dl>{% for item in case_data.architecture %}<div data-content-list="case-architecture" data-content-key="{{ item.label | slugify }}" data-content-value="{{ item.value | strip_html | normalize_whitespace }}"><dt>{{ item.label }}</dt><dd>{{ item.value }}</dd></div>{% endfor %}</dl></section>
+      <section><p class="az-kicker">Methods</p><h2>{{ case_data.stack_heading }}</h2>{% include chip-list.html class="az-chip-list" items=case_data.case_stack parity_list="case-stack" %}</section>
+    </aside>
+  </div>
+
+  {% include designs/azulejo/partials/tile-ribbon.html class="az-tile-ribbon--reverse" %}
+
+  <section class="az-cta az-case-cta" aria-label="Related work" data-content-key="case-cta" data-content-value="{{ case_data.cta.title | strip_html | normalize_whitespace }}">
+    <span class="az-rosette" aria-hidden="true"></span><div><p class="az-kicker">{{ case_data.cta.label }} / Continue reading</p><h2>{{ case_data.cta.title }}</h2><p>{{ case_data.cta.body }}</p></div>
+    {% include action-links.html links=case_data.cta.actions wrapper_class="az-actions" link_class="az-button" primary_class="az-button--primary" secondary_class="" parity_list="case-cta-actions" %}
+  </section>
+</section>
+{% endif %}

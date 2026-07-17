@@ -1,0 +1,35 @@
+{% capture az_por_webp %}{{ '/assets/images/azulejo/porphyrin-light-768.webp' | relative_url }} 768w, {{ '/assets/images/azulejo/porphyrin-light-1024.webp' | relative_url }} 1024w, {{ '/assets/images/azulejo/porphyrin-light-1536.webp' | relative_url }} 1536w{% endcapture %}
+{% capture az_por_jpg %}{{ '/assets/images/azulejo/porphyrin-light-768.jpg' | relative_url }} 768w, {{ '/assets/images/azulejo/porphyrin-light-1024.jpg' | relative_url }} 1024w, {{ '/assets/images/azulejo/porphyrin-light-1536.jpg' | relative_url }} 1536w{% endcapture %}
+{% capture az_por_dark_webp %}{{ '/assets/images/azulejo/porphyrin-dark-768.webp' | relative_url }} 768w, {{ '/assets/images/azulejo/porphyrin-dark-1024.webp' | relative_url }} 1024w, {{ '/assets/images/azulejo/porphyrin-dark-1536.webp' | relative_url }} 1536w{% endcapture %}
+{% capture az_por_dark_jpg %}{{ '/assets/images/azulejo/porphyrin-dark-768.jpg' | relative_url }} 768w, {{ '/assets/images/azulejo/porphyrin-dark-1024.jpg' | relative_url }} 1024w, {{ '/assets/images/azulejo/porphyrin-dark-1536.jpg' | relative_url }} 1536w{% endcapture %}
+<figure class="az-porphyrin-plate">
+  <div class="az-porphyrin-plate__media">
+    {% include optimized-image.html
+      picture_class="az-porphyrin-plate__picture"
+      src="/assets/images/azulejo/porphyrin-light-1536.jpg"
+      webp_srcset=az_por_webp
+      fallback_srcset=az_por_jpg
+      dark_src="/assets/images/azulejo/porphyrin-dark-1536.jpg"
+      dark_webp_srcset=az_por_dark_webp
+      dark_fallback_srcset=az_por_dark_jpg
+      sizes="(max-width: 900px) 100vw, 62vw"
+      alt="Porphyrin microscopy structures translated into a cobalt azulejo scientific plate"
+      img_class="az-porphyrin-plate__image"
+      loading=include.loading
+      decoding="async"
+      priority_candidate=include.priority_candidate
+      width="1536"
+      height="960"
+    %}
+    <span class="az-figure-stamp" data-image-overlay>Microscopy / ceramic study</span>
+  </div>
+  <figcaption>
+    <span>Fig. 03</span>
+    <p>AI-stylized from the published TEM and SEM reference images.</p>
+    <ol aria-label="Material families">
+      <li><b>01</b> Binary</li>
+      <li><b>02</b> Ternary</li>
+      <li><b>03</b> Variable composition</li>
+    </ol>
+  </figcaption>
+</figure>

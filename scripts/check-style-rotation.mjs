@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 
 const source = readFileSync('_includes/style-rotation.js', 'utf8');
 const HOUR = 60 * 60 * 1000;
-const styles = ['default', 'mondrian', 'editorial'];
+const styles = ['default', 'mondrian', 'editorial', 'azulejo'];
 
 class MemoryStorage {
   constructor(initial = {}, blocked = false) {
@@ -56,7 +56,7 @@ function record(storage, api) {
   const test = harness({ random: [0.5, 0, 0.5] });
   const selected = test.api.resolve(styles, 'default');
   const saved = record(test.localStorage, test.api);
-  assert.equal(selected, 'mondrian', 'first visit should receive a random supported style');
+  assert.equal(selected, 'editorial', 'first visit should receive a random supported style');
   assert.notEqual(saved.next, saved.current, 'the next style should be preselected and different');
   assert.ok(saved.rotateAt - saved.assignedAt >= 3 * HOUR);
   assert.ok(saved.rotateAt - saved.assignedAt <= 6 * HOUR);
@@ -121,8 +121,8 @@ function record(storage, api) {
 
 {
   const test = harness({ blockLocal: true, random: [0.5, 0, 0] });
-  assert.equal(test.api.resolve(styles, 'default'), 'mondrian', 'blocked localStorage should fall back to sessionStorage');
-  assert.equal(test.sessionStorage.getItem('style'), 'mondrian');
+  assert.equal(test.api.resolve(styles, 'default'), 'editorial', 'blocked localStorage should fall back to sessionStorage');
+  assert.equal(test.sessionStorage.getItem('style'), 'editorial');
 }
 
 {

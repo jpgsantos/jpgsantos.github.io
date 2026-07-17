@@ -16,17 +16,17 @@
   background: var(--ed-red);
 }
 
-html[data-style="editorial"][data-transition-kind="style"]::view-transition-old(root),
-html[data-style="editorial"][data-transition-kind="style"]::view-transition-new(root) {
+html[data-style="editorial"][data-transition-kind]::view-transition-old(root),
+html[data-style="editorial"][data-transition-kind]::view-transition-new(root) {
   animation-duration: 480ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-html[data-style="editorial"][data-transition-kind="style"]::view-transition-old(root) {
+html[data-style="editorial"][data-transition-kind]::view-transition-old(root) {
   animation-name: editorial-style-out;
 }
 
-html[data-style="editorial"][data-transition-kind="style"]::view-transition-new(root) {
+html[data-style="editorial"][data-transition-kind]::view-transition-new(root) {
   animation-name: editorial-style-in;
 }
 

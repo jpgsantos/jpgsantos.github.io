@@ -1,0 +1,83 @@
+{% assign profile = site.data.profile %}
+{% assign cv_copy = site.data.page_copy.cv %}
+{% assign cv_data = site.data.cv %}
+<section class="azulejo-design az-cv" data-design-root="azulejo" aria-label="Curriculum Vitae - Azulejo Scientific view">
+  <header class="az-cv-hero">
+    <figure class="az-cv-portrait">
+      <span>{% include profile-image.html loading="lazy" width="640" height="640" sizes="(max-width: 700px) 44vw, 220px" %}</span>
+      <figcaption>{{ profile.location }}</figcaption>
+    </figure>
+    <div class="az-cv-hero__copy">
+      <p class="az-kicker">Curriculum vitae / {{ site.time | date: '%Y' }}</p>
+      <h1 data-content-key="page-title" data-content-value="{{ profile.name | strip_html | normalize_whitespace }}">{{ profile.name }}</h1>
+      <p class="az-cv-hero__role">{{ profile.role }}</p>
+      <div class="az-actions"><a href="{{ profile.cv_pdf | relative_url }}" class="az-button az-button--primary" target="_blank" rel="noopener noreferrer">{% include icon.html name="download" %} Download CV</a><a href="{{ '/#contact' | relative_url }}" class="az-button">{% include icon.html name="email" %} Contact</a></div>
+    </div>
+    <dl class="az-cv-contact">
+      <div data-content-list="cv-contact" data-content-key="email" data-content-value="{{ profile.contact.email }}"><dt>Email</dt><dd><a href="mailto:{{ profile.contact.email }}">{{ profile.contact.email }}</a></dd></div>
+      <div data-content-list="cv-contact" data-content-key="phone" data-content-value="{{ profile.contact.phone }}"><dt>Phone</dt><dd><a href="tel:{{ profile.contact.phone_uri }}">{{ profile.contact.phone }}</a></dd></div>
+      <div data-content-list="cv-contact" data-content-key="location" data-content-value="{{ profile.location }}"><dt>Location</dt><dd>{{ profile.location }}</dd></div>
+      <div data-content-list="cv-contact" data-content-key="citizenship" data-content-value="{{ profile.citizenship }}"><dt>Citizenship</dt><dd>{{ profile.citizenship }}</dd></div>
+      <div data-content-list="cv-contact" data-content-key="linkedin" data-content-value="{{ profile.socials.linkedin.username }}"><dt>LinkedIn</dt><dd><a href="{{ profile.socials.linkedin.url }}" target="_blank" rel="noopener noreferrer">{{ profile.socials.linkedin.username }}</a></dd></div>
+      <div data-content-list="cv-contact" data-content-key="github" data-content-value="{{ profile.socials.github.username }}"><dt>GitHub</dt><dd><a href="{{ profile.socials.github.url }}" target="_blank" rel="noopener noreferrer">{{ profile.socials.github.username }}</a></dd></div>
+      <div data-content-list="cv-contact" data-content-key="languages" data-content-value="{{ profile.languages }}"><dt>Languages</dt><dd>{{ profile.languages }}</dd></div>
+      <div data-content-list="cv-contact" data-content-key="current-work" data-content-value="{{ profile.current_work }}"><dt>Current</dt><dd>{{ profile.current_work }}</dd></div>
+    </dl>
+  </header>
+
+  {% include designs/azulejo/partials/tile-ribbon.html class="az-tile-ribbon--hero" %}
+
+  <section class="az-section az-cv-summary">
+    <header class="az-section__head"><span class="az-section__index">01</span><div><p class="az-kicker">{{ cv_copy.summary_eyebrow }}</p><h2>{{ cv_copy.summary_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    <div class="az-cv-summary__body"><p class="az-lede">{{ profile.about }}</p><p>{{ profile.summary }}</p></div>
+  </section>
+
+  <section class="az-section" id="azulejo-experience">
+    <header class="az-section__head"><span class="az-section__index">02</span><div><p class="az-kicker">{{ cv_copy.experience_eyebrow }}</p><h2>{{ cv_copy.experience_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    <div class="az-timeline">
+      {% for entry in cv_data.experience %}
+      <article class="az-timeline__entry" data-cv-entry="experience:{{ entry.id }}" data-reveal data-content-list="cv-experience" data-content-key="{{ entry.id }}" data-content-value="{{ entry.title | strip_html | normalize_whitespace }}">
+        <header><span>0{{ forloop.index }}</span><div><p>{{ entry.period }}</p><h3>{{ entry.title }}</h3><strong>{{ entry.organization }}</strong></div></header>
+        <div><p>{{ entry.summary }}</p>{% if entry.bullets.size > 0 %}<ul>{% for bullet in entry.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>{% endif %}</div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="az-section" id="azulejo-projects">
+    <header class="az-section__head"><span class="az-section__index">03</span><div><p class="az-kicker">Project index</p><h2>{{ cv_copy.work_reference_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    <div class="az-cv-projects">
+      {% for item in site.data.work %}
+      <article data-cv-project="{{ item.slug }}" data-reveal data-content-list="cv-projects" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
+        <span>0{{ forloop.index }}</span><p class="az-kicker">{{ item.category }}</p><h3>{{ item.title }}</h3><p>{{ item.description }}</p>
+        {% include chip-list.html class="az-chip-list" items=item.stack limit=4 %}
+        {% assign primary_link = item.links | first %}{% if primary_link %}<a href="{% if primary_link.external %}{{ primary_link.url }}{% else %}{{ primary_link.url | relative_url }}{% endif %}" {% if primary_link.external %}target="_blank" rel="noopener noreferrer"{% endif %} class="az-text-link">{{ primary_link.text }} {% include icon.html name=primary_link.icon %}</a>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="az-section az-cv-skills" id="azulejo-skills">
+    <header class="az-section__head"><span class="az-section__index">04</span><div><p class="az-kicker">{{ cv_copy.skills_eyebrow }}</p><h2>{{ cv_copy.skills_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    {% include skills-grid.html %}
+  </section>
+
+  <section class="az-section" id="azulejo-education">
+    <header class="az-section__head"><span class="az-section__index">05</span><div><p class="az-kicker">{{ cv_copy.education_eyebrow }}</p><h2>{{ cv_copy.education_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    <div class="az-timeline az-timeline--education">
+      {% for entry in cv_data.education %}
+      <article class="az-timeline__entry" data-cv-entry="education:{{ entry.id }}" data-reveal data-content-list="cv-education" data-content-key="{{ entry.id }}" data-content-value="{{ entry.title | strip_html | normalize_whitespace }}">
+        <header><span>0{{ forloop.index }}</span><div><p>{{ entry.period }}</p><h3>{{ entry.title }}</h3><strong>{{ entry.organization }}</strong></div></header>
+        <div>{% for paragraph in entry.paragraphs %}<p>{{ paragraph }}</p>{% endfor %}{% if entry.bullets.size > 0 %}<ul>{% for bullet in entry.bullets %}<li>{{ bullet }}</li>{% endfor %}</ul>{% endif %}</div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="az-section az-publications" id="azulejo-publications">
+    <header class="az-section__head"><span class="az-section__index">06</span><div><p class="az-kicker">{{ cv_copy.publications_eyebrow }}</p><h2>{{ cv_copy.publications_heading }}</h2></div><span class="az-rosette" aria-hidden="true"></span></header>
+    {% include publications.html %}
+  </section>
+
+  {% include designs/azulejo/partials/tile-ribbon.html class="az-tile-ribbon--reverse" %}
+</section>

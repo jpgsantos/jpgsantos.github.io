@@ -15,17 +15,17 @@
   );
 }
 
-html[data-style="mondrian"][data-transition-kind="style"]::view-transition-old(root),
-html[data-style="mondrian"][data-transition-kind="style"]::view-transition-new(root) {
+html[data-style="mondrian"][data-transition-kind]::view-transition-old(root),
+html[data-style="mondrian"][data-transition-kind]::view-transition-new(root) {
   animation-duration: 420ms;
   animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
 }
 
-html[data-style="mondrian"][data-transition-kind="style"]::view-transition-old(root) {
+html[data-style="mondrian"][data-transition-kind]::view-transition-old(root) {
   animation-name: mondrian-style-out;
 }
 
-html[data-style="mondrian"][data-transition-kind="style"]::view-transition-new(root) {
+html[data-style="mondrian"][data-transition-kind]::view-transition-new(root) {
   animation-name: mondrian-style-in;
 }
 

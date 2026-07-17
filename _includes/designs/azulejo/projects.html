@@ -1,0 +1,81 @@
+{% assign work_copy = site.data.page_copy.work %}
+<section class="azulejo-design az-projects" data-design-root="azulejo" aria-label="Selected work - Azulejo Scientific view">
+  <header class="az-page-hero">
+    <div class="az-page-hero__mark"><span class="az-rosette" aria-hidden="true"></span><span>Portfolio / 04</span></div>
+    <div class="az-page-hero__copy">
+      <p class="az-kicker">{{ work_copy.eyebrow }} / Selected archive</p>
+      <h1 data-content-key="page-title" data-content-value="{{ work_copy.headline | strip_html | normalize_whitespace }}">{{ work_copy.headline }}</h1>
+      <p>{{ work_copy.intro }}</p>
+    </div>
+    <nav class="az-project-index" aria-label="Project index">
+      {% for item in site.data.work %}
+      <a href="#azulejo-work-{{ item.slug }}" data-content-list="project-index" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
+        <span>0{{ forloop.index }}</span><strong>{{ item.title }}</strong><small>{{ item.category }}</small>
+      </a>
+      {% endfor %}
+    </nav>
+  </header>
+
+  {% include designs/azulejo/partials/tile-ribbon.html class="az-tile-ribbon--hero" %}
+
+  <div class="az-project-list">
+    {% for item in site.data.work %}
+    <article class="az-project az-project--{{ forloop.index }}" id="azulejo-work-{{ item.slug }}" data-reveal>
+      <header class="az-project__head">
+        <span class="az-project__number">0{{ forloop.index }}</span>
+        <div><p class="az-kicker">{{ item.eyebrow }}</p><h2 data-content-list="project-titles" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">{{ item.title }}</h2></div>
+        <span class="az-project__icon">{% include icon.html name=item.icon %}</span>
+      </header>
+
+      <div class="az-project__layout">
+        <div class="az-project__content">
+          <p class="az-project__lede" data-content-list="project-descriptions" data-content-key="{{ item.slug }}" data-content-value="{{ item.description | strip_html | normalize_whitespace }}">{{ item.description }}</p>
+          <dl class="az-summary-grid">
+            <div data-content-list="project-summary" data-content-key="{{ item.slug }}:problem" data-content-value="{{ item.problem | strip_html | normalize_whitespace }}"><dt>Problem</dt><dd>{{ item.problem }}</dd></div>
+            <div data-content-list="project-summary" data-content-key="{{ item.slug }}:contribution" data-content-value="{{ item.contribution | strip_html | normalize_whitespace }}"><dt>Contribution</dt><dd>{{ item.contribution }}</dd></div>
+            <div data-content-list="project-summary" data-content-key="{{ item.slug }}:outcome" data-content-value="{{ item.outcome | strip_html | normalize_whitespace }}"><dt>Outcome</dt><dd>{{ item.outcome }}</dd></div>
+          </dl>
+          <div class="az-project__details">
+            <ol class="az-highlight-list">
+              {% for highlight in item.highlights %}
+              <li data-content-list="project-highlights" data-content-key="{{ item.slug }}:{{ forloop.index }}" data-content-value="{{ highlight | strip_html | normalize_whitespace }}"><span>0{{ forloop.index }}</span><p>{{ highlight }}</p></li>
+              {% endfor %}
+            </ol>
+            {% include chip-list.html class="az-chip-list" items=item.stack %}
+            {% include action-links.html links=item.links wrapper_class="az-actions" link_class="az-button" primary_class="az-button--primary" secondary_class="" parity_list="project-actions" %}
+          </div>
+        </div>
+
+        <div class="az-project__media">
+          {% if item.slug == "subcellular-workflow" %}
+          <figure class="az-workflow-plate">
+            <figcaption><span>Plate II</span><strong>Reusable ODE modeling pipeline</strong></figcaption>
+            <div>{% include workflow-diagram.html %}</div>
+            <p>Model setup &rarr; simulation &rarr; estimation &rarr; validation</p>
+          </figure>
+          {% elsif item.slug == "octidy-android-app" %}
+          <div class="az-phone-plate" aria-label="Octidy Android app screenshots">
+            <header><span>Product study</span><strong>Android / Firebase</strong></header>
+            <div class="az-phone-plate__screens">
+              {% for shot in item.screenshots limit:3 %}
+              <figure><span>{% include project-screenshot.html src=shot.src alt=shot.alt loading="lazy" width="1080" height="2400" sizes="(max-width: 760px) 44vw, 180px" %}</span><figcaption>0{{ forloop.index }} / {{ shot.caption }}</figcaption></figure>
+              {% endfor %}
+            </div>
+          </div>
+          {% else %}
+          {% include designs/azulejo/partials/porphyrin-plate.html loading="eager" priority_candidate=true %}
+          {% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+
+  {% include designs/azulejo/partials/tile-ribbon.html class="az-tile-ribbon--reverse" %}
+
+  <section class="az-cta" data-content-key="work-cta" data-content-value="{{ work_copy.cta_heading | strip_html | normalize_whitespace }}">
+    <span class="az-rosette" aria-hidden="true"></span>
+    <div><p class="az-kicker">{{ work_copy.cta_eyebrow }}</p><h2>{{ work_copy.cta_heading }}</h2><p>{{ work_copy.cta_text }}</p></div>
+    <div class="az-actions"><a href="{{ '/cv/' | relative_url }}" class="az-button az-button--primary">{% include icon.html name="file" %} View CV</a><a href="{{ '/#contact' | relative_url }}" class="az-button">{% include icon.html name="email" %} Contact</a></div>
+  </section>
+</section>

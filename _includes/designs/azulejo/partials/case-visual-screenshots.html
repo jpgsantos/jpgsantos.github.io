@@ -1,0 +1,16 @@
+{% assign case_visual = include.visual %}
+<section class="az-case-visual az-case-visual--screens" id="screens" aria-label="{{ case_visual.aria_label }}">
+  <header class="az-case-visual__copy" data-content-key="case-visual-copy" data-content-value="{{ case_visual.title | strip_html | normalize_whitespace }}">
+    <p class="az-kicker">{{ case_visual.label }}</p>
+    <h2>{{ case_visual.title }}</h2>
+    <p>{{ case_visual.body }}</p>
+  </header>
+  <div class="az-screen-ribbon" tabindex="0" aria-label="Scrollable Octidy screenshot gallery">
+    {% for shot in include.screenshots %}
+    <figure class="az-screen" data-content-list="case-screenshots" data-content-key="{{ shot.caption | slugify }}" data-content-value="{{ shot.src }}">
+      <span class="az-screen__frame">{% include project-screenshot.html src=shot.src alt=shot.alt loading="lazy" sizes="(max-width: 560px) 68vw, (max-width: 900px) 34vw, 210px" width="1080" height="2400" %}</span>
+      <figcaption><span>0{{ forloop.index }}</span>{{ shot.caption }}</figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+</section>

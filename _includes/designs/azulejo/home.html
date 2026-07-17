@@ -1,0 +1,104 @@
+{% assign profile = site.data.profile %}
+<section class="azulejo-design az-home" data-design-root="azulejo" aria-label="Home - Azulejo Scientific view">
+  <header class="az-hero">
+    <div class="az-hero__copy">
+      <p class="az-kicker">Science &middot; Systems &middot; Product</p>
+      <h1 data-content-key="page-title" data-content-value="{{ profile.headline | strip_html | normalize_whitespace }}">{{ profile.headline }}</h1>
+      <p class="az-hero__summary" data-content-key="home-summary" data-content-value="{{ profile.summary | strip_html | normalize_whitespace }}">{{ profile.summary }}</p>
+      <div class="az-actions">
+        <a href="{{ '/projects/' | relative_url }}" class="az-button az-button--primary" data-content-list="home-hero-actions" data-content-key="/projects/" data-content-value="View work">View work {% include icon.html name="arrow-right" %}</a>
+        <a href="{{ profile.cv_pdf | relative_url }}" class="az-button" target="_blank" rel="noopener noreferrer" data-content-list="home-hero-actions" data-content-key="{{ profile.cv_pdf }}" data-content-value="Download CV">{% include icon.html name="download" %} Download CV</a>
+      </div>
+      <div class="az-hero__status">
+        <span class="az-rosette az-rosette--small" aria-hidden="true"></span>
+        <p><b>Current field note</b>{{ profile.current_work }} &middot; {{ profile.location }}</p>
+      </div>
+    </div>
+
+    <figure class="az-neuron-plate">
+      {% include designs/azulejo/partials/neuron-plate.html %}
+      <figcaption><span>Plate I / Neural systems</span><span>Generated ceramic study &middot; 2026</span></figcaption>
+    </figure>
+
+    <dl class="az-metrics" aria-label="Professional metrics">
+      {% for metric in profile.metrics %}
+      <div><dt>{{ metric.label }}</dt><dd>{{ metric.value }}</dd></div>
+      {% endfor %}
+    </dl>
+  </header>
+
+  {% include designs/azulejo/partials/tile-ribbon.html class="az-tile-ribbon--hero" %}
+
+  <section class="az-section az-about" id="about" data-about-anchor="azulejo">
+    <header class="az-section__head">
+      <span class="az-section__index">01</span>
+      <div><p class="az-kicker">Profile / About</p><h2>{{ profile.about_heading }}</h2></div>
+      <span class="az-rosette" aria-hidden="true"></span>
+    </header>
+    <div class="az-about__grid">
+      <figure class="az-portrait" data-reveal>
+        <span class="az-portrait__frame">{% include profile-image.html loading="lazy" width="640" height="640" sizes="(max-width: 760px) 72vw, 300px" %}</span>
+        <figcaption><b>{{ profile.short_name }}</b><span>{{ profile.role }}</span></figcaption>
+      </figure>
+      <div class="az-about__prose">
+        <p class="az-lede">{{ profile.about }}</p>
+        <p>{{ profile.about_background }}</p>
+        <div class="az-proof-grid">
+          {% for proof in profile.proof_points %}
+          <article data-reveal><span>0{{ forloop.index }}</span><h3>{{ proof.title }}</h3><p>{{ proof.text }}</p></article>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="az-section az-selected-work">
+    <header class="az-section__head az-section__head--split">
+      <span class="az-section__index">02</span>
+      <div><p class="az-kicker">Selected work / Evidence</p><h2>{{ profile.selected_work_heading }}</h2></div>
+      <p>{{ profile.selected_work_intro }}</p>
+    </header>
+    <div class="az-work-grid">
+      {% for item in site.data.work limit:2 %}
+      <article class="az-work-card az-work-card--{{ forloop.index }}" data-reveal data-content-list="home-selected-work" data-content-key="{{ item.slug }}" data-content-value="{{ item.title | strip_html | normalize_whitespace }}">
+        <div class="az-work-card__folio"><span>0{{ forloop.index }}</span><span>{{ item.category }}</span><span>{% include icon.html name=item.icon %}</span></div>
+        <div class="az-work-card__body">
+          <h3>{{ item.title }}</h3><p>{{ item.description }}</p>
+          <a href="{{ item.url | relative_url }}" class="az-text-link">Read case study {% include icon.html name="arrow-right" %}</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="az-section az-toolkit">
+    <header class="az-section__head">
+      <span class="az-section__index">03</span>
+      <div><p class="az-kicker">Methods / Toolkit</p><h2>{{ profile.toolkit_heading }}</h2></div>
+      <span class="az-rosette" aria-hidden="true"></span>
+    </header>
+    <div class="az-focus-grid">
+      {% for area in profile.focus_areas %}
+      <article data-reveal><span class="az-icon">{% include icon.html name=area.icon %}</span><h3>{{ area.title }}</h3><p>{{ area.description }}</p></article>
+      {% endfor %}
+    </div>
+    {% include chip-list.html class="az-chip-list az-chip-list--center" items=profile.skill_chips aria_label="Core stack" %}
+  </section>
+
+  {% include designs/azulejo/partials/tile-ribbon.html class="az-tile-ribbon--reverse" %}
+
+  <section class="az-section az-contact" id="contact" data-contact-anchor="azulejo">
+    <header class="az-section__head az-section__head--split">
+      <span class="az-section__index">04</span>
+      <div><p class="az-kicker">Correspondence / Contact</p><h2>{{ profile.contact_heading }}</h2></div>
+      <p>{{ profile.contact_intro }}</p>
+    </header>
+    <div class="az-contact-grid">
+      <a class="az-contact-card az-contact-card--primary" href="mailto:{{ profile.contact.email }}" data-content-list="contact-links" data-content-key="mailto:{{ profile.contact.email }}" data-content-value="{{ profile.contact.email }}"><span>{% include icon.html name="email" %}</span><small>Email</small><strong>{{ profile.contact.email }}</strong>{% include icon.html name="arrow-right" %}</a>
+      <a class="az-contact-card" href="tel:{{ profile.contact.phone_uri }}" data-content-list="contact-links" data-content-key="tel:{{ profile.contact.phone_uri }}" data-content-value="{{ profile.contact.phone }}"><span>{% include icon.html name="phone" %}</span><small>Phone</small><strong>{{ profile.contact.phone }}</strong>{% include icon.html name="arrow-right" %}</a>
+      {% for social in profile.socials %}{% assign item = social[1] %}
+      <a class="az-contact-card" href="{{ item.url }}" target="_blank" rel="noopener noreferrer" data-content-list="contact-links" data-content-key="{{ item.url }}" data-content-value="{{ item.username }}"><span>{% include icon.html name=item.icon %}</span><small>{{ item.label }}</small><strong>{{ item.username }}</strong>{% include icon.html name="arrow-right" %}</a>
+      {% endfor %}
+    </div>
+  </section>
+</section>

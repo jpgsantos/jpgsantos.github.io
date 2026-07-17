@@ -45,3 +45,19 @@
     screenshots: "designs/default/partials/case-visual-screenshots.html"
     workflow: "designs/default/partials/case-visual-workflow.html"
     porphyrin: "designs/editorial/partials/case-visual-porphyrin.html"
+
+- value: "azulejo"
+  name: "Azulejo Scientific"
+  description: "Portuguese ceramic science"
+  icon: "text"
+  stylesheet: "/assets/css/azulejo.css"
+  css_budget_kb: 88
+  includes:
+    home: "designs/azulejo/home.html"
+    projects: "designs/azulejo/projects.html"
+    cv: "designs/azulejo/cv.html"
+    case: "designs/azulejo/case.html"
+  case_visuals:
+    screenshots: "designs/azulejo/partials/case-visual-screenshots.html"
+    workflow: "designs/azulejo/partials/case-visual-workflow.html"
+    porphyrin: "designs/azulejo/partials/case-visual-porphyrin.html"

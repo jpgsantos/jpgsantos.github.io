@@ -1,0 +1,21 @@
+{% capture az_neuron_webp %}{{ '/assets/images/azulejo/neuron-light-768.webp' | relative_url }} 768w, {{ '/assets/images/azulejo/neuron-light-1024.webp' | relative_url }} 1024w, {{ '/assets/images/azulejo/neuron-light-1536.webp' | relative_url }} 1536w{% endcapture %}
+{% capture az_neuron_jpg %}{{ '/assets/images/azulejo/neuron-light-768.jpg' | relative_url }} 768w, {{ '/assets/images/azulejo/neuron-light-1024.jpg' | relative_url }} 1024w, {{ '/assets/images/azulejo/neuron-light-1536.jpg' | relative_url }} 1536w{% endcapture %}
+{% capture az_neuron_dark_webp %}{{ '/assets/images/azulejo/neuron-dark-768.webp' | relative_url }} 768w, {{ '/assets/images/azulejo/neuron-dark-1024.webp' | relative_url }} 1024w, {{ '/assets/images/azulejo/neuron-dark-1536.webp' | relative_url }} 1536w{% endcapture %}
+{% capture az_neuron_dark_jpg %}{{ '/assets/images/azulejo/neuron-dark-768.jpg' | relative_url }} 768w, {{ '/assets/images/azulejo/neuron-dark-1024.jpg' | relative_url }} 1024w, {{ '/assets/images/azulejo/neuron-dark-1536.jpg' | relative_url }} 1536w{% endcapture %}
+{% include optimized-image.html
+  picture_class="az-neuron-plate__picture"
+  src="/assets/images/azulejo/neuron-light-1536.jpg"
+  webp_srcset=az_neuron_webp
+  fallback_srcset=az_neuron_jpg
+  dark_src="/assets/images/azulejo/neuron-dark-1536.jpg"
+  dark_webp_srcset=az_neuron_dark_webp
+  dark_fallback_srcset=az_neuron_dark_jpg
+  sizes="(max-width: 900px) 100vw, 58vw"
+  alt="A neuron rendered as a cobalt-blue Portuguese azulejo scientific mural"
+  img_class="az-neuron-plate__image"
+  loading="lazy"
+  decoding="async"
+  priority_candidate=true
+  width="1536"
+  height="960"
+%}

@@ -1,0 +1,1788 @@
+/* ==========================================================================
+   Azulejo Scientific — mural composition
+
+   This final layer deliberately replaces the report-like grid used by the
+   first draft with a spatial language built from ceramic walls, architectural
+   plaques, square patterned tiles, and bands of visible grout.
+   ========================================================================== */
+
+[data-style="azulejo"] {
+  --az-wall: #0d438b;
+  --az-wall-deep: #082f68;
+  --az-wall-ink: #fdfcf6;
+  --az-grout: #eef0e9;
+  --az-tile-gap: clamp(0.38rem, 0.7vw, 0.68rem);
+  --az-mural-shadow: 0 28px 70px rgba(13, 55, 112, 0.17);
+  --t-xl: clamp(3rem, 4.75vw, 5.65rem);
+  --content: 1440px;
+  --section-pad: clamp(2.8rem, 5.5vw, 5.25rem);
+}
+
+[data-style="azulejo"][data-theme="dark"] {
+  --az-wall: #082957;
+  --az-wall-deep: #041a3c;
+  --az-wall-ink: #f4fbff;
+  --az-grout: #182f4a;
+  --az-mural-shadow: 0 30px 80px rgba(0, 0, 0, 0.44);
+}
+
+[data-style="azulejo"] body {
+  background:
+    radial-gradient(circle at 14% 12%, color-mix(in srgb, var(--az-cyan) 12%, transparent), transparent 28rem),
+    radial-gradient(circle at 88% 72%, color-mix(in srgb, var(--az-cobalt) 8%, transparent), transparent 34rem),
+    var(--az-porcelain);
+}
+
+[data-style="azulejo"] body::before {
+  background-image:
+    linear-gradient(90deg, color-mix(in srgb, var(--az-rule) 32%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--az-rule) 32%, transparent) 1px, transparent 1px),
+    linear-gradient(135deg, color-mix(in srgb, var(--az-porcelain-bright) 70%, transparent), transparent 46%);
+  background-size: 64px 64px;
+  opacity: 0.36;
+}
+
+[data-style="azulejo"] body::after {
+  background: none;
+  opacity: 0;
+}
+
+/* A glazed cobalt navigation frieze makes the style distinct before content. */
+[data-style="azulejo"] .site-header {
+  min-height: 72px;
+  padding-block: 0.55rem;
+  border: 0;
+  border-bottom: 6px solid var(--az-grout);
+  color: var(--az-wall-ink);
+  background:
+    linear-gradient(45deg, transparent 44%, rgba(255,255,255,0.09) 45% 55%, transparent 56%) 0 0 / 34px 34px,
+    linear-gradient(-45deg, transparent 44%, rgba(255,255,255,0.055) 45% 55%, transparent 56%) 0 0 / 34px 34px,
+    var(--az-wall);
+  box-shadow: 0 4px 0 var(--az-wall-deep), 0 12px 30px rgba(4, 33, 76, 0.2);
+  backdrop-filter: none;
+}
+
+[data-style="azulejo"] .site-header::after {
+  inset: auto 0 -6px;
+  height: 6px;
+  background: repeating-linear-gradient(90deg, var(--az-cyan) 0 12px, var(--az-grout) 12px 14px, #225cb0 14px 26px, var(--az-grout) 26px 28px);
+  opacity: 1;
+}
+
+[data-style="azulejo"] .has-scrolled .site-header {
+  background:
+    linear-gradient(45deg, transparent 44%, rgba(255,255,255,0.08) 45% 55%, transparent 56%) 0 0 / 34px 34px,
+    var(--az-wall-deep);
+  box-shadow: 0 4px 0 var(--az-wall-deep), 0 16px 36px rgba(0, 24, 61, 0.32);
+}
+
+[data-style="azulejo"] .site-brand,
+[data-style="azulejo"] .site-brand:visited {
+  color: var(--az-wall-ink);
+}
+
+[data-style="azulejo"] .site-brand__mark {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid var(--az-grout);
+  color: #0b356e;
+  background: #fffdf7;
+  box-shadow: inset 0 0 0 1px var(--az-wall), 0 3px 0 var(--az-wall-deep);
+}
+
+[data-style="azulejo"] .site-brand__text {
+  color: var(--az-wall-ink);
+  font-size: var(--t-md);
+}
+
+[data-style="azulejo"] .site-nav {
+  gap: 0.4rem;
+}
+
+[data-style="azulejo"] .site-nav > a,
+[data-style="azulejo"] .site-nav > a:visited {
+  min-height: 2.75rem;
+  border: 1px solid transparent;
+  color: #eaf6ff;
+}
+
+[data-style="azulejo"] .site-nav > a:hover,
+[data-style="azulejo"] .site-nav > a[aria-current="page"] {
+  border-color: var(--az-grout);
+  color: #092f68;
+  background: #fffdf7;
+  box-shadow: inset 0 0 0 3px #d9eaf1;
+}
+
+[data-style="azulejo"] .theme-menu__trigger,
+[data-style="azulejo"] .style-menu__trigger {
+  min-height: 2.75rem;
+  border: 4px solid var(--az-grout);
+  color: #0b356e;
+  background: #fffdf7;
+  box-shadow: inset 0 0 0 1px #17509f;
+}
+
+[data-style="azulejo"] .theme-menu__trigger:hover,
+[data-style="azulejo"] .style-menu__trigger:hover,
+[data-style="azulejo"] .theme-menu__trigger[aria-expanded="true"],
+[data-style="azulejo"] .style-menu__trigger[aria-expanded="true"] {
+  border-color: #d4f3ff;
+  color: #061f49;
+  background: #dff5ff;
+}
+
+[data-style="azulejo"] .nav-toggle {
+  border: 4px solid var(--az-grout);
+  color: #0b356e;
+  background: #fffdf7;
+  box-shadow: inset 0 0 0 1px #17509f;
+}
+
+/* Wider, tighter page rhythm: the content claims the viewport instead of
+   floating as a sequence of narrow report sheets. */
+.azulejo-design {
+  gap: var(--section-pad);
+  width: min(100%, var(--content));
+  padding: calc(var(--header-height, 72px) + clamp(0.9rem, 1.8vw, 1.5rem)) clamp(0.75rem, 2vw, 1.75rem) clamp(3rem, 6vw, 5rem);
+}
+
+.azulejo-design h1 {
+  max-width: 16ch;
+  font-size: var(--t-xl);
+  line-height: 0.94;
+}
+
+.azulejo-design h2 {
+  max-width: 34ch;
+  font-size: var(--t-lg);
+}
+
+.azulejo-design h3 {
+  font-size: var(--t-lg);
+}
+
+.az-button {
+  min-height: 3.2rem;
+  padding-inline: 1.15rem;
+  border: 1px solid var(--az-cobalt);
+  box-shadow: none;
+}
+
+.az-button--primary {
+  border-color: var(--az-wall-deep);
+  color: var(--az-wall-ink);
+  background: var(--az-wall);
+  box-shadow: none;
+}
+
+[data-style="azulejo"] a.az-button--primary,
+[data-style="azulejo"] a.az-button--primary:visited,
+[data-style="azulejo"] a.az-button--primary:hover,
+[data-style="azulejo"] a.az-button--primary:visited:hover {
+  color: var(--az-wall-ink);
+  background: var(--az-wall-deep);
+}
+
+/* Real square-tile bands, reused as compositional punctuation. */
+.az-tile-ribbon {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--az-wall);
+  background: var(--az-grout);
+  box-shadow: var(--shadow-soft);
+  margin-block: calc(var(--section-pad) * -0.45);
+  overflow: hidden;
+}
+
+.az-tile {
+  --az-tile-ink: var(--az-wall);
+  --az-tile-accent: var(--az-cyan);
+  position: relative;
+  display: block;
+  aspect-ratio: 1;
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--az-wall) 70%, var(--az-rule));
+  background:
+    linear-gradient(145deg, color-mix(in srgb, #fff 44%, transparent), transparent 43%),
+    var(--az-porcelain-bright);
+  box-shadow: inset 0 0 0 5px color-mix(in srgb, var(--az-porcelain-bright) 75%, transparent);
+}
+
+.az-tile::before {
+  position: absolute;
+  inset: 8%;
+  content: "";
+  background: var(--az-tile-ink);
+  -webkit-mask: var(--az-tile-mask) center / contain no-repeat;
+  mask: var(--az-tile-mask) center / contain no-repeat;
+}
+
+.az-tile::after {
+  position: absolute;
+  inset: 44%;
+  border-radius: 50%;
+  content: "";
+  background: var(--az-tile-accent);
+  box-shadow: 0 0 0 2px var(--az-porcelain-bright), 0 0 0 3px var(--az-tile-ink);
+}
+
+.az-tile--star {
+  --az-tile-mask: url("../images/azulejo/tiles/star.svg");
+}
+
+.az-tile--petal {
+  --az-tile-mask: url("../images/azulejo/tiles/petal.svg");
+  --az-tile-ink: var(--az-cyan);
+  --az-tile-accent: var(--az-wall);
+}
+
+.az-tile--cross {
+  --az-tile-mask: url("../images/azulejo/tiles/cross.svg");
+}
+
+.az-tile--flower {
+  --az-tile-mask: url("../images/azulejo/tiles/flower.svg");
+  --az-tile-ink: var(--az-cyan);
+  --az-tile-accent: var(--az-wall-deep);
+}
+
+.az-tile--diamond {
+  --az-tile-mask: url("../images/azulejo/tiles/diamond.svg");
+}
+
+.az-tile-ribbon--reverse {
+  direction: rtl;
+}
+
+/* Section titles become free-standing plaques with ornamental rules. */
+.az-section {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.az-section__head,
+.az-section__head--split {
+  position: relative;
+  grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+  min-height: 0;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border: 0;
+  background: transparent;
+}
+
+.az-section__head::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 9px;
+  content: "";
+  background:
+    linear-gradient(135deg, var(--az-wall) 25%, transparent 25%) 0 0 / 18px 18px,
+    linear-gradient(225deg, var(--az-cyan) 25%, transparent 25%) 0 0 / 18px 18px;
+  opacity: 0.85;
+}
+
+.az-section__head > *,
+.az-section__head--split > * {
+  padding: 0.7rem 1.1rem;
+}
+
+.az-section__head > * + *,
+.az-section__head--split > * + * {
+  border: 0;
+}
+
+.az-section__head--split > p {
+  align-self: end;
+  justify-self: end;
+  max-width: 38ch;
+  padding-bottom: 1.05rem;
+}
+
+.az-section__index {
+  align-self: center;
+  width: 4.7rem;
+  height: 4.7rem;
+  border: 5px solid var(--az-grout);
+  color: var(--az-wall-ink);
+  background:
+    linear-gradient(45deg, transparent 42%, rgba(255,255,255,0.2) 43% 57%, transparent 58%),
+    var(--az-wall);
+  box-shadow: inset 0 0 0 1px var(--az-wall-ink), 0 4px 0 var(--az-wall-deep);
+}
+
+.az-section__head .az-section__index {
+  justify-self: center;
+}
+
+.az-section__head .az-section__index,
+.az-project__number,
+.az-case-section > header .az-section__index,
+.az-case-overview .az-section__index {
+  transform: none;
+}
+
+.az-section__head > .az-rosette {
+  width: 4.7rem;
+}
+
+/* Home: the narrative and the full scientific plate share one ceramic frame. */
+.az-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(27rem, 0.92fr) minmax(0, 1.08fr);
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  outline: 0;
+  background: var(--az-wall);
+  box-shadow: none;
+}
+
+.az-neuron-plate {
+  position: relative;
+  grid-area: 1 / 2;
+  display: grid;
+  grid-template-rows: auto auto;
+  place-items: stretch;
+  align-self: start;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: var(--az-porcelain-bright);
+}
+
+.az-neuron-plate__picture {
+  grid-row: 2;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 8 / 5;
+  border: 0;
+  background: var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-neuron-plate__image {
+  object-fit: contain;
+  object-position: center;
+  transform: none;
+}
+
+.az-neuron-plate > figcaption {
+  position: static;
+  z-index: 3;
+  grid-row: 1;
+  justify-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0;
+  padding: 0.72rem 1rem;
+  border: 0;
+  border-bottom: 1px solid var(--az-rule);
+  color: #0a346e;
+  background: #fffdf7;
+  box-shadow: none;
+  font-size: var(--t-xs);
+  text-align: left;
+}
+
+.az-hero__copy {
+  position: relative;
+  z-index: 2;
+  grid-area: 1 / 1 / 3 / 2;
+  align-self: stretch;
+  justify-self: stretch;
+  width: auto;
+  max-height: none;
+  margin: 0;
+  padding: clamp(1.6rem, 3vw, 2.8rem);
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--az-rule) 15%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--az-rule) 15%, transparent) 1px, transparent 1px),
+    var(--az-porcelain-bright);
+  background-size: 36px 36px;
+  box-shadow: none;
+}
+
+.az-hero__copy::before {
+  display: block;
+  width: 3.2rem;
+  height: 3.2rem;
+  margin: 0 auto 1rem;
+  border: 0;
+  content: "";
+  background: var(--az-wall);
+  -webkit-mask: url("../images/azulejo/tiles/rosette.svg") center / contain no-repeat;
+  mask: url("../images/azulejo/tiles/rosette.svg") center / contain no-repeat;
+  transform: none;
+}
+
+.az-hero__copy h1 {
+  max-width: 15ch;
+  margin-bottom: 1rem;
+  font-size: var(--t-hero-title);
+  text-align: center;
+}
+
+.az-hero__copy .az-kicker {
+  text-align: center;
+}
+
+.az-hero__summary {
+  max-width: 58ch;
+  margin-inline: auto;
+  font-size: var(--t-md);
+  text-align: center;
+}
+
+.az-hero__copy .az-actions {
+  justify-content: center;
+}
+
+.az-hero__status {
+  justify-content: center;
+  margin-top: 1.15rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--az-rule);
+  text-align: left;
+}
+
+.az-metrics {
+  z-index: 3;
+  grid-area: 2 / 2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-self: stretch;
+  gap: 1px;
+  padding: 0;
+  border: 0;
+  background: var(--az-rule);
+}
+
+.az-metrics > div {
+  grid-template-rows: auto auto;
+  align-content: center;
+  min-height: 7.1rem;
+  padding: 1.2rem 1.35rem;
+  border: 0;
+  background: var(--az-porcelain-bright);
+}
+
+.az-metrics > div + div {
+  border-left: 0;
+}
+
+.az-metrics dd {
+  color: var(--az-wall);
+}
+
+/* Home content becomes a mosaic of panels rather than one bordered report. */
+.az-about__grid {
+  grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.5fr);
+  gap: var(--az-tile-gap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.az-portrait {
+  min-height: 32rem;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  border: 0;
+  color: var(--az-wall-ink);
+  background:
+    radial-gradient(circle at 50% 0, rgba(255,255,255,0.18), transparent 44%),
+    repeating-conic-gradient(from 45deg, rgba(255,255,255,0.08) 0 12.5%, transparent 0 25%),
+    var(--az-wall-deep);
+}
+
+.az-portrait__frame,
+.az-cv-portrait > span {
+  border: 7px solid var(--az-grout);
+  border-radius: 50% 50% 0.8rem 0.8rem / 38% 38% 0.8rem 0.8rem;
+  box-shadow: inset 0 0 0 1px var(--az-wall), 0 20px 45px rgba(0,0,0,0.24);
+}
+
+.az-portrait figcaption,
+.az-portrait figcaption b,
+.az-portrait figcaption span {
+  color: var(--az-wall-ink);
+}
+
+.az-about__prose {
+  justify-content: center;
+  padding: clamp(1.5rem, 3.5vw, 3.4rem);
+  background: var(--az-porcelain-bright);
+}
+
+.az-about__prose .az-lede {
+  max-width: 44ch;
+}
+
+.az-proof-grid {
+  gap: 1px;
+  margin-top: 1.5rem;
+  border-block: 1px solid var(--az-rule);
+  background: var(--az-rule);
+}
+
+.az-proof-grid article,
+.az-proof-grid article + article {
+  min-height: 11rem;
+  padding: 1.25rem;
+  border: 0;
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--az-cyan) 19%, transparent), transparent 38%),
+    var(--az-porcelain-bright);
+}
+
+.az-work-grid {
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: var(--az-tile-gap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.az-work-card {
+  grid-template-columns: minmax(9rem, 0.42fr) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  min-height: 24rem;
+  border: 1px solid var(--az-wall);
+  background: var(--az-porcelain-bright);
+}
+
+.az-work-card__folio {
+  position: relative;
+  align-content: space-between;
+  min-height: 100%;
+  padding: 1.5rem 1.15rem;
+  overflow: hidden;
+  border: 0;
+  color: var(--az-wall-ink);
+  background: var(--az-wall);
+}
+
+.az-work-card__folio::before {
+  position: absolute;
+  inset: 8%;
+  z-index: 0;
+  content: "";
+  background: rgba(255, 255, 255, 0.24);
+  -webkit-mask: url("../images/azulejo/tiles/star.svg") center / contain no-repeat;
+  mask: url("../images/azulejo/tiles/star.svg") center / contain no-repeat;
+}
+
+.az-work-card__folio > * {
+  position: relative;
+  z-index: 1;
+}
+
+.az-work-card--2 .az-work-card__folio {
+  background: var(--az-wall-deep);
+}
+
+.az-work-card--2 .az-work-card__folio::before {
+  -webkit-mask-image: url("../images/azulejo/tiles/cross.svg");
+  mask-image: url("../images/azulejo/tiles/cross.svg");
+}
+
+.az-work-card__body {
+  align-self: center;
+  padding: clamp(1.5rem, 3vw, 2.6rem);
+}
+
+.az-focus-grid {
+  gap: var(--az-tile-gap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.az-focus-grid article,
+.az-focus-grid article + article {
+  position: relative;
+  min-height: 18rem;
+  padding: 2rem;
+  overflow: hidden;
+  border: 1px solid var(--az-wall);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--az-rule) 18%, transparent) 1px, transparent 1px),
+    linear-gradient(color-mix(in srgb, var(--az-rule) 18%, transparent) 1px, transparent 1px),
+    var(--az-porcelain-bright);
+  background-size: 34px 34px;
+}
+
+.az-focus-grid article::after {
+  position: absolute;
+  right: -2.5rem;
+  bottom: -2.5rem;
+  width: 8rem;
+  aspect-ratio: 1;
+  border: 0;
+  content: "";
+  background: var(--az-wall);
+  -webkit-mask: url("../images/azulejo/tiles/rosette.svg") center / contain no-repeat;
+  mask: url("../images/azulejo/tiles/rosette.svg") center / contain no-repeat;
+  opacity: 0.16;
+  transform: none;
+}
+
+.az-chip-list--center {
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: var(--az-tile-gap);
+  padding: 1rem;
+  border-block: 1px solid var(--az-rule);
+  background: transparent;
+}
+
+.az-chip-list--center > span {
+  border: 1px solid var(--az-wall);
+  color: #0b356e;
+  background: #fffdf7;
+  box-shadow: none;
+}
+
+.az-contact {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.az-contact .az-section__head {
+  margin-bottom: var(--az-tile-gap);
+  padding: 0 0 1rem;
+  background: transparent;
+}
+
+.az-contact-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--az-tile-gap);
+  background: transparent;
+}
+
+.az-contact-card {
+  min-height: 9.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--az-wall);
+  color: var(--az-ink);
+  background:
+    radial-gradient(circle at 90% 10%, color-mix(in srgb, var(--az-cyan) 18%, transparent), transparent 35%),
+    var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-contact-card:nth-child(-n + 2) {
+  grid-column: span 2;
+}
+
+.az-contact-card:nth-child(n + 3) {
+  grid-column: span 2;
+}
+
+.az-contact-card--primary {
+  color: var(--az-wall-ink);
+  background:
+    linear-gradient(45deg, transparent 44%, rgba(255,255,255,0.11) 45% 55%, transparent 56%) 0 0 / 32px 32px,
+    var(--az-wall);
+}
+
+/* The mural treatment stays dark in both themes, so its foreground must use
+   the wall contrast token instead of the theme-dependent cobalt token. */
+[data-style="azulejo"] a.az-contact-card--primary,
+[data-style="azulejo"] a.az-contact-card--primary:visited,
+[data-style="azulejo"] a.az-contact-card--primary:hover,
+[data-style="azulejo"] a.az-contact-card--primary:active,
+[data-style="azulejo"] a.az-contact-card--primary strong,
+[data-style="azulejo"] a.az-contact-card--primary small,
+[data-style="azulejo"] a.az-contact-card--primary > span {
+  color: var(--az-wall-ink);
+}
+
+[data-style="azulejo"] a.az-contact-card--primary > span {
+  border-color: color-mix(in srgb, var(--az-wall-ink) 55%, transparent);
+}
+
+/* Projects: a gallery wall with a title arch and a column of index tiles. */
+.az-page-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(19rem, 0.62fr);
+  grid-template-rows: auto 1fr;
+  gap: var(--az-tile-gap);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.az-page-hero__copy {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  display: grid;
+  align-content: center;
+  min-height: 31rem;
+  padding: clamp(2rem, 4vw, 4rem);
+  border: 1px solid var(--az-wall);
+  border-radius: 10rem 10rem 1rem 1rem / 4rem 4rem 1rem 1rem;
+  background: var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-page-hero__copy h1 {
+  max-width: 18ch;
+}
+
+.az-page-hero__mark {
+  grid-column: 2;
+  grid-row: 1;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-content: stretch;
+  gap: 0.7rem;
+  min-height: 10rem;
+  padding: 1rem;
+  border: 0;
+  color: var(--az-wall-ink);
+  background:
+    radial-gradient(circle at center, transparent 0 20%, rgba(255,255,255,0.22) 21% 23%, transparent 24%),
+    repeating-conic-gradient(from 22.5deg, rgba(255,255,255,0.2) 0 9deg, transparent 9deg 36deg),
+    var(--az-wall-deep);
+}
+
+.az-page-hero__mark .az-rosette {
+  --az-rosette-ink: #fff;
+  width: clamp(3.4rem, 5vw, 4.65rem);
+  align-self: center;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.az-page-hero__mark > span:last-child {
+  line-height: 1.2;
+  text-align: center;
+}
+
+.az-project-index {
+  grid-column: 2;
+  grid-row: 2;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1px;
+  padding: 1px;
+  border: 0;
+  background: var(--az-rule);
+}
+
+.az-project-index a,
+.az-project-index a + a {
+  min-height: 6.3rem;
+  padding: 1rem;
+  border: 0;
+  color: var(--az-ink);
+  background: var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-project-index a:hover,
+.az-project-index a[aria-current="location"] {
+  border-color: var(--az-grout);
+  color: var(--az-wall-ink);
+  background: var(--az-wall);
+}
+
+.az-project-index a:hover :where(span, small),
+.az-project-index a[aria-current="location"] :where(span, small) {
+  color: var(--az-wall-ink);
+}
+
+.az-project-list {
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.az-project {
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.az-project__head {
+  grid-template-columns: 5.5rem minmax(0, 1fr) 5.5rem;
+  min-height: 8.5rem;
+  margin-bottom: var(--az-tile-gap);
+  border: 0;
+  border-block: 1px solid var(--az-wall);
+  background: var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-project__head > * + * {
+  border-left: 0;
+}
+
+.az-project__number,
+.az-project__icon {
+  border: 0;
+}
+
+.az-project__number {
+  margin: 0.55rem;
+  color: var(--az-wall-ink);
+  background: var(--az-wall);
+}
+
+.az-project__icon {
+  margin: 0.55rem;
+  border: 1px solid var(--az-wall);
+  background:
+    repeating-conic-gradient(from 45deg, var(--az-pale) 0 12.5%, transparent 0 25%),
+    var(--az-porcelain-bright);
+}
+
+.az-project__layout {
+  gap: var(--az-tile-gap);
+  background: transparent;
+}
+
+.az-project__content,
+.az-project__media,
+.az-project:nth-child(even) .az-project__content,
+.az-project:nth-child(even) .az-project__media {
+  border: 0;
+  background: var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-project__content {
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.az-project__media {
+  padding: clamp(0.75rem, 1.5vw, 1.3rem);
+}
+
+@media (min-width: 981px) {
+  .az-project__layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-rows: auto auto auto;
+    gap: clamp(1.1rem, 2vw, 1.8rem);
+    padding: clamp(1.25rem, 2.5vw, 2rem) 0;
+    border: 0;
+    border-bottom: 1px solid var(--az-rule);
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .az-project__content,
+  .az-project:nth-child(even) .az-project__content {
+    display: contents;
+  }
+
+  .az-project__lede,
+  .az-summary-grid {
+    grid-column: 1 / -1;
+  }
+
+  .az-project__lede {
+    grid-row: 1;
+    max-width: 72ch;
+    margin-bottom: 0;
+  }
+
+  .az-summary-grid {
+    grid-row: 2;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+  }
+
+  .az-summary-grid > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .az-summary-grid > div + div {
+    border-top: 0;
+    border-left: 1px solid var(--az-rule);
+  }
+
+  .az-summary-grid dd {
+    border-top: 1px solid var(--az-rule);
+    border-left: 0;
+  }
+
+  .az-project__details {
+    grid-column: 1;
+    grid-row: 3;
+    min-width: 0;
+  }
+
+  .az-project__media,
+  .az-project:nth-child(even) .az-project__media {
+    grid-column: 2;
+    grid-row: 3;
+    align-self: start;
+    order: initial;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .az-project:nth-child(even) .az-project__details {
+    grid-column: 2;
+  }
+
+  .az-project:nth-child(even) .az-project__media {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 980px) {
+  .az-project__layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .az-project__media,
+  .az-project:nth-child(even) .az-project__media {
+    order: 1;
+  }
+
+  .az-project__content,
+  .az-project:nth-child(even) .az-project__content {
+    order: 2;
+  }
+}
+
+.az-summary-grid {
+  gap: 1px;
+  padding: 0;
+  border: 0;
+  border-block: 1px solid var(--az-rule);
+  background: var(--az-rule);
+}
+
+.az-summary-grid > div,
+.az-summary-grid > div + div {
+  border: 0;
+  background: color-mix(in srgb, var(--az-pale) 38%, var(--az-porcelain-bright));
+}
+
+.az-highlight-list li {
+  border-bottom: 1px solid var(--az-rule);
+}
+
+.az-workflow-plate,
+.az-phone-plate,
+.az-porphyrin-plate {
+  border: 1px solid var(--az-wall);
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--az-wall-deep) 18%, transparent);
+}
+
+/* CV: portrait, identity, and contact tiles share one compact mural row. */
+.az-cv-hero {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.62fr) minmax(22rem, 1fr) minmax(23rem, 1.08fr);
+  gap: var(--az-tile-gap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.az-cv-portrait,
+.az-cv-hero__copy,
+.az-cv-contact {
+  border: 1px solid var(--az-wall);
+  box-shadow: none;
+}
+
+.az-cv-portrait {
+  grid-column: 1;
+  grid-row: 1;
+  min-height: 28rem;
+  padding: 1.5rem;
+  color: var(--az-wall-ink);
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255,255,255,0.16), transparent 40%),
+    repeating-conic-gradient(from 45deg, rgba(255,255,255,0.09) 0 12.5%, transparent 0 25%),
+    var(--az-wall-deep);
+}
+
+.az-cv-portrait figcaption {
+  color: var(--az-wall-ink);
+}
+
+.az-cv-hero__copy {
+  grid-column: 2;
+  grid-row: 1;
+  justify-content: center;
+  min-height: 28rem;
+  padding: clamp(1.7rem, 3vw, 3rem);
+  border-radius: 7rem 7rem 0.7rem 0.7rem / 2.8rem 2.8rem 0.7rem 0.7rem;
+  background: var(--az-porcelain-bright);
+}
+
+.az-cv-hero__copy h1 {
+  max-width: 11ch;
+  font-size: var(--t-xl);
+}
+
+.az-cv-contact {
+  grid-column: 3;
+  grid-row: 1;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: stretch;
+  gap: 1px;
+  padding: 0;
+  background: var(--az-rule);
+}
+
+.az-cv-contact > div,
+.az-cv-contact > div + div,
+.az-cv-contact > div:nth-child(n + 5) {
+  min-height: 0;
+  padding: 0.9rem;
+  border: 0;
+  background: var(--az-porcelain-bright);
+}
+
+.az-cv-summary__body {
+  gap: var(--az-tile-gap);
+  padding: 0;
+  border-block: 1px solid var(--az-rule);
+  background: transparent;
+}
+
+.az-cv-summary__body p {
+  margin: 0;
+  padding: clamp(1.3rem, 2.4vw, 2rem);
+  background: var(--az-porcelain-bright);
+}
+
+.az-timeline {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--az-tile-gap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.az-timeline__entry,
+.az-timeline__entry + .az-timeline__entry {
+  display: block;
+  border: 1px solid var(--az-wall);
+  background: var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-timeline__entry:first-child {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.62fr) minmax(0, 1.38fr);
+}
+
+.az-timeline--education .az-timeline__entry:first-child {
+  grid-column: auto;
+  display: block;
+}
+
+.az-timeline__entry > header {
+  min-height: 0;
+  border: 0;
+  border-bottom: 1px solid var(--az-rule);
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--az-cyan) 18%, transparent), transparent 42%),
+    color-mix(in srgb, var(--az-pale) 48%, var(--az-porcelain-bright));
+}
+
+.az-timeline__entry:first-child > header {
+  min-height: 100%;
+  border-right: 1px solid var(--az-rule);
+  border-bottom: 0;
+}
+
+.az-timeline__entry > div {
+  padding: 1.45rem;
+}
+
+.az-cv-projects,
+.az-cv-skills .skills-grid {
+  gap: var(--az-tile-gap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.az-cv-projects article,
+.az-cv-skills .skill-card {
+  border: 1px solid var(--az-wall);
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--az-cyan) 17%, transparent), transparent 38%),
+    var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-publications .publications-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--az-tile-gap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.az-publications .publication-card,
+.az-publications .publication-card + .publication-card {
+  grid-template-columns: minmax(6rem, 0.28fr) minmax(0, 1fr);
+  border: 1px solid var(--az-wall);
+  background: var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-publications .publication-card__year,
+.az-publications .publication-card:nth-child(even) .publication-card__year {
+  color: var(--az-wall-ink);
+  background:
+    repeating-conic-gradient(from 45deg, rgba(255,255,255,0.11) 0 12.5%, transparent 0 25%),
+    var(--az-wall);
+}
+
+/* Case studies: compact masthead and fact tiles in one mural composition. */
+.az-case-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.3fr) minmax(0, 1.45fr) minmax(21rem, 0.82fr);
+  grid-template-rows: auto 1fr;
+  gap: var(--az-tile-gap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.az-case-hero__masthead {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  padding: 0.7rem 1rem;
+  border: 0;
+  color: var(--az-ink);
+  background: transparent;
+}
+
+.az-case-hero__mark {
+  grid-column: 1;
+  grid-row: 2;
+  min-height: 25rem;
+  padding: 1rem;
+  border: 0;
+  color: var(--az-wall-ink);
+  background:
+    radial-gradient(circle at center, transparent 0 20%, rgba(255,255,255,0.2) 21% 23%, transparent 24%),
+    repeating-conic-gradient(from 22.5deg, rgba(255,255,255,0.18) 0 9deg, transparent 9deg 36deg),
+    var(--az-wall);
+}
+
+.az-case-hero__mark .az-rosette {
+  --az-rosette-ink: #fff;
+  border: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.az-case-hero__copy {
+  grid-column: 2;
+  grid-row: 2;
+  display: grid;
+  align-content: center;
+  min-height: 25rem;
+  padding: clamp(1.8rem, 3.5vw, 3.6rem);
+  border: 1px solid var(--az-wall);
+  border-radius: 8rem 8rem 0.8rem 0.8rem / 3rem 3rem 0.8rem 0.8rem;
+  background: var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-case-hero__copy h1 {
+  max-width: 15ch;
+  font-size: var(--t-xl);
+}
+
+.az-case-facts {
+  grid-column: 3;
+  grid-row: 2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-content: stretch;
+  gap: 1px;
+  padding: 0;
+  border: 1px solid var(--az-wall);
+  background: var(--az-rule);
+  box-shadow: none;
+}
+
+.az-case-facts > div {
+  align-content: center;
+  justify-content: initial;
+  gap: 0.5rem;
+  min-height: 0;
+  padding: 1rem;
+  border: 0;
+  background:
+    radial-gradient(circle at 95% 5%, color-mix(in srgb, var(--az-cyan) 17%, transparent), transparent 38%),
+    var(--az-porcelain-bright);
+}
+
+.az-case-overview {
+  gap: var(--az-tile-gap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.az-case-overview article,
+.az-case-overview article + article {
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  min-height: 16rem;
+  border: 1px solid var(--az-wall);
+  background: var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-case-overview .az-section__index {
+  width: 3.4rem;
+  height: 3.4rem;
+  margin: 1rem 0 0 0.8rem;
+}
+
+.az-case-figure {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.az-case-figure > figcaption {
+  padding: 0.55rem 0.75rem;
+  border: 0;
+  color: var(--az-ink);
+  background: transparent;
+}
+
+.az-case-visual {
+  gap: var(--az-tile-gap);
+  background: transparent;
+}
+
+.az-case-visual > *,
+.az-case-visual > * + * {
+  border: 1px solid var(--az-wall);
+  background-color: var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-case-layout {
+  grid-template-columns: minmax(0, 1.58fr) minmax(20rem, 0.62fr);
+  gap: var(--az-tile-gap);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.az-case-main {
+  display: grid;
+  gap: var(--az-tile-gap);
+  background: transparent;
+}
+
+.az-case-section,
+.az-case-section + .az-case-section {
+  border: 1px solid var(--az-wall);
+  background: var(--az-porcelain-bright);
+  box-shadow: none;
+}
+
+.az-case-section > header {
+  grid-template-columns: 5rem minmax(0, 1fr);
+  border-bottom: 1px solid var(--az-rule);
+}
+
+.az-case-section > header .az-section__index {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0.8rem;
+}
+
+.az-case-features {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 4px;
+  padding: 4px;
+  background: var(--az-grout);
+}
+
+.az-case-features article,
+.az-case-features article + article {
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
+  min-height: 14rem;
+  border: 0;
+  background:
+    radial-gradient(circle at 100% 0, color-mix(in srgb, var(--az-cyan) 15%, transparent), transparent 38%),
+    var(--az-porcelain-bright);
+}
+
+.az-case-workflow > p {
+  max-width: none;
+}
+
+.az-case-aside {
+  align-self: start;
+  gap: var(--az-tile-gap);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.az-case-aside section {
+  margin: 0;
+  padding: 1.35rem;
+  border: 1px solid var(--az-wall);
+  background: var(--az-porcelain-bright);
+}
+
+.az-case-aside section + section {
+  border: 0;
+}
+
+.az-cta {
+  gap: clamp(1rem, 2vw, 2rem);
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  border: 1px solid var(--az-wall);
+  color: var(--az-wall-ink);
+  background:
+    radial-gradient(circle at 10% 50%, rgba(255,255,255,0.13), transparent 17rem),
+    repeating-conic-gradient(from 45deg, rgba(255,255,255,0.075) 0 12.5%, transparent 0 25%),
+    var(--az-wall);
+  box-shadow: inset 0 0 0 1px var(--az-wall-ink), var(--az-mural-shadow);
+}
+
+.az-cta h2,
+.az-cta p,
+.az-cta .az-kicker {
+  color: var(--az-wall-ink) !important;
+}
+
+.az-cta .az-button:not(.az-button--primary) {
+  color: #0b356e;
+  background: #fffdf7;
+}
+
+/* Responsive recomposition. */
+@media (max-width: 1180px) {
+  .az-hero {
+    grid-template-columns: minmax(24rem, 0.96fr) minmax(0, 1.04fr);
+  }
+
+  .az-page-hero {
+    grid-template-columns: minmax(0, 1.5fr) minmax(17rem, 0.7fr);
+  }
+
+  .az-cv-hero {
+    grid-template-columns: minmax(14rem, 0.58fr) minmax(0, 1.2fr);
+  }
+
+  .az-cv-contact {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .az-case-hero {
+    grid-template-columns: minmax(7rem, 0.26fr) minmax(0, 1.3fr) minmax(19rem, 0.8fr);
+  }
+
+  .az-case-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .az-case-aside {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  [data-style="azulejo"] .site-nav {
+    top: calc(100% + 6px);
+    gap: 1px;
+    padding: 1px;
+    border: 1px solid var(--az-wall-deep);
+    background: var(--az-rule);
+    box-shadow: var(--shadow-strong);
+  }
+
+  [data-style="azulejo"] .site-nav > a,
+  [data-style="azulejo"] .site-nav > a:visited {
+    border: 0;
+    color: #0b356e;
+    background: #fffdf7;
+  }
+
+  .az-hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+  }
+
+  .az-hero__copy {
+    grid-area: 1 / 1;
+    width: auto;
+    margin: 0;
+    border-radius: 4rem 4rem 0 0 / 2rem 2rem 0 0;
+  }
+
+  .az-neuron-plate {
+    grid-area: 2 / 1;
+    padding: 0;
+  }
+
+  .az-neuron-plate__picture {
+    aspect-ratio: 8 / 5;
+  }
+
+  .az-metrics {
+    grid-area: 3 / 1;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .az-work-grid,
+  .az-about__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .az-portrait {
+    min-height: 0;
+    border: 0;
+  }
+
+  .az-portrait__frame {
+    width: min(52vw, 20rem);
+  }
+
+  .az-proof-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .az-work-card {
+    min-height: 21rem;
+  }
+
+  .az-page-hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+  }
+
+  .az-page-hero__copy {
+    grid-column: 1;
+    grid-row: 1;
+    min-height: 0;
+  }
+
+  .az-page-hero__mark {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 8rem;
+  }
+
+  .az-project-index {
+    grid-column: 1;
+    grid-row: 3;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .az-cv-hero {
+    grid-template-columns: minmax(13rem, 0.55fr) minmax(0, 1.2fr);
+  }
+
+  .az-cv-contact {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .az-case-hero {
+    grid-template-columns: minmax(7rem, 0.25fr) minmax(0, 1fr);
+  }
+
+  .az-case-hero__copy {
+    grid-column: 2;
+  }
+
+  .az-case-facts {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .az-publications .publications-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  [data-style="azulejo"] {
+    --t-xl: clamp(2.55rem, 10vw, 4.25rem);
+  }
+
+  .azulejo-design {
+    gap: clamp(2.2rem, 8vw, 3.5rem);
+    padding-inline: 0.65rem;
+  }
+
+  .azulejo-design h1 {
+    font-size: var(--t-xl);
+  }
+
+  .az-tile-ribbon {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .az-tile-ribbon .az-tile:nth-child(n + 7) {
+    display: none;
+  }
+
+  .az-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    overflow: hidden;
+  }
+
+  .az-neuron-plate {
+    grid-area: 1 / 1;
+    grid-template-rows: auto auto;
+    place-items: stretch;
+    height: auto;
+    padding: 0;
+  }
+
+  .az-neuron-plate > figcaption {
+    position: static;
+    grid-row: 2;
+    margin-top: 0;
+    padding: 0.5rem 0.6rem;
+    border: 0;
+    border-top: 1px solid var(--az-rule);
+    text-align: center;
+  }
+
+  .az-hero__copy {
+    grid-area: 2 / 1;
+    width: auto;
+    max-height: none;
+    margin: 0;
+    padding: 1.4rem 1.1rem;
+    overflow: visible;
+    border-radius: 3.4rem 3.4rem 0 0 / 1.8rem 1.8rem 0 0;
+  }
+
+  .az-hero__copy::before {
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .az-hero__copy h1 {
+    font-size: var(--t-hero-title-mobile);
+  }
+
+  .az-metrics {
+    grid-area: 3 / 1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .az-metrics > div {
+    min-height: 6.2rem;
+  }
+
+  .az-section__head,
+  .az-section__head--split {
+    grid-template-columns: 4.2rem minmax(0, 1fr);
+  }
+
+  .az-section__head > .az-rosette,
+  .az-section__head--split > .az-rosette {
+    display: none;
+  }
+
+  .az-section__head--split > p {
+    grid-column: 2;
+    justify-self: start;
+    border: 0;
+  }
+
+  .az-section__index {
+    width: 3.7rem;
+    height: 3.7rem;
+  }
+
+  .az-proof-grid,
+  .az-focus-grid,
+  .az-contact-grid,
+  .az-project-index,
+  .az-timeline,
+  .az-cv-projects,
+  .az-cv-skills .skills-grid,
+  .az-case-overview {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .az-work-card {
+    grid-template-columns: minmax(7rem, 0.34fr) minmax(0, 1fr);
+  }
+
+  .az-contact-card,
+  .az-contact-card:nth-child(n) {
+    grid-column: auto;
+  }
+
+  .az-page-hero__copy {
+    padding: 2rem 1.25rem;
+    border-radius: 4rem 4rem 0.7rem 0.7rem / 2rem 2rem 0.7rem 0.7rem;
+  }
+
+  .az-page-hero__mark {
+    display: grid;
+  }
+
+  .az-project__head {
+    grid-template-columns: 4.2rem minmax(0, 1fr);
+  }
+
+  .az-project__icon {
+    display: none;
+  }
+
+  .az-cv-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .az-cv-portrait,
+  .az-cv-hero__copy,
+  .az-cv-contact {
+    grid-column: 1;
+  }
+
+  .az-cv-portrait {
+    grid-row: 1;
+    min-height: 23rem;
+    border: 1px solid var(--az-wall);
+  }
+
+  .az-cv-hero__copy {
+    grid-row: 2;
+    min-height: 0;
+    border-radius: 4rem 4rem 0.7rem 0.7rem / 2rem 2rem 0.7rem 0.7rem;
+  }
+
+  .az-cv-contact {
+    grid-row: 3;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border: 1px solid var(--az-wall);
+  }
+
+  .az-timeline__entry:first-child,
+  .az-timeline--education .az-timeline__entry:first-child {
+    grid-column: auto;
+    display: block;
+  }
+
+  .az-timeline__entry:first-child > header {
+    border-right: 0;
+    border-bottom: 1px solid var(--az-rule);
+  }
+
+  .az-case-hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .az-case-hero__mark {
+    display: none;
+  }
+
+  .az-case-hero__copy {
+    grid-column: 1;
+    grid-row: 2;
+    min-height: 0;
+    border-radius: 4rem 4rem 0.7rem 0.7rem / 2rem 2rem 0.7rem 0.7rem;
+  }
+
+  .az-case-facts {
+    grid-column: 1;
+    grid-row: 3;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .az-case-aside {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 460px) {
+  [data-style="azulejo"] .site-header {
+    min-height: 66px;
+  }
+
+  [data-style="azulejo"] .site-brand__mark {
+    width: 2.55rem;
+    height: 2.55rem;
+  }
+
+  .az-hero__status {
+    display: none;
+  }
+
+  .az-neuron-plate {
+    height: auto;
+  }
+
+  .az-hero__copy {
+    margin-top: 0;
+  }
+
+  .az-work-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .az-work-card__folio {
+    min-height: 9rem;
+  }
+
+  .az-cv-contact,
+  .az-case-facts {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .az-publications .publication-card,
+  .az-publications .publication-card + .publication-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .az-publications .publication-card__year {
+    min-height: 4rem;
+    border: 0;
+  }
+}

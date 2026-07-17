@@ -7,6 +7,8 @@ const allowedTypeTokens = new Set([
   'var(--t-md)',
   'var(--t-lg)',
   'var(--t-xl)',
+  'var(--t-hero-title)',
+  'var(--t-hero-title-mobile)',
   '0'
 ]);
 
@@ -90,4 +92,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log('typography ok: 2 font families, 5 Sass type tokens');
+console.log('typography ok: 2 font families, 7 Sass type tokens');

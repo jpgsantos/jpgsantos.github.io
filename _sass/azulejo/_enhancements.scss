@@ -1,0 +1,24 @@
+/* A glaze spreads from the mode controls as the ceramic palette changes. */
+html[data-style="azulejo"][data-transition-kind]::view-transition-old(root),
+html[data-style="azulejo"][data-transition-kind]::view-transition-new(root) {
+  animation-duration: 460ms;
+  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+html[data-style="azulejo"][data-transition-kind]::view-transition-old(root) {
+  animation-name: azulejo-glaze-out;
+}
+
+html[data-style="azulejo"][data-transition-kind]::view-transition-new(root) {
+  animation-name: azulejo-glaze-in;
+}
+
+@keyframes azulejo-glaze-out {
+  from { opacity: 1; filter: brightness(1); }
+  to { opacity: 0.35; filter: brightness(0.9); }
+}
+
+@keyframes azulejo-glaze-in {
+  from { clip-path: circle(0 at calc(100% - 4rem) 4rem); filter: brightness(1.14); }
+  to { clip-path: circle(150vmax at calc(100% - 4rem) 4rem); filter: brightness(1); }
+}
