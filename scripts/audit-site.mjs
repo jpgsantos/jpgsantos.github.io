@@ -440,6 +440,158 @@ function auditExpression(expectedStyle, path) {
         .flatMap((item) => Array.from(item.querySelectorAll('img[loading="eager"], img[fetchpriority="high"]')))
         .length;
       const activeScoped = (selector) => activeRoots.flatMap((item) => Array.from(item.querySelectorAll(selector)));
+      const alignmentFailures = [];
+      const clippedTextFailures = [];
+      const viewportContainmentFailures = [];
+      const overlapFailures = [];
+      const geometry = (node) => {
+        if (!node || node.offsetParent === null) return null;
+        const rect = node.getBoundingClientRect();
+        return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, width: rect.width, height: rect.height };
+      };
+      const describeNode = (node) => {
+        if (!node) return 'missing node';
+        const name = node.tagName?.toLowerCase() || 'node';
+        const identity = node.id ? '#' + node.id : '';
+        const classes = Array.from(node.classList || []).slice(0, 2).map((item) => '.' + item).join('');
+        return name + identity + classes;
+      };
+      const compareOuterEdges = (label, nodes, tolerance = 2) => {
+        const visible = nodes.map((node) => ({ node, rect: geometry(node) })).filter((item) => item.rect && item.rect.width > 1);
+        const reference = visible[0];
+        if (!reference) return;
+        for (const item of visible.slice(1)) {
+          const leftDelta = Math.abs(item.rect.left - reference.rect.left);
+          const rightDelta = Math.abs(item.rect.right - reference.rect.right);
+          if (leftDelta > tolerance || rightDelta > tolerance) {
+            alignmentFailures.push(label + ': ' + describeNode(item.node) + ' differs by ' + leftDelta.toFixed(1) + 'px left / ' + rightDelta.toFixed(1) + 'px right');
+          }
+        }
+      };
+      const activeRoot = activeRoots[0];
+      if (activeRoot && '${expectedStyle}' !== 'mondrian') {
+        compareOuterEdges('${expectedStyle} page landmarks', Array.from(activeRoot.children));
+      }
+      if (activeRoot && '${expectedStyle}' === 'editorial' && location.pathname === '/cv/') {
+        const compareRail = (sectionSelector, rowSelector) => {
+          const section = activeRoot.querySelector(sectionSelector);
+          const reference = geometry(section?.querySelector('.ed-section__number'));
+          if (!reference) return;
+          for (const row of Array.from(section.querySelectorAll(rowSelector))) {
+            const rect = geometry(row);
+            if (rect && Math.abs(rect.right - reference.right) > 1.25) {
+              alignmentFailures.push(sectionSelector + ' rail: ' + describeNode(row) + ' differs by ' + Math.abs(rect.right - reference.right).toFixed(1) + 'px');
+            }
+          }
+        };
+        compareRail('.ed-cv-experience', '.ed-timeline__date');
+        compareRail('.ed-cv-education', '.ed-timeline__date');
+        compareRail('.ed-cv-publications', '.publication-card__year');
+        const publicationCards = Array.from(activeRoot.querySelectorAll('.ed-cv-publications .publication-card'))
+          .map((node) => ({ node, rect: geometry(node) }))
+          .filter((item) => item.rect);
+        for (let index = 1; index < publicationCards.length; index += 1) {
+          const gap = publicationCards[index].rect.top - publicationCards[index - 1].rect.bottom;
+          if (Math.abs(gap) > 1.25) {
+            alignmentFailures.push('.ed-cv-publications row gap: ' + gap.toFixed(1) + 'px');
+          }
+        }
+      }
+      if (activeRoot && '${expectedStyle}' === 'default' && innerWidth <= 980) {
+        for (const feature of Array.from(activeRoot.querySelectorAll('.project-feature--research'))) {
+          compareOuterEdges('default stacked research feature', [
+            feature.querySelector('.project-feature__content'),
+            feature.querySelector('.project-feature__media')
+          ].filter(Boolean));
+        }
+      }
+      if (activeRoot && '${expectedStyle}' === 'default' && innerWidth <= 980) {
+        for (const layout of Array.from(activeRoot.querySelectorAll('.case-study__hero, .case-study__visual--workflow, .case-study__visual--porphyrin'))) {
+          compareOuterEdges('default stacked case layout', Array.from(layout.children));
+        }
+      }
+      if (activeRoot && '${expectedStyle}' === 'editorial' && innerWidth <= 760) {
+        for (const head of Array.from(activeRoot.querySelectorAll('.ed-project__head'))) {
+          compareOuterEdges('editorial stacked project head', Array.from(head.children));
+        }
+      }
+      if (activeRoot && '${expectedStyle}' === 'editorial' && innerWidth <= 900) {
+        for (const layout of Array.from(activeRoot.querySelectorAll('.case-study__visual--workflow, .case-study__visual--porphyrin'))) {
+          compareOuterEdges('editorial stacked case visual', Array.from(layout.children));
+        }
+      }
+      if (activeRoot && '${expectedStyle}' === 'mondrian') {
+        const rootRect = geometry(activeRoot);
+        const rootStyle = getComputedStyle(activeRoot);
+        const columns = rootStyle.gridTemplateColumns.split(/\\s+/).map(Number.parseFloat).filter(Number.isFinite);
+        const gap = Number.parseFloat(rootStyle.columnGap) || 0;
+        if (rootRect && columns.length > 0) {
+          const contentLeft = rootRect.left + (Number.parseFloat(rootStyle.borderLeftWidth) || 0) + (Number.parseFloat(rootStyle.paddingLeft) || 0);
+          const boundaries = [contentLeft];
+          let cursor = contentLeft;
+          columns.forEach((width, index) => {
+            cursor += width;
+            boundaries.push(cursor);
+            if (index < columns.length - 1) {
+              cursor += gap;
+              boundaries.push(cursor);
+            }
+          });
+          const distanceToGrid = (value) => Math.min(...boundaries.map((boundary) => Math.abs(boundary - value)));
+          for (const child of Array.from(activeRoot.children)) {
+            const rect = geometry(child);
+            if (!rect || rect.width <= 1 || getComputedStyle(child).position === 'absolute') continue;
+            const leftDelta = distanceToGrid(rect.left);
+            const rightDelta = distanceToGrid(rect.right);
+            if (leftDelta > 1.5 || rightDelta > 1.5) {
+              alignmentFailures.push('mondrian grid: ' + describeNode(child) + ' differs by ' + leftDelta.toFixed(1) + 'px left / ' + rightDelta.toFixed(1) + 'px right');
+            }
+          }
+        }
+      }
+      if (activeRoot) {
+        const siteHeader = geometry(document.querySelector('.site-header'));
+        const directChildren = Array.from(activeRoot.children)
+          .map((node) => ({ node, rect: geometry(node), style: getComputedStyle(node) }))
+          .filter((item) => item.rect && item.rect.width > 1 && item.rect.height > 1 && item.style.visibility !== 'hidden');
+        if (!location.hash && scrollY < 2 && siteHeader && directChildren.length > 0) {
+          const firstContentTop = Math.min(...directChildren.map((item) => item.rect.top));
+          if (firstContentTop < siteHeader.bottom - 2) {
+            alignmentFailures.push('page content begins ' + (siteHeader.bottom - firstContentTop).toFixed(1) + 'px beneath the site header');
+          }
+        }
+        for (let leftIndex = 0; leftIndex < directChildren.length; leftIndex += 1) {
+          for (let rightIndex = leftIndex + 1; rightIndex < directChildren.length; rightIndex += 1) {
+            const left = directChildren[leftIndex];
+            const right = directChildren[rightIndex];
+            if (['absolute', 'fixed'].includes(left.style.position) || ['absolute', 'fixed'].includes(right.style.position)) continue;
+            const intersectionWidth = Math.min(left.rect.right, right.rect.right) - Math.max(left.rect.left, right.rect.left);
+            const intersectionHeight = Math.min(left.rect.bottom, right.rect.bottom) - Math.max(left.rect.top, right.rect.top);
+            if (intersectionWidth > 2 && intersectionHeight > 2) {
+              overlapFailures.push(describeNode(left.node) + ' overlaps ' + describeNode(right.node) + ' by ' + intersectionWidth.toFixed(1) + 'x' + intersectionHeight.toFixed(1) + 'px');
+            }
+          }
+        }
+      }
+      for (const node of activeScoped('h1, h2, h3, h4, button, .button, .mond-button, .ed-button')) {
+        const rect = geometry(node);
+        if (!rect || rect.width <= 1 || rect.height <= 1) continue;
+        const insideHorizontalScroller = (() => {
+          let ancestor = node.parentElement;
+          while (ancestor && ancestor !== activeRoot) {
+            const style = getComputedStyle(ancestor);
+            if (['auto', 'scroll'].includes(style.overflowX) && ancestor.scrollWidth > ancestor.clientWidth + 2) return true;
+            ancestor = ancestor.parentElement;
+          }
+          return false;
+        })();
+        if (node.scrollWidth - node.clientWidth > 2) {
+          clippedTextFailures.push(describeNode(node) + ' exceeds its box by ' + (node.scrollWidth - node.clientWidth).toFixed(1) + 'px');
+        }
+        if (!insideHorizontalScroller && (rect.left < -2 || rect.right > innerWidth + 2)) {
+          viewportContainmentFailures.push(describeNode(node) + ' extends outside the viewport (' + rect.left.toFixed(1) + 'px to ' + rect.right.toFixed(1) + 'px)');
+        }
+      }
       const defaultRoot = document.querySelector('[data-design-root="default"]');
       const mondrianRoot = document.querySelector('[data-design-root="mondrian"]');
       const defaultH1 = normalize(defaultRoot?.querySelector('h1')?.textContent);
@@ -591,6 +743,11 @@ function auditExpression(expectedStyle, path) {
       );
       const target = document.querySelector('[data-contact-anchor="${expectedStyle}"]') || document.querySelector('[data-contact-anchor="default"]');
       const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
+      const readingRail = document.querySelector('[data-reading-progress]');
+      const readingRailStyle = readingRail ? getComputedStyle(readingRail) : null;
+      const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+      const shouldShowReadingProgress = maxScroll > Math.max(560, window.innerHeight * 0.75);
+      const activeProjectIndexLinks = activeScoped('a[data-content-list="project-index"][aria-current="location"]');
       return {
         path: '${path}',
         expectedStyle: '${expectedStyle}',
@@ -600,10 +757,24 @@ function auditExpression(expectedStyle, path) {
         inactiveLeakCount: inactiveLeaks.length,
         inactiveEagerImages,
         overflow: Math.max(0, docWidth - window.innerWidth),
+        readingProgress: {
+          present: Boolean(readingRail),
+          ariaHidden: readingRail?.getAttribute('aria-hidden') === 'true',
+          pointerEvents: readingRailStyle?.pointerEvents || '',
+          height: readingRailStyle ? Number.parseFloat(readingRailStyle.height) : 0,
+          shouldShow: shouldShowReadingProgress,
+          active: document.body.classList.contains('has-reading-progress')
+        },
+        activeProjectIndexCount: activeProjectIndexLinks.length,
+        activeProjectIndexKeys: uniqueList(activeProjectIndexLinks.map((link) => link.dataset.contentKey)),
         imagesMissingDimensions,
         responsiveImagesMissingSizes,
         themePictureMismatches,
         imageOverlayContrastFailures,
+        alignmentFailures,
+        clippedTextFailures,
+        viewportContainmentFailures,
+        overlapFailures,
         cvPhotoTooLarge,
         cvPhotoBadCrop,
         cvPhotoImageMismatch,
@@ -675,6 +846,29 @@ async function pressArrowRight(page) {
   })()`);
 }
 
+async function inspectReadingProgressAfterScroll(page) {
+  const state = await page.evaluate(`(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return { skipped: true };
+    const maxScroll = Math.max(0, document.documentElement.scrollHeight - innerHeight);
+    scrollTo(0, maxScroll * 0.5);
+    return { skipped: false, maxScroll };
+  })()`);
+  if (state.skipped) return state;
+
+  await delay(120);
+  return page.evaluate(`(() => {
+    const rail = document.querySelector('[data-reading-progress]');
+    const bar = rail?.querySelector('.reading-progress__bar');
+    const railWidth = rail?.getBoundingClientRect().width || 0;
+    const barWidth = bar?.getBoundingClientRect().width || 0;
+    return {
+      skipped: false,
+      customProgress: Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--reading-progress')),
+      visualProgress: railWidth > 0 ? barWidth / railWidth : 0
+    };
+  })()`);
+}
+
 async function runCase(page, testCase) {
   page.errors = [];
   await page.send('Emulation.setDeviceMetricsOverride', {
@@ -682,6 +876,9 @@ async function runCase(page, testCase) {
     height,
     deviceScaleFactor: testCase.width <= 540 ? 2 : 1,
     mobile: testCase.width <= 540
+  });
+  await page.send('Emulation.setEmulatedMedia', {
+    features: [{ name: 'prefers-reduced-motion', value: 'no-preference' }]
   });
 
   await navigateAndWait(page, normalizeUrl('/'));
@@ -694,9 +891,17 @@ async function runCase(page, testCase) {
   await waitForDesignRuntime(page, testCase.style);
   await delay(testCase.path.includes('#contact') ? 700 : 260);
 
-  const result = await page.evaluate(auditExpression(testCase.style, testCase.path));
+  let result = await page.evaluate(auditExpression(testCase.style, testCase.path));
+  if (testCase.path.includes('#') && result.contact && !result.contact.ok) {
+    await delay(600);
+    result = await page.evaluate(auditExpression(testCase.style, testCase.path));
+  }
   if (shouldCaptureSnapshot(testCase)) {
     await writeSnapshot(page, testCase);
+  }
+  let readingProgressAfterScroll = null;
+  if (testCase.path === '/' && testCase.theme === 'light' && testCase.width === 1366) {
+    readingProgressAfterScroll = await inspectReadingProgressAfterScroll(page);
   }
   let carouselAfter = null;
   if (result.carousel) {
@@ -706,6 +911,7 @@ async function runCase(page, testCase) {
   return {
     ...testCase,
     ...result,
+    readingProgressAfterScroll,
     carouselAfter,
     consoleErrors: page.errors.slice()
   };
@@ -719,6 +925,23 @@ function assertResult(result) {
   if (result.inactiveLeakCount > 0) failures.push('inactive design roots visible/accessibility-leaking');
   if (result.inactiveEagerImages > 0) failures.push(`${result.inactiveEagerImages} inactive design image(s) are eager/high priority`);
   if (result.overflow > 2) failures.push(`horizontal overflow ${result.overflow}px`);
+  if (!result.readingProgress?.present) failures.push('reading progress rail is missing');
+  if (!result.readingProgress?.ariaHidden) failures.push('reading progress rail should be hidden from assistive technology');
+  if (result.readingProgress?.pointerEvents !== 'none') failures.push('reading progress rail should not intercept input');
+  if (result.readingProgress?.shouldShow !== result.readingProgress?.active) failures.push('reading progress activation does not match page length');
+  const expectedProgressHeight = result.expectedStyle === 'mondrian' ? 5 : 3;
+  if (Math.abs((result.readingProgress?.height || 0) - expectedProgressHeight) > 0.5) {
+    failures.push(`reading progress height is ${result.readingProgress?.height || 0}px, expected ${expectedProgressHeight}px`);
+  }
+  if (result.readingProgressAfterScroll && !result.readingProgressAfterScroll.skipped) {
+    const { customProgress, visualProgress } = result.readingProgressAfterScroll;
+    if (Math.abs(customProgress - 0.5) > 0.12 || Math.abs(visualProgress - 0.5) > 0.12) {
+      failures.push(`reading progress did not track midpoint (state ${customProgress}, visual ${visualProgress})`);
+    }
+  }
+  if (result.path === '/projects/' && (result.activeProjectIndexCount !== 1 || result.activeProjectIndexKeys?.length !== 1)) {
+    failures.push(`project index should expose one active location, got ${result.activeProjectIndexCount}`);
+  }
   if (result.imagesMissingDimensions > 0) failures.push(`${result.imagesMissingDimensions} visible image(s) missing dimensions`);
   if (result.responsiveImagesMissingSizes > 0) failures.push(`${result.responsiveImagesMissingSizes} responsive image candidate(s) missing sizes`);
   if (result.themePictureMismatches?.length > 0) {
@@ -726,6 +949,18 @@ function assertResult(result) {
   }
   if (result.imageOverlayContrastFailures?.length > 0) {
     failures.push(`image overlay contrast: ${result.imageOverlayContrastFailures.map((item) => `${item.text} (${item.reason}${item.ratio ? `, ${item.ratio.toFixed(2)}:1` : ''})`).join('; ')}`);
+  }
+  if (result.alignmentFailures?.length > 0) {
+    failures.push(`alignment: ${result.alignmentFailures.slice(0, 6).join('; ')}`);
+  }
+  if (result.clippedTextFailures?.length > 0) {
+    failures.push(`clipped text: ${result.clippedTextFailures.slice(0, 6).join('; ')}`);
+  }
+  if (result.viewportContainmentFailures?.length > 0) {
+    failures.push(`viewport containment: ${result.viewportContainmentFailures.slice(0, 6).join('; ')}`);
+  }
+  if (result.overlapFailures?.length > 0) {
+    failures.push(`overlap: ${result.overlapFailures.slice(0, 6).join('; ')}`);
   }
   if (result.cvPhotoTooLarge) failures.push('Mondrian CV tablet photo is oversized');
   if (result.cvPhotoBadCrop) failures.push('Mondrian CV tablet photo aspect is unstable');

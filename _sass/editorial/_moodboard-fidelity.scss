@@ -515,7 +515,7 @@
 .ed-cv-project,
 .ed-cv-skills .skill-card,
 .ed-cv-publications .publication-card__body {
-  padding: clamp(0.95rem, 2vw, 1.45rem);
+  padding: clamp(0.85rem, 1.7vw, 1.15rem);
 }
 
 .ed-cv-project {
@@ -527,7 +527,7 @@
 }
 
 .ed-case-facts > div {
-  min-height: 112px;
+  min-height: 0;
   padding: 0.9rem;
 }
 
