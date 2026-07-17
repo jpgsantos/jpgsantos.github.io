@@ -1,0 +1,113 @@
+/* Editorial Modernism keeps the progress cue as a restrained rule, then
+   enters like a new printed sheet settling onto the reading surface. */
+
+[data-style="editorial"] {
+  --reveal-distance: 1.5rem;
+  --reveal-duration: 620ms;
+  --reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-style="editorial"] .reading-progress {
+  height: 3px;
+  background: color-mix(in srgb, var(--ed-ink) 24%, var(--ed-paper));
+}
+
+[data-style="editorial"] .reading-progress__bar {
+  background: var(--ed-red);
+}
+
+html[data-style="editorial"][data-transition-kind="style"]::view-transition-old(root),
+html[data-style="editorial"][data-transition-kind="style"]::view-transition-new(root) {
+  animation-duration: 480ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html[data-style="editorial"][data-transition-kind="style"]::view-transition-old(root) {
+  animation-name: editorial-style-out;
+}
+
+html[data-style="editorial"][data-transition-kind="style"]::view-transition-new(root) {
+  animation-name: editorial-style-in;
+}
+
+@keyframes editorial-style-out {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-0.4rem); }
+}
+
+@keyframes editorial-style-in {
+  from { opacity: 0; clip-path: inset(0 0 12% 0); transform: translateY(1rem); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0); }
+}
+
+/* Selected-work cards use the editorial grid as a composition, rather than
+   reserving a full blank row beside an intrinsically sized illustration. */
+.ed-work-card__figure {
+  width: 100%;
+}
+
+@media (min-width: 761px) {
+  .ed-work-card {
+    display: grid;
+    grid-template-columns: clamp(8rem, 11vw, 10.5rem) minmax(0, 1fr);
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    align-items: stretch;
+  }
+
+  .ed-work-card::after {
+    display: none;
+  }
+
+  .ed-work-card__topline {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .ed-work-card__figure {
+    grid-column: 1;
+    grid-row: 2 / 5;
+    min-height: 11.75rem;
+    border-right: 1px solid var(--ed-ink);
+    border-bottom: 0;
+  }
+
+  .ed-work-card__figure-orbit {
+    right: -3.25rem;
+    bottom: -3.25rem;
+  }
+
+  .ed-work-card h3 {
+    grid-column: 2;
+    grid-row: 2;
+    margin: clamp(1.1rem, 2vw, 1.4rem) clamp(1rem, 2vw, 1.5rem) 0.6rem;
+  }
+
+  .ed-work-card > p {
+    grid-column: 2;
+    grid-row: 3;
+    margin: 0 clamp(1rem, 2vw, 1.5rem) 1rem;
+  }
+
+  .ed-work-card > .ed-text-link {
+    grid-column: 2;
+    grid-row: 4;
+    margin: 0 clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.35rem);
+  }
+}
+
+@media (min-width: 761px) and (max-width: 900px) {
+  .ed-work__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ed-work-card:first-child {
+    border-right: 0;
+    border-bottom: 1px solid var(--ed-ink);
+  }
+}
+
+@media (max-width: 480px) {
+  .ed-work-card__figure {
+    min-height: 145px;
+  }
+}

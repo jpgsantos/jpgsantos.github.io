@@ -1,0 +1,40 @@
+/* Mondrian expresses orientation as a hard-edged primary-colour rule and uses
+   a lateral wipe when it becomes the active composition. */
+
+[data-style="mondrian"] .reading-progress {
+  height: 5px;
+  background: var(--mond-ink);
+}
+
+[data-style="mondrian"] .reading-progress__bar {
+  background: linear-gradient(
+    90deg,
+    var(--mond-red) 0 34%,
+    var(--mond-blue) 34% 68%,
+    var(--mond-yellow) 68% 100%
+  );
+}
+
+html[data-style="mondrian"][data-transition-kind="style"]::view-transition-old(root),
+html[data-style="mondrian"][data-transition-kind="style"]::view-transition-new(root) {
+  animation-duration: 420ms;
+  animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+html[data-style="mondrian"][data-transition-kind="style"]::view-transition-old(root) {
+  animation-name: mondrian-style-out;
+}
+
+html[data-style="mondrian"][data-transition-kind="style"]::view-transition-new(root) {
+  animation-name: mondrian-style-in;
+}
+
+@keyframes mondrian-style-out {
+  from { opacity: 1; }
+  to { opacity: 0.38; }
+}
+
+@keyframes mondrian-style-in {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}

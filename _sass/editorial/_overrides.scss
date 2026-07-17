@@ -15,10 +15,10 @@
 
 [data-style="editorial"] body::before {
   background-image:
-    radial-gradient(circle, color-mix(in srgb, var(--ed-ink) 18%, transparent) 0 0.7px, transparent 0.8px),
+    radial-gradient(circle, color-mix(in srgb, var(--ed-ink) 28%, transparent) 0 0.75px, transparent 0.9px),
     linear-gradient(90deg, color-mix(in srgb, var(--ed-rule) 13%, transparent) 1px, transparent 1px);
   background-size: 6px 6px, 25% 100%;
-  opacity: 0.22;
+  opacity: 0.3;
   mask-image: linear-gradient(to bottom, black, transparent 92%);
 }
 
@@ -916,7 +916,7 @@
 
 .editorial-design .contact-card:visited { color: var(--ed-ink); }
 
-.editorial-design .contact-card:hover {
+.editorial-design .contact-card:is(:hover, :focus-visible) {
   color: var(--ed-on-color);
   background: var(--ed-teal);
 }
@@ -924,6 +924,10 @@
 .editorial-design .contact-card:active {
   color: var(--ed-on-color);
   background: var(--ed-red);
+}
+
+.ed-contact .contact-card * {
+  color: inherit;
 }
 
 .editorial-design .contact-card > .icon:first-child {
@@ -966,7 +970,7 @@
 
 .ed-index {
   display: grid;
-  align-content: start;
+  grid-template-rows: auto repeat(3, minmax(0, 1fr));
 }
 
 .ed-index__label {
@@ -1290,8 +1294,9 @@
   background: var(--ed-red);
 }
 
-.ed-project__visual--research .porphyrin-paper-visual {
-  margin-inline: auto;
+.ed-project__visual--research {
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 .ed-project__footer {
@@ -1426,7 +1431,7 @@
 
 .ed-timeline__entry {
   display: grid;
-  grid-template-columns: minmax(190px, 0.34fr) minmax(0, 1fr);
+  grid-template-columns: minmax(78px, 0.18fr) minmax(0, 1fr);
   border-bottom: 1px solid var(--ed-ink);
 }
 
@@ -1563,11 +1568,15 @@
   font-size: var(--t-xs);
 }
 
-.ed-cv-publications .publications-list { display: grid; }
+.ed-cv-publications .publications-list {
+  display: grid;
+  gap: 0;
+}
 
 .ed-cv-publications .publication-card {
   display: grid;
-  grid-template-columns: minmax(110px, 0.2fr) minmax(0, 1fr);
+  grid-template-columns: minmax(78px, 0.18fr) minmax(0, 1fr);
+  gap: 0;
   padding: 0;
   border: 0;
   border-bottom: 1px solid var(--ed-ink);
@@ -1632,23 +1641,21 @@
 
 .ed-case-facts {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, minmax(0, 1fr));
   margin: 0;
 }
 
 .ed-case-facts > div {
-  display: flex;
-  min-height: 140px;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.75rem;
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.42fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
   padding: 1.2rem;
-  border-right: 1px solid var(--ed-ink);
   border-bottom: 1px solid var(--ed-ink);
 }
 
-.ed-case-facts > div:nth-child(even) { border-right: 0; }
-.ed-case-facts > div:nth-last-child(-n + 2) { border-bottom: 0; }
+.ed-case-facts > div:last-child { border-bottom: 0; }
 
 .ed-case-facts dt {
   color: var(--ed-red);
@@ -1788,13 +1795,13 @@
 
 .ed-case-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+  grid-template-columns: 1fr;
   margin-top: clamp(2rem, 5vw, 4rem);
   border: 1px solid var(--ed-ink);
   background: var(--ed-paper-bright);
 }
 
-.ed-case-main { border-right: 1px solid var(--ed-ink); }
+.ed-case-main { grid-row: 2; }
 
 .ed-case-section {
   border-bottom: 1px solid var(--ed-ink);
@@ -1832,18 +1839,19 @@
 }
 
 .ed-case-aside {
-  background:
-    radial-gradient(circle, color-mix(in srgb, var(--ed-ink) 20%, transparent) 0 1px, transparent 1.1px) 0 0 / 12px 12px,
-    var(--ed-paper-deep);
+  display: grid;
+  grid-row: 1;
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+  gap: 1px;
+  border-bottom: 1px solid var(--ed-ink);
+  background: var(--ed-ink);
 }
 
 .ed-case-aside > section {
   padding: clamp(1.3rem, 3vw, 2.2rem);
-  border-bottom: 1px solid var(--ed-ink);
+  border-bottom: 0;
   background: color-mix(in srgb, var(--ed-paper-bright) 94%, transparent);
 }
-
-.ed-case-aside > section:last-child { border-bottom: 0; }
 
 .ed-case-aside dl { margin: 1.5rem 0 0; }
 
@@ -1978,8 +1986,7 @@
   .ed-hero__copy,
   .ed-page-hero__copy,
   .ed-cv-hero__identity,
-  .ed-case-hero__copy,
-  .ed-case-main {
+  .ed-case-hero__copy {
     border-right: 0;
     border-bottom: 1px solid var(--ed-ink);
   }

@@ -1,0 +1,163 @@
+/* Progressive interaction layer shared by every design.
+   The default bundle is always present, so the structural rules live here while
+   each optional design only overrides its visual expression. */
+
+:root {
+  --reading-progress: 0;
+  --reveal-distance: 1rem;
+  --reveal-duration: 520ms;
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+main p {
+  text-wrap: pretty;
+}
+
+main :where(h1, h2, h3) {
+  text-wrap: balance;
+}
+
+.reading-progress {
+  position: fixed;
+  z-index: 1300;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3px;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  background: color-mix(in srgb, var(--text) 12%, transparent);
+  transform: translateY(-100%);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+body.has-reading-progress .reading-progress {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reading-progress__bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-strong), var(--accent));
+  transform: scaleX(var(--reading-progress));
+  transform-origin: left center;
+}
+
+@supports (animation-timeline: scroll()) {
+  .reading-progress__bar {
+    animation: site-reading-progress linear both;
+    animation-timeline: scroll(root);
+  }
+
+  @keyframes site-reading-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+}
+
+/* Let the profile summary respond to its own width. This catches the narrow
+   two-column range where viewport breakpoints still leave the metrics cramped. */
+.profile-console {
+  container-name: profile-console;
+  container-type: inline-size;
+}
+
+@container profile-console (max-width: 29rem) {
+  .profile-console .metric-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .profile-console .metric-grid div {
+    padding: 0.55rem 0.7rem;
+  }
+
+  .profile-console .metric-grid div:nth-child(odd) {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .profile-console .metric-grid div:nth-child(n + 3) {
+    border-top: 1px solid var(--border);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-distance), 0);
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease),
+    transform var(--reveal-duration) var(--reveal-ease);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: auto;
+}
+
+/* Same-document transitions keep style and theme switches legible as the
+   layout changes underneath the controls. Unsupported browsers simply swap. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 280ms;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  mix-blend-mode: normal;
+}
+
+html[data-transition-kind="theme"]::view-transition-old(root) {
+  animation-name: site-theme-out;
+}
+
+html[data-transition-kind="theme"]::view-transition-new(root) {
+  animation-name: site-theme-in;
+}
+
+html[data-transition-kind="style"]::view-transition-old(root) {
+  animation-name: site-style-out;
+}
+
+html[data-transition-kind="style"]::view-transition-new(root) {
+  animation-name: site-style-in;
+}
+
+@keyframes site-theme-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes site-theme-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes site-style-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.008); }
+}
+
+@keyframes site-style-in {
+  from { opacity: 0; transform: scale(0.992); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reading-progress {
+    display: none;
+  }
+
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

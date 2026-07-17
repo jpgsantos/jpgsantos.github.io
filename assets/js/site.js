@@ -12,6 +12,7 @@
   const designStylesheets = Array.from(document.querySelectorAll('[data-design-stylesheet]'));
   const stylePriorityImages = Array.from(document.querySelectorAll('[data-style-priority-image]'));
   const themePictures = Array.from(document.querySelectorAll('[data-theme-picture]'));
+  const readingProgress = document.querySelector('[data-reading-progress]');
   const styleSelect = document.querySelector('[data-style-select]');
   const styleButtons = Array.from(document.querySelectorAll('[data-style-value]'));
   const themeButtons = Array.from(document.querySelectorAll('[data-theme-value]'));
@@ -32,6 +33,10 @@
   let resizeFrame = 0;
   let headerHeight = 76;
   let hasScrolled = false;
+  let activeViewTransition = null;
+  let transitionSerial = 0;
+  let styleRequestSerial = 0;
+  let syncProjectIndex = function() {};
 
   function readPreference(key, fallback) {
     try {
@@ -107,8 +112,8 @@
     buttons.forEach((button) => {
       button.addEventListener('click', () => {
         const value = button.dataset[config.buttonDataset];
-        config.onChoose(value);
         closeAndRestoreFocus();
+        config.onChoose(value);
       });
 
       button.addEventListener('keydown', (event) => {
@@ -201,6 +206,89 @@
     });
   }
 
+  function isDesignStylesheetReady(stylesheet) {
+    if (stylesheet.sheet) return true;
+    if (!stylesheet.href) return false;
+
+    return Array.from(document.styleSheets).some((sheet) => sheet.href === stylesheet.href);
+  }
+
+  function ensureDesignStylesheet(style) {
+    const stylesheet = designStylesheets.find((link) => link.dataset.designStylesheet === style);
+    if (!stylesheet || style === 'default') return Promise.resolve();
+
+    if (stylesheet.href) {
+      stylesheet.disabled = false;
+      if (isDesignStylesheetReady(stylesheet)) return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+      let settled = false;
+      let timeout = 0;
+
+      function finish() {
+        if (settled) return;
+        settled = true;
+        window.clearTimeout(timeout);
+        resolve();
+      }
+
+      timeout = window.setTimeout(finish, 2400);
+      stylesheet.addEventListener('load', finish, { once: true });
+      stylesheet.addEventListener('error', finish, { once: true });
+      if (!stylesheet.href && stylesheet.dataset.designHref) {
+        stylesheet.href = stylesheet.dataset.designHref;
+      }
+      stylesheet.disabled = false;
+      window.requestAnimationFrame(() => {
+        if (isDesignStylesheetReady(stylesheet)) finish();
+      });
+    });
+  }
+
+  function dispatchSiteEvent(name, detail) {
+    window.dispatchEvent(new CustomEvent(name, { detail }));
+  }
+
+  function runViewTransition(kind, from, to, update) {
+    if (reduceMotion || typeof document.startViewTransition !== 'function') {
+      update();
+      return null;
+    }
+
+    if (activeViewTransition && typeof activeViewTransition.skipTransition === 'function') {
+      activeViewTransition.skipTransition();
+    }
+
+    const serial = ++transitionSerial;
+    root.dataset.transitionKind = kind;
+    root.dataset.transitionFrom = from;
+    root.dataset.transitionTo = to;
+
+    try {
+      activeViewTransition = document.startViewTransition(update);
+    } catch (error) {
+      delete root.dataset.transitionKind;
+      delete root.dataset.transitionFrom;
+      delete root.dataset.transitionTo;
+      activeViewTransition = null;
+      update();
+      return null;
+    }
+
+    activeViewTransition.finished
+      .catch(() => {})
+      .finally(() => {
+        if (serial !== transitionSerial) return;
+        delete root.dataset.transitionKind;
+        delete root.dataset.transitionFrom;
+        delete root.dataset.transitionTo;
+        activeViewTransition = null;
+      });
+
+    return activeViewTransition;
+  }
+
   function isInActiveDesignTree(element) {
     const designRoot = element.closest('[data-design-root]');
     if (!designRoot) return true;
@@ -241,6 +329,7 @@
     if (resizeFrame) return;
     resizeFrame = window.requestAnimationFrame(() => {
       scrollToActiveHash('auto');
+      handleScroll();
       resizeFrame = 0;
     });
   }
@@ -309,36 +398,77 @@
     });
   }
 
-  function applyTheme(choice) {
+  function applyTheme(choice, options) {
+    const settings = options || {};
     const theme = choice || readPreference('theme', 'auto');
     const shouldUseDark = theme === 'dark' || (theme === 'auto' && darkQuery && darkQuery.matches);
+    const previousTheme = root.getAttribute('data-theme-choice') || 'auto';
+    const previouslyUsedDark = root.getAttribute('data-theme') === 'dark';
 
-    if (shouldUseDark) {
-      root.setAttribute('data-theme', 'dark');
-    } else {
-      root.removeAttribute('data-theme');
+    function commitTheme() {
+      if (shouldUseDark) {
+        root.setAttribute('data-theme', 'dark');
+      } else {
+        root.removeAttribute('data-theme');
+      }
+      root.setAttribute('data-theme-choice', theme);
+      syncThemePictures(shouldUseDark);
+      themeMenu.render(theme);
+      dispatchSiteEvent('site:themechange', {
+        theme,
+        previousTheme,
+        resolvedTheme: shouldUseDark ? 'dark' : 'light',
+        previousResolvedTheme: previouslyUsedDark ? 'dark' : 'light'
+      });
+      window.requestAnimationFrame(handleScroll);
     }
-    root.setAttribute('data-theme-choice', theme);
-    syncThemePictures(shouldUseDark);
-    themeMenu.render(theme);
+
+    if (settings.animate && shouldUseDark !== previouslyUsedDark) {
+      runViewTransition(
+        'theme',
+        previouslyUsedDark ? 'dark' : 'light',
+        shouldUseDark ? 'dark' : 'light',
+        commitTheme
+      );
+      return;
+    }
+
+    commitTheme();
   }
 
-  function applyStyle(choice) {
+  function applyStyle(choice, options) {
+    const settings = options || {};
     const requestedStyle = choice || readPreference('style', 'default');
     const fallbackStyle = supportedStyles.includes('default') ? 'default' : supportedStyles[0];
     const style = supportedStyles.includes(requestedStyle) ? requestedStyle : fallbackStyle;
+    const previousStyle = root.getAttribute('data-style') || fallbackStyle;
+    const requestSerial = ++styleRequestSerial;
 
-    syncDesignStylesheets(style);
-    root.setAttribute('data-style', style);
-    syncDesignTrees(style);
-    syncStylePriorityImages(style);
+    function commitStyle() {
+      syncDesignStylesheets(style);
+      root.setAttribute('data-style', style);
+      syncDesignTrees(style);
+      syncStylePriorityImages(style);
 
-    if (styleSelect && styleSelect.value !== style) {
-      styleSelect.value = style;
+      if (styleSelect && styleSelect.value !== style) {
+        styleSelect.value = style;
+      }
+
+      styleMenu.render(style);
+      dispatchSiteEvent('site:stylechange', { style, previousStyle });
+      scrollToActiveHash('auto');
+      window.requestAnimationFrame(handleScroll);
     }
 
-    styleMenu.render(style);
-    scrollToActiveHash('auto');
+    if (!settings.animate || previousStyle === style) {
+      commitStyle();
+      return;
+    }
+
+    ensureDesignStylesheet(style).then(() => {
+      if (requestSerial !== styleRequestSerial) return;
+      runViewTransition('style', previousStyle, style, commitStyle);
+    });
   }
 
   function closeNav() {
@@ -367,6 +497,9 @@
   function initProjectIndexState() {
     const projectIndexLinks = Array.from(document.querySelectorAll('a[data-content-list="project-index"]'));
     if (projectIndexLinks.length === 0) return;
+    const projectPairs = projectIndexLinks
+      .map((link) => ({ link, target: document.getElementById(decodeURIComponent(link.hash.slice(1))) }))
+      .filter((pair) => pair.target);
 
     function setCurrentProject(projectKey) {
       projectIndexLinks.forEach((link) => {
@@ -378,17 +511,73 @@
       });
     }
 
-    function syncCurrentProjectFromHash() {
-      const currentLink = projectIndexLinks.find((link) => link.hash === window.location.hash);
-      setCurrentProject(currentLink ? currentLink.dataset.contentKey : '');
+    function syncCurrentProjectFromScroll() {
+      const activePairs = projectPairs.filter((pair) => (
+        isInActiveDesignTree(pair.link) && isInActiveDesignTree(pair.target)
+      ));
+      if (activePairs.length === 0) return;
+
+      const marker = headerHeight + Math.min(window.innerHeight * 0.28, 240);
+      let currentPair = activePairs[0];
+
+      activePairs.forEach((pair) => {
+        if (pair.target.getBoundingClientRect().top <= marker) currentPair = pair;
+      });
+
+      setCurrentProject(currentPair.link.dataset.contentKey);
     }
+
+    function scrollToProjectLink(link) {
+      const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
+      if (!target) return;
+
+      window.requestAnimationFrame(() => {
+        const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+        window.scrollTo({ top: Math.max(0, targetTop), behavior: 'auto' });
+      });
+    }
+
+    function syncCurrentProjectFromHash() {
+      const hashedLink = projectIndexLinks.find((link) => link.hash === window.location.hash);
+      if (!hashedLink) {
+        syncCurrentProjectFromScroll();
+        return;
+      }
+
+      const projectKey = hashedLink.dataset.contentKey;
+      const activeLink = projectIndexLinks.find((link) => (
+        link.dataset.contentKey === projectKey && isInActiveDesignTree(link)
+      ));
+      if (!activeLink) return;
+
+      setCurrentProject(projectKey);
+      if (activeLink.hash !== window.location.hash && window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', activeLink.hash);
+      }
+      scrollToProjectLink(activeLink);
+    }
+
+    syncProjectIndex = syncCurrentProjectFromScroll;
 
     projectIndexLinks.forEach((link) => {
       link.addEventListener('click', () => setCurrentProject(link.dataset.contentKey));
     });
 
     window.addEventListener('hashchange', syncCurrentProjectFromHash);
+    window.addEventListener('site:stylechange', syncCurrentProjectFromHash);
     syncCurrentProjectFromHash();
+  }
+
+  function updateReadingProgress() {
+    if (!readingProgress) return;
+
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+    const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const isLongPage = maxScroll > Math.max(560, window.innerHeight * 0.75);
+    const progress = maxScroll > 0 ? Math.min(1, Math.max(0, scrollTop / maxScroll)) : 0;
+
+    body.classList.toggle('has-reading-progress', isLongPage);
+    root.style.setProperty('--reading-progress', progress.toFixed(4));
   }
 
   function handleScroll() {
@@ -399,6 +588,8 @@
       hasScrolled = nextHasScrolled;
     }
 
+    updateReadingProgress();
+    syncProjectIndex();
   }
 
   function initCarousels() {
@@ -535,7 +726,7 @@
     labels: themeLabels,
     onChoose: (theme) => {
       writePreference('theme', theme);
-      applyTheme(theme);
+      applyTheme(theme, { animate: true });
     }
   });
 
@@ -551,7 +742,7 @@
     labels: styleLabels,
     onChoose: (style) => {
       rememberStyleChoice(style);
-      applyStyle(style);
+      applyStyle(style, { animate: true });
     }
   });
 
@@ -562,7 +753,7 @@
     styleSelect.addEventListener('change', () => {
       const nextStyle = styleSelect.value;
       rememberStyleChoice(nextStyle);
-      applyStyle(nextStyle);
+      applyStyle(nextStyle, { animate: true });
     });
   }
 
@@ -604,9 +795,15 @@
 
   window.addEventListener('resize', scheduleAnchorScroll);
   window.addEventListener('hashchange', () => scrollToActiveHash(reduceMotion ? 'auto' : 'smooth'));
-  window.addEventListener('load', () => scrollToActiveHash('auto'));
+  window.addEventListener('load', () => {
+    scrollToActiveHash('auto');
+    handleScroll();
+  });
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => scrollToActiveHash('auto')).catch(() => {});
+    document.fonts.ready.then(() => {
+      scrollToActiveHash('auto');
+      handleScroll();
+    }).catch(() => {});
   }
 
   initNavigation();

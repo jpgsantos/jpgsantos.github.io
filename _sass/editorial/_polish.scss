@@ -70,7 +70,7 @@
 
 @media (min-width: 901px) {
   .ed-hero {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: 1.2fr 0.9fr 0.9fr;
   }
 
   .ed-hero__copy { grid-column: 1; }

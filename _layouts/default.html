@@ -140,6 +140,10 @@
   <body data-page="{{ page.title | downcase | replace: ' ', '-' | default: 'home' }}" class="preload">
     <a class="skip-link" href="#main-content">Skip to content</a>
 
+    <div class="reading-progress" data-reading-progress aria-hidden="true">
+      <span class="reading-progress__bar"></span>
+    </div>
+
     <header class="site-header" role="banner">
       <a class="site-brand" href="{{ '/' | relative_url }}" aria-label="{{ site.title }} home">
         <span class="site-brand__mark">{{ profile.initials }}</span>
