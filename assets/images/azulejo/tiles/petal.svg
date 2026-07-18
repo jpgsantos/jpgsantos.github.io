@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" shape-rendering="geometricPrecision">
-  <g fill="#fff">
-    <path d="M50 48C35 37 31 20 50 3c19 17 15 34 0 45Z"/>
-    <path d="M52 50c11-15 28-19 45 0-17 19-34 15-45 0Z"/>
-    <path d="M50 52c15 11 19 28 0 45-19-17-15-34 0-45Z"/>
-    <path d="M48 50c-11 15-28 19-45 0 17-19 34-15 45 0Z"/>
-    <circle cx="50" cy="50" r="8"/>
-  </g>
-</svg>

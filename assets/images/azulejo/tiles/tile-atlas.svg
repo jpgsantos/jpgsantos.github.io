@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400" color="#fff" shape-rendering="geometricPrecision">
+  <defs>
+    <style>
+      .f{fill:currentColor}.l{fill:none;stroke:currentColor;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+      .s{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    </style>
+    <symbol id="t01" viewBox="0 0 100 100">
+      <g class="f"><path d="m50 9 7 31-7 8-7-8Z"/><path d="m50 9 7 31-7 8-7-8Z" transform="rotate(45 50 50)"/><path d="m50 9 7 31-7 8-7-8Z" transform="rotate(90 50 50)"/><path d="m50 9 7 31-7 8-7-8Z" transform="rotate(135 50 50)"/><path d="m50 9 7 31-7 8-7-8Z" transform="rotate(180 50 50)"/><path d="m50 9 7 31-7 8-7-8Z" transform="rotate(225 50 50)"/><path d="m50 9 7 31-7 8-7-8Z" transform="rotate(270 50 50)"/><path d="m50 9 7 31-7 8-7-8Z" transform="rotate(315 50 50)"/><circle cx="50" cy="50" r="5"/></g><circle class="s" cx="50" cy="50" r="13"/>
+    </symbol>
+    <symbol id="t02" viewBox="0 0 100 100">
+      <g class="f"><path d="M50 47C34 37 31 21 50 7c19 14 16 30 0 40Z"/><path d="M53 50c10-16 26-19 40 0-14 19-30 16-40 0Z"/><path d="M50 53c16 10 19 26 0 40-19-14-16-30 0-40Z"/><path d="M47 50c-10 16-26 19-40 0 14-19 30-16 40 0Z"/></g><circle class="l" cx="50" cy="50" r="9"/>
+    </symbol>
+    <symbol id="t03" viewBox="0 0 100 100">
+      <path class="f" d="M50 5 57 34 76 13 65 39 94 31 68 46 95 50 68 54 94 69 65 61 76 87 57 66 50 95 43 66 24 87 35 61 6 69 32 54 5 50 32 46 6 31 35 39 24 13 43 34Z"/><circle class="l" cx="50" cy="50" r="11"/><circle class="f" cx="50" cy="50" r="4"/>
+    </symbol>
+    <symbol id="t04" viewBox="0 0 100 100">
+      <path class="l" d="m50 7 43 43-43 43L7 50Z"/><path class="l" d="m50 22 28 28-28 28-28-28Z"/><path class="s" d="m50 36 14 14-14 14-14-14Z"/><circle class="f" cx="50" cy="50" r="4"/>
+    </symbol>
+    <symbol id="t05" viewBox="0 0 100 100">
+      <path class="f" fill-rule="evenodd" d="M8 19 19 8l31 31L81 8l11 11-31 31 31 31-11 11-31-31-31 31L8 81l31-31Zm42 18-13 13 13 13 13-13Z"/><circle class="s" cx="50" cy="50" r="34"/>
+    </symbol>
+    <symbol id="t06" viewBox="0 0 100 100">
+      <g class="f"><ellipse cx="50" cy="27" rx="8" ry="19"/><ellipse cx="50" cy="27" rx="8" ry="19" transform="rotate(45 50 50)"/><ellipse cx="50" cy="27" rx="8" ry="19" transform="rotate(90 50 50)"/><ellipse cx="50" cy="27" rx="8" ry="19" transform="rotate(135 50 50)"/><ellipse cx="50" cy="27" rx="8" ry="19" transform="rotate(180 50 50)"/><ellipse cx="50" cy="27" rx="8" ry="19" transform="rotate(225 50 50)"/><ellipse cx="50" cy="27" rx="8" ry="19" transform="rotate(270 50 50)"/><ellipse cx="50" cy="27" rx="8" ry="19" transform="rotate(315 50 50)"/></g><circle class="l" cx="50" cy="50" r="10"/><circle class="f" cx="50" cy="50" r="4"/>
+    </symbol>
+    <symbol id="t07" viewBox="0 0 100 100">
+      <circle class="l" cx="50" cy="50" r="32"/><circle class="s" cx="50" cy="50" r="13"/><path class="f" d="m50 6 8 31-8 11-8-11Zm44 44-31 8-11-8 11-8ZM50 94l-8-31 8-11 8 11ZM6 50l31-8 11 8-11 8Z"/><circle class="f" cx="50" cy="50" r="5"/>
+    </symbol>
+    <symbol id="t08" viewBox="0 0 100 100">
+      <path class="f" d="M50 49C31 42 21 25 26 8c18 5 29 20 24 41ZM51 50c7-19 24-29 41-24-5 18-20 29-41 24ZM50 51c19 7 29 24 24 41-18-5-29-20-24-41ZM49 50c-7 19-24 29-41 24 5-18 20-29 41-24Z"/><circle class="l" cx="50" cy="50" r="9"/>
+    </symbol>
+    <symbol id="t09" viewBox="0 0 100 100">
+      <circle class="l" cx="50" cy="50" r="36"/><circle class="s" cx="50" cy="50" r="23"/><circle class="l" cx="50" cy="50" r="10"/><g class="f"><circle cx="50" cy="14" r="5"/><circle cx="86" cy="50" r="5"/><circle cx="50" cy="86" r="5"/><circle cx="14" cy="50" r="5"/></g>
+    </symbol>
+    <symbol id="t10" viewBox="0 0 100 100">
+      <g class="l"><path d="M50 50C35 34 24 22 9 15M50 50C43 30 40 18 35 7M50 50C57 30 60 18 65 7M50 50C65 34 76 22 91 15"/><path d="M18 23Q50 5 82 23M27 33Q50 18 73 33M36 42Q50 32 64 42"/></g><circle class="f" cx="50" cy="50" r="6"/>
+    </symbol>
+    <symbol id="t11" viewBox="0 0 100 100">
+      <path class="l" d="M50 88V46M50 49c-17-4-27-16-26-31 15 1 26 10 26 31Zm0 0c17-4 27-16 26-31-15 1-26 10-26 31ZM50 66c-12-2-20-9-24-18M50 66c12-2 20-9 24-18"/><path class="f" d="M44 88h12l-6-16Z"/>
+    </symbol>
+    <symbol id="t12" viewBox="0 0 100 100">
+      <g class="l"><path d="M5 23c15-14 30 14 45 0s30 14 45 0M5 41c15-14 30 14 45 0s30 14 45 0M5 59c15-14 30 14 45 0s30 14 45 0M5 77c15-14 30 14 45 0s30 14 45 0"/></g><circle class="f" cx="50" cy="50" r="4"/>
+    </symbol>
+    <symbol id="t13" viewBox="0 0 100 100">
+      <g class="l"><path d="M50 11c21 0 39 18 39 39S71 89 50 89 11 71 11 50 29 11 50 11Z"/><path d="M50 11c0 22-17 39-39 39M89 50c-22 0-39-17-39-39M50 89c0-22 17-39 39-39M11 50c22 0 39 17 39 39"/></g><circle class="f" cx="50" cy="50" r="6"/>
+    </symbol>
+    <symbol id="t14" viewBox="0 0 100 100">
+      <g class="f"><path d="m25 8 12 12-12 12-12-12Zm25 25 12 12-12 12-12-12Zm25-25 12 12-12 12-12-12ZM25 58l12 12-12 12-12-12Zm50 0 12 12-12 12-12-12ZM50 83l9 9H41Z"/></g><path class="s" d="M8 50 50 8l42 42-42 42Z"/>
+    </symbol>
+    <symbol id="t15" viewBox="0 0 100 100">
+      <g class="l"><path d="M50 50C27 50 18 38 18 25c13 0 25 8 32 25ZM50 50c0-23 12-32 25-32 0 13-8 25-25 32ZM50 50c23 0 32 12 32 25-13 0-25-8-32-25ZM50 50c0 23-12 32-25 32 0-13 8-25 25-32Z"/></g><circle class="f" cx="50" cy="50" r="7"/><circle class="s" cx="50" cy="50" r="40"/>
+    </symbol>
+    <symbol id="t16" viewBox="0 0 100 100">
+      <path class="l" d="m30 8 40 0 22 22v40L70 92H30L8 70V30Z"/><path class="l" d="m38 25 24 0 13 13v24L62 75H38L25 62V38Z"/><path class="f" d="m50 35 15 15-15 15-15-15Z"/>
+    </symbol>
+    <symbol id="t17" viewBox="0 0 100 100">
+      <g class="l"><path d="M50 91V20M50 91 22 27M50 91 78 27M50 91 8 43M50 91 92 43M50 91 15 67M50 91 85 67"/><path d="M9 43Q50 3 91 43M15 67Q50 30 85 67"/></g><circle class="f" cx="50" cy="91" r="5"/>
+    </symbol>
+    <symbol id="t18" viewBox="0 0 100 100">
+      <path class="s" d="M-8 25 25-8M-8 58 58-8M-8 91 91-8M9 108 108 9M42 108l66-66M75 108l33-33M75-8l33 33M42-8l66 66M9-8l99 99M-8 9l99 99M-8 42l66 66M-8 75l33 33"/><g class="f"><circle cx="25" cy="25" r="4"/><circle cx="75" cy="25" r="4"/><circle cx="50" cy="50" r="5"/><circle cx="25" cy="75" r="4"/><circle cx="75" cy="75" r="4"/></g>
+    </symbol>
+    <symbol id="t19" viewBox="0 0 100 100">
+      <circle class="s" cx="50" cy="50" r="27"/><g class="f"><ellipse cx="50" cy="16" rx="6" ry="13"/><ellipse cx="50" cy="16" rx="6" ry="13" transform="rotate(45 50 50)"/><ellipse cx="50" cy="16" rx="6" ry="13" transform="rotate(90 50 50)"/><ellipse cx="50" cy="16" rx="6" ry="13" transform="rotate(135 50 50)"/><ellipse cx="50" cy="16" rx="6" ry="13" transform="rotate(180 50 50)"/><ellipse cx="50" cy="16" rx="6" ry="13" transform="rotate(225 50 50)"/><ellipse cx="50" cy="16" rx="6" ry="13" transform="rotate(270 50 50)"/><ellipse cx="50" cy="16" rx="6" ry="13" transform="rotate(315 50 50)"/></g><circle class="l" cx="50" cy="50" r="8"/>
+    </symbol>
+    <symbol id="t20" viewBox="0 0 100 100">
+      <circle class="l" cx="50" cy="50" r="18"/><circle class="f" cx="50" cy="50" r="8"/><g class="l"><path d="M50 5v19M50 76v19M5 50h19M76 50h19M18 18l14 14M68 68l14 14M82 18 68 32M32 68 18 82"/></g><path class="f" d="m50 3 5 10H45ZM97 50l-10 5V45ZM50 97l-5-10h10ZM3 50l10-5v10Z"/>
+    </symbol>
+  </defs>
+  <g opacity=".28" fill="none" stroke="currentColor" stroke-width="1">
+    <path d="M100 0v400M200 0v400M300 0v400M400 0v400M0 100h500M0 200h500M0 300h500"/>
+  </g>
+  <g>
+    <use href="#t01" x="8" y="8" width="84" height="84"/><use href="#t02" x="108" y="8" width="84" height="84"/><use href="#t03" x="208" y="8" width="84" height="84"/><use href="#t04" x="308" y="8" width="84" height="84"/><use href="#t05" x="408" y="8" width="84" height="84"/>
+    <use href="#t06" x="8" y="108" width="84" height="84"/><use href="#t07" x="108" y="108" width="84" height="84"/><use href="#t08" x="208" y="108" width="84" height="84"/><use href="#t09" x="308" y="108" width="84" height="84"/><use href="#t10" x="408" y="108" width="84" height="84"/>
+    <use href="#t11" x="8" y="208" width="84" height="84"/><use href="#t12" x="108" y="208" width="84" height="84"/><use href="#t13" x="208" y="208" width="84" height="84"/><use href="#t14" x="308" y="208" width="84" height="84"/><use href="#t15" x="408" y="208" width="84" height="84"/>
+    <use href="#t16" x="8" y="308" width="84" height="84"/><use href="#t17" x="108" y="308" width="84" height="84"/><use href="#t18" x="208" y="308" width="84" height="84"/><use href="#t19" x="308" y="308" width="84" height="84"/><use href="#t20" x="408" y="308" width="84" height="84"/>
+  </g>
+</svg>

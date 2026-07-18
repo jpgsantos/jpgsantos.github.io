@@ -446,6 +446,7 @@ function auditExpression(expectedStyle, path) {
       const clippedTextFailures = [];
       const viewportContainmentFailures = [];
       const overlapFailures = [];
+      const emptySpaceFailures = [];
       const geometry = (node) => {
         if (!node || node.offsetParent === null) return null;
         const rect = node.getBoundingClientRect();
@@ -544,6 +545,28 @@ function auditExpression(expectedStyle, path) {
           const contentBottom = Math.max(...children.map((rect) => rect.bottom));
           const unusedTail = mediaRect.bottom - contentBottom - (Number.parseFloat(getComputedStyle(media).paddingBottom) || 0);
           if (unusedTail > 48) alignmentFailures.push('azulejo project media leaves ' + unusedTail.toFixed(1) + 'px of unused vertical space');
+        }
+        for (const container of Array.from(activeRoot.querySelectorAll('.az-timeline, .az-work-grid, .az-focus-grid, .az-contact-grid, .az-cv-projects, .az-cv-skills .skills-grid, .az-project-index, .publications-list'))) {
+          const containerRect = geometry(container);
+          if (!containerRect || containerRect.height < 260) continue;
+          const children = Array.from(container.children)
+            .map((node) => ({ node, rect: geometry(node), style: getComputedStyle(node) }))
+            .filter((item) => item.rect && item.rect.width > 1 && item.rect.height > 1 && item.rect.width < containerRect.width * 0.82 && !['absolute', 'fixed'].includes(item.style.position));
+          const columns = [];
+          for (const item of children) {
+            let column = columns.find((candidate) => Math.abs(candidate.left - item.rect.left) < 4);
+            if (!column) {
+              column = { left: item.rect.left, bottom: item.rect.bottom };
+              columns.push(column);
+            }
+            column.bottom = Math.max(column.bottom, item.rect.bottom);
+          }
+          if (columns.length < 2 || columns.length > 4) continue;
+          const tails = columns.map((column) => column.bottom);
+          const imbalance = Math.max(...tails) - Math.min(...tails);
+          if (imbalance > Math.max(150, containerRect.height * 0.2)) {
+            emptySpaceFailures.push(describeNode(container) + ' leaves a ' + imbalance.toFixed(1) + 'px unbalanced column tail');
+          }
         }
       }
       if (activeRoot && '${expectedStyle}' === 'mondrian') {
@@ -802,6 +825,8 @@ function auditExpression(expectedStyle, path) {
       const headerHeight = document.querySelector('.site-header')?.offsetHeight || 0;
       const readingRail = document.querySelector('[data-reading-progress]');
       const readingRailStyle = readingRail ? getComputedStyle(readingRail) : null;
+      const azulejoFieldStyle = '${expectedStyle}' === 'azulejo' ? getComputedStyle(document.body, '::before') : null;
+      const azulejoTiles = '${expectedStyle}' === 'azulejo' ? Array.from(document.querySelectorAll('.az-tile')) : [];
       const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
       const shouldShowReadingProgress = maxScroll > Math.max(560, window.innerHeight * 0.75);
       const activeProjectIndexLinks = activeScoped('a[data-content-list="project-index"][aria-current="location"]');
@@ -831,6 +856,15 @@ function auditExpression(expectedStyle, path) {
           shouldShow: shouldShowReadingProgress,
           active: document.body.classList.contains('has-reading-progress')
         },
+        azulejoField: azulejoFieldStyle ? {
+          maskImage: azulejoFieldStyle.maskImage || azulejoFieldStyle.webkitMaskImage || '',
+          maskSize: azulejoFieldStyle.maskSize || azulejoFieldStyle.webkitMaskSize || '',
+          opacity: Number.parseFloat(azulejoFieldStyle.opacity),
+          tileVariantCount: new Set(azulejoTiles.map((tile) => {
+            const style = getComputedStyle(tile);
+            return style.getPropertyValue('--az-tile-x').trim() + '/' + style.getPropertyValue('--az-tile-y').trim();
+          })).size
+        } : null,
         activeProjectIndexCount: activeProjectIndexLinks.length,
         activeProjectIndexKeys: uniqueList(activeProjectIndexLinks.map((link) => link.dataset.contentKey)),
         imagesMissingDimensions,
@@ -841,6 +875,7 @@ function auditExpression(expectedStyle, path) {
         clippedTextFailures,
         viewportContainmentFailures,
         overlapFailures,
+        emptySpaceFailures,
         cvPhotoTooLarge,
         cvPhotoBadCrop,
         cvPhotoImageMismatch,
@@ -916,24 +951,51 @@ async function pressArrowRight(page) {
 async function inspectReadingProgressAfterScroll(page) {
   const state = await page.evaluate(`(() => {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return { skipped: true };
+    const header = document.querySelector('.site-header');
+    const headerStyle = header ? getComputedStyle(header) : null;
+    const headerRect = header?.getBoundingClientRect();
     const maxScroll = Math.max(0, document.documentElement.scrollHeight - innerHeight);
     scrollTo(0, maxScroll * 0.5);
-    return { skipped: false, maxScroll };
+    return {
+      skipped: false,
+      maxScroll,
+      headerBefore: headerStyle && headerRect ? {
+        height: headerRect.height,
+        paddingBlock: [headerStyle.paddingTop, headerStyle.paddingBottom],
+        borderBlock: [headerStyle.borderTopWidth, headerStyle.borderBottomWidth],
+        backgroundImage: headerStyle.backgroundImage,
+        backgroundColor: headerStyle.backgroundColor,
+        boxShadow: headerStyle.boxShadow
+      } : null
+    };
   })()`);
   if (state.skipped) return state;
 
   await delay(120);
-  return page.evaluate(`(() => {
+  const after = await page.evaluate(`(() => {
     const rail = document.querySelector('[data-reading-progress]');
     const bar = rail?.querySelector('.reading-progress__bar');
     const railWidth = rail?.getBoundingClientRect().width || 0;
     const barWidth = bar?.getBoundingClientRect().width || 0;
+    const header = document.querySelector('.site-header');
+    const headerStyle = header ? getComputedStyle(header) : null;
+    const headerRect = header?.getBoundingClientRect();
     return {
       skipped: false,
       customProgress: Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--reading-progress')),
-      visualProgress: railWidth > 0 ? barWidth / railWidth : 0
+      visualProgress: railWidth > 0 ? barWidth / railWidth : 0,
+      hasScrolled: document.body.classList.contains('has-scrolled'),
+      headerAfter: headerStyle && headerRect ? {
+        height: headerRect.height,
+        paddingBlock: [headerStyle.paddingTop, headerStyle.paddingBottom],
+        borderBlock: [headerStyle.borderTopWidth, headerStyle.borderBottomWidth],
+        backgroundImage: headerStyle.backgroundImage,
+        backgroundColor: headerStyle.backgroundColor,
+        boxShadow: headerStyle.boxShadow
+      } : null
     };
   })()`);
+  return { ...after, headerBefore: state.headerBefore };
 }
 
 async function inspectThemeTransition(page) {
@@ -1143,7 +1205,7 @@ async function runCase(page, testCase) {
     choiceMenuMotion = await inspectChoiceMenuMotion(page);
   }
   let readingProgressAfterScroll = null;
-  if (testCase.path === '/' && testCase.theme === 'light' && testCase.width === 1366) {
+  if (testCase.path === '/' && testCase.width === 1366) {
     readingProgressAfterScroll = await inspectReadingProgressAfterScroll(page);
   }
   let themeTransition = null;
@@ -1198,9 +1260,38 @@ function assertResult(result) {
     failures.push(`reading progress height is ${result.readingProgress?.height || 0}px, expected ${expectedProgressHeight}px`);
   }
   if (result.readingProgressAfterScroll && !result.readingProgressAfterScroll.skipped) {
-    const { customProgress, visualProgress } = result.readingProgressAfterScroll;
+    const { customProgress, visualProgress, hasScrolled, headerBefore, headerAfter } = result.readingProgressAfterScroll;
     if (Math.abs(customProgress - 0.5) > 0.12 || Math.abs(visualProgress - 0.5) > 0.12) {
       failures.push(`reading progress did not track midpoint (state ${customProgress}, visual ${visualProgress})`);
+    }
+    if (!hasScrolled) failures.push('scrolled page did not activate the header scroll state');
+    if (!headerBefore || !headerAfter) {
+      failures.push('header state could not be measured before and after scrolling');
+    } else {
+      const stableHeaderKeys = ['paddingBlock', 'borderBlock', 'backgroundImage', 'backgroundColor'];
+      if (result.expectedStyle === 'azulejo') stableHeaderKeys.push('boxShadow');
+      if (Math.abs(headerBefore.height - headerAfter.height) > 0.5) {
+        failures.push(`header height changes on scroll (${headerBefore.height}px to ${headerAfter.height}px)`);
+      }
+      for (const key of stableHeaderKeys) {
+        if (JSON.stringify(headerBefore[key]) !== JSON.stringify(headerAfter[key])) {
+          failures.push(`header ${key} changes on scroll`);
+        }
+      }
+    }
+  }
+  if (result.expectedStyle === 'azulejo') {
+    if (!result.azulejoField?.maskImage.includes('tile-atlas.svg')) {
+      failures.push('Azulejo background is not using the twenty-tile atlas');
+    }
+    if (result.azulejoField?.maskSize !== '480px 384px') {
+      failures.push(`Azulejo background mosaic has unexpected sizing (${result.azulejoField?.maskSize || 'none'})`);
+    }
+    if (result.azulejoField?.tileVariantCount !== 20) {
+      failures.push(`Azulejo ribbons expose ${result.azulejoField?.tileVariantCount || 0} of 20 tile variants`);
+    }
+    if (!(result.azulejoField?.opacity > 0 && result.azulejoField?.opacity < 0.15)) {
+      failures.push('Azulejo background mosaic opacity is outside the quiet decorative range');
     }
   }
   if (result.themeTransition?.supported) {
@@ -1320,6 +1411,9 @@ function assertResult(result) {
   }
   if (result.overlapFailures?.length > 0) {
     failures.push(`overlap: ${result.overlapFailures.slice(0, 6).join('; ')}`);
+  }
+  if (result.emptySpaceFailures?.length > 0) {
+    failures.push(`empty space: ${result.emptySpaceFailures.slice(0, 6).join('; ')}`);
   }
   if (result.cvPhotoTooLarge) failures.push('Mondrian CV tablet photo is oversized');
   if (result.cvPhotoBadCrop) failures.push('Mondrian CV tablet photo aspect is unstable');
