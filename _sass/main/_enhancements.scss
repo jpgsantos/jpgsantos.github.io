@@ -90,13 +90,11 @@ body.has-reading-progress .reading-progress {
   transition:
     opacity var(--reveal-duration) var(--reveal-ease),
     transform var(--reveal-duration) var(--reveal-ease);
-  will-change: opacity, transform;
 }
 
 .reveal.is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0);
-  will-change: auto;
 }
 
 /* Shared interaction motion keeps navigation behavior complete in every

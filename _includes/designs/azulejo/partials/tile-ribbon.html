@@ -1,5 +1,10 @@
+{% assign tile_atlas = '/assets/images/azulejo/tiles/tile-atlas.svg' | relative_url %}
 <div class="az-tile-ribbon{% if include.class %} {{ include.class }}{% endif %}" aria-hidden="true">
   {% for tile in (1..20) %}
-    <span class="az-tile az-tile--{% if tile < 10 %}0{% endif %}{{ tile }}"></span>
+    <span class="az-tile az-tile--{% if tile < 10 %}0{% endif %}{{ tile }}">
+      <svg viewBox="0 0 100 100" focusable="false">
+        <use href="{{ tile_atlas }}#t{% if tile < 10 %}0{% endif %}{{ tile }}"></use>
+      </svg>
+    </span>
   {% endfor %}
 </div>

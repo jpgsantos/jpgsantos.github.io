@@ -192,7 +192,6 @@
 
 .az-tile {
   --az-tile-ink: var(--az-wall);
-  --az-tile-accent: var(--az-cyan);
   position: relative;
   display: block;
   aspect-ratio: 1;
@@ -205,35 +204,19 @@
   box-shadow: inset 0 0 0 5px color-mix(in srgb, var(--az-porcelain-bright) 75%, transparent);
 }
 
-.az-tile::before {
+.az-tile svg {
   position: absolute;
   inset: 8%;
-  content: "";
-  background: var(--az-tile-ink);
-  -webkit-mask: var(--az-tile-atlas) var(--az-tile-x, 0%) var(--az-tile-y, 0%) / 500% 400% no-repeat;
-  mask: var(--az-tile-atlas) var(--az-tile-x, 0%) var(--az-tile-y, 0%) / 500% 400% no-repeat;
+  display: block;
+  width: 84%;
+  height: 84%;
+  color: var(--az-tile-ink);
+  overflow: visible;
+  shape-rendering: geometricPrecision;
 }
 
-.az-tile::after {
-  position: absolute;
-  inset: 44%;
-  border-radius: 50%;
-  content: "";
-  background: var(--az-tile-accent);
-  box-shadow: 0 0 0 2px var(--az-porcelain-bright), 0 0 0 3px var(--az-tile-ink);
-}
-
-.az-tile--01, .az-tile--06, .az-tile--11, .az-tile--16 { --az-tile-x: 0%; }
-.az-tile--02, .az-tile--07, .az-tile--12, .az-tile--17 { --az-tile-x: 25%; }
-.az-tile--03, .az-tile--08, .az-tile--13, .az-tile--18 { --az-tile-x: 50%; }
-.az-tile--04, .az-tile--09, .az-tile--14, .az-tile--19 { --az-tile-x: 75%; }
-.az-tile--05, .az-tile--10, .az-tile--15, .az-tile--20 { --az-tile-x: 100%; }
-.az-tile--01, .az-tile--02, .az-tile--03, .az-tile--04, .az-tile--05 { --az-tile-y: 0%; }
-.az-tile--06, .az-tile--07, .az-tile--08, .az-tile--09, .az-tile--10 { --az-tile-y: 33.333%; }
-.az-tile--11, .az-tile--12, .az-tile--13, .az-tile--14, .az-tile--15 { --az-tile-y: 66.667%; }
-.az-tile--16, .az-tile--17, .az-tile--18, .az-tile--19, .az-tile--20 { --az-tile-y: 100%; }
-.az-tile:nth-child(4n + 2) { --az-tile-ink: var(--az-cyan); --az-tile-accent: var(--az-wall); }
-.az-tile:nth-child(5n) { --az-tile-ink: var(--az-wall-deep); --az-tile-accent: var(--az-cyan); }
+.az-tile:nth-child(4n + 2) { --az-tile-ink: var(--az-cyan); }
+.az-tile:nth-child(5n) { --az-tile-ink: var(--az-wall-deep); }
 
 .az-tile-ribbon--reverse {
   direction: rtl;

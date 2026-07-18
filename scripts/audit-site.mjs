@@ -604,6 +604,7 @@ function auditExpression(expectedStyle, path) {
           .map((node) => {
             const rect = geometry(node);
             const flowBottom = rect ? Array.from(node.querySelectorAll('*')).reduce((bottom, descendant) => {
+              if (descendant.ownerSVGElement) return bottom;
               const descendantStyle = getComputedStyle(descendant);
               let ancestor = descendant;
               let transformed = false;
@@ -833,6 +834,20 @@ function auditExpression(expectedStyle, path) {
       const revealTargets = activeScoped('[data-reveal]').filter((node) => node.offsetParent !== null);
       const revealStyle = revealTargets[0] ? getComputedStyle(revealTargets[0]) : null;
       const carouselViewport = carousel?.querySelector('.app-carousel__viewport');
+      const navigationEntry = window.performance.getEntriesByType('navigation')[0];
+      const resourceEntries = window.performance.getEntriesByType('resource');
+      const firstContentfulPaint = window.performance.getEntriesByName('first-contentful-paint')[0];
+      const resourceSize = (type) => resourceEntries
+        .filter((entry) => entry.initiatorType === type)
+        .reduce((total, entry) => total + (entry.decodedBodySize || 0), 0);
+      const visibleElements = Array.from(document.querySelectorAll('*')).filter((node) => node.offsetParent !== null);
+      const maskLayerCount = visibleElements.reduce((count, node) => {
+        const style = getComputedStyle(node);
+        const before = getComputedStyle(node, '::before');
+        const after = getComputedStyle(node, '::after');
+        const hasMask = (candidate) => (candidate.maskImage || candidate.webkitMaskImage || 'none') !== 'none';
+        return count + Number(hasMask(style)) + Number(hasMask(before)) + Number(hasMask(after));
+      }, 0);
       return {
         path: '${path}',
         expectedStyle: '${expectedStyle}',
@@ -846,7 +861,8 @@ function auditExpression(expectedStyle, path) {
           reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
           revealCount: revealTargets.length,
           revealPreparedCount: revealTargets.filter((node) => node.classList.contains('reveal') || node.classList.contains('is-visible')).length,
-          revealTransitionDuration: revealStyle?.transitionDuration || ''
+          revealTransitionDuration: revealStyle?.transitionDuration || '',
+          revealPromotedCount: revealTargets.filter((node) => getComputedStyle(node).willChange !== 'auto').length
         },
         readingProgress: {
           present: Boolean(readingRail),
@@ -854,16 +870,29 @@ function auditExpression(expectedStyle, path) {
           pointerEvents: readingRailStyle?.pointerEvents || '',
           height: readingRailStyle ? Number.parseFloat(readingRailStyle.height) : 0,
           shouldShow: shouldShowReadingProgress,
-          active: document.body.classList.contains('has-reading-progress')
+          active: document.body.classList.contains('has-reading-progress'),
+          nativeTimeline: CSS.supports('animation-timeline: scroll()'),
+          inlineProgressValue: html.style.getPropertyValue('--reading-progress')
+        },
+        performance: {
+          domContentLoadedMs: Math.round(navigationEntry?.domContentLoadedEventEnd || 0),
+          loadMs: Math.round(navigationEntry?.loadEventEnd || 0),
+          firstContentfulPaintMs: Math.round(firstContentfulPaint?.startTime || 0),
+          resourceCount: resourceEntries.length,
+          totalResourceKb: Math.round(resourceEntries.reduce((total, entry) => total + (entry.decodedBodySize || 0), 0) / 1024),
+          imageResourceKb: Math.round(resourceSize('img') / 1024),
+          stylesheetResourceKb: Math.round(resourceSize('link') / 1024),
+          scriptResourceKb: Math.round(resourceSize('script') / 1024),
+          visibleElementCount: visibleElements.length,
+          maskLayerCount
         },
         azulejoField: azulejoFieldStyle ? {
           maskImage: azulejoFieldStyle.maskImage || azulejoFieldStyle.webkitMaskImage || '',
           maskSize: azulejoFieldStyle.maskSize || azulejoFieldStyle.webkitMaskSize || '',
           opacity: Number.parseFloat(azulejoFieldStyle.opacity),
-          tileVariantCount: new Set(azulejoTiles.map((tile) => {
-            const style = getComputedStyle(tile);
-            return style.getPropertyValue('--az-tile-x').trim() + '/' + style.getPropertyValue('--az-tile-y').trim();
-          })).size
+          tileVariantCount: new Set(azulejoTiles
+            .map((tile) => tile.querySelector('use')?.getAttribute('href') || '')
+            .filter(Boolean)).size
         } : null,
         activeProjectIndexCount: activeProjectIndexLinks.length,
         activeProjectIndexKeys: uniqueList(activeProjectIndexLinks.map((link) => link.dataset.contentKey)),
@@ -984,6 +1013,7 @@ async function inspectReadingProgressAfterScroll(page) {
       skipped: false,
       customProgress: Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--reading-progress')),
       visualProgress: railWidth > 0 ? barWidth / railWidth : 0,
+      nativeTimeline: CSS.supports('animation-timeline: scroll()'),
       hasScrolled: document.body.classList.contains('has-scrolled'),
       headerAfter: headerStyle && headerRect ? {
         height: headerRect.height,
@@ -1251,17 +1281,24 @@ function assertResult(result) {
       .some((duration) => Number.parseFloat(duration) > 0);
     if (!revealHasDuration) failures.push('reveal elements have no transition duration');
   }
+  if ((result.motion?.revealPromotedCount || 0) > 0) {
+    failures.push(`${result.motion.revealPromotedCount} reveal element(s) reserve compositor layers while idle`);
+  }
   if (!result.readingProgress?.present) failures.push('reading progress rail is missing');
   if (!result.readingProgress?.ariaHidden) failures.push('reading progress rail should be hidden from assistive technology');
   if (result.readingProgress?.pointerEvents !== 'none') failures.push('reading progress rail should not intercept input');
   if (result.readingProgress?.shouldShow !== result.readingProgress?.active) failures.push('reading progress activation does not match page length');
+  if (result.readingProgress?.nativeTimeline && result.readingProgress?.inlineProgressValue) {
+    failures.push('native scroll timeline is receiving duplicate JavaScript progress updates');
+  }
   const expectedProgressHeight = result.expectedStyle === 'mondrian' ? 5 : 3;
   if (Math.abs((result.readingProgress?.height || 0) - expectedProgressHeight) > 0.5) {
     failures.push(`reading progress height is ${result.readingProgress?.height || 0}px, expected ${expectedProgressHeight}px`);
   }
   if (result.readingProgressAfterScroll && !result.readingProgressAfterScroll.skipped) {
-    const { customProgress, visualProgress, hasScrolled, headerBefore, headerAfter } = result.readingProgressAfterScroll;
-    if (Math.abs(customProgress - 0.5) > 0.12 || Math.abs(visualProgress - 0.5) > 0.12) {
+    const { customProgress, visualProgress, nativeTimeline, hasScrolled, headerBefore, headerAfter } = result.readingProgressAfterScroll;
+    const stateProgressIsWrong = !nativeTimeline && Math.abs(customProgress - 0.5) > 0.12;
+    if (stateProgressIsWrong || Math.abs(visualProgress - 0.5) > 0.12) {
       failures.push(`reading progress did not track midpoint (state ${customProgress}, visual ${visualProgress})`);
     }
     if (!hasScrolled) failures.push('scrolled page did not activate the header scroll state');
@@ -1292,6 +1329,9 @@ function assertResult(result) {
     }
     if (!(result.azulejoField?.opacity > 0 && result.azulejoField?.opacity < 0.15)) {
       failures.push('Azulejo background mosaic opacity is outside the quiet decorative range');
+    }
+    if ((result.performance?.maskLayerCount || 0) > 20) {
+      failures.push(`Azulejo renders ${result.performance.maskLayerCount} visible mask layers, exceeding the paint budget`);
     }
   }
   if (result.themeTransition?.supported) {

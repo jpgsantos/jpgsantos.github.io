@@ -18,6 +18,7 @@
     speed: coarsePointer ? 0.16 : 0.22,
     radius: coarsePointer ? 120 : 155
   };
+  const radiusSquared = config.radius * config.radius;
 
   function isDark() {
     return document.documentElement.getAttribute('data-theme') === 'dark';
@@ -34,17 +35,17 @@
   function colors() {
     if (isEditorial()) {
       return isDark()
-        ? { node: 'rgba(13, 18, 16, .76)', line: 'rgba(13, 18, 16, .25)', hot: 'rgba(239, 113, 93, .95)' }
-        : { node: 'rgba(255, 253, 246, .82)', line: 'rgba(255, 253, 246, .26)', hot: 'rgba(213, 169, 31, .96)' };
+        ? { node: 'rgba(13, 18, 16, .76)', line: 'rgb(13, 18, 16)', hot: 'rgba(239, 113, 93, .95)' }
+        : { node: 'rgba(255, 253, 246, .82)', line: 'rgb(255, 253, 246)', hot: 'rgba(213, 169, 31, .96)' };
     }
     if (isMondrian()) {
       return isDark()
-        ? { node: 'rgba(241, 236, 225, .85)', line: 'rgba(241, 236, 225, .25)', hot: 'rgba(230, 57, 70, .9)' }
-        : { node: 'rgba(13, 13, 13, .82)', line: 'rgba(13, 13, 13, .25)', hot: 'rgba(230, 57, 70, .9)' };
+        ? { node: 'rgba(241, 236, 225, .85)', line: 'rgb(241, 236, 225)', hot: 'rgba(230, 57, 70, .9)' }
+        : { node: 'rgba(13, 13, 13, .82)', line: 'rgb(13, 13, 13)', hot: 'rgba(230, 57, 70, .9)' };
     }
     return isDark()
-      ? { node: 'rgba(94, 234, 212, .62)', line: 'rgba(94, 234, 212, .16)', hot: 'rgba(251, 191, 36, .85)' }
-      : { node: 'rgba(15, 118, 110, .62)', line: 'rgba(15, 118, 110, .17)', hot: 'rgba(180, 83, 9, .8)' };
+      ? { node: 'rgba(94, 234, 212, .62)', line: 'rgb(94, 234, 212)', hot: 'rgba(251, 191, 36, .85)' }
+      : { node: 'rgba(15, 118, 110, .62)', line: 'rgb(15, 118, 110)', hot: 'rgba(180, 83, 9, .8)' };
   }
 
   function createInstance(canvas) {
@@ -52,6 +53,7 @@
     if (!ctx) return null;
 
     const parent = canvas.parentElement;
+    let palette = colors();
     const state = {
       width: 0,
       height: 0,
@@ -68,8 +70,8 @@
       return Math.max(config.minParticles, Math.min(config.maxParticles, Math.round(area * config.density)));
     }
 
-    function resize() {
-      const rect = parent.getBoundingClientRect();
+    function resize(observedRect) {
+      const rect = observedRect || parent.getBoundingClientRect();
       const width = Math.max(120, Math.floor(rect.width));
       const height = Math.max(120, Math.floor(rect.height));
       const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
@@ -112,8 +114,9 @@
     function draw() {
       if (!state.running || !state.visible) return;
 
-      const palette = colors();
       ctx.clearRect(0, 0, state.width, state.height);
+      ctx.strokeStyle = palette.line;
+      ctx.lineWidth = 1;
 
       for (let i = 0; i < state.particles.length; i += 1) {
         const current = state.particles[i];
@@ -123,12 +126,12 @@
           const next = state.particles[j];
           const dx = current.x - next.x;
           const dy = current.y - next.y;
-          const distance = Math.sqrt(dx * dx + dy * dy);
+          const distanceSquared = dx * dx + dy * dy;
 
-          if (distance < config.radius) {
+          if (distanceSquared < radiusSquared) {
+            const distance = Math.sqrt(distanceSquared);
             const opacity = 1 - distance / config.radius;
-            ctx.strokeStyle = palette.line.replace(/[\d.]+\)$/g, `${Math.max(0.04, opacity * 0.22)})`);
-            ctx.lineWidth = 1;
+            ctx.globalAlpha = Math.max(0.04, opacity * 0.22);
             ctx.beginPath();
             ctx.moveTo(current.x, current.y);
             ctx.lineTo(next.x, next.y);
@@ -136,11 +139,12 @@
           }
         }
       }
+      ctx.globalAlpha = 1;
 
       state.particles.forEach((particle) => {
         const dx = state.mouse.x === null ? Infinity : particle.x - state.mouse.x;
         const dy = state.mouse.y === null ? Infinity : particle.y - state.mouse.y;
-        const hot = Math.sqrt(dx * dx + dy * dy) < 95;
+        const hot = dx * dx + dy * dy < 9025;
         ctx.fillStyle = hot ? palette.hot : palette.node;
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, hot ? particle.size + 1.5 : particle.size, 0, Math.PI * 2);
@@ -174,9 +178,8 @@
 
     if (!coarsePointer) {
       canvas.addEventListener('pointermove', (event) => {
-        const rect = canvas.getBoundingClientRect();
-        state.mouse.x = event.clientX - rect.left;
-        state.mouse.y = event.clientY - rect.top;
+        state.mouse.x = event.offsetX;
+        state.mouse.y = event.offsetY;
       }, { passive: true });
 
       canvas.addEventListener('pointerleave', () => {
@@ -194,7 +197,10 @@
       }
     }, { threshold: 0.05 });
 
-    const resizeObserver = new ResizeObserver(() => { resize(); });
+    const resizeObserver = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      resize(entry ? entry.contentRect : null);
+    });
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) stop();
@@ -206,6 +212,7 @@
 
     return {
       refresh: () => {
+        palette = colors();
         if (isOnscreen()) {
           resize();
           start();

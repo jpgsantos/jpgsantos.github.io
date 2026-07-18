@@ -1,11 +1,17 @@
 {% assign profile = site.data.profile %}
 {% assign designs = site.data.designs %}
+{% if site.github.build_revision %}
+  {% assign asset_version = site.github.build_revision %}
+{% else %}
+  {% assign asset_version = site.time | date: '%Y%m%d%H%M%S' %}
+{% endif %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
+    <style>html.is-design-stylesheet-loading body{visibility:hidden}</style>
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
     <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
     <script>
@@ -29,6 +35,21 @@
           style = window.__siteStyleRotation.resolve(supportedStyles, fallbackStyle);
         } catch (e) {}
         document.documentElement.setAttribute('data-style', style);
+        if (style !== fallbackStyle) {
+          document.documentElement.classList.add('is-design-stylesheet-loading');
+          var styleHrefs = {
+            {% for design in designs %}{{ design.value | jsonify }}: {{ design.stylesheet | relative_url | append: '?v=' | append: asset_version | jsonify }}{% unless forloop.last %},{% endunless %}
+            {% endfor %}
+          };
+          if (styleHrefs[style]) {
+            var preload = document.createElement('link');
+            preload.rel = 'preload';
+            preload.as = 'style';
+            preload.href = styleHrefs[style];
+            preload.setAttribute('data-design-preload', style);
+            document.head.appendChild(preload);
+          }
+        }
       })();
     </script>
     {% capture font_stylesheet %}https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=optional{% endcapture %}
@@ -36,11 +57,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="{{ font_stylesheet }}" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ font_stylesheet }}"></noscript>
-    {% if site.github.build_revision %}
-      {% assign asset_version = site.github.build_revision %}
-    {% else %}
-      {% assign asset_version = site.time | date: '%Y%m%d%H%M%S' %}
-    {% endif %}
     {% for design in designs %}
       {% if design.stylesheet %}
         {% if forloop.first %}
@@ -54,12 +70,34 @@
       (function() {
         try {
           var style = document.documentElement.getAttribute('data-style') || 'default';
+          var pending = document.documentElement.classList.contains('is-design-stylesheet-loading');
+          var settled = false;
+          var timeout;
+          function finish() {
+            if (settled) return;
+            settled = true;
+            window.clearTimeout(timeout);
+            document.documentElement.classList.remove('is-design-stylesheet-loading');
+            window.dispatchEvent(new Event('site:designstylesheetready'));
+          }
+          var activeLink;
           document.querySelectorAll('[data-design-href]').forEach(function(link) {
             if (link.getAttribute('data-design-stylesheet') === style) {
+              activeLink = link;
+              link.addEventListener('load', finish, { once: true });
+              link.addEventListener('error', finish, { once: true });
               link.href = link.getAttribute('data-design-href');
               link.disabled = false;
             }
           });
+          if (!pending || !activeLink) {
+            finish();
+          } else {
+            timeout = window.setTimeout(finish, 2400);
+            window.requestAnimationFrame(function() {
+              if (activeLink.sheet) finish();
+            });
+          }
         } catch (e) {}
       })();
     </script>

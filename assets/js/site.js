@@ -13,6 +13,11 @@
   const stylePriorityImages = Array.from(document.querySelectorAll('[data-style-priority-image]'));
   const themePictures = Array.from(document.querySelectorAll('[data-theme-picture]'));
   const readingProgress = document.querySelector('[data-reading-progress]');
+  const nativeScrollProgress = Boolean(
+    window.CSS
+    && typeof window.CSS.supports === 'function'
+    && window.CSS.supports('animation-timeline: scroll()')
+  );
   const styleSelect = document.querySelector('[data-style-select]');
   const styleButtons = Array.from(document.querySelectorAll('[data-style-value]'));
   const themeButtons = Array.from(document.querySelectorAll('[data-theme-value]'));
@@ -31,13 +36,16 @@
 
   let anchorScrollFrame = 0;
   let resizeFrame = 0;
-  let readingProgressFrame = 0;
+  let pageGeometryFrame = 0;
+  let readingProgressMaxScroll = 0;
+  let readingProgressIsLongPage = false;
   let headerHeight = 76;
   let hasScrolled = false;
   let activeViewTransition = null;
   let transitionSerial = 0;
   let styleRequestSerial = 0;
   let syncProjectIndex = function() {};
+  let updateProjectGeometry = function() {};
 
   function readPreference(key, fallback) {
     try {
@@ -301,6 +309,7 @@
     if (!nextHeight || nextHeight === headerHeight) return;
     headerHeight = nextHeight;
     root.style.setProperty('--header-height', `${headerHeight}px`);
+    schedulePageGeometryUpdate();
   }
 
   function measureHeaderOffset() {
@@ -330,7 +339,7 @@
     if (resizeFrame) return;
     resizeFrame = window.requestAnimationFrame(() => {
       scrollToActiveHash('auto');
-      handleScroll();
+      refreshPageGeometry();
       resizeFrame = 0;
     });
   }
@@ -458,7 +467,7 @@
       styleMenu.render(style);
       dispatchSiteEvent('site:stylechange', { style, previousStyle });
       scrollToActiveHash('auto');
-      window.requestAnimationFrame(handleScroll);
+      schedulePageGeometryUpdate();
     }
 
     if (!settings.animate || previousStyle === style) {
@@ -501,10 +510,15 @@
     const projectPairs = projectIndexLinks
       .map((link) => ({ link, target: document.getElementById(decodeURIComponent(link.hash.slice(1))) }))
       .filter((pair) => pair.target);
+    let currentProjectKey = '';
 
     function setCurrentProject(projectKey) {
+      const nextProjectKey = projectKey || '';
+      if (nextProjectKey === currentProjectKey) return;
+      currentProjectKey = nextProjectKey;
+
       projectIndexLinks.forEach((link) => {
-        if (projectKey && link.dataset.contentKey === projectKey) {
+        if (nextProjectKey && link.dataset.contentKey === nextProjectKey) {
           link.setAttribute('aria-current', 'location');
         } else {
           link.removeAttribute('aria-current');
@@ -512,17 +526,30 @@
       });
     }
 
-    function syncCurrentProjectFromScroll() {
-      const activePairs = projectPairs.filter((pair) => (
+    let activeProjectPositions = [];
+
+    function refreshProjectGeometry() {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+      activeProjectPositions = projectPairs.filter((pair) => (
         isInActiveDesignTree(pair.link) && isInActiveDesignTree(pair.target)
-      ));
-      if (activePairs.length === 0) return;
+      )).map((pair) => ({
+        pair,
+        top: pair.target.getBoundingClientRect().top + scrollTop
+      }));
+    }
 
-      const marker = headerHeight + Math.min(window.innerHeight * 0.28, 240);
-      let currentPair = activePairs[0];
+    function syncCurrentProjectFromScroll(currentScrollTop) {
+      if (activeProjectPositions.length === 0) refreshProjectGeometry();
+      if (activeProjectPositions.length === 0) return;
 
-      activePairs.forEach((pair) => {
-        if (pair.target.getBoundingClientRect().top <= marker) currentPair = pair;
+      const scrollTop = Number.isFinite(currentScrollTop)
+        ? currentScrollTop
+        : (window.scrollY || document.documentElement.scrollTop || 0);
+      const marker = scrollTop + headerHeight + Math.min(window.innerHeight * 0.28, 240);
+      let currentPair = activeProjectPositions[0].pair;
+
+      activeProjectPositions.forEach((position) => {
+        if (position.top <= marker) currentPair = position.pair;
       });
 
       setCurrentProject(currentPair.link.dataset.contentKey);
@@ -565,52 +592,72 @@
     });
 
     window.addEventListener('hashchange', syncCurrentProjectFromHash);
-    window.addEventListener('site:stylechange', syncCurrentProjectFromHash);
+    window.addEventListener('site:stylechange', () => {
+      refreshProjectGeometry();
+      syncCurrentProjectFromHash();
+    });
+    updateProjectGeometry = refreshProjectGeometry;
+    refreshProjectGeometry();
     syncCurrentProjectFromHash();
   }
 
-  function updateReadingProgress() {
+  function refreshReadingProgressGeometry() {
     if (!readingProgress) return;
 
-    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
-    const maxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-    const isLongPage = maxScroll > Math.max(560, window.innerHeight * 0.75);
-    const progress = maxScroll > 0 ? Math.min(1, Math.max(0, scrollTop / maxScroll)) : 0;
+    readingProgressMaxScroll = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    const isLongPage = readingProgressMaxScroll > Math.max(560, window.innerHeight * 0.75);
+    if (isLongPage !== readingProgressIsLongPage) {
+      body.classList.toggle('has-reading-progress', isLongPage);
+      readingProgressIsLongPage = isLongPage;
+    }
+  }
 
-    body.classList.toggle('has-reading-progress', isLongPage);
+  function updateReadingProgress(scrollTop) {
+    if (!readingProgress || nativeScrollProgress) return;
+
+    const progress = readingProgressMaxScroll > 0
+      ? Math.min(1, Math.max(0, scrollTop / readingProgressMaxScroll))
+      : 0;
     root.style.setProperty('--reading-progress', progress.toFixed(4));
   }
 
-  function scheduleReadingProgressUpdate() {
-    if (!readingProgress || readingProgressFrame) return;
-    readingProgressFrame = window.requestAnimationFrame(() => {
-      updateReadingProgress();
-      readingProgressFrame = 0;
+  function refreshPageGeometry() {
+    refreshReadingProgressGeometry();
+    updateProjectGeometry();
+    handleScroll();
+  }
+
+  function schedulePageGeometryUpdate() {
+    if (pageGeometryFrame) return;
+    pageGeometryFrame = window.requestAnimationFrame(() => {
+      refreshPageGeometry();
+      pageGeometryFrame = 0;
     });
   }
 
-  function initReadingProgressObserver() {
-    if (!readingProgress) return;
-
+  function initPageGeometryObserver() {
     const main = document.querySelector('main');
     if ('ResizeObserver' in window && main) {
-      const observer = new ResizeObserver(scheduleReadingProgressUpdate);
+      const observer = new ResizeObserver(schedulePageGeometryUpdate);
       observer.observe(main);
     }
 
-    document.addEventListener('load', scheduleReadingProgressUpdate, true);
+    document.addEventListener('load', schedulePageGeometryUpdate, true);
+    refreshPageGeometry();
   }
 
-  function handleScroll() {
-    const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+  function handleScroll(currentScrollTop) {
+    const scrollTop = Number.isFinite(currentScrollTop)
+      ? currentScrollTop
+      : (window.scrollY || document.documentElement.scrollTop || 0);
     const nextHasScrolled = scrollTop > 18;
     if (nextHasScrolled !== hasScrolled) {
       body.classList.toggle('has-scrolled', nextHasScrolled);
       hasScrolled = nextHasScrolled;
     }
 
-    updateReadingProgress();
-    syncProjectIndex();
+    updateReadingProgress(scrollTop);
+    syncProjectIndex(scrollTop);
   }
 
   function initCarousels() {
@@ -767,72 +814,87 @@
     }
   });
 
-  applyTheme(readPreference('theme', 'auto'));
-  applyStyle(root.getAttribute('data-style') || readPreference('style', 'default'));
+  function initializeSite() {
+    if (initializeSite.started) return;
+    initializeSite.started = true;
 
-  if (styleSelect) {
-    styleSelect.addEventListener('change', () => {
-      const nextStyle = styleSelect.value;
-      rememberStyleChoice(nextStyle);
-      applyStyle(nextStyle, { animate: true });
-    });
-  }
+    applyTheme(readPreference('theme', 'auto'));
+    applyStyle(root.getAttribute('data-style') || readPreference('style', 'default'));
 
-  if (darkQuery) {
-    const handleSystemThemeChange = () => {
-      if (readPreference('theme', 'auto') === 'auto') {
-        applyTheme('auto');
-      }
-    };
-
-    if (darkQuery.addEventListener) {
-      darkQuery.addEventListener('change', handleSystemThemeChange);
-    } else if (darkQuery.addListener) {
-      darkQuery.addListener(handleSystemThemeChange);
+    if (styleSelect) {
+      styleSelect.addEventListener('change', () => {
+        const nextStyle = styleSelect.value;
+        rememberStyleChoice(nextStyle);
+        applyStyle(nextStyle, { animate: true });
+      });
     }
-  }
 
-  document.addEventListener('click', (event) => {
-    if (themeMenu.menu && !themeMenu.menu.contains(event.target)) themeMenu.setOpen(false);
-    if (styleMenu.menu && !styleMenu.menu.contains(event.target)) styleMenu.setOpen(false);
-  });
+    if (darkQuery) {
+      const handleSystemThemeChange = () => {
+        if (readPreference('theme', 'auto') === 'auto') {
+          applyTheme('auto');
+        }
+      };
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key !== 'Escape') return;
-    closeNav();
-    themeMenu.setOpen(false);
-    styleMenu.setOpen(false);
-  });
+      if (darkQuery.addEventListener) {
+        darkQuery.addEventListener('change', handleSystemThemeChange);
+      } else if (darkQuery.addListener) {
+        darkQuery.addListener(handleSystemThemeChange);
+      }
+    }
 
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (ticking) return;
-    window.requestAnimationFrame(() => {
-      handleScroll();
-      ticking = false;
+    document.addEventListener('click', (event) => {
+      if (themeMenu.menu && !themeMenu.menu.contains(event.target)) themeMenu.setOpen(false);
+      if (styleMenu.menu && !styleMenu.menu.contains(event.target)) styleMenu.setOpen(false);
     });
-    ticking = true;
-  }, { passive: true });
 
-  window.addEventListener('resize', scheduleAnchorScroll);
-  window.addEventListener('hashchange', () => scrollToActiveHash(reduceMotion ? 'auto' : 'smooth'));
-  window.addEventListener('load', () => {
-    scrollToActiveHash('auto');
-    handleScroll();
-  });
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => {
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      closeNav();
+      themeMenu.setOpen(false);
+      styleMenu.setOpen(false);
+    });
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      window.requestAnimationFrame(() => {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+        handleScroll(scrollTop);
+        ticking = false;
+      });
+      ticking = true;
+    }, { passive: true });
+
+    window.addEventListener('resize', scheduleAnchorScroll);
+    window.addEventListener('hashchange', () => scrollToActiveHash(reduceMotion ? 'auto' : 'smooth'));
+    window.addEventListener('load', () => {
       scrollToActiveHash('auto');
-      handleScroll();
-    }).catch(() => {});
+      refreshPageGeometry();
+    });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        scrollToActiveHash('auto');
+        refreshPageGeometry();
+      }).catch(() => {});
+    }
+
+    initNavigation();
+    initProjectIndexState();
+    initCarousels();
+    initReveals();
+    initHeaderOffset();
+    initPageGeometryObserver();
+    scrollToActiveHash('auto');
   }
 
-  initNavigation();
-  initProjectIndexState();
-  initCarousels();
-  initReveals();
-  initHeaderOffset();
-  initReadingProgressObserver();
-  handleScroll();
-  scrollToActiveHash('auto');
+  if (root.classList.contains('is-design-stylesheet-loading')) {
+    const fallback = window.setTimeout(initializeSite, 2500);
+    window.addEventListener('site:designstylesheetready', () => {
+      window.clearTimeout(fallback);
+      initializeSite();
+    }, { once: true });
+  } else {
+    initializeSite();
+  }
 })();
